@@ -8,7 +8,7 @@
 .icon {
   width: 31px;
   height: 31px;
-  transition: filter 2s ease;
+  transition: filter 1.25s ease;
   text-align: center;
 }
 
