@@ -3,7 +3,7 @@
     border-radius: 4px;
     color: white;
     background-color: rgb(0, 0, 0);
-    transition: color 0.75s, background-color 0.75s;
+    transition: color 1s, background-color 1s;
   }
 
 .highlight-inline:hover {
