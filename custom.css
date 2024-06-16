@@ -3,6 +3,12 @@
     border-radius: 4px;
     color: white;
     background-color: rgb(0, 0, 0);
+    transition: color 0.3s, background-color 0.5s;
+  }
+
+.highlight-inline:hover {
+    color: rgb(0, 0, 0); /* Set text color to black on hover */
+    background-color: white; /* Set background color to white on hover */
   }
   
 .icon {
