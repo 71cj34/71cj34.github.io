@@ -21,7 +21,9 @@
 .noselect {
   -webkit-user-select: none;
   -ms-user-select: none;
+  -moz-user-select: none;
   user-select: none;
+  text-align: center
 }
 
 .icon:hover {
