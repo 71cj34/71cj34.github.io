@@ -18,6 +18,12 @@
   text-align: center;
 }
 
+.noselect {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .icon:hover {
-  filter: opacity(0%); /* Purple color on hover */
+  filter: opacity(0%);
 }
