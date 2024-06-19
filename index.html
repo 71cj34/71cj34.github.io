@@ -16,6 +16,7 @@
 </head>
 <body>
 <main>
+    <span class="top-right-icon" id="modeselection"> Dark mode.</span>
     <p style="font-size: 5em; margin-top: 40vh; margin-bottom: 25vh; text-align: center;" class="highlight-inline">Hello.</p>
 
     <p style="text-align: center; color: white; font-size: 10px; margin-bottom: 25vh;">
@@ -30,11 +31,11 @@
 
 <br><br><br><br><br><br><br><br><br><br>
 
-    <p style="text-align: center;"><a href="#" id="iconLink"><span><img class="icon" id="myIcon" src="stariconv2.png" alt="star icon"></span></a></p>
+    <p style="text-align: center;"><a href="#" id="iconLink"><span><img class="icon" src="stariconv2.png" alt="star icon"></span></a></p>
 </main>
 
 <script>
-    const icon = document.getElementById('myIcon');
+    const icon = document.getElementById('modeselection');
     const body = document.querySelector('body');
 
     icon.addEventListener('click', () => {
