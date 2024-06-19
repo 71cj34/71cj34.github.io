@@ -37,11 +37,23 @@ const icon = document.getElementById('modeselection');
 const body = document.querySelector('body');
 const text = document.querySelectorAll('p, span');
 
+let isDarkMode = false;
+
 icon.addEventListener('click', () => {
-    body.style.backgroundColor = 'black';
-    text.forEach(element => {
-        element.style.color = 'white';
-    });
+    if (!isDarkMode) {
+        body.style.backgroundColor = 'black';
+        text.forEach(element => {
+            element.style.color = 'white';
+        });
+        icon.textContent = 'Light Mode.';
+    } else {
+        body.style.backgroundColor = 'white';
+        text.forEach(element => {
+            element.style.color = 'black';
+        });
+        icon.textContent = 'Dark Mode.';
+    }
+    isDarkMode = !isDarkMode;
 });
 </script>
 </body>
