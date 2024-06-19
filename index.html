@@ -7,6 +7,7 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             margin: 0;
@@ -23,7 +24,9 @@
             color: black;
             background-color: white;
         }
-
+        .main {
+            flex-grow: 1
+        }
         .highlight-inline:hover {
             color: black; /* Set text color to black on hover */
             background-color: white; /* Set background color to white on hover */
@@ -47,7 +50,7 @@
 </head>
 <body>
 <main>
-    <div class="flex-grow: 1">
+    <div>
     <span class="top-right-icon" id="modeselection"> Dark mode.</span>
     <p style="font-size: 5em; margin-top: 40vh; margin-bottom: 25vh; text-align: center;" class="highlight-inline">Hello.</p>
 
