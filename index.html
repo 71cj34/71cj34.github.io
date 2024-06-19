@@ -31,16 +31,18 @@
 
 <br><br><br><br><br><br><br><br><br><br>
 
-    <p style="text-align: center;"><a href="#" id="iconLink"><span><img class="icon" src="stariconv2.png" alt="star icon"></span></a></p>
-</main>
-
+    <p style="text-align: center;"><a href="https://en.wikipedia.org/wiki/K2-155d"><span><img class="icon " src="stariconv2.png" alt="star icon"></span></a></p></main>
 <script>
-    const icon = document.getElementById('modeselection');
-    const body = document.querySelector('body');
+const icon = document.getElementById('modeselection');
+const body = document.querySelector('body');
+const text = document.querySelectorAll('p, span');
 
-    icon.addEventListener('click', () => {
-        body.style.backgroundColor = 'black';
+icon.addEventListener('click', () => {
+    body.style.backgroundColor = 'black';
+    text.forEach(element => {
+        element.style.color = 'white';
     });
+});
 </script>
 </body>
 </html>
