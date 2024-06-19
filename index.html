@@ -11,6 +11,22 @@
             margin: 0;
             font-family: 'Helvetica', sans-serif;
         }
+        .highlight-inline {
+            padding: 2px 4px;
+            border-radius: 4px;
+            color: white;
+            background-color: rgb(0, 0, 0);
+            transition: color 1s, background-color 1s;
+          }
+        .highlight-inline.light-mode {
+            color: black;
+            background-color: white;
+        }
+
+        .highlight-inline:hover {
+            color: rgb(0, 0, 0); /* Set text color to black on hover */
+            background-color: white; /* Set background color to white on hover */
+          }
     </style>
     <link rel="stylesheet" href="custom.css" />
 </head>
@@ -36,6 +52,7 @@
 const icon = document.getElementById('modeselection');
 const body = document.querySelector('body');
 const text = document.querySelectorAll('p, span');
+const highlightInline = document.querySelectorAll('.highlight-inline');
 
 let isDarkMode = false;
 
@@ -45,11 +62,17 @@ icon.addEventListener('click', () => {
         text.forEach(element => {
             element.style.color = 'white';
         });
+        highlightInline.forEach(element => {
+            element.classList.remove('light-mode');
+        });
         icon.textContent = 'Light Mode.';
     } else {
         body.style.backgroundColor = 'white';
         text.forEach(element => {
             element.style.color = 'black';
+        });
+        highlightInline.forEach(element => {
+            element.classList.add('light-mode');
         });
         icon.textContent = 'Dark Mode.';
     }
