@@ -60,17 +60,18 @@ const icon = document.getElementById('modeselection');
 const body = document.querySelector('body');
 const text = document.querySelectorAll('p, span');
 const highlightInline = document.querySelectorAll('.highlight-inline');
+const hidden = document.querySelectorAll('.hidden');
 
 let isDarkMode = false;
 
 icon.addEventListener('click', () => {
     if (!isDarkMode) {
         body.style.backgroundColor = 'black';
-        hidden.forEach(element => {
-            element.classList.add('dark-mode');
-        });
         text.forEach(element => {
             element.style.color = 'white';
+        });
+        hidden.forEach(element => {
+            element.classList.add('dark-mode');
         });
         highlightInline.forEach(element => {
             element.classList.add('dark-mode');
@@ -78,11 +79,11 @@ icon.addEventListener('click', () => {
         icon.textContent = 'Light Mode.';
     } else {
         body.style.backgroundColor = 'white';
-        hidden.forEach(element => {
-            element.classList.remove('dark-mode');
-        });
         text.forEach(element => {
             element.style.color = 'black';
+        });
+        hidden.forEach(element => {
+            element.classList.remove('dark-mode');
         });
         highlightInline.forEach(element => {
             element.classList.remove('dark-mode');
