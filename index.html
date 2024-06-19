@@ -39,7 +39,7 @@
     <span class="top-right-icon" id="modeselection"> Dark mode.</span>
     <p style="font-size: 5em; margin-top: 40vh; margin-bottom: 25vh; text-align: center;" class="highlight-inline">Hello.</p>
 
-    <p style="text-align: center; color: white; font-size: 10px; margin-bottom: 25vh;">
+    <p style="text-align: center; color: white; font-size: 10px; margin-bottom: 25vh;" class="hidden">
         i wonder if they ever <br>
         found what they were <br>
         looking for out there. 
@@ -69,6 +69,9 @@ icon.addEventListener('click', () => {
         highlightInline.forEach(element => {
             element.classList.remove('light-mode');
         });
+        hidden.forEach(element => {
+            element.style.color = 'black'
+        });
         icon.textContent = 'Light Mode.';
     } else {
         body.style.backgroundColor = 'white';
@@ -77,6 +80,9 @@ icon.addEventListener('click', () => {
         });
         highlightInline.forEach(element => {
             element.classList.add('light-mode');
+        });
+        hidden.forEach(element => {
+            element.style.color = 'white'
         });
         icon.textContent = 'Dark Mode.';
     }
