@@ -18,8 +18,6 @@
 <main>
     <p style="font-size: 5em; margin-top: 40vh; margin-bottom: 25vh; text-align: center;" class="highlight-inline">Hello.</p>
 
-
-<!-- id like to say i dont use javascript because "urr durr reactive pages 0.03ms load time modern pages take 9999gb ram" but the truth is i just dont know how to and i dont want to learn out of spite caused by not knowing --> 
     <p style="text-align: center; color: white; font-size: 10px; margin-bottom: 25vh;">
         i wonder if they ever <br>
         found what they were <br>
@@ -32,7 +30,16 @@
 
 <br><br><br><br><br><br><br><br><br><br>
 
-    <p style="text-align: center;"><a href="https://en.wikipedia.org/wiki/K2-155d"><span><img class="icon " src="stariconv2.png" alt="star icon"></span></a></p>
+    <p style="text-align: center;"><a href="#" id="iconLink"><span><img class="icon" id="myIcon" src="stariconv2.png" alt="star icon"></span></a></p>
 </main>
+
+<script>
+    const icon = document.getElementById('myIcon');
+    const body = document.querySelector('body');
+
+    icon.addEventListener('click', () => {
+        body.style.backgroundColor = 'black';
+    });
+</script>
 </body>
 </html>
