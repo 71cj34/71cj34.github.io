@@ -37,6 +37,10 @@
         .hidden.dark-mode {
             color:black;
         }
+
+        .icon.dark-mode {
+            filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+        }
     </style>
     <link rel="stylesheet" href="custom.css" />
 </head>
@@ -64,6 +68,7 @@ const body = document.querySelector('body');
 const text = document.querySelectorAll('p:not(.highlight-inline):not(.hidden), span:not(.highlight-inline):not(.hidden)');
 const highlightInline = document.querySelectorAll('.highlight-inline');
 const hidden = document.querySelectorAll('.hidden');
+const blackicon = document.querySelectorAll('.icon');
 
 let isDarkMode = false;
 
@@ -79,6 +84,9 @@ icon.addEventListener('click', () => {
         highlightInline.forEach(element => {
             element.classList.add('dark-mode');
         });
+        blackicon.forEach(element => {
+            element.classList.add('dark-mode');
+        });
         icon.textContent = 'Light Mode.';
     } else {
         hidden.forEach(element => {
@@ -89,6 +97,9 @@ icon.addEventListener('click', () => {
             element.style.color = 'black';
         });
         highlightInline.forEach(element => {
+            element.classList.remove('dark-mode');
+        });
+        blackicon.forEach(element => {
             element.classList.remove('dark-mode');
         });
         icon.textContent = 'Dark Mode.';
