@@ -18,7 +18,7 @@
             background-color: rgb(0, 0, 0);
             transition: color 1s, background-color 1s;
           }
-        .highlight-inline.light-mode {
+        .highlight-inline.dark-mode {
             color: black;
             background-color: white;
         }
@@ -27,9 +27,12 @@
             color: black; /* Set text color to black on hover */
             background-color: white; /* Set background color to white on hover */
           }
-        .highlight-inline.light-mode:hover {
+        .highlight-inline.dark-mode:hover {
             color: white;
             background-color: black;
+        }
+        .hidden.dark-mode {
+            color:black;
         }
     </style>
     <link rel="stylesheet" href="custom.css" />
@@ -63,26 +66,26 @@ let isDarkMode = false;
 icon.addEventListener('click', () => {
     if (!isDarkMode) {
         body.style.backgroundColor = 'black';
+        hidden.forEach(element => {
+            element.classList.add('dark-mode');
+        });
         text.forEach(element => {
             element.style.color = 'white';
         });
         highlightInline.forEach(element => {
-            element.classList.remove('light-mode');
-        });
-        hidden.forEach(element => {
-            element.style.color = 'black'
+            element.classList.add('dark-mode');
         });
         icon.textContent = 'Light Mode.';
     } else {
         body.style.backgroundColor = 'white';
+        hidden.forEach(element => {
+            element.classList.remove('dark-mode');
+        });
         text.forEach(element => {
             element.style.color = 'black';
         });
         highlightInline.forEach(element => {
-            element.classList.add('light-mode');
-        });
-        hidden.forEach(element => {
-            element.style.color = 'white'
+            element.classList.remove('dark-mode');
         });
         icon.textContent = 'Dark Mode.';
     }
