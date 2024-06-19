@@ -18,6 +18,15 @@
   text-align: center;
 }
 
+.top-right-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+  }
+
 .noselect {
   -webkit-user-select: none;
   -ms-user-select: none;
