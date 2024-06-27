@@ -2,21 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Jason Cheng</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             margin: 0;
             font-family: 'Helvetica', sans-serif;
+            position: relative;
+            min-height: 100vh;
+        }
+        .highlight-inline {
+            padding: 2px 4px;
+            border-radius: 4px;
+            color: white;
+            background-color: rgb(0, 0, 0);
+            transition: color 1s, background-color 1s;
+          }
+        .highlight-inline.dark-mode {
+            color: black;
+            background-color: white;
+        }
+        .main {
+            flex-grow: 1
+        }
+        .highlight-inline:hover {
+            color: black; /* Set text color to black on hover */
+            background-color: white; /* Set background color to white on hover */
+          }
+        .highlight-inline.dark-mode:hover {
+            color: white;
+            background-color: black;
+        }
+        .hidden {
+            text-align: center; color: white; font-size: 10px; margin-bottom: 25vh;
+        }
+        .hidden.dark-mode {
+            color:black;
+            transition: filter 1.25s ease;
+        }
+
+        .icon.dark-mode {
+            filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
         }
     </style>
     <link rel="stylesheet" href="custom.css" />
 </head>
 <body>
 <main>
+    <div>
+    <span class="top-right-icon" id="modeselection"> Dark mode.</span>
     <p style="font-size: 5em; margin-top: 40vh; margin-bottom: 25vh; text-align: center;" class="highlight-inline">Hello.</p>
+
+    <p class="hidden">
+        i wonder if they ever <br>
+        found what they were <br>
+        looking for out there. 
+    </p>
 
     <p style="text-align: center ;">My name is <span class="highlight-inline">Jason Cheng</span>.</p>
     <p style="text-align: center ;"><span class="highlight-inline">McMaster</span> Engineering, class of <span class="highlight-inline">'28</span>.</p> <br>
@@ -24,7 +69,59 @@
 
 <br><br><br><br><br><br><br><br><br><br>
 
-    <p style="text-align: center;"><a href="https://en.wikipedia.org/wiki/K2-155d"><span><img class="icon " src="stariconv2.png" alt="star icon"></span></a></p>
+    <p style="text-align: center;"><a href="https://en.wikipedia.org/wiki/K2-155d"><span><img class="icon " src="stariconv2.png" alt="star icon"></span></a>
+        
+        <br></p>
+    <span style="font-size: 10px; font-style: italic; justify-content: center; align-items: center;">website made from scratch by jason cheng. no frameworks. thank you for being here ♡ </span>
+<br><br>
+</div>
 </main>
+
+    
+<script>
+const icon = document.getElementById('modeselection');
+const body = document.querySelector('body');
+const text = document.querySelectorAll('p:not(.highlight-inline):not(.hidden), span:not(.highlight-inline):not(.hidden)');
+const highlightInline = document.querySelectorAll('.highlight-inline');
+const hidden = document.querySelectorAll('.hidden');
+const blackicon = document.querySelectorAll('.icon');
+
+let isDarkMode = false;
+
+icon.addEventListener('click', () => {
+    if (!isDarkMode) {
+        body.style.backgroundColor = 'black';
+        hidden.forEach(element => {
+            element.classList.add('dark-mode');
+        });
+        text.forEach(element => {
+            element.style.color = 'white';
+        });
+        highlightInline.forEach(element => {
+            element.classList.add('dark-mode');
+        });
+        blackicon.forEach(element => {
+            element.classList.add('dark-mode');
+        });
+        icon.textContent = 'Light Mode.';
+    } else {
+        hidden.forEach(element => {
+            element.classList.remove('dark-mode');
+        });
+        body.style.backgroundColor = 'white';
+        text.forEach(element => {
+            element.style.color = 'black';
+        });
+        highlightInline.forEach(element => {
+            element.classList.remove('dark-mode');
+        });
+        blackicon.forEach(element => {
+            element.classList.remove('dark-mode');
+        });
+        icon.textContent = 'Dark Mode.';
+    }
+    isDarkMode = !isDarkMode;
+});
+</script>
 </body>
 </html>
