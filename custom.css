@@ -21,6 +21,13 @@
   text-align: center
 }
 
+.caption {
+  text-align: center;
+  font-style: italic; 
+  color: lightgrey;
+  font-size: 80%
+}
+
 .icon:hover {
   filter: opacity(0%);
 }
