@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jason Cheng</title>
+    <link rel="shortcut icon" href="/stariconv2.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    .sep {
+      text-align: center;
+      margin-top: 1ch;
+      margin-bottom: 1ch;
+    }
+    .p {
+      margin-left: 20vw; 
+      margin-right: 20vw;
+    }
+    </style>
+    <link rel="stylesheet" href="custom.css" />
+</head>
+<body>
+<main>
+    <div>
+    <span class="top-right-icon" id="modeselection"> Dark mode.</span>
+    <h1 style="font-size: 2em; margin-top: 10vh; margin-bottom: 5vh; text-align: center;" class="highlight-inline">Blog</h1>
+    <p style="text-align: center; font-weight: bold" class="sep">---</p>
+    <p style="text-align: left; font-weight: bold">About VPNs</p>
+    <p style="text-align: left">VPNs are one of those things that graduated over the years from.</p>
+    <p style="text-align: center; font-weight: bold" class="sep">---</p>
+    <br><br><br><br>
+    <p><a href="/" style="color:inherit; text-decoration: underline; cursor: pointer;">Return to home.</a></p>
+</div>
+</main>
+
+    
+<script>
+const icon = document.getElementById('modeselection');
+const body = document.querySelector('body');
+const text = document.querySelectorAll('p:not(.highlight-inline):not(.hidden), span:not(.highlight-inline):not(.hidden)');
+const highlightInline = document.querySelectorAll('.highlight-inline');
+const hidden = document.querySelectorAll('.hidden');
+const blackicon = document.querySelectorAll('.icon');
+
+let isDarkMode = false;
+
+icon.addEventListener('click', () => {
+    if (!isDarkMode) {
+        body.style.backgroundColor = 'black';
+        hidden.forEach(element => {
+            element.classList.add('dark-mode');
+        });
+        text.forEach(element => {
+            element.style.color = 'white';
+        });
+        highlightInline.forEach(element => {
+            element.classList.add('dark-mode');
+        });
+        blackicon.forEach(element => {
+            element.classList.add('dark-mode');
+        });
+        icon.textContent = 'Light Mode.';
+    } else {
+        hidden.forEach(element => {
+            element.classList.remove('dark-mode');
+        });
+        body.style.backgroundColor = 'white';
+        text.forEach(element => {
+            element.style.color = 'black';
+        });
+        highlightInline.forEach(element => {
+            element.classList.remove('dark-mode');
+        });
+        blackicon.forEach(element => {
+            element.classList.remove('dark-mode');
+        });
+        icon.textContent = 'Dark Mode.';
+    }
+    isDarkMode = !isDarkMode;
+});
+</script>
+</body>
+</html>
