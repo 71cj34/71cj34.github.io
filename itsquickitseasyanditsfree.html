@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>It's Quick, It's Easy, and It's Free!</title>
+    <style>
+        .a {
+            white-space: pre-wrap; 
+            word-wrap: break-word; 
+            width: 100%; 
+            border: 1px solid #ccc; 
+            padding: 1px; 
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div id="a" class="a"></div>
+    <!-- test to make a procedurally generated number gaming house (destroyed by tractor (REAL!)) -->
+     <!-- gaming regex: /\*.*\\* -->
+
+    <script>
+        const numChars = 250000000;
+
+        function getRandomNumber() {
+            return Math.floor(Math.random() * 10);
+        }
+
+        function generateRandomNumbers(length) {
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += getRandomNumber();
+            }
+            return result;
+        }
+
+        function displayRandomNumbers() {
+            const randomNumbers = generateRandomNumbers(numChars);
+            document.getElementById('a').innerText = randomNumbers;
+        }
+
+        window.onload = displayRandomNumbers;
+    </script>
+</body>
+</html>
