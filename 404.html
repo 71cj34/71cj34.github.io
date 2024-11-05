@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jason Cheng</title>
+    <link rel="shortcut icon" href="/stariconv2.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="custom.css" />
+</head>
+<body>
+<main>
+    <div>
+    <span class="top-right-icon" id="modeselection"> Dark mode.</span>
+
+    <p style="text-align: center ;"><span class="highlight-inline">Whoops.</span></p>
+    <p style="text-align: center ;">Seems like we couldn't find that page.</p> <br>
+    <p style="text-align: center ;">Don't get lost next time.</p><br><br>
+    <a style="text-align: center ;" href="/">Return to home.</a>
+    <br>
+<br><br>
+</div>
+</main>
+
+    
+<script>
+const icon = document.getElementById('modeselection');
+const body = document.querySelector('body');
+const text = document.querySelectorAll('p:not(.highlight-inline):not(.hidden), span:not(.highlight-inline):not(.hidden)');
+const highlightInline = document.querySelectorAll('.highlight-inline');
+const hidden = document.querySelectorAll('.hidden');
+const blackicon = document.querySelectorAll('.icon');
+
+let isDarkMode = false;
+
+icon.addEventListener('click', () => {
+    if (!isDarkMode) {
+        body.style.backgroundColor = 'black';
+        hidden.forEach(element => {
+            element.classList.add('dark-mode');
+        });
+        text.forEach(element => {
+            element.style.color = 'white';
+        });
+        highlightInline.forEach(element => {
+            element.classList.add('dark-mode');
+        });
+        blackicon.forEach(element => {
+            element.classList.add('dark-mode');
+        });
+        icon.textContent = 'Light Mode.';
+    } else {
+        hidden.forEach(element => {
+            element.classList.remove('dark-mode');
+        });
+        body.style.backgroundColor = 'white';
+        text.forEach(element => {
+            element.style.color = 'black';
+        });
+        highlightInline.forEach(element => {
+            element.classList.remove('dark-mode');
+        });
+        blackicon.forEach(element => {
+            element.classList.remove('dark-mode');
+        });
+        icon.textContent = 'Dark Mode.';
+    }
+    isDarkMode = !isDarkMode;
+});
+</script>
+</body>
+</html>
