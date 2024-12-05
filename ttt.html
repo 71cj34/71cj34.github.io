@@ -82,7 +82,7 @@
             content.innerHTML = `You will play as ${finalNumber === '\\circ' ? '$\\circ$' : '$\\times$'}.<br />You will go ${finalNumber === '\\circ' ? 'second' : 'first'}.`;
             MathJax.typeset();
           }
-        }, 10);
+        }, 80);
       });
 
       document.getElementById('continue').addEventListener('click', async function() {
