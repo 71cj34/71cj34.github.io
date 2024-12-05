@@ -1,38 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="custom.css" />
-    <title>Tic-Tac-Toe But Awesome</title>
+    <title>Tic Tac Toe</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-      body,
-      html {
-        height: 100%;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-      }
-    </style>
-    <script>
-      MathJax = {
-        tex: {
-          inlineMath: [
-            ['$', '$'],
-            ['\$$', '\$$']
-          ]
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
         }
-      };
-    </script>
-    <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-    </script>
+        .cell {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #000;
+            font-size: 26pt;
+            cursor: pointer;
+        }
+        #result {
+            font-size: 26pt;
+            margin-top: 20px;
+        }
+        #ticTacToeGrid {
+            display: none;
+        }
+    </style>
 </head>
-  <body>
-    <div>
-      <p>this should show up as math: $$x - 4 + \frac{2}{\pi}$$ and this too $\int^4_1 3x^2 - \sin{x} \, dx$</p>
-    </div>
+<body>
+    <button id="rollDiceButton">Roll dice</button>
+    <div id="result"></div>
+    <div id="mainContent"></div>
+    <button id="continue" style="display: none">Press here to continue</button> 
+    <div id="ticTacToeGrid" class="grid"></div>
+    <script>
+document.getElementById('rollDiceButton').addEventListener('click', async function() {
+  const diceButton = document.getElementById('rollDiceButton');
+  diceButton.style.display = "none";
+  const resultDiv = document.getElementById('result');
+  const symbols = ["\\circ", "\\times", "\\And", "\\ast", "\\boxtimes", "\\cap", "\\wr", "\\circledast", "\\Cup", "\\curlyvee", "\\doublebarwedge", "\\gtrdot", "\\intercal", "\\perp", "\\phi", "\\sigma", "\\ltimes",
+                          "\\lor", "\\cup", "\\curlywedge", "\\divideontimes", "\\leftthreetimes", "\\lhd", "\\pm", "\\rtimes", "\\sqcap", "\\veebar", "\\approx", "\\bowtie", "\\between", "\\eta", "\\cong",
+                          "\\Doteq", "\\in", "\\ggg", "\\gg", "\\frown", "\\eqcirc", "\\models", "\\varnothing", "\\pitchfork", "\\propto", "\\smallsmile", "\\supseteqq", "\\Supset", "\\supset", "\\succapprox", "\\gamma",
+                          "\\sqsubseteq", "\\sqsupseteq", "\\subseteq", "\\succ", "\\ntrianglelefteq", "\\ntrianglerighteq", "\\nvdash", "\\nVDash", "\\precnapprox", "\\circlearrowleft", "\\circlearrowright", "\\mu",
+                          "\\leftrightsquigarrow", "\\nLeftrightarrow", "\\leadsto", "\\nwarrow", "\\LaTeX", "\\dagger", "\\circledR", "\\natural", "\\flat", "\\sharp", "\\maltese", "\\kappa", "\\varrho", "\\varpi"
+                          ];
+  resultDiv.innerHTML = '';
+  let counter = 0;
+  const interval = setInterval(() => {
+    const symbol = "$".concat(symbols[Math.floor(Math.random() * symbols.length)], "$");
+    resultDiv.innerHTML = symbol;
+    MathJax.typeset();
+    counter++;
+    if (counter >= 45) {
+      clearInterval(interval);
+      const finalNumber = symbols[Math.floor(Math.random() * 2)]
+      const continueButton = document.getElementById('continue');
+      const content = document.getElementById('mainContent');
+      continueButton.style.display = "block";
+      resultDiv.innerHTML = "$".concat(finalNumber, "$");
+      continueButton.innerHTML = "Press here to continue";
+      content.innerHTML = `You will play as ${finalNumber === '\\circ' ? '$\\circ$' : '$\\times$'}.<br />You will go ${finalNumber === '\\circ' ? 'second' : 'first'}.`;
+      MathJax.typeset();
+    }
+  }, 90);
+});
+
+document.getElementById('continue').addEventListener('click', async function() {
+  const continueButton = document.getElementById('continue');
+  const resultDiv = document.getElementById('result');
+  const content = document.getElementById('mainContent');
+  content.style.fontSize = "26pt"
+  continueButton.style.display = "none";
+  resultDiv.style.display = "none";
+  
+  let board = ['', '', '', '', '', '', '', '', ''];
+  let currentPlayer = resultDiv.innerHTML === '$\\circ$' ? '\\circ' : '\\times';
+  let exit = 0;
+
+  function updateBoard() {
+    let matrix = `\\begin{array}{c:c:c}
+                  ${board[0]} & ${board[1]} & ${board[2]} \\\\
+                  \\hdashline
+                  ${board[3]} & ${board[4]} & ${board[5]} \\\\
+                  \\hdashline
+                  ${board[6]} & ${board[7]} & ${board[8]}
+                  \\end{array}`;
+    content.innerHTML = matrix;
+    MathJax.typeset();
+  }
+
+  function checkWinOrDraw() {
+    const winPatterns = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+      [0, 4, 8], [2, 4, 6] // diag
+    ];
+
+    for (let pattern of winPatterns) {
+      if (board[pattern[0]] && board[pattern[0]] === board[pattern[1]] && board[pattern[0]] === board[pattern[2]]) {
+        content.innerHTML = `Player ${board[pattern[0]]} wins!`;
+        exit = 1;
+        document.getElementById('ticTacToeGrid').style.display = "none";
+        return;
+      }
+    }
+
+    if (!board.includes('')) {
+      content.innerHTML = "It's a draw!";
+      exit = 1;
+      document.getElementById('ticTacToeGrid').style.display = "none";
+    }
+  }
+
+  function handleMove(index) {
+    if (board[index] === '' && !exit) {
+      board[index] = currentPlayer;
+      checkWinOrDraw();
+      if (!exit) {
+        currentPlayer = currentPlayer === '\\circ' ? '\\times' : '\\circ';
+      }
+      updateBoard();
+      document.getElementById('ticTacToeGrid').style.display = currentPlayer === '\\circ' ? "none" : "grid";
+    }
+  }
+
+  updateBoard();
+
+  const grid = document.getElementById('ticTacToeGrid');
+  grid.innerHTML = '';
+  for (let i = 0; i < 9; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+    cell.addEventListener('click', () => handleMove(i));
+    grid.appendChild(cell);
+  }
+
+  document.getElementById('ticTacToeGrid').style.display = currentPlayer === '\\circ' ? "none" : "grid";
+});
+    </script>
   </body>
 </html>
