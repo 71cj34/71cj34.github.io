@@ -20,17 +20,19 @@
       MathJax = {
         tex: {
           inlineMath: [
-            // ['$', '$'],
+            ['$', '$'],
             ['\$$', '\$$']
           ]
         }
       };
     </script>
-    <script type="text/javascript" id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.0.0/es5/latest.js?tex-mml-chtml"></script>
-  </head>
+    <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+</head>
   <body>
     <div>
-      <p>this should show up as math: $$x - 4 + \frac{2}{\pi}$$</p>
+      <p>this should show up as math: $$x - 4 + \frac{2}{\pi}$$ and this too $\int^4_1 3x^2 - \sin{x} \, dx$</p>
     </div>
   </body>
 </html>
