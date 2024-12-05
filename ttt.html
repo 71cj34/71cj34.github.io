@@ -7,23 +7,23 @@
     <script>
       MathJax = {
         tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
+          inlineMath: [['$', '$'], ['\$$', '\$$']]
         }
       };
-      </script>
+    </script>
     <script type="text/javascript" id="MathJax" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>    
-  <link rel="stylesheet" href="custom.css">
-  <style>
+    </script>    
+    <link rel="stylesheet" href="custom.css">
+    <style>
       .grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 10px;
       }
       .cell {
-          width: 100px;
-          height: 100px;
+          width: 60px;
+          height: 60px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -38,7 +38,11 @@
       #ticTacToeGrid {
           display: none;
       }
-  </style>
+      .disabled {
+          pointer-events: none;
+          opacity: 0.6;
+      }
+    </style>
 </head>
 <body>
     <button id="rollDiceButton">Roll dice</button>
@@ -47,6 +51,8 @@
     <button id="continue" style="display: none">Press here to continue</button> 
     <div id="ticTacToeGrid" class="grid"></div>
     <script>
+      let currentPlayer;
+
       document.getElementById('rollDiceButton').addEventListener('click', async function() {
         const diceButton = document.getElementById('rollDiceButton');
         diceButton.style.display = "none";
@@ -56,7 +62,7 @@
                         "\\Doteq", "\\in", "\\ggg", "\\gg", "\\frown", "\\eqcirc", "\\models", "\\varnothing", "\\pitchfork", "\\propto", "\\smallsmile", "\\supseteqq", "\\Supset", "\\supset", "\\succapprox", "\\gamma",
                         "\\sqsubseteq", "\\sqsupseteq", "\\subseteq", "\\succ", "\\ntrianglelefteq", "\\ntrianglerighteq", "\\nvdash", "\\nVDash", "\\precnapprox", "\\circlearrowleft", "\\circlearrowright", "\\mu",
                         "\\leftrightsquigarrow", "\\nLeftrightarrow", "\\leadsto", "\\nwarrow", "\\LaTeX", "\\dagger", "\\circledR", "\\natural", "\\flat", "\\sharp", "\\maltese", "\\kappa", "\\varrho", "\\varpi"
-                        ];
+                        ];        
         resultDiv.innerHTML = '';
         let counter = 0;
         const interval = setInterval(() => {
@@ -66,28 +72,28 @@
           counter++;
           if (counter >= 45) {
             clearInterval(interval);
-            const finalNumber = symbols[Math.floor(Math.random() * 2)]
+            const finalNumber = symbols[Math.floor(Math.random() * 2)];
             const continueButton = document.getElementById('continue');
             const content = document.getElementById('mainContent');
+            currentPlayer = finalNumber;
             continueButton.style.display = "block";
             resultDiv.innerHTML = "$".concat(finalNumber, "$");
             continueButton.innerHTML = "Press here to continue";
             content.innerHTML = `You will play as ${finalNumber === '\\circ' ? '$\\circ$' : '$\\times$'}.<br />You will go ${finalNumber === '\\circ' ? 'second' : 'first'}.`;
             MathJax.typeset();
           }
-        }, 90);
+        }, 10);
       });
 
       document.getElementById('continue').addEventListener('click', async function() {
         const continueButton = document.getElementById('continue');
         const resultDiv = document.getElementById('result');
         const content = document.getElementById('mainContent');
-        content.style.fontSize = "26pt"
+        content.style.fontSize = "26pt";
         continueButton.style.display = "none";
         resultDiv.style.display = "none";
         
         let board = ['', '', '', '', '', '', '', '', ''];
-        let currentPlayer = resultDiv.innerHTML === '$\\circ$' ? '\\circ' : '\\times';
         let exit = 0;
 
         function updateBoard() {
@@ -133,14 +139,13 @@
               currentPlayer = currentPlayer === '\\circ' ? '\\times' : '\\circ';
             }
             updateBoard();
-            document.getElementById('ticTacToeGrid').style.display = currentPlayer === '\\circ' ? "none" : "grid";
+            document.getElementById('ticTacToeGrid').classList.toggle('disabled', currentPlayer === '\\circ');
           }
         }
 
         updateBoard();
 
         const grid = document.getElementById('ticTacToeGrid');
-        grid.innerHTML = '';
         for (let i = 0; i < 9; i++) {
           const cell = document.createElement('div');
           cell.className = 'cell';
@@ -148,8 +153,22 @@
           grid.appendChild(cell);
         }
 
-        document.getElementById('ticTacToeGrid').style.display = currentPlayer === '\\circ' ? "none" : "grid";
+        document.getElementById('ticTacToeGrid').style.display = "grid";
+        document.getElementById('ticTacToeGrid').classList.toggle('disabled', currentPlayer === '\\circ');
       });
+
     </script>
-  </body>
+</body>
 </html>
+
+
+
+<!-- 
+
+        const symbols = ["\\circ", "\\times", "\\And", "\\ast", "\\boxtimes", "\\cap", "\\wr", "\\circledast", "\\Cup", "\\curlyvee", "\\doublebarwedge", "\\gtrdot", "\\intercal", "\\perp", "\\phi", "\\sigma", "\\ltimes",
+                        "\\lor", "\\cup", "\\curlywedge", "\\divideontimes", "\\leftthreetimes", "\\lhd", "\\pm", "\\rtimes", "\\sqcap", "\\veebar", "\\approx", "\\bowtie", "\\between", "\\eta", "\\cong",
+                        "\\Doteq", "\\in", "\\ggg", "\\gg", "\\frown", "\\eqcirc", "\\models", "\\varnothing", "\\pitchfork", "\\propto", "\\smallsmile", "\\supseteqq", "\\Supset", "\\supset", "\\succapprox", "\\gamma",
+                        "\\sqsubseteq", "\\sqsupseteq", "\\subseteq", "\\succ", "\\ntrianglelefteq", "\\ntrianglerighteq", "\\nvdash", "\\nVDash", "\\precnapprox", "\\circlearrowleft", "\\circlearrowright", "\\mu",
+                        "\\leftrightsquigarrow", "\\nLeftrightarrow", "\\leadsto", "\\nwarrow", "\\LaTeX", "\\dagger", "\\circledR", "\\natural", "\\flat", "\\sharp", "\\maltese", "\\kappa", "\\varrho", "\\varpi"
+                        ];
+-->
