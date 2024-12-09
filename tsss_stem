@@ -242,7 +242,7 @@
                 });
             });
 
-            // Collapsible section
+            // collapsibel
             const coll = document.querySelector('.collapsible');
             const content = coll.nextElementSibling;
             coll.addEventListener('click', () => {
@@ -254,7 +254,7 @@
                 }
             });
 
-            // Toggle LaTeX
+            // latex
             const toggleLatexButton = content.querySelector('.toggle-latex');
             const latexContent = content.querySelector('.latex-content');
             toggleLatexButton.addEventListener('click', () => {
