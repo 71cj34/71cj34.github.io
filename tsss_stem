@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSSS STEM Benchmark</title>
+    <link rel="stylesheet" href="custom.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            cursor: pointer;
+            background-color: #f2f2f2e4;
+        }
+    </style>
+</head>
+<body>
+    <h1>The TSSS_STEM Benchmark</h1>
+    <p style="text-align: center;">This benchmark grades a model's ability<br>
+        to solve math problems and 'reason'.<br>
+        LLMs cannot technically 'reason', so<br>
+        this benchmark uses a high-quality<br>
+        uncontaminated dataset of problems<br>
+        that are less about pure crunching<br>
+        numbers and more about reasoning and<br>
+        knowing HOW to do the problem.
+    </p>
+    <div class="container">
+        <table id="scoreTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th id="scoreHeader">Score <span id="sortIcon"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>85</td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>92</td>
+                </tr>
+                <tr>
+                    <td>Sam Johnson</td>
+                    <td>78</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const table = document.getElementById('scoreTable');
+        const headers = table.querySelectorAll('th');
+        const tableBody = table.querySelector('tbody');
+        const rows = Array.from(tableBody.querySelectorAll('tr'));
+        const sortIcon = document.getElementById('sortIcon');
+
+        const directions = Array.from(headers).map(() => '');
+
+        const transform = (index, content) => {
+            const type = headers[index].getAttribute('data-type');
+            switch (type) {
+                case 'number':
+                    return parseFloat(content);
+                default:
+                    return content;
+            }
+        };
+
+        const sortColumn = (index) => {
+            const direction = directions[index] || 'asc';
+            const multiplier = direction === 'asc' ? 1 : -1;
+
+            const newRows = rows.slice().sort((rowA, rowB) => {
+                const cellA = rowA.querySelectorAll('td')[index].innerHTML;
+                const cellB = rowB.querySelectorAll('td')[index].innerHTML;
+
+                const a = transform(index, cellA);
+                const b = transform(index, cellB);
+
+                switch (true) {
+                    case a > b: return 1 * multiplier;
+                    case a < b: return -1 * multiplier;
+                    case a === b: return 0;
+                }
+            });
+
+            [].forEach.call(rows, row => row.parentNode.removeChild(row));
+
+            newRows.forEach(newRow => tableBody.appendChild(newRow));
+
+            directions[index] = direction === 'asc' ? 'desc' : 'asc';
+
+            // Update the sort icon
+            if (direction === 'asc') {
+                sortIcon.textContent = '↓';
+            } else {
+                sortIcon.textContent = '↑';
+            }
+        };
+
+        headers.forEach((header, index) => {
+            header.addEventListener('click', () => {
+                sortColumn(index);
+            });
+        });
+    });
+
+
+    </script>
+</body>
+</html>
