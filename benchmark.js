@@ -80,6 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+// latex for small screen
 document.addEventListener('DOMContentLoaded', function() {
     const latexContent = document.getElementById('latexContent');
     const toggleLatexButton = document.querySelector('.toggle-latex.collapsible');
