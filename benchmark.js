@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // collapsibel
+    // collapsible
     const coll = document.querySelector('.collapsible');
     const content = coll.nextElementSibling;
     coll.addEventListener('click', () => {
@@ -67,47 +67,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Function to detect if the user is on a mobile device
+    const isMobile = () => {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    };
+
     // latex
     const toggleLatexButton = content.querySelector('.toggle-latex');
     const latexContent = content.querySelector('.latex-content');
     toggleLatexButton.addEventListener('click', () => {
-        latexContent.classList.toggle('visible');
-        if (latexContent.classList.contains('visible')) {
-            content.classList.add('expanded');
+        if (isMobile()) {
+            window.location.href = 'https://jasoncheng.me/latex.png';
         } else {
-            content.classList.remove('expanded');
+            latexContent.classList.toggle('visible');
+            if (latexContent.classList.contains('visible')) {
+                content.classList.add('expanded');
+            } else {
+                content.classList.remove('expanded');
+            }
         }
     });
-});
-
-
-// latex for small screen
-document.addEventListener('DOMContentLoaded', function() {
-    const latexContent = document.getElementById('latexContent');
-    const toggleLatexButton = document.querySelector('.toggle-latex.collapsible');
-
-    toggleLatexButton.addEventListener('click', function() {
-        if (latexContent.classList.contains('visible')) {
-            latexContent.classList.remove('visible');
-        } else {
-            latexContent.classList.add('visible');
-            checkScreenSize();
-        }
-    });
-
-    function checkScreenSize() {
-        if (window.innerWidth <= 600 && latexContent.classList.contains('visible')) {
-            latexContent.innerHTML = '<a href="http://jasoncheng.me/latex.png" target="_blank">See Question Image</a>';
-        } else {
-            latexContent.innerHTML = 
-                '$\\text{Which of the following statements are always true for vectors in } \\mathbb{R}^3 \\text{?}$ <br><br>' +
-                '$\\text{(i)  If } u \\cdot (v \\times w) = 4 \\text{ then } w \\cdot (u \\times v) = -4$<br>' +
-                '$\\text{(ii) } (2u + v) \\times (u - 5v) = -11(u \\times v)$<br>' +
-                '$\\text{(iii) If } u \\text{ is orthogonal to } v \\text{ and } w \\text{ then } u \\text{ is also orthogonal to } ||w||v + ||v||w$<br><br><br>' +
-                '${\\color{gray} \\textit{Expected solution: (ii), (iii)}}$';
-        }
-    }
-
-    window.addEventListener('resize', checkScreenSize);
-    checkScreenSize(); // Initial check
 });
