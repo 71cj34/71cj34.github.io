@@ -5,13 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TSSS STEM Benchmark</title>
     <link rel="stylesheet" href="custom.css">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\$$', '\$$']]
+          }
+        };
+      </script>
+      <script type="text/javascript" id="MathJax" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+      </script>    
     <style>
         body {
             text-align: center;
         }
     
         .br-space {
-            line-height: 2;
+            height: 6px;
         }
 
         .bl-inline {
@@ -41,7 +51,7 @@
             color: #000000;
             cursor: pointer;
             padding: 18px;
-            width: 18vw;
+            width: 23vw;
             border: none;
             text-align: left;
             outline: none;
@@ -55,9 +65,23 @@
         .content {
             padding: 0 18px;
             display: none;
-            width: 15vw;
+            width: 20vw;
             overflow: hidden;
             background-color: #f9f9f9;
+        }
+
+        .latex-content {
+            display: none;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .latex-content.visible {
+            display: block;
+        }
+
+        .content.expanded {
+            width: 30vw;
         }
     </style>
 </head>
@@ -72,40 +96,90 @@
 
         Also, this dataset was compiled by one undergrad university student.<br>
         This dataset is not representative of all STEM use cases or subjects,<br>
-        nor is it trying to be.<br><br>
+        nor is it trying to be. It will contain a limited number of models I<br>
+        feel represent a wide breadth of sizes and providers.<br><br>
     </p>
     <button class="collapsible" style="text-align: center">More Information</button>
     <div class="content">
         <p>
-            <span class="bl-inline">30 questions total.</span><br>
-            8 questions linear algebra, 10 questions calculus, 12 questions physics. All questions are 
-            undergraduate level.
-            <br class="br-space">
+            <span class="bl-inline">31 questions total.</span><br>
+            8 questions linear algebra, 11 questions calculus, 12 questions physics. All questions are 
+            undergraduate level. Problems were collected when LLMs were flagged to consistently get
+            those problems incorrect.
+        </p>
+        <p>
+            <span class="bl-inline">Parameters:</span><br>
+            Temperature = 0<br>
+            All other samplers disabled.<br>
+            No system prefill or instruct formatting.<br>
+            Tests done with self-made GGUF quants.<br>
+            Zero-shot prompting only. <br>
+            Using kobold.cpp.<br>
+        </p>
+        <p>
+            <span class="bl-inline">Example Question:</span><br>
+            <span style="font-style: italic;">This question was removed from the dataset to be here.<br>Subject: Linear Algebra</span><br><br>
+            <button class="toggle-latex collapsible" style="text-align: center; width: auto">See Question</button>
+            <div class="latex-content">
+                $\text{Which of the following statements are always true for vectors in } \mathbb{R}^3 \text{?}$ <br><br>
+
+                $\text{(i)  If } u \cdot (v \times w) = 4 \text{ then } w \cdot (u \times v) = -4$<br>
+                $\text{(ii) } (2u + v) \times (u - 5v) = -11(u \times v)$<br>
+                $\text{(iii) If } u \text{ is orthogonal to } v \text{ and } w \text{ then } u \text{ is also orthogonal to } ||w||v + ||v||w$<br><br><br>
+
+                ${\color{gray} \textit{Expected solution: (ii), (iii)}}$
+            </div>
         </p>
     </div>
 
-
     <div style="height: 3vh"></div>
+    <div style="font-style: italic; color:lightgray">
+        Click on the headers to sort
+    </div>
     <div class="container">
         <table id="scoreTable">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th id="scoreHeader">Score <span id="sortIcon"></span></th>
+                    <th>Provider</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>John Doe</td>
-                    <td>85</td>
+                    <td>Claude 3.5 Sonnet</td>
+                    <td>80.64</td>
+                    <td>Anthropic</td>
                 </tr>
                 <tr>
-                    <td>Jane Smith</td>
-                    <td>92</td>
+                    <td>Gemini Pro 1.5</td>
+                    <td>70.96</td>
+                    <td>Google</td>
                 </tr>
                 <tr>
-                    <td>Sam Johnson</td>
-                    <td>78</td>
+                    <td>Qwen 2.5 72B</td>
+                    <td>70.96</td>
+                    <td>Alibaba</td>
+                </tr>
+                <tr>
+                    <td>o1-mini</td>
+                    <td>83.87</td>
+                    <td>OpenAI</td>
+                </tr>
+                <tr>
+                    <td>Ministral 8B</td>
+                    <td>51.61</td>
+                    <td>Mistral</td>
+                </tr>
+                <tr>
+                    <td>GPT-4o-mini (2024-07-18)</td>
+                    <td>70.97</td>
+                    <td>OpenAI</td>
+                </tr>
+                <tr>
+                    <td>Nova Pro</td>
+                    <td>74.19</td>
+                    <td>Amazon</td>
                 </tr>
             </tbody>
         </table>
@@ -170,13 +244,25 @@
 
             // Collapsible section
             const coll = document.querySelector('.collapsible');
+            const content = coll.nextElementSibling;
             coll.addEventListener('click', () => {
                 coll.classList.toggle('active');
-                const content = coll.nextElementSibling;
                 if (content.style.display === 'block') {
                     content.style.display = 'none';
                 } else {
                     content.style.display = 'block';
+                }
+            });
+
+            // Toggle LaTeX
+            const toggleLatexButton = content.querySelector('.toggle-latex');
+            const latexContent = content.querySelector('.latex-content');
+            toggleLatexButton.addEventListener('click', () => {
+                latexContent.classList.toggle('visible');
+                if (latexContent.classList.contains('visible')) {
+                    content.classList.add('expanded');
+                } else {
+                    content.classList.remove('expanded');
                 }
             });
         });
