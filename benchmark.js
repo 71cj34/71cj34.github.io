@@ -43,9 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update the sort icon
         if (direction === 'asc') {
-            sortIcon.textContent = '↓';
-        } else {
             sortIcon.textContent = '↑';
+        } else {
+            sortIcon.textContent = '↓';
         }
     };
 
@@ -78,4 +78,34 @@ document.addEventListener('DOMContentLoaded', () => {
             content.classList.remove('expanded');
         }
     });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const latexContent = document.getElementById('latexContent');
+    const toggleLatexButton = document.querySelector('.toggle-latex.collapsible');
+
+    toggleLatexButton.addEventListener('click', function() {
+        if (latexContent.classList.contains('visible')) {
+            latexContent.classList.remove('visible');
+        } else {
+            latexContent.classList.add('visible');
+            checkScreenSize();
+        }
+    });
+
+    function checkScreenSize() {
+        if (window.innerWidth <= 600 && latexContent.classList.contains('visible')) {
+            latexContent.innerHTML = '<a href="http://jasoncheng.me/latex.png" target="_blank">See Question Image</a>';
+        } else {
+            latexContent.innerHTML = 
+                '$\\text{Which of the following statements are always true for vectors in } \\mathbb{R}^3 \\text{?}$ <br><br>' +
+                '$\\text{(i)  If } u \\cdot (v \\times w) = 4 \\text{ then } w \\cdot (u \\times v) = -4$<br>' +
+                '$\\text{(ii) } (2u + v) \\times (u - 5v) = -11(u \\times v)$<br>' +
+                '$\\text{(iii) If } u \\text{ is orthogonal to } v \\text{ and } w \\text{ then } u \\text{ is also orthogonal to } ||w||v + ||v||w$<br><br><br>' +
+                '${\\color{gray} \\textit{Expected solution: (ii), (iii)}}$';
+        }
+    }
+
+    window.addEventListener('resize', checkScreenSize);
+    checkScreenSize(); // Initial check
 });
