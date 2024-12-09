@@ -134,7 +134,7 @@
 
     <div style="height: 3vh"></div>
     <div style="font-style: italic; color:lightgray">
-        Click on the headers to sort
+        Click on the Score header to sort.
     </div>
     <div class="container">
         <table id="scoreTable">
@@ -184,6 +184,8 @@
             </tbody>
         </table>
     </div>
+    <div style="height: 40px"></div>
+    <a href="/" style="color:inherit; text-decoration: underline; cursor: pointer;">Return to home.</a>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const table = document.getElementById('scoreTable');
