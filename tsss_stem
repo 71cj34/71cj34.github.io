@@ -6,6 +6,19 @@
     <title>TSSS STEM Benchmark</title>
     <link rel="stylesheet" href="custom.css">
     <style>
+        body {
+            text-align: center;
+        }
+    
+        .br-space {
+            line-height: 2;
+        }
+
+        .bl-inline {
+            font-size: 110%;
+            font-weight: bold;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -22,19 +35,57 @@
             cursor: pointer;
             background-color: #f2f2f2e4;
         }
+
+        .collapsible {
+            background-color: #f1f1f1;
+            color: #000000;
+            cursor: pointer;
+            padding: 18px;
+            width: 18vw;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #ddd;
+        }
+
+        .content {
+            padding: 0 18px;
+            display: none;
+            width: 15vw;
+            overflow: hidden;
+            background-color: #f9f9f9;
+        }
     </style>
 </head>
 <body>
     <h1>The TSSS_STEM Benchmark</h1>
-    <p style="text-align: center;">This benchmark grades a model's ability<br>
-        to solve math problems and 'reason'.<br>
-        LLMs cannot technically 'reason', so<br>
-        this benchmark uses a high-quality<br>
-        uncontaminated dataset of problems<br>
-        that are less about pure crunching<br>
-        numbers and more about reasoning and<br>
-        knowing HOW to do the problem.
+    <p>
+        This benchmark grades a model's ability to solve math problems <br>
+        and 'reason'. LLMs cannot technically 'reason', so this benchmark <br>
+        uses a high-quality uncontaminated dataset of problems that are <br>
+        less about pure crunching numbers and more about reasoning and<br>
+        knowing HOW to do the problem.<br><br>
+
+        Also, this dataset was compiled by one undergrad university student.<br>
+        This dataset is not representative of all STEM use cases or subjects,<br>
+        nor is it trying to be.<br><br>
     </p>
+    <button class="collapsible" style="text-align: center">More Information</button>
+    <div class="content">
+        <p>
+            <span class="bl-inline">30 questions total.</span><br>
+            8 questions linear algebra, 10 questions calculus, 12 questions physics. All questions are 
+            undergraduate level.
+            <br class="br-space">
+        </p>
+    </div>
+
+
+    <div style="height: 3vh"></div>
     <div class="container">
         <table id="scoreTable">
             <thead>
@@ -61,64 +112,74 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-        const table = document.getElementById('scoreTable');
-        const headers = table.querySelectorAll('th');
-        const tableBody = table.querySelector('tbody');
-        const rows = Array.from(tableBody.querySelectorAll('tr'));
-        const sortIcon = document.getElementById('sortIcon');
+            const table = document.getElementById('scoreTable');
+            const headers = table.querySelectorAll('th');
+            const tableBody = table.querySelector('tbody');
+            const rows = Array.from(tableBody.querySelectorAll('tr'));
+            const sortIcon = document.getElementById('sortIcon');
 
-        const directions = Array.from(headers).map(() => '');
+            const directions = Array.from(headers).map(() => '');
 
-        const transform = (index, content) => {
-            const type = headers[index].getAttribute('data-type');
-            switch (type) {
-                case 'number':
-                    return parseFloat(content);
-                default:
-                    return content;
-            }
-        };
+            const transform = (index, content) => {
+                const type = headers[index].getAttribute('data-type');
+                switch (type) {
+                    case 'number':
+                        return parseFloat(content);
+                    default:
+                        return content;
+                }
+            };
 
-        const sortColumn = (index) => {
-            const direction = directions[index] || 'asc';
-            const multiplier = direction === 'asc' ? 1 : -1;
+            const sortColumn = (index) => {
+                const direction = directions[index] || 'asc';
+                const multiplier = direction === 'asc' ? 1 : -1;
 
-            const newRows = rows.slice().sort((rowA, rowB) => {
-                const cellA = rowA.querySelectorAll('td')[index].innerHTML;
-                const cellB = rowB.querySelectorAll('td')[index].innerHTML;
+                const newRows = rows.slice().sort((rowA, rowB) => {
+                    const cellA = rowA.querySelectorAll('td')[index].innerHTML;
+                    const cellB = rowB.querySelectorAll('td')[index].innerHTML;
 
-                const a = transform(index, cellA);
-                const b = transform(index, cellB);
+                    const a = transform(index, cellA);
+                    const b = transform(index, cellB);
 
-                switch (true) {
-                    case a > b: return 1 * multiplier;
-                    case a < b: return -1 * multiplier;
-                    case a === b: return 0;
+                    switch (true) {
+                        case a > b: return 1 * multiplier;
+                        case a < b: return -1 * multiplier;
+                        case a === b: return 0;
+                    }
+                });
+
+                [].forEach.call(rows, row => row.parentNode.removeChild(row));
+
+                newRows.forEach(newRow => tableBody.appendChild(newRow));
+
+                directions[index] = direction === 'asc' ? 'desc' : 'asc';
+
+                // Update the sort icon
+                if (direction === 'asc') {
+                    sortIcon.textContent = '↓';
+                } else {
+                    sortIcon.textContent = '↑';
+                }
+            };
+
+            headers.forEach((header, index) => {
+                header.addEventListener('click', () => {
+                    sortColumn(index);
+                });
+            });
+
+            // Collapsible section
+            const coll = document.querySelector('.collapsible');
+            coll.addEventListener('click', () => {
+                coll.classList.toggle('active');
+                const content = coll.nextElementSibling;
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                } else {
+                    content.style.display = 'block';
                 }
             });
-
-            [].forEach.call(rows, row => row.parentNode.removeChild(row));
-
-            newRows.forEach(newRow => tableBody.appendChild(newRow));
-
-            directions[index] = direction === 'asc' ? 'desc' : 'asc';
-
-            // Update the sort icon
-            if (direction === 'asc') {
-                sortIcon.textContent = '↓';
-            } else {
-                sortIcon.textContent = '↑';
-            }
-        };
-
-        headers.forEach((header, index) => {
-            header.addEventListener('click', () => {
-                sortColumn(index);
-            });
         });
-    });
-
-
     </script>
 </body>
 </html>
