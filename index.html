@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="custom.css" />
 </head>
-<body>
+<body class="light-mode">
 <main>
     <div>
     <span class="top-right-icon" id="modeselection"> Dark mode.</span>
@@ -20,7 +20,7 @@
         v <br>
     </p> <br><br><br>
     
-    <p class="hidden">
+    <p class="hidden dark-mode">
         <br><br> <a href="/beyondthefourthwall" class="hidden">??????</a> <br><br>
     </p>
 
@@ -44,52 +44,6 @@
 <br><br>
 </div>
 </main>
-
-    
-<script>
-const icon = document.getElementById('modeselection');
-const body = document.querySelector('body');
-const text = document.querySelectorAll('p:not(.highlight-inline):not(.hidden), span:not(.highlight-inline):not(.hidden)');
-const highlightInline = document.querySelectorAll('.highlight-inline');
-const hidden = document.querySelectorAll('.hidden');
-const blackicon = document.querySelectorAll('.icon');
-
-let isDarkMode = false;
-
-icon.addEventListener('click', () => {
-    if (!isDarkMode) {
-        body.style.backgroundColor = 'black';
-        hidden.forEach(element => {
-            element.classList.add('dark-mode');
-        });
-        text.forEach(element => {
-            element.style.color = 'white';
-        });
-        highlightInline.forEach(element => {
-            element.classList.add('dark-mode');
-        });
-        blackicon.forEach(element => {
-            element.classList.add('dark-mode');
-        });
-        icon.textContent = 'Light Mode.';
-    } else {
-        hidden.forEach(element => {
-            element.classList.remove('dark-mode');
-        });
-        body.style.backgroundColor = 'white';
-        text.forEach(element => {
-            element.style.color = 'black';
-        });
-        highlightInline.forEach(element => {
-            element.classList.remove('dark-mode');
-        });
-        blackicon.forEach(element => {
-            element.classList.remove('dark-mode');
-        });
-        icon.textContent = 'Dark Mode.';
-    }
-    isDarkMode = !isDarkMode;
-});
-</script>
 </body>
+<script src="darkmode.js"></script>
 </html>

@@ -88,13 +88,44 @@ main div {
     color: white;
 }
 .hidden {
-    text-align: center; color: white; font-size: 10px; margin-bottom: 25vh;
-}
-.hidden.dark-mode {
-    color:black;
-    transition: filter 1.25s ease;
+  text-align: center; 
+  font-size: 10px; 
+  margin-bottom: 25vh;
+  color: white; /* need to flip white/black for .hidden */
 }
 
+body.dark-mode .hidden {
+  color: black;
+}
 .icon.dark-mode {
     filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
+
+body.light-mode {
+  background-color: white;
+  color: black;
+}
+
+body.dark-mode {
+  background-color: black;
+  color: white;
+}
+
+body.dark-mode p,
+body.dark-mode span {
+  color: white;
+}
+
+body.dark-mode .highlight-inline {
+  color: black;
+  background-color: white;
+}
+
+body.dark-mode .highlight-inline:hover {
+  color: white;
+  background-color: black;
+}
+
+body.dark-mode .icon {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
