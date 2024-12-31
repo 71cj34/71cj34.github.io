@@ -6,7 +6,8 @@
                           "\\lor", "\\cup", "\\curlywedge", "\\divideontimes", "\\leftthreetimes", "\\lhd", "\\pm", "\\rtimes", "\\sqcap", "\\veebar", "\\approx", "\\bowtie", "\\between", "\\eta", "\\cong",
                           "\\Doteq", "\\in", "\\ggg", "\\gg", "\\frown", "\\eqcirc", "\\models", "\\varnothing", "\\pitchfork", "\\propto", "\\smallsmile", "\\supseteqq", "\\Supset", "\\supset", "\\succapprox", "\\gamma",
                           "\\sqsubseteq", "\\sqsupseteq", "\\subseteq", "\\succ", "\\ntrianglelefteq", "\\ntrianglerighteq", "\\nvdash", "\\nVDash", "\\precnapprox", "\\circlearrowleft", "\\circlearrowright", "\\mu",
-                          "\\leftrightsquigarrow", "\\nLeftrightarrow", "\\leadsto", "\\nwarrow", "\\LaTeX", "\\dagger", "\\circledR", "\\natural", "\\flat", "\\sharp", "\\maltese", "\\kappa", "\\varrho", "\\varpi"
+                          "\\leftrightsquigarrow", "\\nLeftrightarrow", "\\leadsto", "\\nwarrow", "\\LaTeX", "\\dagger", "\\circledR", "\\natural", "\\flat", "\\sharp", "\\maltese", "\\kappa", "\\varrho", "\\varpi",
+                          "\\bowtie", "\\diamond", "\\wr", "\\star", "\\succnsim", "\\ncong", "\\nVDash", "\\subsetneqq", "\\lvertneqq", "\\nprec", "\\exists!", "\\N", "\\Z", "\\Q", "\\R", "\\C", "\\nparallel", "\\beth"
                           ];
           resultDiv.innerHTML = '';
           let counter = 0;
