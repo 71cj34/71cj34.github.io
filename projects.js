@@ -2,21 +2,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const repos = [
         '71cj34/MergekitHelper',
         '71cj34/CompressExp',
+
         // '71cj34/REPO',
         // '71cj34/REPO',
         // '71cj34/REPO'
     ];
 
-    const icon = document.getElementById('modeselection');
-    const body = document.querySelector('body');
-    const text = document.querySelectorAll('p:not(.highlight-inline):not(.hidden), span:not(.highlight-inline):not(.hidden)');
-    const highlightInline = document.querySelectorAll('.highlight-inline');
-    const hidden = document.querySelectorAll('.hidden');
-    const blackicon = document.querySelectorAll('.icon');
+    // Assign icon variable inside the 'DOMContentLoaded' event listener
+
+
     const projectsContent = document.getElementById('projectsContent');
     const replaceButton = document.getElementById('replaceButton');
 
-    let isDarkMode = false;
     let isContentReplaced = false;
 
     const originalContent = projectsContent.innerHTML;
@@ -24,11 +21,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const newContent = `
         <p style="font-weight: bold">Exllama</p>
         <p>Some sort of quantization tool for Exllama. Had a quick gander at the docs. <br>Doesn't look all that bad.</p>
-        <br><img src="/linev3.png" style="display: block; margin-left: auto; margin-right: auto;"><br>
+        <br>
+        <img src="/linev3.png" style="display: block; margin-left: auto; margin-right: auto;">
+        <br>
         <p style="font-weight: bold">MTransformer</p>
         <p>Windows app to convert file formats. I need to look into C++.</p>
         <br><br><br><br><br><br>
-        <p style="font-style: italic, color: lightgrey, font-size: 60%"> Maybe someday.</p>
+        <p style="font-style: italic; color: grey; font-size: 80%"> Maybe someday.</p>
     `;
 
     // Fetch last commit message for each repo
@@ -51,52 +50,63 @@ document.addEventListener('DOMContentLoaded', (event) => {
             console.warn(`Element with ID "commit-message-${index + 1}" not found.`);
         }
     });
-});
+    
+    // Replace content when replaceButton is clicked.
+    replaceButton.addEventListener('click', () => {
+        if (!isContentReplaced) {
+            projectsContent.innerHTML = newContent;
+            replaceButton.textContent = 'Or, go back to my projects.';
+        } else {
+            projectsContent.innerHTML = originalContent;
+            replaceButton.textContent = 'Or, see my ideas (not-quite-projects).';
+        }
+        isContentReplaced = !isContentReplaced;
+    });
 
-// Dark mode toggle
-icon.addEventListener('click', () => {
-    if (!isDarkMode) {
-        body.style.backgroundColor = 'black';
-        hidden.forEach(element => {
-            element.classList.add('dark-mode');
-        });
-        text.forEach(element => {
-            element.style.color = 'white';
-        });
-        highlightInline.forEach(element => {
-            element.classList.add('dark-mode');
-        });
-        blackicon.forEach(element => {
-            element.classList.add('dark-mode');
-        });
-        icon.textContent = 'Light Mode.';
-    } else {
-        hidden.forEach(element => {
-            element.classList.remove('dark-mode');
-        });
-        body.style.backgroundColor = 'white';
-        text.forEach(element => {
-            element.style.color = 'black';
-        });
-        highlightInline.forEach(element => {
-            element.classList.remove('dark-mode');
-        });
-        blackicon.forEach(element => {
-            element.classList.remove('dark-mode');
-        });
-        icon.textContent = 'Dark Mode.';
-    }
-    isDarkMode = !isDarkMode;
-});
+    // DARK MODE STUFF
 
-// Replace content when replaceButton is clicked.
-replaceButton.addEventListener('click', () => {
-    if (!isContentReplaced) {
-        projectsContent.innerHTML = newContent;
-        replaceButton.textContent = 'Or, go back to my projects.';
-    } else {
-        projectsContent.innerHTML = originalContent;
-        replaceButton.textContent = 'Or, see my ideas (not-quite-projects).';
-    }
-    isContentReplaced = !isContentReplaced;
+    let isDarkMode = false;
+    const icon = document.getElementById('modeselection');
+    const body = document.querySelector('body');
+    const text = document.querySelectorAll('p:not(.highlight-inline):not(.hidden), span:not(.highlight-inline):not(.hidden)');
+    const highlightInline = document.querySelectorAll('.highlight-inline');
+    const hidden = document.querySelectorAll('.hidden');
+    const blackicon = document.querySelectorAll('.icon');
+
+    // Dark mode toggle
+    icon.addEventListener('click', () => {
+        if (!isDarkMode) {
+            body.style.backgroundColor = 'black';
+            hidden.forEach(element => {
+                element.classList.add('dark-mode');
+            });
+            text.forEach(element => {
+                element.style.color = 'white';
+            });
+            highlightInline.forEach(element => {
+                element.classList.add('dark-mode');
+            });
+            blackicon.forEach(element => {
+                element.classList.add('dark-mode');
+            });
+            icon.textContent = 'Light Mode.';
+        } else {
+            hidden.forEach(element => {
+                element.classList.remove('dark-mode');
+            });
+            body.style.backgroundColor = 'white';
+            text.forEach(element => {
+                element.style.color = 'black';
+            });
+            highlightInline.forEach(element => {
+                element.classList.remove('dark-mode');
+            });
+            blackicon.forEach(element => {
+                element.classList.remove('dark-mode');
+            });
+            icon.textContent = 'Dark Mode.';
+        }
+        isDarkMode = !isDarkMode;
+    });
+
 });
