@@ -82,7 +82,7 @@
             content.innerHTML = `You will play as ${finalNumber === '\\circ' ? '$\\circ$' : '$\\times$'}.<br />You will go ${finalNumber === '\\circ' ? 'second' : 'first'}.`;
             MathJax.typeset();
           }
-        }, 80);
+        }, 10);
       });
 
       document.getElementById('continue').addEventListener('click', async function() {
@@ -137,9 +137,69 @@
             checkWinOrDraw();
             if (!exit) {
               currentPlayer = currentPlayer === '\\circ' ? '\\times' : '\\circ';
+              makeAIMove();
             }
             updateBoard();
             document.getElementById('ticTacToeGrid').classList.toggle('disabled', currentPlayer === '\\circ');
+          }
+        }
+
+        function makeAIMove() {
+          let bestScore = -Infinity;
+          let move;
+          for (let i = 0; i < 9; i++) {
+            if (board[i] === '') {
+              board[i] = currentPlayer === '\\circ' ? '\\times' : '\\circ';
+              let score = minimax(board, 0, false);
+              board[i] = '';
+              if (score > bestScore) {
+                bestScore = score;
+                move = i;
+              }
+            }
+          }
+          handleMove(move);
+        }
+
+        function minimax(board, depth, isMaximizing) {
+          const winPatterns = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+            [0, 4, 8], [2, 4, 6] // diag
+          ];
+
+          for (let pattern of winPatterns) {
+            if (board[pattern[0]] && board[pattern[0]] === board[pattern[1]] && board[pattern[0]] === board[pattern[2]]) {
+              return board[pattern[0]] === '\\times' ? 1 : -1;
+            }
+          }
+
+          if (!board.includes('')) {
+            return 0;
+          }
+
+          if (isMaximizing) {
+            let bestScore = -Infinity;
+            for (let i = 0; i < 9; i++) {
+              if (board[i] === '') {
+                board[i] = '\\times';
+                let score = minimax(board, depth + 1, false);
+                board[i] = '';
+                bestScore = Math.max(score, bestScore);
+              }
+            }
+            return bestScore;
+          } else {
+            let bestScore = Infinity;
+            for (let i = 0; i < 9; i++) {
+              if (board[i] === '') {
+                board[i] = '\\circ';
+                let score = minimax(board, depth + 1, true);
+                board[i] = '';
+                bestScore = Math.min(score, bestScore);
+              }
+            }
+            return bestScore;
           }
         }
 
@@ -155,11 +215,15 @@
 
         document.getElementById('ticTacToeGrid').style.display = "grid";
         document.getElementById('ticTacToeGrid').classList.toggle('disabled', currentPlayer === '\\circ');
+        if (currentPlayer === '\\times') {
+          makeAIMove();
+        }
       });
 
     </script>
 </body>
 </html>
+
 
 
 
