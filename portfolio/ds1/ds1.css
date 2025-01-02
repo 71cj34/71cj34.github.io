@@ -12,7 +12,6 @@
   font-style: normal;
 }
 
-
 body, html {
   margin: 10vh 10vw 0;
   padding: 0;
@@ -23,7 +22,6 @@ body, html {
   font-size: 105%;
   display: flex;
   font-family:'Input Serif', 'Courier New', monospace;
-  
 }
 
 body {
@@ -62,14 +60,12 @@ h2 {
   transition: opacity 0.5s ease;
 }
 
-
 .modal-content {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
   text-align: center;
 }
-
 
 .modal.hidden {
   opacity: 0;
@@ -83,7 +79,7 @@ h2 {
   padding: 0px 10px;
   max-height: 0; 
   overflow: hidden; 
-  transition: max-height 0.5s ease, padding 0.5s ease, margin 0.5s ease; /* Add padding and margin to the transition */
+  transition: max-height 0.5s ease, padding 0.5s ease, margin 0.5s ease;
 }
 
 .dropdown-content.expanded {
@@ -97,20 +93,20 @@ div.dropdown-content p:not(.caption) {
   margin: 1em 0.75em
 }
 
-#dropdownArrow {
+.arrow {
   font-size: 0.7em;
   color: #a24a4b;
   padding: 0 0.25vw 0.1vh 0.25vw;
   transition: transform 0.5s ease, color 0.5s ease;
 }
 
-#toggleButton {
+.toggleButton {
   cursor: pointer;
   display: inline-block;
   position: relative;
 }
 
-#toggleButton span {
+.toggleButton span {
   position: relative;
   z-index: 1; 
 }
@@ -140,10 +136,6 @@ div.dropdown-content p:not(.caption) {
   background-color: #a24a4b;
   z-index: -10;
   transition: height 0.5s ease;
-}
-
-.arrow {
-  z-index: 10;
 }
 
 .hover-fill:hover span,
@@ -179,15 +171,15 @@ img {
 }
 
 .caption {
-  text-align: center; /* Center the caption text */
+  text-align: center;
   font-family: 'Inconsolata', monospace;
-  font-style: italic; /* Make the caption italic */
-  color: #5a5a5a; /* Use a muted color for the caption */
-  margin-top: 0em; /* Add a small margin above the caption */
+  font-style: italic;
+  color: #5a5a5a;
+  margin-top: 0em;
   padding-bottom: 5px;
-  font-size: 0.72em; /* Slightly smaller font size for captions */
-  width: 100%; /* Ensure the caption spans the width of the image */
-  clear: both; /* Ensure the caption appears below the image */
+  font-size: 0.72em;
+  width: 100%;
+  clear: both;
 }
 
 .block {

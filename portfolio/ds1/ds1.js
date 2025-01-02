@@ -1,5 +1,4 @@
 // PHASE 1
-
 const modal = document.getElementById('modal');
 
 function closeModal() {
@@ -25,22 +24,20 @@ modal.addEventListener('click', (event) => {
 document.title = "II. Narrative"
 
 // OTHER STUFF
-
 document.addEventListener('DOMContentLoaded', function() {
-    const toggleButton = document.getElementById('toggleButton');
-    const dropdownContent = document.getElementById('dropdownContent');
-    const dropdownArrow = document.getElementById('dropdownArrow');
-  
-    toggleButton.addEventListener('click', function() {
-      if (dropdownContent.classList.contains('expanded')) {
-        dropdownContent.classList.remove('expanded');
-        dropdownArrow.classList.remove('rotated');
-      } else {
-        dropdownContent.classList.add('expanded');
-        dropdownArrow.classList.add('rotated');
-      }
+    document.body.addEventListener('click', function(event) {
+        if (event.target.closest('.toggleButton')) {
+            const toggleButton = event.target.closest('.toggleButton');
+            const dropdownContent = toggleButton.nextElementSibling;
+            const dropdownArrow = toggleButton.querySelector('.arrow');
+
+            if (dropdownContent.classList.contains('expanded')) {
+                dropdownContent.classList.remove('expanded');
+                dropdownArrow.classList.remove('rotated');
+            } else {
+                dropdownContent.classList.add('expanded');
+                dropdownArrow.classList.add('rotated');
+            }
+        }
     });
-  });
-  
-
-
+});
