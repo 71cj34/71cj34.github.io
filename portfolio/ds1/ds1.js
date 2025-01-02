@@ -21,13 +21,8 @@ modal.addEventListener('click', (event) => {
     }
 });
 
-
 // PHASE 2
 document.title = "II. Narrative"
-
-
-
-
 
 // OTHER STUFF
 

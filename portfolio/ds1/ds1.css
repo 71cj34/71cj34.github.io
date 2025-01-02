@@ -80,12 +80,11 @@ h2 {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   margin-top: 0;
-  padding: 0px;
+  padding: 0px 10px;
   max-height: 0; 
   overflow: hidden; 
-  transition: max-height 0.5s ease; 
+  transition: max-height 0.5s ease, padding 0.5s ease, margin 0.5s ease; /* Add padding and margin to the transition */
 }
-
 
 .dropdown-content.expanded {
   max-height: 1000px; 
