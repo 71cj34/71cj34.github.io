@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design Project 1</title>
+    <title>Animated Dropdown</title>
+    <link rel="stylesheet" href="ds1.css">
 </head>
 <body>
-    <div>asdadasdadasd</div>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+          <h1 style="font-size: 300%; margin-bottom: 1vh;">Design Project #1</h1>
+          <h2 style="font-size: 175%; color: grey; font-style: italic; margin-top: 0; margin-bottom: 0;">"The Airport"</h2>
+          <br><p style="font-size: 200%">✈</p><br>
+          <p style="margin-top: 0;">(Press any key to continue...)</p>
+      </div>
+    </div>
+    <h2 id="toggleButton">Toggle Dropdown</h2>
+    <div id="dropdownContent" class="dropdown-content">
+        <p>This is the dropdown content. It appears with a smooth animation!</p>
+    </div>
+
+    <script src="ds1.js"></script>
 </body>
 </html>

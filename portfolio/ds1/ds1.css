@@ -1,0 +1,67 @@
+@font-face {
+  font-family: 'Inconsolata';
+  src: url('../fonts/Inconsolata.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Input Serif';
+  src: url('../fonts/InputSerif.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body, html {
+  font-family: "Input Serif", 'Courier New', monospace
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: bold;
+  font-family: "Inconsolata", 'Courier', 'monospace'
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 1);
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+/* Style the modal content */
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Hide the modal when it's not visible */
+.modal.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+/* Styling for the dropdown content */
+.dropdown-content {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 0px;
+  max-height: 0; /* Start with no height */
+  overflow: hidden; /* Hide overflow content */
+  transition: max-height 0.5s ease-out; /* Smooth transition */
+}
+
+/* Class to expand the dropdown */
+.dropdown-content.expanded {
+  max-height: 200px; /* Adjust to fit your content */
+}
