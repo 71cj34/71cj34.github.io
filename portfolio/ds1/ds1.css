@@ -13,11 +13,11 @@
 }
 
 body, html {
-  margin: 15vh 15vw;
+  margin: 10vh 10vw;
   padding: 0;
   height: 100%;
-  height: calc(100vh - 30vh); 
-  width: calc(100vw - 30vw);
+  height: calc(100vh - 20vh); 
+  width: calc(100vw - 20vw);
   box-sizing: border-box;
   font-size: 105%;
   display: flex;
@@ -84,6 +84,12 @@ h2 {
   max-height: 200px; /* Adjust to fit your content */
 }
 
+p {
+  text-indent: 2em;
+  text-align: justify;
+  margin: 1em 0.75em
+}
+
 #dropdownArrow {
   font-size: 0.7em;
   color: #a24a4b;
@@ -141,4 +147,10 @@ h2 {
 
 .hover-fill:hover::before {
   height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline; 
+  cursor: pointer;
 }
