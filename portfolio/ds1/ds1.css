@@ -40,6 +40,13 @@ h2 {
   margin-bottom: 1%
 }
 
+.subheading {
+  color: grey; 
+  font-style: italic; 
+  margin-top: 0; 
+  margin-bottom: 0;
+}
+
 .modal {
   display: flex;
   justify-content: center;
@@ -182,4 +189,9 @@ img {
   font-size: 0.72em; /* Slightly smaller font size for captions */
   width: 100%; /* Ensure the caption spans the width of the image */
   clear: both; /* Ensure the caption appears below the image */
+}
+
+.block {
+  color: #a24a4b;
+  font-size: 50%
 }
