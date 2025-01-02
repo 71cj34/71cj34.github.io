@@ -13,12 +13,30 @@
 }
 
 body, html {
-  font-family: "Input Serif", 'Courier New', monospace
+  margin: 15vh 15vw;
+  padding: 0;
+  height: 100%;
+  height: calc(100vh - 30vh); 
+  width: calc(100vw - 30vw);
+  box-sizing: border-box;
+  font-size: 105%;
+  display: flex;
+  font-family:'Input Serif', 'Courier New', monospace;
+  overflow: hidden;  
+}
+
+body {
+  margin: 0 15vw;
+  flex-direction: column;
 }
 
 h1, h2, h3, h4, h5 {
   font-weight: bold;
   font-family: "Inconsolata", 'Courier', 'monospace'
+}
+
+h2 {
+  margin-bottom: 1%
 }
 
 .modal {
@@ -50,18 +68,77 @@ h1, h2, h3, h4, h5 {
   pointer-events: none;
 }
 
-
 /* Styling for the dropdown content */
 .dropdown-content {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
+  margin-top: 0;
   padding: 0px;
   max-height: 0; /* Start with no height */
   overflow: hidden; /* Hide overflow content */
-  transition: max-height 0.5s ease-out; /* Smooth transition */
+  transition: max-height 0.5s ease; /* Smooth transition */
 }
 
 /* Class to expand the dropdown */
 .dropdown-content.expanded {
   max-height: 200px; /* Adjust to fit your content */
+}
+
+#dropdownArrow {
+  font-size: 0.7em;
+  color: #a24a4b;
+  margin: 0 0.5vw 0.1vh 0.25vw;
+  transition: transform 0.5s ease, color 0.5s ease;
+}
+
+#toggleButton {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+
+#toggleButton span {
+  position: relative;
+  z-index: 1; /* Ensure the text is above the pseudo-element */
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+.hover-fill {
+  position: relative;
+  transition: color 0.5s ease;
+  overflow: hidden;
+}
+
+.hover-fill .hover-text {
+  position: relative;
+  z-index: 1;
+}
+
+.hover-fill::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: #a24a4b;
+  z-index: -10;
+  transition: height 0.5s ease;
+}
+
+.arrow {
+  z-index: 10;
+}
+
+.hover-fill:hover span,
+.hover-fill:hover .arrow {
+  color: white !important; /* Change text and icon color */
+  transition: color 0.5s ease;
+}
+
+.hover-fill:hover::before {
+  height: 100%;
 }
