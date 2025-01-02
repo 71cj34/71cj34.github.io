@@ -1,7 +1,7 @@
-// Get the modal element
+// PHASE 1
+
 const modal = document.getElementById('modal');
 
-// Function to close the modal
 function closeModal() {
     modal.classList.add('hidden');
     setTimeout(() => {
@@ -21,6 +21,14 @@ modal.addEventListener('click', (event) => {
     }
 });
 
+// PHASE 2
+document.title = "II. Narrative"
+
+
+
+
+
+// OTHER STUFF
 
 document.addEventListener('DOMContentLoaded', function () {
   const toggleButton = document.getElementById('toggleButton');
