@@ -50,7 +50,7 @@ body.light-mode {
     color: black;
     }
     
-    body.dark-mode {
+body.dark-mode {
     background-color: black;
     color: white;
     }

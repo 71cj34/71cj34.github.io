@@ -12,17 +12,18 @@
   font-style: normal;
 }
 
+
 body, html {
-  margin: 10vh 10vw;
+  margin: 10vh 10vw 0;
   padding: 0;
   height: 100%;
-  height: calc(100vh - 20vh); 
-  width: calc(100vw - 20vw);
+  height: auto; 
+  width: auto;
   box-sizing: border-box;
   font-size: 105%;
   display: flex;
   font-family:'Input Serif', 'Courier New', monospace;
-  overflow: hidden;  
+  
 }
 
 body {
@@ -54,7 +55,7 @@ h2 {
   transition: opacity 0.5s ease;
 }
 
-/* Style the modal content */
+
 .modal-content {
   background-color: white;
   padding: 20px;
@@ -62,29 +63,29 @@ h2 {
   text-align: center;
 }
 
-/* Hide the modal when it's not visible */
+
 .modal.hidden {
   opacity: 0;
   pointer-events: none;
 }
 
-/* Styling for the dropdown content */
 .dropdown-content {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   margin-top: 0;
   padding: 0px;
-  max-height: 0; /* Start with no height */
-  overflow: hidden; /* Hide overflow content */
-  transition: max-height 0.5s ease; /* Smooth transition */
+  max-height: 0; 
+  overflow: hidden; 
+  transition: max-height 0.5s ease; 
 }
 
-/* Class to expand the dropdown */
+
 .dropdown-content.expanded {
-  max-height: 200px; /* Adjust to fit your content */
+  max-height: 1000px; 
+  padding: 10px; 
 }
 
-p {
+div.dropdown-content p:not(.caption) {
   text-indent: 2em;
   text-align: justify;
   margin: 1em 0.75em
@@ -93,7 +94,7 @@ p {
 #dropdownArrow {
   font-size: 0.7em;
   color: #a24a4b;
-  margin: 0 0.5vw 0.1vh 0.25vw;
+  padding: 0 0.25vw 0.1vh 0.25vw;
   transition: transform 0.5s ease, color 0.5s ease;
 }
 
@@ -105,7 +106,7 @@ p {
 
 #toggleButton span {
   position: relative;
-  z-index: 1; /* Ensure the text is above the pseudo-element */
+  z-index: 1; 
 }
 
 .rotated {
@@ -141,7 +142,7 @@ p {
 
 .hover-fill:hover span,
 .hover-fill:hover .arrow {
-  color: white !important; /* Change text and icon color */
+  color: white !important; 
   transition: color 0.5s ease;
 }
 
@@ -153,4 +154,32 @@ a {
   color: inherit;
   text-decoration: underline; 
   cursor: pointer;
+}
+
+img {
+  height: auto;
+  width: 100%;
+}
+
+.left_img {
+  float: left;
+  width: 50%;
+  height: auto;
+  border: 1px solid #ddd;
+  margin: 0 1em 0 0.75em;
+  padding: 5px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.caption {
+  text-align: center; /* Center the caption text */
+  font-family: 'Inconsolata', monospace;
+  font-style: italic; /* Make the caption italic */
+  color: #5a5a5a; /* Use a muted color for the caption */
+  margin-top: 0em; /* Add a small margin above the caption */
+  padding-bottom: 5px;
+  font-size: 0.72em; /* Slightly smaller font size for captions */
+  width: 100%; /* Ensure the caption spans the width of the image */
+  clear: both; /* Ensure the caption appears below the image */
 }

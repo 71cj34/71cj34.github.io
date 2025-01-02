@@ -31,14 +31,21 @@ document.title = "II. Narrative"
 
 // OTHER STUFF
 
-document.addEventListener('DOMContentLoaded', function () {
-  const toggleButton = document.getElementById('toggleButton');
-  const dropdownContent = document.getElementById('dropdownContent');
-  const dropdownAngle = document.getElementById('dropdownArrow');
-
-  toggleButton.addEventListener('click', function () {
-      dropdownContent.classList.toggle('expanded');
-      var icon = document.getElementById('dropdownArrow');
-      icon.classList.toggle('rotated');
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.getElementById('toggleButton');
+    const dropdownContent = document.getElementById('dropdownContent');
+    const dropdownArrow = document.getElementById('dropdownArrow');
+  
+    toggleButton.addEventListener('click', function() {
+      if (dropdownContent.classList.contains('expanded')) {
+        dropdownContent.classList.remove('expanded');
+        dropdownArrow.classList.remove('rotated');
+      } else {
+        dropdownContent.classList.add('expanded');
+        dropdownArrow.classList.add('rotated');
+      }
+    });
   });
-});
+  
+
+
