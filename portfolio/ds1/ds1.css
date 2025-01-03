@@ -13,7 +13,7 @@
 }
 
 body, html {
-  margin: 10vh 10vw 0;
+  margin: 10vh 12vw 0;
   padding: 0;
   height: 100%;
   height: auto; 
@@ -90,7 +90,7 @@ h2 {
 div.dropdown-content p:not(.caption) {
   text-indent: 2em;
   text-align: justify;
-  margin: 1em 0.75em
+  margin: 1em 0.75em;
 }
 
 .arrow {
@@ -170,12 +170,37 @@ img {
   position: relative;
 }
 
+.right_img {
+  float: right;
+  width: 50%;
+  height: auto;
+  border: 1px solid #ddd;
+  margin: 0 0.75em 0 1em;
+  padding: 5px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.center_img {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  height: auto;
+  border: 1px solid #ddd;
+  padding: 5px;
+  box-sizing: border-box;
+  position: relative;
+}
+
 .caption {
+  display: inline;
   text-align: center;
   font-family: 'Inconsolata', monospace;
   font-style: italic;
   color: #5a5a5a;
+  text-align: center;
   margin-top: 0em;
+  margin-left: 0.75em;
   padding-bottom: 5px;
   font-size: 0.72em;
   width: 100%;
@@ -185,4 +210,14 @@ img {
 .block {
   color: #a24a4b;
   font-size: 50%
+}
+
+.bold {
+  color: black;
+  font-weight: bold;
+  transition: color 0.5s
+}
+
+.bold:hover {
+  color: #a24a4b;
 }
