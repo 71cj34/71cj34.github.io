@@ -143,3 +143,17 @@ body.dark-mode .highlight-inline:hover {
 body.dark-mode .icon {
   filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
+
+.commit-caption {
+  opacity: 60%;
+  font-style: italic;
+  font-size: 0.75em;
+  margin-bottom: 0;
+}
+
+a {
+  color:inherit; 
+  text-decoration: underline; 
+  cursor: pointer; 
+  font-weight: bold
+}

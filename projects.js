@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const repos = [
-        '71cj34/MergekitHelper',
         '71cj34/CompressExp',
+        '71cj34/MergekitHelper',
     ];
 
     const projectsContent = document.getElementById('projectsContent');
@@ -21,25 +21,33 @@ document.addEventListener('DOMContentLoaded', (event) => {
         <p style="font-style: italic; color: grey; font-size: 80%"> Maybe someday.</p>
     `;
 
-    // Fetch last commit message for each repo
     repos.forEach((repo, index) => {
         const commitMessageElement = document.getElementById(`commit-message-${index + 1}`);
-        if (commitMessageElement) {
+        const commitDateElement = document.getElementById(`commit-date-${index + 1}`);
+        if (commitMessageElement && commitDateElement) {
             fetch(`https://api.github.com/repos/${repo}/commits`)
                 .then(response => response.json())
                 .then(data => {
                     const lastCommitMessage = data[0]?.commit?.message || "No commit message found";
+                    const lastCommitLink = data[0]?.html_url || "https://http.cat/images/404.jpg";
+                    const lastCommitDate = data[0]?.commit?.author?.date || data[0]?.commit?.committer?.date || "No commit date found";
                     commitMessageElement.innerText = lastCommitMessage;
+                    commitMessageElement.setAttribute('href', lastCommitLink)
+                    commitDateElement.innerText = new Date(lastCommitDate).toLocaleDateString(); // Formats the date to a more readable form
                 })
                 .catch(error => {
                     if (commitMessageElement) {
                         commitMessageElement.innerText = "Error: Could not fetch commit info.";
                     }
+                    if (commitDateElement) {
+                        commitDateElement.innerText = "Error: Could not fetch commit info.";
+                    }
                 });
         } else {
-            console.warn(`Element with ID "commit-message-${index + 1}" not found.`);
+            console.warn(`Element with ID "commit-message-${index + 1}" or "commit-date-${index + 1}" not found.`);
         }
     });
+    
 
     // Replace content when replaceButton is clicked.
     replaceButton.addEventListener('click', () => {
