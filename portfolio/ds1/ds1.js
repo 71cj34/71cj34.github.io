@@ -11,18 +11,18 @@ function closeModal() {
 document.addEventListener('keydown', (event) => {
     if (event.key) {
         closeModal();
+        document.title = "II. Narrative"
     }
 });
 
 modal.addEventListener('click', (event) => {
     if (event.target === modal || event.target.closest('.modal-content')) {
         closeModal();
+        document.title = "II. Narrative"
     }
 });
 
 // PHASE 2
-document.title = "II. Narrative"
-
 const swap1 = document.getElementById('img-swap-1');
 const cap1 = document.getElementById('img-swap-1-c');
 swap1.addEventListener('click', function() {
