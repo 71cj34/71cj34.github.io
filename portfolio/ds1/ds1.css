@@ -213,7 +213,6 @@ img {
 
 .bold {
   color: black;
-  font-family: "Inconsolata";
   font-weight: bold;
   transition: color 0.5s
 }
@@ -236,4 +235,23 @@ img {
 
 .code-inline:hover {
   background-color: #ccd4dc;
+}
+
+#collapse-dropdowns {
+  position: fixed;
+  font-family: "Input Serif", "Courier";
+  top: 1.2em;
+  right: 1.2em;
+  padding: 0.75em 1.5em;
+  background-color: #a24a4b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.3s ease;
+}
+
+#collapse-dropdowns:hover {
+  background-color: #923335;
 }

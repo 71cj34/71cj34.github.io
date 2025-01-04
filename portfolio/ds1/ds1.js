@@ -59,6 +59,27 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // Add event listener to the collapse dropdowns button
+    const collapseDropdownsButton = document.getElementById('collapse-dropdowns');
+    collapseDropdownsButton.addEventListener('click', function() {
+        // Select all toggle buttons
+        const toggleButtons = document.querySelectorAll('.toggleButton');
+        toggleButtons.forEach(toggleButton => {
+            const dropdownContent = toggleButton.nextElementSibling;
+            const dropdownArrow = toggleButton.querySelector('.arrow');
+
+            if (dropdownContent.classList.contains('expanded')) {
+                // Collapse the dropdown
+                dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px'; // Set to current height
+                setTimeout(() => {
+                    dropdownContent.style.maxHeight = '0'; // Animate to 0
+                }, 100); // Small delay to allow the browser to register the initial height
+                dropdownArrow.classList.remove('rotated');
+                dropdownContent.classList.remove('expanded');
+            }
+        });
+    });
 });
 
 // PHASE 3
@@ -68,6 +89,6 @@ document.getElementById('p3-toggle').addEventListener('click', function() {
     document.body.classList.add('faded');
     
     setTimeout(function() {
-        window.location.href = '/portfolio';
+        window.location.href = '/';
     }, 1000);
 });
