@@ -28,14 +28,16 @@
     <div class="dropdown-content">
         <p> 
             I was quite confident in my abilities in coding, since I had experience building my own <a target="#" href="/projects">side projects before</a>. I was not as confident in
-            my CAD abilities: unlike some of the people I had befriended, Inventor was my first taste of a solid modeling software, and while I finished coursework (Fig. 1.) with ease, I was unsure
+            my CAD abilities: unlike some of the people I had befriended, Inventor was my first taste of a solid modeling software, and while I finished coursework (Fig. 1) with ease, I was unsure
             if I would be able to keep up with my group members.
         </p>
-        <img src="https://i.imgur.com/Cmw6zpB.png" class="left_img" style="width:30%" alt="image of a crude 3d model.">
+        <div class="img-cont left_img" style="width: 40%">
+            <img src="https://i.imgur.com/Cmw6zpB.png" alt="image of a crude 3d model.">
+            <p class="caption"><span class="bold">Fig. 1:</span> 'chenj692_GD4.ipt.' A rudimentary schoolwork CAD submission from early October. Took me around 3 hours.</p>
+        </div>          
         <p>Looking back, I should have practiced a bit more. I was a bit smug, thinking that my coding prowess would be enough for the project.</p>
         <p>I did do some practice with Python, as my skill had decreased over summer vacation and lack of time, working some on my side projects and stretching my muscles on coursework.</p>
         <span class="block">■</span>
-        <p class="caption" style="width: 30%;"><span class="bold">Fig. 1:</span> 'chenj692_GD4.ipt.' A rudimentary schoolwork CAD submission from early October. Took me around 4 hours- far too long.</p>
     </div>
 
     <h2 class="toggleButton hover-fill" style="margin-bottom: 0.5em;">
@@ -46,20 +48,48 @@
         <span style="font-weight: bold;">Problem:</span>
         <p>The problem we were tasked to solve was about an airport. The airport was having trouble sorting checked bags for outgoing flights. The project had a 
             <span class="bold">software</span> and <span class="bold">hardware</span> component: we were tasked with creating modular programs using
-            <span class="bold">Python</span> to perform data validation and analysis, and then design a mechanism to transport luggage from Point A to Point B (Fig. 2.).
+            <span class="bold">Python</span> to perform data validation and analysis, and then design a mechanism to transport luggage from Point A to Point B (Fig. 2).
         </p>
-        <img src="../../img/fig2.png" class="right_img" style="width:40%" alt="image of a black structure with two rectangular cuboids. One is taller than the other and labeled Point A, the other Point B. A line in between them is labeled Restriction Line.">
-        <p class="caption" style="margin-left: 60%; width: 40%;"><span class="bold">Fig. 2:</span> The challenge. </p>
+        <div class="img-cont right_img" style="width: 45%">
+            <img src="../../img/fig2.png" alt="image of a black structure with two rectangular cuboids. One is taller than the other and labeled Point A, the other Point B. A line in between them is labeled Restriction Line.">
+            <p class="caption"><span class="bold">Fig. 2:</span> Diagram of the challenge. Note restriction line.</p>
+        </div>
         <p>The catch was that equidistant from both Points lay a Restriction Line, past which we were not allowed to build or extend beyond until our contraption began to move. We were granted two
             actuators: a <span class="bold">rotary</span> actuator, and a <span class="bold">linear</span> actuator.
         </p>
         <span style="font-weight: bold;">Brainstorming:</span>
         <p>Immediately, my group began to think of possible solutions to this problem. We conferred over possible mechanisms using each design, and then both. When we reconvened days later, each member had 
-            come up with a design for each actuator. After further conferring, we settled on two possible designs,
+            come up with a design for each actuator. After further conferring, we settled on two possible designs.
         </p>
-        <p>These would thus be dubbed the <span class="bold">'bucket'</span> and the <span class="bold">'elbow'</span>.</p>
-
+        <p>
+            These would thus be dubbed the <span class="bold">'bucket'</span> and the <span class="bold">'elbow'</span>. The design I contributed is the 'bucket' design (Fig. 3). This design integrated
+            both actuators and numerous custom-modeled parts to catch the luggage smoothly, then slowly lower it to Platform B. Highlights of my design include a smooth ramped bucket to ease delivery, 
+            a counterweighted base to ease stress on base screws, hollowed components to lower rotary torque required and increase level of control, extended pieces to ensure controlled angular movement, 
+            and a ribbed bar to reduce risk of premature sliding.
+        </p>
+        <div class="img-cont left_img" style="width: 50%">
+            <img src="../../img/fig3.png" alt="Image of my design. Large hollow rectangular prism with a ramp inside, below which an adapter houses the tip of the linear actuator, to which is attached a large support with a rotary actuator attachment.">
+            <p class="caption"><span class="bold">Fig. 3: My 'bucket' design. Created through three days of iterative development. The 'bucket', attached to linear actuator, rotates using the rotary actuator.</span> </p>
+        </div>
+        <p>
+            By group consensus, we moved ahead with the 'elbow' design instead, as my 'bucket' design was far too complicated and required too much 3D printing time under our constraints. 
+            After making more quick adjustments and improvements to the design, each member was assigned a part to model. I modeled and submitted my part, a support. Once the model was finished,
+            printing time began. During this time, we began work on the software portion.
+        </p>
+        <p>
+            By this point, we had talked on who should be lead on what, and I volunteered to lead the software development. Each member was to complete their own function, and three functions had to
+            be completed by the whole team. On the first day, I completed two of the simple team functions while taking feedback from group members, and finished my own function, <span class="code-inline">time_delay.py</span>.
+        </p>
+        <p>You may find the full signed code on GitHub <a href="https://github.com/71cj34/1P13-Project1" target="_blank">here</a>. I collected all the Python modules, performed unit tests and 
+            standardized all I/O methods, then linked them together as modules through an external <span class="code-inline">_config.py</span> file. I retrieved the progress made on the final team
+            function, <span class="code-inline">graphical_teamID.py</span>, finished it, linked all of the other models as inputs, tested it, and validated it.
+        </p>
+        <div class="img-cont left_img" style="width: 50%">
+            <img src="../../img/fig4.jpg" alt="Image of an Apple IMessage app. I send an image of my monitor showing successful deployment of graphical_teamid; my teammates react with joy.">
+            <p class="caption"><span class="bold">Fig. 3: My 'bucket' design. Created through three days of iterative development. The 'bucket', attached to linear actuator, rotates using the rotary actuator.</span> </p>
+        </div>
     </div>
+    <a href="#" id="p3-toggle" style="text-align: center;">Move on.</a>
 
     <script src="ds1.js"></script>
 </body>

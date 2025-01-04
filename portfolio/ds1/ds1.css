@@ -13,7 +13,7 @@
 }
 
 body, html {
-  margin: 10vh 12vw 0;
+  margin: 10vh 10vw 0;
   padding: 0;
   height: 100%;
   height: auto; 
@@ -76,14 +76,13 @@ h2 {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   margin-top: 0;
+  max-height: 0;
   padding: 0px 10px;
-  max-height: 0; 
   overflow: hidden; 
-  transition: max-height 0.5s ease, padding 0.5s ease, margin 0.5s ease;
+  transition: max-height 0.5s ease, padding 0.5s ease;
 }
 
 .dropdown-content.expanded {
-  max-height: 1000px; 
   padding: 10px; 
 }
 
@@ -92,6 +91,7 @@ div.dropdown-content p:not(.caption) {
   text-align: justify;
   margin: 1em 0.75em;
 }
+
 
 .arrow {
   font-size: 0.7em;
@@ -159,52 +159,44 @@ img {
   width: 100%;
 }
 
-.left_img {
-  float: left;
-  width: 50%;
-  height: auto;
-  border: 1px solid #ddd;
-  margin: 0 1em 0 0.75em;
-  padding: 5px;
-  box-sizing: border-box;
+.img-cont {
   position: relative;
+  box-sizing: border-box;
+  justify-content: center;
+  float: left; /* left by default */
+  width: 50%; /* 50% by default */
+  margin: 0 1em 0 0.75em;
 }
 
-.right_img {
+/* override for right_img */
+.img-cont.right_img {
+  justify-content: right;
   float: right;
-  width: 50%;
+  margin: 0 0.75em 0 1em;
+}
+
+.img-cont img {
+  width: 100%;
   height: auto;
   border: 1px solid #ddd;
-  margin: 0 0.75em 0 1em;
   padding: 5px;
   box-sizing: border-box;
-  position: relative;
+}
+
+.img-cont .caption {
+  display: block;
+  text-align: center;
+  font-family: 'Inconsolata', monospace;
+  font-style: italic;
+  color: #5a5a5a;
+  margin-top: 0.2em; /* Space between image and caption */
+  font-size: 0.7em;
+  width: 100%;
 }
 
 .center_img {
   display: block;
   margin: 0 auto;
-  width: 50%;
-  height: auto;
-  border: 1px solid #ddd;
-  padding: 5px;
-  box-sizing: border-box;
-  position: relative;
-}
-
-.caption {
-  display: inline;
-  text-align: center;
-  font-family: 'Inconsolata', monospace;
-  font-style: italic;
-  color: #5a5a5a;
-  text-align: center;
-  margin-top: 0em;
-  margin-left: 0.75em;
-  padding-bottom: 5px;
-  font-size: 0.72em;
-  width: 100%;
-  clear: both;
 }
 
 .block {
@@ -220,4 +212,14 @@ img {
 
 .bold:hover {
   color: #a24a4b;
+}
+
+.code-inline {
+  padding: .2em .4em;
+  font-family: "Courier New";
+  font-weight: bold;
+  margin: 0;
+  font-size: 90%;
+  border-radius: 6px;
+  background-color: #e0e6eb;
 }

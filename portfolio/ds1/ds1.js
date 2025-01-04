@@ -32,11 +32,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const dropdownArrow = toggleButton.querySelector('.arrow');
 
             if (dropdownContent.classList.contains('expanded')) {
-                dropdownContent.classList.remove('expanded');
+                // Collapse the dropdown
+                dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px'; // Set to current height
+                setTimeout(() => {
+                    dropdownContent.style.maxHeight = '0'; // Animate to 0
+                }, 100); // Small delay to allow the browser to register the initial height
                 dropdownArrow.classList.remove('rotated');
+                dropdownContent.classList.remove('expanded');
             } else {
-                dropdownContent.classList.add('expanded');
+                // Expand the dropdown
+                dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px'; // Set to actual height
                 dropdownArrow.classList.add('rotated');
+                dropdownContent.classList.add('expanded');
             }
         }
     });
