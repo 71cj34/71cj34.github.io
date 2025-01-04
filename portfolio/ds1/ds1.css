@@ -19,7 +19,7 @@ body, html {
   height: auto; 
   width: auto;
   box-sizing: border-box;
-  font-size: 1.1em;
+  font-size: 0.9vw;
   display: flex;
   font-family:'Input Serif', 'Courier New', monospace;
 }
@@ -27,6 +27,12 @@ body, html {
 body {
   margin: 0 15vw 5vh 15vw;
   flex-direction: column;
+  cursor: default;
+  transition: opacity 1s;
+}
+
+body.faded {
+  opacity: 0;
 }
 
 h1, h2, h3, h4, h5 {

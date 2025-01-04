@@ -60,3 +60,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// PHASE 3
+const p3Toggle = document.getElementById('p3-toggle');
+
+document.getElementById('p3-toggle').addEventListener('click', function() {
+    document.body.classList.add('faded');
+    
+    setTimeout(function() {
+        window.location.href = '/portfolio';
+    }, 1000);
+});
