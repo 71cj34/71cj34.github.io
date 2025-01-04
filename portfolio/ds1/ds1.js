@@ -89,6 +89,6 @@ document.getElementById('p3-toggle').addEventListener('click', function() {
     document.body.classList.add('faded');
     
     setTimeout(function() {
-        window.location.href = '/';
-    }, 1000);
+        window.location.href = '/portfolio';
+    }, 1500);
 });
