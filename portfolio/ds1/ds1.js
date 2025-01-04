@@ -23,7 +23,19 @@ modal.addEventListener('click', (event) => {
 // PHASE 2
 document.title = "II. Narrative"
 
-// OTHER STUFF
+const swap1 = document.getElementById('img-swap-1');
+const cap1 = document.getElementById('img-swap-1-c');
+swap1.addEventListener('click', function() {
+    if (swap1.src.includes('fig5-1.jpeg')) {
+        swap1.src = "../../img/fig5-2.jpeg";
+        cap1.innerHTML = "<span class='bold'>Fig. 5: </span> The finished product, extended mode. Note additions from initial drafting, like foam rails to prevent luggage damage."
+
+    } else {
+        swap1.src = "../../img/fig5-1.jpeg";
+        cap1.innerHTML = "<span class='bold'>Fig. 5: </span> The finished product, retracted mode. Note additions from initial drafting, like foam rails to prevent luggage damage."
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     document.body.addEventListener('click', function(event) {
         if (event.target.closest('.toggleButton')) {

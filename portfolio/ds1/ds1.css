@@ -19,13 +19,13 @@ body, html {
   height: auto; 
   width: auto;
   box-sizing: border-box;
-  font-size: 105%;
+  font-size: 1.1em;
   display: flex;
   font-family:'Input Serif', 'Courier New', monospace;
 }
 
 body {
-  margin: 0 15vw;
+  margin: 0 15vw 5vh 15vw;
   flex-direction: column;
 }
 
@@ -197,6 +197,7 @@ img {
 .center_img {
   display: block;
   margin: 0 auto;
+  float: none;
 }
 
 .block {
@@ -206,6 +207,7 @@ img {
 
 .bold {
   color: black;
+  font-family: "Inconsolata";
   font-weight: bold;
   transition: color 0.5s
 }
@@ -218,8 +220,14 @@ img {
   padding: .2em .4em;
   font-family: "Courier New";
   font-weight: bold;
+  cursor: default;
   margin: 0;
   font-size: 90%;
   border-radius: 6px;
   background-color: #e0e6eb;
+  transition: background-color 0.3s ease;
+}
+
+.code-inline:hover {
+  background-color: #ccd4dc;
 }
