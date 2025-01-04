@@ -217,7 +217,14 @@ img {
   transition: color 0.5s
 }
 
-.bold:hover {
+.bolder {
+  color: black;
+  font-weight: bolder;
+  font-size: 110%;
+  transition: color 0.5s
+}
+
+.bold:hover, .bolder:hover {
   color: #a24a4b;
 }
 
