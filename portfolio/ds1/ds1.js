@@ -23,6 +23,16 @@ modal.addEventListener('click', (event) => {
 });
 
 // PHASE 2
+const swap0 = document.getElementById('img-swap-0');
+swap0.addEventListener('click', function() {
+    if (swap0.src.includes('fig3-1.png')) {
+        swap0.src = "../../img/fig3-2.png";
+
+    } else {
+        swap0.src = "../../img/fig3-1.png";
+    }
+});
+
 const swap1 = document.getElementById('img-swap-1');
 const cap1 = document.getElementById('img-swap-1-c');
 swap1.addEventListener('click', function() {

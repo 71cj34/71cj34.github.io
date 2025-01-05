@@ -5,7 +5,7 @@
     <link rel="shortcut icon" href="../../stariconv2.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>I. DS1</title>
-    <link rel="stylesheet" href="ds1.css">
+    <link rel="stylesheet" href="../ds1.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -18,86 +18,145 @@
       </div>
     </div>
     <!-- PHASE 2 -->
+    <div style="position: fixed; top: 1.5em; left: 50%; transform: translateX(-50%); text-align: center; color: #a24a4b;">
+                !! PLEASE VISIT <a href="https://jasoncheng.me/portfolio">THE WEBSITE VERISON</a> FOR THE FULL EXPERIENCE !!
+    </div>
     <h1 style="margin-bottom: 0.25em;">II. NARRATIVE</h1>
     <h4 style="font-style: italic; color: #979797; margin-top: 0">What we accomplished, what I contributed</h4>
 
     <h2 class="toggleButton hover-fill" style="margin-bottom: 0.5em;">
         <i class="fa-solid fa-angles-up arrow"></i>
-        <span>Before</span>
-        <span class="subheading" style="font-size: 60%;">(Optional)</span>
+        <span>Project</span>
     </h2>
     <div class="dropdown-content">
-        <p> 
-            I was quite confident in my abilities in coding, since I had experience building my own <a target="#" href="/projects">side projects before</a>. I was not as confident in
-            my CAD abilities: unlike some of the people I had befriended, Inventor was my first taste of a solid modeling software, and while I finished coursework (Fig. 1) with ease, I was unsure
-            if I would be able to keep up with my group members.
-        </p>
-        <div class="img-cont left_img" style="width: 40%">
-            <img src="https://i.imgur.com/Cmw6zpB.png" alt="image of a crude 3d model.">
-            <p class="caption"><span class="bold">Fig. 1:</span> 'chenj692_GD4.ipt.' A rudimentary schoolwork CAD submission from early October. Took me around 3 hours.</p>
-        </div>          
-        <p>Looking back, I should have practiced a bit more. I was a bit smug, thinking that my coding prowess would be enough for the project.</p>
-        <p>I did do some practice with Python, as my skill had decreased over summer vacation and lack of time, working some on my side projects and stretching my muscles on coursework.</p>
-        <span class="block">■</span>
-    </div>
+        <span class="bold">Problem:</span><br>
+        <span style="font-style: italic; color: #979797; margin-top: 0; font-size: 85%">Oct. 3, 2024</span>
+        <ul>
+            <li>
+                <span class="bold">Software</span>
+                <ul>
+                    <li>We were tasked with creating modular programs using <span class="bold">Python</span> to perform data validation and analysis.</li>
+                </ul>
+            </li>
+            <li>
+                <span class="bold">Hardware</span>
+                <ul>
+                    <li>We were tasked with designing a mechanism to transport luggage from Point A to Point B (Fig. 2).</li>
+                </ul>
+            </li>
+        </ul>
 
-    <h2 class="toggleButton hover-fill" style="margin-bottom: 0.5em;">
-        <i class="fa-solid fa-angles-up arrow"></i>
-        <span>During</span>
-    </h2>
-    <div class="dropdown-content">
-        <span class="bold">Problem:</span>
-        <p>The problem we were tasked to solve was about an airport. The airport was having trouble sorting checked bags for outgoing flights. The project had a 
-            <span class="bold">software</span> and <span class="bold">hardware</span> component: we were tasked with creating modular programs using
-            <span class="bold">Python</span> to perform data validation and analysis, and then design a mechanism to transport luggage from Point A to Point B (Fig. 2).
-        </p>
         <div class="img-cont right_img" style="width: 45%">
             <img src="../../img/fig2.png" alt="image of a black structure with two rectangular cuboids. One is taller than the other and labeled Point A, the other Point B. A line in between them is labeled Restriction Line.">
             <p class="caption"><span class="bold">Fig. 2:</span> Diagram of the challenge. Note restriction line.</p>
         </div>
-        <p>The catch was that equidistant from both Points lay a Restriction Line, past which we were not allowed to build or extend beyond until our contraption began to move. We were granted two
-            actuators: a <span class="bold">rotary</span> actuator, and a <span class="bold">linear</span> actuator.
-        </p>
-        <span class="bold">Brainstorming:</span>
-        <p>Immediately, my group began to think of possible solutions to this problem. We conferred over possible mechanisms using each design, and then both. When we reconvened days later, each member had 
-            come up with a design for each actuator. After further conferring, we settled on two possible designs.
-        </p>
-        <p>
-            These would thus be dubbed the <span class="bold">'bucket'</span> and the <span class="bold">'elbow'</span>. The design I contributed is the 'bucket' design (Fig. 3). This design integrated
-            both actuators and numerous custom-modeled parts to catch the luggage smoothly, then slowly lower it to Platform B. Highlights of my design include a smooth ramped bucket to ease delivery, 
-            a counterweighted base to ease stress on base screws, hollowed components to lower rotary torque required and increase level of control, extended pieces to ensure controlled angular movement, 
-            and a ribbed bar to reduce risk of premature sliding.
-        </p>
+
+        <span class="bold">Problem Analysis:</span><br>
+        <span style="font-style: italic; color: #979797; margin-top: 0; font-size: 85%">Oct. 3, 2024</span>
+        <ul>
+            <li>
+                <span class="bold">Objectives</span>
+                <ul>
+                    <li>Effective at delivering luggage</li>
+                    <li>Consistent under repeated use</li>
+                    <li>Deliver luggage safely</li>
+                </ul>
+            </li>
+            <li>
+                <span class="bold">Functions</span>
+                <ul>
+                    <li>Scan barcode to determine delivery location</li>
+                    <li>Move luggage to right location</li>
+                    <li>Process fleet and passenger data</li>
+                </ul>
+            </li>
+            <li>
+                <span class="bold">Constraints</span>
+                <ul>
+                    <li>Material effective</li>
+                    <li>Timely delivery rate</li>
+                    <li>No part may pass the <span class="bold">restriction line</span> (Fig. 2)</li>
+                    <li>Only use the two actuators: <span class="bold">rotary</span> and <span class="bold">linear</span></li>
+                </ul>
+                <br>
+            </li>
+            <li>
+                <span class="bold">Final Problem Statement</span>
+                <ul>
+                    <li>The problem is that a meaningful proportion of luggage at airports is lost in transit. We aim
+                        to create a system that delivers bags to their correct locations based on airport regulations.
+                        This solution aims to reduce the amount of bags that are lost at airports by using
+                        automation.</li>
+                </ul>
+            </li>
+        </ul>
+        
         <div class="img-cont left_img" style="width: 50%">
             <img src="../../img/fig3-1.png" id="img-swap-0" alt="Image of my design. Large hollow rectangular prism with a ramp inside, below which an adapter houses the tip of the linear actuator, to which is attached a large support with a rotary actuator attachment.">
             <p class="caption"><span class="bold">Fig. 3:</span> My 'bucket' design. Created through three days of iterative development. The 'bucket', attached to linear actuator, rotates using the rotary actuator. </p>
         </div>
-        <span class="bold">The Solution:</span>
+
+        <span class="bold">Brainstorming:</span><br>
+        <span style="font-style: italic; color: #979797; margin-top: 0; font-size: 85%">Oct. 4, 2024 - Oct. 10, 2024</span>
         <p>
-            By group consensus, we moved ahead with the 'elbow' design instead, as my 'bucket' design was far too complicated and required too much 3D printing time under our constraints. 
-            After making more quick adjustments and improvements to the design, each member was assigned a part to model. I modeled and submitted my part, a support. Once the model was finished,
-            printing time began. During this time, we began work on the software portion.
+            Two initial solutions:
         </p>
+        <ul style="margin-left: 0.75em">
+            <li>The <span class="bold">'elbow'</span></li>
+            <li>The <span class="bold">'bucket'</span></li>
+        </ul>
+
         <p>
-            By this point, we had talked on who should be lead on what, and I volunteered to lead the software development. Each member was to complete their own function, and three functions had to
-            be completed by the whole team. On the first day, I completed two of the simple team functions while taking feedback from group members, and finished my own function, <span class="code-inline">time_delay.py</span>.
+            The 'bucket' was my idea (Fig. 3, click to switch images); functional design features include:
         </p>
-        <p>You may find the full attributed code on GitHub <a href="https://github.com/71cj34/1P13-Project1" target="_blank">here</a>. I collected all the Python modules, performed unit tests and 
-            standardized all I/O methods, then linked them together as modules through an external <span class="code-inline">_config.py</span> file. I retrieved the progress made on the final team
-            function, <span class="code-inline">graphical_teamID.py</span>, finished it, linked all of the other models as inputs, tested it, and validated it.
+
+        <ul style="margin-left: 0.75em">
+            <li>A smooth ramped bucket for easy delivery</li>
+            <li>Weighted base to lower stress on screws</li>
+            <li>Hollowed components to lower rotary torque and increase control</li>
+            <li>Extended guards for smoother angular movement</li>
+        </ul>
+
+        <span class="bold">The Solution:</span><br>
+        <span style="font-style: italic; color: #979797; margin-top: 0; font-size: 85%">Oct. 11, 2024 - Nov. 6, 2024</span>
+        <p>
+            Ended up with 'elbow' instead, as my design was too complicated to 3D print. More refinements were made, and each member modeled a part. I modeled a support for the rotary actuator. During this 
+            time, 3D printing opportunities began: I attended most of these as representatives for our group, printing parts.
         </p>
-        <div class="img-cont right_img" style="width: 50%">
+        <span class="bold">Code:</span><br>
+        <span style="font-style: italic; color: #979797; margin-top: 0; font-size: 85%">Oct. 31, 2024 - Nov. 25, 2024</span>
+        <p>
+            I was assigned the role of <span class="bold">Software Lead</span>. One function was to be completed by each member; three were to be completed by the team. I completed two of the three team
+            functions, and finished my function <span class="code-inline">time_delay.py</span>. I took iterative feedback from the team in this process.
+        </p>
+        <div class="img-cont right_img" style="width: 40%">
             <img src="../../img/fig4.jpg" alt="Image of an Apple IMessage app. I send an image of my monitor showing successful deployment of graphical_teamid; my teammates react with joy.">
             <p class="caption"><span class="bold">Fig. 4: </span> The moment I notified my team that I got the <span class="code-inline">graphical_teamID.py</span> module running. </p>
         </div>
         <p>
-            I would go as far to say that I practically rewrote a significant amount of code to fix bugs, solve edge cases and inefficient chunks, and refactored the whole existing base of 
-            <span class="code-inline">graphical_teamID.py</span>, since it became outdated after I standardized the way the modules interacted with one another.
+            You can find the full attributed code on GitHub <a href="https://github.com/71cj34/1P13-Project1" target="_blank">here</a>. After the code was finished, I took all modules and executed these steps:
         </p>
+        <ul>
+            <li>Collected all Python modules and performed unit tests.</li>
+            <li>Standardized all I/O methods.</li>
+            <li>Made code readable + added comments.</li>
+            <li>Linked modules through an external <span class="code-inline">_config.py</span> file.</li>
+            <li>Retrieved and completed the final team function, <span class="code-inline">graphical_teamID.py</span>.</li>
+            <li>Linked all modules to one another as inputs.</li>
+            <li>Tested and optimized <span class="code-inline">graphical_teamID.py</span>.</li>
+            <li>Performed final integration tests for commiting to Github.</li>
+        </ul>
+
         <p>
-            As the date of our project evaluation loomed, I briefed my team on what exactly I had done to the code and how all the modules were connected. I also provided consulting on whether
-            our solution needed tweaks: we had come close to running out of printing time, having had to reprint numerous times because of software bugs in the slicing software. 
-            Thus, we had no time to test if our solution would actually work or not coming into the evaluation.
+            I might even say that I practically rewrote a significant amount of code to fix bugs, solve edge cases and inefficient chunks, and refactored the whole existing base of 
+            <span class="code-inline">graphical_teamID.py</span>, since it was outdated.
+        </p>
+        <span class="bold">Evaluation:</span><br>
+        <span style="font-style: italic; color: #979797; margin-top: 0; font-size: 85%">Dec. 2, 2024</span><br>
+        <span style="font-style: italic; color: #979797; margin-top: 0; font-size: 85%">Total span: Oct. 3, 2024 - Dec. 2, 2024 (60 days)</span>
+        <p>
+            We finished up our printing and I briefed the team on my changes to their code and final questions on how the code worked. I also assisted on small physical testing of the mechanism.
+            We unfortunately suffered <span class="bold">3D printing issues</span> because of slicing errors and improper supports, meaning we had no testing time for the full mechanism.
         </p>
         <p>
             Luckily, on the day of the evaluation, when we arrived half an hour earlier for our allotted setup time, the solution worked wonderfully. See Fig. 5 for an image of the full assembled
@@ -105,7 +164,7 @@
         </p>
         <p style="text-indent: 0;"><span class="block">■</span></p>
 
-        <div class="img-cont center_img" style="width: 50%">
+        <div class="img-cont center_img" style="width: 45%">
             <img src="../../img/fig5-1.jpeg" alt="Image of the completed setup." id="img-swap-1">
             <p class="caption" id="img-swap-1-c"><span class="bold">Fig. 5: </span> The finished product, retracted mode. Note additions from initial drafting, like foam rails to prevent luggage damage. I modeled the x-shape blue support.</p>
         </div>
@@ -114,7 +173,7 @@
 
     <h2 class="toggleButton hover-fill" style="margin-bottom: 0.5em;">
         <i class="fa-solid fa-angles-up arrow"></i>
-        <span>After</span>
+        <span>Reflection</span>
     </h2>
     <div class="dropdown-content">
         <span class="bolder" style="text-indent: 0">ON CAD</span>
@@ -161,5 +220,5 @@
     <script src="ds1.js"></script>
 </body>
 <button id="collapse-dropdowns">Collapse All Dropdowns</button>
-<button id="verbose" onclick="window.location.href='/ds1/compact'">Abridged Version</button>
+<button id="verbose">Abridged Version</button>
 </html>
