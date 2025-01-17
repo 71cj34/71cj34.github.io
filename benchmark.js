@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const latexContent = content.querySelector('.latex-content');
     toggleLatexButton.addEventListener('click', () => {
         if (isMobile()) {
-            window.location.href = 'https://jasoncheng.me/latex.png';
+            window.location.href = 'https://jasoncheng.me/img/latex.png';
         } else {
             latexContent.classList.toggle('visible');
             if (latexContent.classList.contains('visible')) {
