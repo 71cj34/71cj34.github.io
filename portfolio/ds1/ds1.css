@@ -283,3 +283,7 @@ img {
 #collapse-dropdowns:hover {
   background-color: #923335;
 }
+
+i {
+  vertical-align: 0.03em;
+}
