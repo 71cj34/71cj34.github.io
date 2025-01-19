@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const repos = [
         '71cj34/CompressExp',
         '71cj34/MergekitHelper',
+        '71cj34/71cj34.github.io'
     ];
 
     const projectsContent = document.getElementById('projectsContent');
