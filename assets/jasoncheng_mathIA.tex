@@ -1,0 +1,481 @@
+\documentclass[11pt]{article}
+\usepackage[english]{babel}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\setlength\parindent{12pt}
+
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{mathtools}
+\usepackage{cases}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{placeins}
+\usepackage{graphicx}
+\usepackage{siunitx} % ermm... respectfully... we will NOT be using siunitx.... only switch to siunitx from \text if necessary!!!
+\usepackage{cite}
+\usepackage{tabularx} % note: delete this one if not used!!
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\begin{document}
+\doublespacing
+\begin{center}
+\vspace*{2cm}
+\textbf{\LARGE{Mathematical Model and Improvement of Traffic Light Timings}} \\
+\vspace{2cm}
+\textit{\large{IB Analysis and Approaches SL: Internal Assessment}} \\
+\vspace{0.5cm}
+\vfill
+\end{center}
+\clearpage
+
+
+\section{Introduction}
+It was only a few years ago when I first got interested in how traffic is controlled. My commute to my IB school passes through two downtowns with many traffic lights, and it wasn’t uncommon I found myself frustrated by how inconsistent the traffic lights would be. Sometimes I would get all red lights, sometimes I would breeze through. The worst scenario is being stopped by red light at an intersection, continuing when it becomes green, accelerating to the speed limit, and then getting unlucky and the second light becoming red and stopping me again, even if the two lights are not too far away from each other.
+
+The impact of these poorly coordinated lights is multifold. It leads to situations such as more drivers trying to rush through orange lights to avoid a red light, inconsistent and unpredictable travel time, and more greenhouse gas emissions. I did some research on how poorly timed traffic lights can affect greenhouse gas emission. Using two badly coordinated intersections on my way to school as an example, I found that at least an extra 270 kg of CO$_2$ could be released into the atmosphere every year with a 40km/h speed limit, average daily traffic flow, and assuming only medium-sized gas-powered sedans (See Appendix A). I was surprised at the drastic effect. Considering the number of heavy trucks on the road and roads with higher speed limits (such as 60 km/h instead of 40km/h), compounded by the hundreds of thousands of intersections in my country, it is a staggering statistic. It made me even more determined to find a way to at least try to solve this issue.
+
+I am sure engineers have tried to solve this specific issue before, but I would still like to apply my knowledge to approach the problem. It is only recently, when I learned about Calculus and its application to physics, specifically to solve real-world problems, as well as how Calculus links speed, distance, and acceleration all together, I realized it may be possible to create a mathematical model for a simple system. While this may sound simple, simple systems are the foundations of more complex systems, and I know I need more knowledge to be able to address the more complex systems. Thus, I will be focusing on the timing and coordination of traffic lights, as well as how to optimize and control them.
+
+\section{Aim and Approach}
+The aim of this paper is to find a way to optimize the coordination of timings of traffic lights, more specifically, to create and optimize a model representing a simple system of two intersections. My approach will be to categorize lights into several cases, mathematically model the situation with derivatives and integrals, find the optimal timing for traffic light coordination for my system of two intersections using my model, and then verifying my results with real-life observations. I will verify with real-life observations by going to the actual intersection at the time where I would be going to school, slowing down the video, finding the real-life difference in the traffic lights’ timing, and contrasting it with what I find with my mathematical model.
+
+\section{Background Information}
+
+\subsection{The Situation}
+
+As described in the Introduction, I have found myself puzzled by the traffic lights on my way to/from school. Before coming out with my own model, I did some research online and realized coordinating traffic lights is not a simple task. It involves many factors such as speed limit, lane settings, vehicle traffic volume, pediatrician traffic volume, distance between lights, types of vehicles, and even some human factors such as driving habit or pedestrian walking speed. Obviously my knowledge as a high school student is insufficient to model such complex situations. However, by starting with simplified situations, for example a system with two intersections, I can tackle the problem. Before trying to figure out the coordination of the traffic lights of a real-life case, for example the two intersections I mentioned early with bad coordination, I will try to build a mathematical model using my math knowledge. 
+
+Figure 1 illustrates a simplified diagram of a system with two intersections, where max velocity represents the speed limit and displacement represents the distance between the two intersections.
+\newpage
+
+
+% Using JavaScript, I built a small application connected to the Google Maps Application Programming Interface (API) to retrieve the distance between the centers of the road stop lines. The Google Maps. Google Maps' API only provides two decimal points of precision, which is still plenty- the centimeters of uncertainty is negligible.
+
+% figure 1: diagram
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.4]{model_mathai1.png}
+    \caption{Diagram of the situation as described in the aim and approach, not to scale.}
+\end{figure} 
+
+\FloatBarrier
+
+In order to properly model the system presented, I will break up each traffic light possibility into one of four cases. 
+
+\begin{itemize}
+    \item Case 1: The vehicle gets a red light at the first intersection and a green light at the second intersection. The vehicle will start from rest from the first intersection, and accelerates to ${v}_{max}$ and goes through the second intersection at ${v}_{max}$.
+    \item Case 2: The vehicle gets a green light at the first intersection and a red light at the second intersection. The vehicle passes the first intersection with ${v}_{max}$, approaches the second intersection at ${v}_{max}$, then slows to rest.
+    \item Case 3: The vehicle gets a green light at both intersections. The vehicle goes through both intersections at ${v}_{max}$.
+    \item Case 4: The vehicle gets a red light at both intersections. The vehicle accelerates to ${v}_{max}$ from rest at the first intersection, but must slow to rest again at a red light at the second intersection, as the second light either is red or turned red on the way to the second intersection. This is the worst Case, and must be avoided by properly coordinating the lights' timings.
+\end{itemize}
+
+The timing of the lights and how many times Case 4 occurs is dependent on the time it takes to travel the distance between the intersections. These four cases help in understanding the issue. 
+
+These cases, however, can be broken into stages as follows. In Case 1, the first stage is the acceleration stage until the car reaches ${v}_{max}$. Then, the second stage starts during which the vehicle travels at ${v}_{max}$ all the way to $\Delta d$. In Case 2, it is the opposite, the first stage being constant velocity at ${v}_{max}$ up until the approach to the second intersection, where the second stage starts. The vehicle slows to rest while approaching $\Delta d$. Case 3 features one stage, the constant movement at ${v}_{max}$ through both intersections. Case 4 has three stages, but is not relevant to the model.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.4]{real_case1.png}
+    \caption{The three relevant cases.}
+    \label{allcases}
+\end{figure}
+
+Figure 2 demonstrates all three cases that require modeling, with added dots to show which lights are which. Blue lines represent an approximation of where the stage changes.
+
+I will refer to these cases throughout, and refer to the stages after it with a colon; Case 1 stage 1 will become 1:1 and Case 1 stage 2 will become 1:2, and so on. When in the case of a variable, for example $a$, the case will be appended as a suffix, such as $a_{1:1}$.
+
+\subsection{Assumptions}
+
+The following assumptions are made for simplicity:
+
+\begin{itemize}
+\item There is no other traffic causing a queue or delay. The duration of traffic lights can also be coordinated, but that is not in the scope of this paper. This paper is focused on the coordination of the switches between states of traffic lights, i.e. the delay or offset.
+\item The vehicles move at exactly 40 km/h. Over or under-speeding is not considered. 
+\item Constant acceleration. Although driving habits differ from driver to driver, an average acceleration time can be used to calculate a general average acceleration rate. Assuming the acceleration is constant will make modeling much easier and is still generally correct.
+\item Sensors or pedestrian push buttons affecting the traffic lights are not considered. 
+\item Clear weather and road surface conditions are assumed. 
+\item It is assumed the traffic lights are functional.
+\end{itemize}
+
+
+\subsection{Kinematics}
+
+Since kinematics is an essential part of the research, a few concepts of kinematics will be introduced here. The following five elementary variables are used in the model. 
+
+\begin{itemize}
+    \item \textbf{Position} ($\vec{p}$)
+    \item \textbf{Velocity} ($\vec{v}$)
+    \item \textbf{Displacement} ($\Delta{d}$)
+    \item \textbf{Change in Time} ($\Delta{t}$)
+    \item \textbf{Acceleration} ($\vec{a}$)
+\end{itemize}
+
+The arrow denotes a vector quantity (as opposed to a scalar quantity) with both magnitude and direction, and the $\Delta$ means the variable represents a change in a variable. Speed, $v$, is a scalar quantity- it only has a magnitude. Velocity, $\vec{v}$, is a vector- it has a magnitude and direction. The first derivative of a position vs. time graph results in velocity, $\vec{v}$. The first derivative of a velocity vs. time graph creates acceleration, ${a}$. The derivative of an acceleration vs. time graph provides another variable, jerk, but it is not relevant in this investigation. Position, velocity, and time also have initial and final stages, being denoted by an $i$ or $f$ subscript.
+
+\section{Mathematical Modeling}
+
+In order to comprehend the system presented in 3.1, a model must be made to represent the time taken to reach $\Delta d$, or in other words, the time needed to pass both intersections. A model is essentially a system of equations, so I must derive some equations to achieve my aim. As a starting point, I decided on the relations described in 3.3. Kinematics- velocity to time and position to time.
+
+Starting with relating velocity to time:
+
+\begin{align*}
+    a &= \frac{dv}{dt} \\
+    a \cdot {dt} &= {dv} \\
+    \int_{t_i}^{t_f} a \cdot dt &= \int_{v_i}^{v_f} dv \\
+\end{align*}
+
+At first, I was unsure if I was to use a definite integral since we had not yet learned about them in class, but after reading ahead in my textbook, I learned that since definite integrals always output a real number instead of a function, I should use them.
+
+Vectors, like (${a}$), need a direction, but since all of the vectors are collinear- i.e they are all on the same line and direction, vector signs are not needed. So, going forward, scalars will be used. Additionally, while in a derivative, time and displacement do not have deltas ($\Delta$). 
+
+\begin{equation*}
+\begin{aligned}
+	&\text{LS:} \\
+    &\int_{t_i}^{t_f} a \cdot dt \\
+    &a \cdot \int_{t_i}^{t_f} dt \\
+    &a \cdot \int_{t_i}^{t_f} dt = a \cdot [t]^{t_f}_{t_i} \\
+    &a \cdot \int_{t_i}^{t_f} dt = at_f - at_i
+\end{aligned}
+\qquad\qquad\qquad\qquad
+\begin{aligned}
+	&\text{RS:} \\
+    &\int_{v_i}^{v_f} dv \\
+    &\int_{{v_i}}^{{v_f}} d{v} = [{v}]_{{v_i}}^{{v_f}} \\
+    &\int_{{v_i}}^{{v_f}} d{v} = {v_f} - {v_i}
+\end{aligned}
+\end{equation*} % less monster integrals for 1st eq
+
+ Both sides use the property that $\int dx = x + C$, and the left side also uses $\int kf(x) dx = k \int f(x) dx$ for a constant $k$. By recombining both sides, the first equation is obtained.
+
+\begin{align*}
+   a(t_f - 0) &= v_f - v_i \\
+   \Delta t &= \frac{v_f - v_i}{a}  \tag{3} \label{1steq} \\
+\end{align*}
+
+\eqref{1steq} is the first equation. Since the initial time, $t_i$ is always equal to 0, that term can be removed. However, this equation is missing position/displacement. That is found via relating position to time. 
+
+Recall that there are three cases. Cases 1 and 2 are similar. They both feature an acceleration stage and a constant velocity stage. The reason \eqref{1steq} is helpful is because the acceleration stage's time can be found directly using \eqref{1steq}. So, Cases 1.1 and 2.2 can be done with \eqref{1steq}.
+
+Now, using \eqref{1steq}, I can relate position to time to yield a second equation:
+
+\begin{align*}
+    {v} &= \frac{dp}{dt} \\
+    {v} \cdot {dt} &= {dp} \\
+    & \\
+    \text{Rearra} & \text{nging \eqref{1steq}:} \\
+    t &= \frac{v_f - v_i}{a} \\
+    v_f &= v_i + at \tag{3.1} \label{1steqreference} 
+    & \\
+    \text{Substi} & \text{tuting \eqref{1steqreference}:} \\
+    & \\
+    ({v_i} + {a}t) \cdot {dt} &= {dp} \\
+\end{align*}
+
+\vspace{-0.75cm}
+
+Since $v_f$ and $v$ are the same thing at this state, I can rearrange the previous equation for $v_f$ and substitute it in.
+
+\begin{equation*}
+\begin{aligned}
+	&\text{LS:} \\
+    &\int_{0}^{t_f} (v_i + {a}t) \cdot dt \\
+    &\int_{0}^{t_f} v_i \cdot {dt} + at \cdot dt \\
+    &\int_{0}^{t_f} ({v_i} + {a} t) \cdot dt = [{v_i}t + \frac{1}{2}{a} t^2]^{t_f}_{0} \\
+    &\int_{0}^{t_f} ({v_i} + {a} t) \cdot dt = {v_i} t + \frac{1}{2}{a} t^2
+\end{aligned}
+\qquad\qquad\qquad\qquad
+\begin{aligned}
+    &\text{RS:} \\
+    &\int_{p_i}^{p_f} dp \\
+	&\int_{p_i}^{p_f} dp = [p]_{p_i}^{p_f} \\
+	&\int_{p_i}^{p_f} dp = p_f - p_i \\
+\end{aligned}
+\end{equation*} % tiny 2nd eq
+\begin{equation*}
+    {v_i}\Delta t + \frac{1}{2}{a}\Delta t^2 = \Delta d \tag{4} \label{2ndeq}
+\end{equation*}
+
+Thus, a second equation is found, created from \eqref{1steq} and position vs. time. The RS is similarly derived as \eqref{1steq}. But, the LS uses the constant rule for $v_i$, $\int b \cdot dy = by + C$ (where $b$ is a constant). The LS uses two rules for the term $at$, the power rule, $\int x \cdot dx = \tfrac{1}{2}x^2$, and the constant rule. Since $t_i$ is always equal to 0, integrating from $t_i$ to $t_f$ is equivalent to integrating from $0$ to $t_f$, and thus $t_f$ is equal to $\Delta t$ as $t_f - t_i = \Delta t$. Similarly, $p_f - p_i$ is equal to $\Delta d$.
+This equation allows me to find the time of the constant velocity stages, Cases 1.2, 2.1, and 3. This would satisfy all the stages, but in order to use \eqref{2ndeq}, I need displacement. So, I need a new equation that lets me solve for displacement. Thus far, I have related velocity to time and position to time. The only thing left to do is relate velocity to position. 
+
+\begin{equation*}
+    ? = \tfrac{dv}{dp}
+\end{equation*}
+
+This did not seem possible to me at first. If the result itself is unknown, how can I integrate it? This led me to an answer: both velocity and position make tangible, known variables (acceleration and velocity respectively) when put in respect with time. If there is no time, then I can just add it myself, adding the ability to simplify the problem into familiar variables. I can do that by adding $\tfrac{dt}{dt}$, which is equivalent to 1. I have to make $\tfrac{dv}{dp}$ equal to itself to get rid of that mystery question mark result. 
+
+\begin{align*}
+    \frac{dv}{dp} &= \frac{d{v}}{dp} \cdot \frac{dt}{dt} \\
+    \frac{d{v}}{dp} &= \frac{d{v} \cdot dt}{dt \cdot dp} \\
+    \frac{d{v}}{dp} &= {a} \cdot \frac{1}{{v}} \\
+\end{align*}
+
+\vspace{-0.75cm}
+
+Cross-multiplying:
+\begin{equation*}
+    {v} \cdot d{v} = {a} \cdot dp
+\end{equation*}
+
+This looks much more simple than the original equation with a completely unknown variable. Now, I can integrate with respect to the derivatives. 
+
+\begin{equation*}
+    \int_{{v_i}}^{{v_f}} {v} \cdot d{v} = \int_{p_i}^{p_f} a \cdot dp \\
+\end{equation*} % original stuff for 3rd eq
+\begin{equation*}
+\begin{aligned}
+    &\text{LS:} \\
+    &\int_{{v_i}}^{{v_f}} {v} \cdot d{v} \\
+    &\int_{{v_i}}^{{v_f}} {v} \cdot d{v} = [\frac{1}{2}{v^2}]_{{v_i}}^{{v_f}} \\
+    &\int_{{v_i}}^{{v_f}} {v} \cdot d{v} = \frac{1}{2}{v^2_f} - \frac{1}{2}{v^2_i} \\
+    &\int_{{v_i}}^{{v_f}} {v} \cdot d{v} = \frac{1}{2}({v^2_f} - {v^2_i})
+\end{aligned}
+\qquad\qquad\qquad\qquad
+\begin{aligned}
+    &\text{RS:} \\
+    &\int_{p_i}^{p_f} {a} \cdot dp \\
+	&\int_{p_i}^{p_f} {a} \cdot dp = {a} \cdot \int_{p_i}^{p_f} dp \\
+	&\int_{p_i}^{p_f} {a} \cdot dp = {a} \cdot [p]_{p_i}^{p_f} \\
+	&\int_{p_i}^{p_f} {a} \cdot dp = {a}p_f - {a}p_i \\
+	&\int_{p_i}^{p_f} {a} \cdot dp = {a}(\Delta d)
+\end{aligned}
+\end{equation*} % monster integrals for 3rd eq
+
+Both sides use rules established previously, such as using the power rule in the LS.
+
+\vspace{-0.75cm}
+
+\begin{align*}
+    \frac{1}{2}({v^2_f} - {v^2_i}) &= {a}\Delta d \\
+    {v^2_f} &= {v^2_i} + 2({a}\Delta d) \\
+    {v^2_f} &= {v^2_i} + 2({a}\Delta d) \tag{5} \label{3rdeq}
+\end{align*} % solving for 3rd eq
+
+Now, the full sequence of events is able to happen. In order to find time, the cases with acceleration, Cases 1.1 and 2.2, can use \eqref{1steq} and the cases with constant velocity, Cases 1.2, 2.1, and 3 can use \eqref{2ndeq}. \eqref{3rdeq} is required to use \eqref{2ndeq}. I now can make the actual mathematical model. As a reminder, the end goal of this model is to find the $\Delta t$, the time it takes to pass through both intersections. With that in mind, I just need to put together the model by stringing together the equations in the right order.
+
+\begin{equation*}
+\begin{dcases}
+    \frac{v_{f1:1} - v_{i1:1}}{a_{1:1}} + \frac{d_{total}}{v_{i1:2}} - \frac{v_{f1:1}^2 + v_{i1:1}^2}{2a_{1:1}v_{i1:2}} = \Delta t_1 \tag{for Cases 1 and 2} \\
+    \frac{v_{f2:2} - v_{i2:2}}{a_{2:2}} + \frac{d_{total}}{v_{i2:1}} - \frac{v_{f2:2}^2 + v_{i2:2}^2}{2a_{2:2}v_{i2:1}} = \Delta t_2 \\
+\end{dcases}
+\end{equation*}
+
+This is the final equation. Since there are two sets of initial and final velocities in each case (one set from each subcase), the subscripts show which case the velocity comes from.
+
+I had trouble comprehending that there were two sets of initial and final velocities, but I overcame it. In short, explained per term from left to right, what is happening in these equations are:
+
+\begin{itemize}
+    \item The first term is \eqref{1steq}. It finds the time for cases 1.1 and 2.2.
+    \item The total distance subtracts the distance of the accelerating/slowing down stage to find the distance of the constant velocity stages.
+    \item A merge of \eqref{2ndeq} and \eqref{3rdeq}, to find the distance of the accelerating/slowing down stages, and \eqref{3rdeq}, to find the time of the constant velocity stage given its distance.
+\end{itemize}
+
+See Appendix B for a full explanation of Cases 1 and 2.
+
+I found Case 3 much easier. It only has one stage, and there is no merging of equations needed, as the distance is the same as the total distance. It is just a simplified version of \eqref{3rdeq}, without the term with acceleration because acceleration is equal to 0.
+
+\begin{equation*}
+\begin{dcases}
+    \frac{\Delta d_{total}}{v_{i3}} = \Delta t_3 \tag{for Case 3}
+\end{dcases}
+\end{equation*}
+
+That makes all the cases mapped out via a mathematical model. The reason this model will help with finding the optimal coordination of these two traffic lights, as is my aim, is that the lights and the time it takes to pass the intersections are linked. I will explore this further in the Analysis.
+
+% \tfrac{{v^2_f} - {v^2_i}}{2a} = {v_f}\Delta t + \frac{1}{2}{a}\Delta t^2
+\section{Calculations}
+
+\subsection{Practical Acceleration Rate}
+Now that I have a model, I just need to find the variables required for my system. As a reminder, these are acceleration for both Cases 1:1 and 2:2, initial and final velocities for each case and subcase, and the distance of every case and subcase.
+
+Immediately, I can apply known variables from my system. The speed limit, $v_{max}$, is 40 km/h or 11.111 m/s, the $\Delta d_{total}$ is 141.28 m, and the $v_i$ of Case 1.1 and the $v_f$ of Case 2.2 are both 0.
+
+This actually cuts down the number of required variables to such an extent that the only missing variables are Case 1.1 and 2.2's acceleration.
+
+First, my car's forward acceleration, for Case 1.1, needs to be found. In the scale of this investigation, I cannot do this to an accurate degree. However, by assuming constant acceleration, acceleration can be extrapolated from the time it takes for the vehicle to reach 60 miles per hour from rest. For my specific engine, it takes 9.2 seconds (Toyota Corolla 1.8 Specs, 2022).
+
+\vspace{-0.75cm}
+
+\begin{align*}
+    60 \text{ mph} \cdot \frac{1.609344 \text{ kph}}{1 \text{ mph}} \cdot \frac{1000 \text{ meters/h}}{1 \text{ kph}} &= 96560 \text{ meters/h} \\
+    96560 \text{ m/h} \cdot \frac{1 \text{ h}}{3600 \text{ s}} &= 26.822 \text{ m/s}
+\end{align*} % dimensional analysis
+
+\vspace{-0.75cm}
+
+\begin{align*}
+    {a} &= 26.822 \cdot \frac{1}{9.2} \\
+    {a_{1:1}} &= 2.915 \text{ m/s$^2$} \\
+\end{align*} % finding acceleration
+\vspace{-1.5cm}
+
+Through a series of dimensional analyses, mph is converted to m/s. Then, from the converted figure, the acceleration is found. I chose to use 3 decimal points because I have learned in my other IB courses that 3 decimal points are a good level of significance when the calculations are not finished. 
+
+I need to do the same as above to find acceleration, but for Case 2:2. Once again, I can use the time it takes for my motor to go from 60 mph to 0 to find both (Toyota Corolla 1.8 Specs, 0-60, 2022). However, for deacceleration, my source provides not a time but a distance. Luckily, \eqref{3rdeq} also has distance as a variable. Thus, I can still use \eqref{3rdeq} and the dimensional analysis from finding ${a}$ earlier.
+
+\vspace{-0.75cm}
+
+\begin{align*}
+    {v^2_f} &= {v^2_i} + 2({a}(\Delta d)) \\
+    0 &= 26.822^2 + 2({a}(37)) \\
+    -74{a} &= 719.42 \\
+    {a_{2:2}} &= -9.722 \text{ m/s$^2$}
+\end{align*}
+
+\vspace{-0.7cm}
+
+\begin{align*}
+    {v^2_f} &= {v^2_i} + 2({a}(\Delta d)) \\
+    0 &= 11.111^2 + 2(-9.722(\Delta d)) \\
+    19.444{\Delta d} &= 123.454 \\
+    {\Delta d_{2:2}} &= 6.349 \text{ m}
+\end{align*}
+
+That is all that needs to be done. Substituting all variables into Cases 1, 2, and 3:
+
+
+\begin{align*}
+    \frac{v_{f1:1} - v_{i1:1}}{a_{1:1}} + \frac{d_{total}}{v_{i1:2}} - \frac{v_{f1:1}^2 + v_{i1:1}^2}{2a_{1:1}v_{i1:2}} = \Delta t_1 \\
+    \frac{11.111 - 0}{2.915} + \frac{141.28}{11.111} - \frac{11.111^2 + 0^2}{2 \cdot 2.915 \cdot 11.111} = \Delta t_1 \\
+    14.6 \text{ s} = \Delta t_1
+\end{align*}
+\vspace{-0.4cm}
+\begin{align*}
+    \frac{v_{f2:2} - v_{i2:2}}{a_{2:2}} + \frac{d_{total}}{v_{i2:1}} - \frac{v_{f2:2}^2 + v_{i2:2}^2}{2a_{2:2}v_{i2:1}} = \Delta t_2 \\
+    \frac{0 - 11.111}{-9.722} + \frac{141.28}{11.111} - \frac{0^2 + 11.111^2}{2 \cdot -9.722 \cdot 11.111} = \Delta t_2 \\
+    13.3 \text{ s} = \Delta t_2
+\end{align*}
+\vspace{-0.4cm}
+\begin{align*}
+    \frac{\Delta d_{total}}{v_{i3}} = \Delta t_3 \\
+    \frac{141.28}{11.111} = \Delta t_3 \\
+     12.7 \text{ s} = \Delta t_3
+\end{align*}
+
+\subsection{Analysis}
+
+Now that all of the calculations are done, the values are sorted into a table. They take only one decimal point because that is the number of decimals in the time I referenced my car taking to accelerate to 60 kph.
+
+\begin{center}
+\centering
+\begin{tabular}{|| c | c | c | c | c | c ||}
+\hline\hline
+\rule{0pt}{3ex} Case & $\Delta$t (s) & $\Delta$d (m) & ${v_i}$ (m/s) & ${v_f}$ (m/s) & ${a}$ (m/s$^2$) \\ [1ex]
+\hline 
+\rule{0pt}{3ex}1:1 & & & 0 & 11.111 & 2.915 \\
+1:2 & & & 11.111 & 11.111 & 0 \\
+1 (total) & 14.6 & 141.28 & & & \\
+2:1 & & & 11.111 & 11.111 & 0 \\
+2:2 & & & 11.111 & 0 & -9.722 \\
+2 (total) & 13.3 & 141.28 & & & \\
+3 & 12.7 & 141.28 & 11.111 & 11.111 & 0 \\ [1ex]
+\hline\hline
+\end{tabular}
+\label{table:allvalues} \\
+Table 5.1. Times, distances, velocities, and accelerations for all cases
+\end{center}
+ 
+In Table 5.1, all cases and their assigned values are shown- note that after a bit of work with the three derived equations, this table could be filled. Since the model goes straight from the variables to the total time per case, the table does not need to be filled in this investigation. However, the only real important one for the analysis is time, $\Delta t$.
+
+From Table 5.1, the slowest Case is Case 1 and the fastest is Case 3- not surprising, considering that vehicles generally can brake faster than they can accelerate. However, I will first try and get only these cases, and eliminate Case 4, described in 2.1. as the risk of getting two red lights in a row through unlucky timing.
+
+An obvious solution is to have the two lights perfectly synced- both of them turn red and green at the same time. This guarantees one of the three cases will happen. However, this is not feasible in real life because, for example, pedestrian buttons. It is also clear after some thought that having the lights completely off-cycle (when one turns red, the other turns green) will lead to Case 4 often. The question becomes: how far can the timing vary from perfectly synced until Case 4 may happen?
+
+Using Case 1 as an example, once the first light turns green and the vehicle starts to accelerate, the second light has 14.6 seconds to turn green before the vehicle arrives there.
+
+At this point, I did some thought. Can I simplify this question and combine Cases 2 and 3 into one? Soon, I realized that I was trying to conserve both stages of Case 2, when that is not necessary- no need to slow down if the vehicle doesn't plan to stop at the second light! I have been assuming that the driver in 2:1 will start slowing down upon seeing a red light. By getting rid of this assumption and assuming that the driver practices unsafe driving and continues going at full speed all the way until the second intersection, I can combine Cases 2 and 3. Both will therefore use Case 3's value, 12.7 s.
+
+The first light is green, and the vehicle goes through at 40 km/h. 12.7 seconds later, it is already at the second light- 1.56 seconds earlier than Case 1. Thus, the light is not green yet, and the vehicle presumably then gets into an accident. So, the intersections' maximum amount of coordination offset, the maximum time between one light turning green and the other turning green, must be the same as the fastest case. And, in my system, the fastest case possible is 12.7 seconds. Note that the actual length of the green light or red light is arbitrary, and that the lengths of the red light are not factored into the times provided by my mode. Therefore, I have optimized my system of traffic lights by creating a model, finding that the maximum coordination offset possible for maximum efficiency is 12.7 seconds. This fulfills my aim.
+
+\section{Verification and Discussion}
+
+\subsection{Verification}
+
+Now, I can compare my theoretical offset with the intersection's real-life actual timings. I took two 60fps videos with a cellphone, one from one direction and the other from the other direction. I left early from home, attempting to get an authentic capture of what traffic would be like when I travel to school. Both videos recorded both traffic lights simultaneously, totalling over ten minutes of raw footage. Using a video-editing software, I went through the videos frame-by-frame to find the exact frame each light changed colors. However, if I do this again, I would try and take a dedicated camera for an even greater level of detail, because it was hard to tell if the faraway second intersection's light had changed color.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.8]{rawdata.png}
+    \caption{Two videos, timings and durations compared.}
+    \label{rawdata}
+\end{figure}
+
+In Figure \ref{rawdata}, each time signifies the frame the light changed to that color, and that there is around 16.7 milliseconds of uncertainty due to the videos being 60fps. The light durations are inconsistent (except for the orange lights), but not by too much, which means there likely is not a sensor or anything that could externally affect the timings.
+
+It is interesting that the green lights are actually significantly longer than the red lights. Therefore, Case 3 is actually more common than Case 1, which surprised me- I had thought they would be around even with the amount of times I personally was stopped at the first light.
+
+\begin{figure}[h!tbp]
+    \centering
+    \includegraphics[scale=1.2]{Offset.png}
+    \caption{Offsets of the traffic lights.}
+    \label{offsets}
+\end{figure}
+
+By subtracting the lights' timestamps from each other, the results shown in Fig. \ref{offsets}, there are offsets from 45 seconds all the way to a whole minute of offset! This is very different from the 12.715 seconds calculated as a theoretical best offset. I believe this to be because of factors I did not consider in my model such as traffic, pedestrians, and flow, but that is a shocking difference between theory and practice, and I wonder exactly why this could be the case.
+
+\subsection{Evaluation}
+
+While the math and physics are sound in a vacuum, this investigation utilized many generalizations and assumptions. While assumptions of no traffic, no weather, and that traffic lights are functional are a detriment to the findings of my investigation, the most important part is the assumption that kinematics are always followed. This is why I said that the math and physics are sound in a vacuum- from my physics classes, I know that constant acceleration is very rare, that cars do not just stop accelerating at a certain velocity, there are friction and gravity forces acting on the tires, and that people own different vehicles with different engines of different capabilities. I understand that people do not slam the brakes or floor the accelerator every time, meaning my acceleration times are different from reality. These may have an effect on the verity of my final answer, but it is incredibly difficult to apply solely something as rigid as calculus to such a complicated real-world scenario nonetheless.
+
+\subsection{Further Research}
+
+This investigation may be incomplete due to the scale of my investigation, on the basis of kinematics. However, civil and industrial engineers are still trying to find the best way to optimize traffic lights. I read papers like Toledo et al. (2004), and while most of the theory and mathematics flew over my head, I can recognize some familiar concepts, such as relating velocity to time to find acceleration.
+
+Engineers are also using advanced technology like sensors to detect cars and smartly adjust traffic light timings based off that information (Tubaishat et al., 2007). For example, the lights in the downtown of another bigger town near me all use sensors- I have traveled there very early in the morning, and all of the lights were green in the direction of the main thoroughfare as they sensed no one was on the road. That technology amazes me, I never knew this sort of technology was developed just to control traffic. 
+
+I personally would like to expand this idea by attempting to add those considerations outside the scope of this investigation, such as adding some traffic or adding more traffic lights or even trying my hand at going past kinematics.
+
+\section{Conclusion}
+
+  I successfully modeled a system of two intersections and found the optimal delay between two signals based on the model. For the real-life intersection I focused on, I got a result of 12.7 s. I then compared the result with the data I collected from the intersections, and offered short commentary on why theory and practice could be different.
+  
+  All in all, while I initially set out just to find a way to optimize my specific problem with a set of two traffic lights on my way to school, I have also gained an appreciation for the work industrial and civil engineers do. I can only imagine how hard it is to coordinate traffic lights when going past mathematics and taking into account all of the considerations I could not include. It has been exciting to discover calculus's uses in practical applications like physics and civil engineering.
+
+My biggest lesson has been not to take any work for granted. From the traffic lights I see every morning to the basic physics equations I practiced in class, I have learned to appreciate and have respect for the work others have done before me.
+
+Now that the project is over, I am left with a desire to find out more about traffic lights. Not only is even more advanced tech like IR detectors (Ghazal et al., 2016) still in development, the field will likely never die. With constant need for more innovation, more solutions, more ideas to quell traffic, it sounds to me like a perfect way to apply what I have learned in physics and calculus to the real world.
+
+\section{References}
+
+Ghazal, B., Elkhatib, K., Chahine, K., \& Kherfan, M. (2016). Smart traffic light control system. 2016 Third International Conference on Electrical, Electronics, Computer Engineering and Their Applications. https://doi.org/10.1109/eecea.2016.7470780 
+
+Greenhouse Gases Equivalencies Calculator - Calculations and References | US EPA. (2023, May 30). US EPA. https://www.epa.gov/energy/greenhouse-gases-equivalencies-
+calculator-calculations-and-references 
+
+Rakestraw, S. (2023, November 13). How Much Does A Car Weigh? Average Weights. Insurance Navy. https://www.insurancenavy.com/average-car-weight/ 
+
+Toledo, B. A., Muñoz, V., Rogan, J., Tenreiro, C., \& Valdivia, J. A. (2004). Modeling traffic through a sequence of traffic lights. Physical Review E, 70(1). https://doi.org/10.1103/physreve.
+70.016107 
+
+Toyota Corolla 1.8 Mk XI 140 HP specs, 0-60. (2022, December 12). FastestLaps.com. https://fastestlaps.com/models/toyota-corolla-1-8-mk-xi 
+
+Tubaishat, M., Shang, Y., \& Shi, H. (2007). Adaptive Traffic Light Control with Wireless Sensor Networks. 2007 4th IEEE Consumer Communications and Networking Conference. https://doi.org/10.1109/ccnc.2007.44
+
+\section{Appendix A}
+
+The average annual daily traffic is 19129 based on a 2016 traffic survey from the municipal government (Citation redacted). Conservatively, it is assumed  that all vehicles are middle sized sedans with an average mass of 1497kg (Rakestraw, 2023). The formula for kinetic energy is $E_k = \tfrac{mv^2}{2}$, so the kinetic energy at 40km/s is $0.5 \cdot 1497 \cdot (40000/3600)2 \text{Joules} = 92407 \text{Joules} = 25.67 \text{Watt-hours}$. The annual total kinetic energy wasted on brakes at these two intersections thus is ($25.67 \cdot 2 \cdot 365 \cdot 19129)$ Watt-hours = 358,460 Watt-hours. In a normal combustion engines, about 2/3 of fuel energy is wasted via exhaust, which means it needs to burn $3 x 358,460$ Watt-hours, or about 1075 kilo-Watt-hours worth of gasoline. Each cubic meter of gasoline is equivalent to 9308.9 kWh of energy. The 1075kWh- is equivalent to ($\tfrac{1075}{9308.9}$) m$^3$ = 0.115 m$^3$ or 30.38 gallons. The CO$_2$ emission per gallon gas is 8.887$\cdot 10^{-3}$ tons (Greenhouse Gases Equivalencies Calculator | US EPA, 2023). Therefore, there will be 8.887$\cdot 10^{-3}$ x 30.38 gallons = 0.27 tons of CO2 gas produced per year from this one intersection. 
+
+\section{Appendix B}
+
+Since Cases 1.1 and 2.2 have non-zero acceleration, they can use \eqref{1steq}. This is the first term, $\frac{v_{f1:1} - v_{i1:1}}{a_{1:1}}$. I will use Case 1 as an example for this process, but Case 2 is the same with different variable subscripts.
+
+I need the distance of the portion with constant velocity. So, I can find the distance of the stage with acceleration then subtract it from the total distance. This is $d_{total}$. Since the distance of 1.2 is the total distance minus 1.1, I can rearrange \eqref{3rdeq} for distance and put \eqref{2ndeq} and \eqref{3rdeq} equal to each other with total distance in front. Acceleration in Case 1.2 is 0, but nonzero in Case 1.1. So, I can solve for the time for the constant velocity stage.
+
+\vspace{-0.5cm}
+
+\begin{align*}
+    v_{i1:2}\Delta t_1 + \tfrac{1}{2}a_{1:2}\Delta t^2_{1:2} &= d_{total} - \frac{v_{f1:1}^2 + v_{i1:1}^2}{2a_{1:1}} \\
+    v_{i1:2}\Delta t_1 + 0 &= d_{total} - \frac{v_{f1:1}^2 + v_{i1:1}^2}{2a_{1:1}} \\
+    \Delta t_1 &= \frac{d_{total}}{v_{i1:2}} - \frac{v_{f1:1}^2 + v_{i1:1}^2}{2a_{1:1} \cdot v_{i1:2}}
+\end{align*}
+
+These are the second and third terms. By combining all the terms, I get the final model. 
+
+\vspace{-0.5cm}
+\begin{align*}
+        \frac{v_{f1:1} - v_{i1:1}}{a_{1:1}} + \frac{d_{total}}{v_{i1:2}} - \frac{v_{f1:1}^2 + v_{i1:1}^2}{2a_{1:1}v_{i1:2}} = \Delta t_1
+\end{align*}
+
+Case 2 is the same with different subscripts, and Case 3 is just \eqref{2ndeq} rearranged.
+
+\end{document}
