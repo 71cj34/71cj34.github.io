@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TSSS STEM Benchmark</title>
     <link rel="stylesheet" href="custom.css">
+    <link rel="stylesheet" href="benchmark.css">
     <script>
         MathJax = {
           tex: {
@@ -15,99 +16,6 @@
     <script type="text/javascript" id="MathJax" async
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </script>    
-    <style>
-        .br-space {
-            height: 6px;
-        }
-
-        .bl-inline {
-            font-size: 110%;
-            font-weight: bold;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0 auto;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            cursor: pointer;
-            background-color: #f2f2f2e4;
-        }
-
-        .collapsible {
-            background-color: #f1f1f1;
-            color: #000000;
-            cursor: pointer;
-            padding: 18px;
-            width: 20%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 15px;
-        }
-
-        .active, .collapsible:hover {
-            background-color: #ddd;
-        }
-
-        .content {
-            padding: 0 18px;
-            display: none;
-            width: 20vw;
-            overflow: hidden;
-            background-color: #f9f9f9;
-        }
-
-        .latex-content {
-            display: none;
-            text-align: left;
-            margin-top: 10px;
-        }
-
-        .latex-content.visible {
-            display: block;
-        }
-
-        .content.expanded {
-            width: 30vw;
-        }
-
-        .description {
-            text-align: center;
-            margin: 0 auto;
-            width: 30%;
-        }
-
-        @media (max-width: 900px) {
-            .collapsible {
-                width: 50%;
-            }
-
-            .content {
-                width: 50%;
-            }
-
-            .description {
-                width: 60%;
-            }
-
-            table {
-                width: 100%;
-            }
-
-            th, td {
-                padding: 8px;
-            }
-        }
-    </style>
 </head>
 <div>
     <span class="top-right-icon" id="modeselection" style="background-color: #f3b7b7; padding: 5px; display: inline-block;">
@@ -145,9 +53,13 @@
             Temperature = 0<br>
             All other samplers disabled.<br>
             No system prefill or instruct formatting.<br>
-            Tests done with self-made GGUF quants.<br>
-            Zero-shot prompting only. <br>
+            Zero-shot prompting only. <br><br>
+
+            For local models:<br>
             Using kobold.cpp.<br>
+            Using self-made GGUF quants.<br><br>
+
+            All models were allotted 3 rerolls/question.<br>
         </p>
         <p>
             <span class="bl-inline">Example Question:</span><br>
@@ -182,7 +94,7 @@
                 <tr>
                     <td>Claude 3.5 Haiku</td>
                     <td>70.96</td>
-                    <td>Deepseek</td>
+                    <td>Anthropic</td>
                 </tr>
                 <tr>
                     <td>Claude 3.5 Sonnet</td>
@@ -206,12 +118,12 @@
                 </tr>
                 <tr>
                     <td>Ministral 8B</td>
-                    <td>51.61</td>
+                    <td>38.71</td>
                     <td>Mistral</td>
                 </tr>
                 <tr>
                     <td>GPT-4o-mini (2024-07-18)</td>
-                    <td>70.96</td>
+                    <td>67.74</td>
                     <td>OpenAI</td>
                 </tr>
                 <tr>
@@ -225,8 +137,8 @@
                     <td>Deepseek</td>
                 </tr>
                 <tr>
-                    <td>Deepseek V3</td>
-                    <td>77.42</td>
+                    <td>Deepseek V2.5</td>
+                    <td>70.96</td>
                     <td>Deepseek</td>
                 </tr>
             </tbody>
