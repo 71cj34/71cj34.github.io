@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>API docs</title>
+    <meta name="description" content="api reference">
+    <link rel="shortcut icon" href="/img/stariconv2.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
+    <link rel="stylesheet" href="index.css">
+</head>
+  <body> 
+    <h1>API Reference Docs</h1>
+    <p>
+        Always call <a href="/api">jasoncheng.me/api</a> in your HTTP request. Only POST requests are permitted.<br><br>
+        This API is meant as a quick learning exercise for myself and are thus subject to Cloudflare Workers free tier rate limits.
+    </p>
+    <h2>
+        Endpoints
+    </h1>
+    <p>
+        All endpoints return serialized JSON objects. Specify request type through the "Query" header. The allowed "Query" values are:
+    </p>
+    <ul>
+        <li>
+            helloworld
+            <ul>
+                Testing endpoint. Returns Hello World.
+            </ul>
+        </li>
+        <li>
+            linalg
+            <ul>
+                Returns lastFinishedChapter, lastRevisionDate, changeMessage for my public Linear Algebra guidebook.
+            </ul>
+        </li>
+        <li>
+            resume
+            <ul>
+                Returns my resume.
+            </ul>
+        </li>
+        <li>
+            spotify
+            <ul>
+                Work in Progress.
+            </ul>
+        </li>
+    </ul>
+    <h2>Quickstart</h2>
+    <p>Click a code block to copy its contents.</p>
+    <h3>CMD/PS</h3>
+    <p>
+        <code>curl jasoncheng.me/api -X POST -H "Query: helloworld"</code>
+    </p>
+    <h3>Shell</h3>
+    <p>
+        <pre><code class="code_block">curl jasoncheng.me/api \
+    -H "Content-Type: text/json" \
+    -H "Query: helloworld"</code></pre>
+    </p>
+    <h3>
+        Python
+    </h3>
+    <pre><code class="code_block">import requests
+
+url = "https://jasoncheng.me/api"
+params = {
+    'Query': 'helloworld'
+}
+
+response = requests.post(url, headers=params).json()
+print(response)</pre></code>
+    <h3>
+        TypeScript
+    </h3>
+    <pre><code class="code_block">fetch("jasoncheng.me/api", {
+    method: "POST",
+    headers: {
+        "Content-Type": "text/json"
+        "Query": "helloworld"
+    }
+});</pre></code>
+
+
+    <script>
+        const codeBlocks = document.querySelectorAll("code");
+        codeBlocks.forEach(codeBlock => {
+            codeBlock.addEventListener("click", function() {
+                const codeText = this.textContent; // Use textContent to preserve line breaks
+
+                const tempTextArea = document.createElement("textarea");
+                tempTextArea.value = codeText;
+                document.body.appendChild(tempTextArea);
+
+                tempTextArea.select();
+                tempTextArea.setSelectionRange(0, 99999); // For mobile devices
+
+                document.execCommand("copy");
+
+                document.body.removeChild(tempTextArea);
+
+                alert("Code copied to clipboard.");
+            });
+        });
+    </script>
+  </body>
+</html>
