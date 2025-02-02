@@ -1,3 +1,5 @@
+{% raw_file assets/MATH 1ZC3 Study Guide.md %}
+
 # Math 1ZC3 Study Guide
 
 ```ad-info
