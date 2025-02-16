@@ -1,3 +1,5 @@
+// refs: 1, 2, 4, 5, 6
+
 const icon = document.getElementById('modeselection');
 const body = document.querySelector('body');
 
