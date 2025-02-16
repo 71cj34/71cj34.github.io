@@ -144,9 +144,9 @@ body.dark-mode .icon {
 }
 
 .commit-caption {
-  opacity: 60%;
+  opacity: 50%;
   font-style: italic;
-  font-size: 0.75em;
+  font-size: 0.7em;
   margin-bottom: 0;
 }
 
