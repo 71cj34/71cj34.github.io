@@ -1,5 +1,3 @@
-{% raw_file assets/MATH 1ZC3 Study Guide.md %}
-
 # Math 1ZC3 Study Guide
 
 ```ad-info
@@ -474,7 +472,6 @@ $\textbf{2.3.6 }$ $A^{-1} = \frac{1}{\text{det}(A)}\text{adj}(A)$.
   
 $\textbf{2.3.7 }$ **Cramer's Rule:** If $A\mathbf{x} = \mathbf{b}$ is a system of linear equations where $\det(A) \neq 0$, the system has a unique solution. The solution is $x^{j} = \frac{\text{det}(A)}{\text{det}(A_j)}$ for every column j, where $A_j$ is the matrix obtained by replacing the $j$th column of $A$ with the column vector $\mathbf{b}$. (It is usually more efficient, for $n > 3$, to solve systems with $n$ unknowns and $n$ equations, to use Gauss-Jordan elimination)  
 
-(Additions to the equivalent statement thingy)
 $\textbf{2.3.8 }$ For square matrix $A$, all of these statements are equivalent:  
 (a) $A$ is invertible.  
 (b) $A\mathbf{x} = 0$ has only the trivial solution.  
@@ -891,7 +888,7 @@ A more efficient way to change basis is as follows:
 - Use elementary row operations to reduce the matrix on the left, the new basis, to $I$.
 - The transition matrix is the remaining matrix on the right.
 
-$\textbf{4.7.1 }$ Let $B = \left\{{\mathbf{u}_1, \mathbf{u}_2, \dots, \mathbf{u}_n}\right\}$ be any basis for $\mathbb{R}^n$ and $S$ be the standard basis for $\mathbb{R}^n$. If the bases are in column form, then the basis from $B$ to $S$ can be described as $$P_{B \rightarrow S} = \left[\mathbf{u}_1, \mathbf{u}_2, \dots, \mathbf{u}_n\right]$$
+$\textbf{4.7.2 }$ Let $B = \left\{{\mathbf{u}_1, \mathbf{u}_2, \dots, \mathbf{u}_n}\right\}$ be any basis for $\mathbb{R}^n$ and $S$ be the standard basis for $\mathbb{R}^n$. If the bases are in column form, then the basis from $B$ to $S$ can be described as $$P_{B \rightarrow S} = \left[\mathbf{u}_1, \mathbf{u}_2, \dots, \mathbf{u}_n\right]$$
 ## 4.8: Row Space, Column Space, and Null Space
 
 If $A$ is a $n \times m$ matrix:
@@ -987,7 +984,6 @@ $\textbf{4.9.4 }$ If $A$ is an $m \times n$ matrix, then:
 $\text{(a) }$ The null space of $A$ and row space of $A$ are orthogonal complements in $\mathbb{R}^n$.
 $\text{(b) }$ The null space of $A^T$ and the column space of $A$ are orthogonal complements in $\mathbb{R}^n$.
 
-(Additions to the equivalent statement thingy)
 $\textbf{4.9.8 }$ For square matrix $A$ with NO DUPLICATE ROWS/COLUMNS, all of these statements are equivalent:  
 $\text{(a) } A$ is invertible.
 $\text{(b) } A\mathbf{x} = 0$ has only the trivial solution.
@@ -1034,7 +1030,6 @@ Finding eigenspaces:
 
 $\textbf{5.1.4 }$ A square matrix $A$ is invertible if and only if $\lambda = 0$ is not an eigenvalue.
 
-(Additions to the equivalent statement thingy)
 $\textbf{5.1.5 }$ For square matrix $A$ with NO DUPLICATE ROWS/COLUMNS, all of these statements are equivalent:  
 $\text{(a) } A$ is invertible.
 $\text{(b) } A\mathbf{x} = 0$ has only the trivial solution.
@@ -1360,7 +1355,6 @@ $\text{(a)}$ The column vectors of $A$ are linearly independent.
 $\text{(b)}$ $A^TA$ is invertible.
 
 $\textbf{6.4.4 }$ If $A$ is an $m \times n$ matrix with linearly independent column vectors, then for every $m \times1$ matrix $\mathbf{b}$, $A \mathbf{x} = \mathbf{b}$ has a unique least squares solution. This solution is given by $$\mathbf{x} = (A^TA)^{-1}A^T \mathbf{b}$$ and if $W$ is the column space of $A$, then $$A \mathbf{x} = A(A^T A)^{-1}A^T \mathbf{b} = \text{proj}_W \mathbf{b}$$
-(Presented without comment.)
 $\textbf{6.4.5 }$ For square matrix $A$ with no duplicate rows/columns, all of these statements are equivalent:  
 $\text{(a) } A$ is invertible.
 $\text{(b) } A\mathbf{x} = 0$ has only the trivial solution.
@@ -1714,5 +1708,119 @@ A square complex matrix $A$ is unitarily diagonalizable if and only if $AA^* = A
 
 # 8. General Linear Transformations
 
-### 8.1: General Linear Transformations
+## 8.1: General Linear Transformations
 
+If $T: V \rightarrow W$ is a mapping from a vector space $V$ to a vector space $W$, then $T$ is called a **linear transformation** from $V$ to $W$ if the following two properties hold for all vectors $\mathbf{u}$ and $\mathbf{v}$ in $V$ and all scalars $k$:
+- $T(k \mathbf{u}) = kT(\mathbf{u}) \qquad \textbf{[Homogenity property]}$
+- $T(\mathbf{u} + \mathbf{v}) = T(\mathbf{u}) + T(\mathbf{v}) \qquad \textbf{[Additivity property]}$
+In the special case $V = W$, the linear transformation $T$ is called a **linear operator** on $V$.
+
+$\textbf{8.1.1 }$ If $T: V \rightarrow W$ is a linear transformation, then:
+$\text{(a) }$ $T(\mathbf{0}) = \mathbf{0}$
+$\text{(b) }$ $T(\mathbf{u} - \mathbf{v}) = T(\mathbf{u}) - T(\mathbf{v})$ for all $\mathbf{u}, \mathbf{v}$ in $V$.
+$\text{(c) }$ $T(-\mathbf{u}) = -T(\mathbf{u})$ for all $\mathbf{u}$ in $V$.
+
+The mapping $T: V \rightarrow W$ defined by $T(\mathbf{v}) = \mathbf{0}$ for every $\mathbf{v}$ in $V$ is called the **zero transformation**. $I: V \rightarrow V$ defined by $I(\mathbf{v}) = \mathbf{v}$ is called the **identity operator** on $V$.
+
+The linear operator $T: V \rightarrow V$ defined by $T(\mathbf{x}) = c \mathbf{x}$ for every $\mathbf{x}$ in $V$ and scalar $c$ is called the **contraction of $V$** if $0 < c < 1$, and the **dilation of $V$** if $c > 1$.
+
+### Finding Linear Transformations from Images of Basis Vectors
+
+$\textbf{8.1.2 }$ Let $T: V \rightarrow W$ is a linear transformation, for which the vector space $V$ is finite-dimensional. If $S = \left\{\mathbf{v}_{1}, \mathbf{v}_{2}, \dots, \mathbf{v}_{n} \right\}$ is a basis for $V$, then the image of any vector $\mathbf{v}$ in $V$ can be expressed as: $$
+T(\mathbf{v}) = c_{1}T(\mathbf{v}_{1}) + c_{2}T(\mathbf{v}_{2}) + \dots + c_{n}T(\mathbf{v}_{n})
+	$$where $c_{1}, c_{2}, \dots, c_{n}$ are the coefficients required to express $\mathbf{v}$ as a linear transformation of the vectors in basis $S$.
+
+### Kernel and Range
+
+If $T: V \rightarrow W$ is a linear transformation, then the set of vectors in $V$ that $T$ maps into $\mathbf{0}$ is called the **kernel** of $T$ and is denoted by $\text{ker}(T)$. The set of all vectors in $W$ that are images under $T$ of at least one vector in $V$ is called the **range** of $T$ and is denoted by $R(T)$.
+
+- If $T_{A}: \mathbb{R}^n \rightarrow \mathbb{R}^m$ is multiplication by the $m \times n$ matrix $A$, then the kernel of $T_{A}$ is the null space of $A$ and the range is the column space of $A$.
+- Let $T: V \rightarrow W$ be the zero transformation. $\text{ker}(T) = V$, and $R(T) = \left\{\mathbf{0}\right\}$.
+- Let $I: V \rightarrow V$ be the identity operator. $\text{ker}(I) = \left\{\mathbf{0}\right\}$, and $R(I) = V$.
+- Let $T: R^{3} \rightarrow R^{3}$ be the orthogonal projection on the $xy$ plane. $\text{ker}(T)$ is the set of points of form $(0, 0, z)$, and $R(T)$ is the set of points of form $(x,y,0)$.
+- Let $T: R^{2} \rightarrow R^2$ be the linear operator that rotates every vector in the $xy$ plane through the angle $\theta$. $\text{ker}(T) = \left\{\mathbf{0}\right\}$, and $R(T) = R^{2}$.
+
+$\textbf{8.1.3 }$ Let $T: V \rightarrow W$ is a linear transformation.
+$\text{(a) }$ The kernel of $T$ is a subspace of $W$.
+$\text{(b) }$ The range of $T$ is a subspace of $W$.
+
+### Rank and Nullity of Linear Transformations
+
+Let $T: V \rightarrow W$ be a linear transformation. In the case that the range of $T$ is finite-dimensional its dimension is called the **rank of $T$**, and if the kernel is finite-dimensional, its dimension is called the **nullity of $T$**.
+
+$\textbf{8.1.4 }$ Let $T: V \rightarrow W$ is a linear transformation with two finite-dimensional vector spaces $V$ and $W$, then the range of $T$ is finite-dimensional, and $\text{rank}({T}) +\text{nullity}(T) = \dim(V)$.
+
+## 8.2: Compositions and Inverse Transformations
+
+### One-to-One and Onto
+
+If $T: V \rightarrow W$ is a linear transformation, then $T$ is **one-to-one** if $T$ maps distinct vectors in $V$ into distinct vectors in $W$.
+
+If $T: V \rightarrow W$ is a linear transformation, then $T$ is **onto** $W$ if every vector in $W$ is an image of at least one vector in $V$.
+
+$\textbf{8.2.1 }$ If $T: V \rightarrow W$ is a linear transformation, the following statements are equivalent.
+$\text{(a) }$ $T$ is one-to-one.
+$\text{(b) }$ $\text{ker}(T) = \left\{\mathbf{0}\right\}$.
+
+|                                                                                                                                         | One-to-One | Onto |
+| --------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ---- |
+| Rotation operators on $\mathbb{R}^{n}$                                                                                                  | Yes        | Yes  |
+| Orthogonal projections on $\mathbb{R}^{n}$                                                                                              | No         | No   |
+| $$\begin{gather} T: P_{3} \rightarrow R^{4} \\ T(a+bx+cx^{2}+dx^{3}) = (a,b,c,d)\end{gather}$$                                          | Yes        | Yes  |
+| $$\begin{gather*} T: M_{22} \rightarrow R^{4} \\ T\left(\begin{bmatrix} a & b \\ c & d \end{bmatrix}\right) = (a,b,c, d)\end{gather*}$$ | Yes        | Yes  |
+| $$\begin{gather} T: P_{n} \rightarrow P_{n+1} \\ T(\mathbf{p}) = T(p(x)) = xp(x)\end{gather}$$                                          | Yes        | No   |
+| $D: \mathbb{C}^{1}(-\infty, \infty) \rightarrow F(-\infty, \infty)$                                                                     | No         | Yes  |
+*proving these results is left as an exercise, or just read the examples in the textbook if you want. i'm not a cop*
+
+$\textbf{8.2.2 }$ If $T: V \rightarrow W$ is a linear transformation, the following statements are equivalent.
+$\text{(a) }$ $T$ is one-to-one.
+$\text{(b) }$ $\text{ker}(T) = \left\{\mathbf{0}\right\}$.
+$\text{(c) }$ $T$ is onto ($R(T) = W$).
+
+### Matrix Transformations Revisited
+
+$\textbf{8.2.3 }$ If $T_{A}: \mathbb{R}^n \rightarrow \mathbb{R}^m$ is a linear transformation, then
+$\text{(a) }$ $T_{A}$ is one-to-one if and only if the columns of $A$ are linearly independent.
+$\text{(b) }$ $T_{A}$ is onto if and only if the columns of $A$ span $\mathbb{R}^n$.
+
+$\textbf{8.2.4 }$ For square matrix $A$ with no duplicate rows/columns, all of these statements are equivalent:  
+$\text{(a) } A$ is invertible.
+$\text{(b) } A\mathbf{x} = 0$ has only the trivial solution.
+$\text{(c) }$ The reduced row echelon form of $A$ is $I_n$.
+$\text{(d) } A$ can be expressed as a product of elementary matrices.
+$\text{(e) } A\mathbf{x} = b$ is consistent for every $n \times 1$ matrix $\mathbf{b}$.
+$\text{(f) } A\mathbf{x} = b$ has exactly one solution for every $n \times 1$ matrix $\mathbf{b}$.
+$\text{(g) } \det(A) \neq 0.$
+$\text{(h) }$ The column vectors of $A$ are linearly independent.
+$\text{(i) }$ The row vectors of $A$ are linearly independent.
+$\text{(j) }$ The column vectors of $A$ span $\mathbb{R}^n$.
+$\text{(k) }$ The row vectors of $A$ span $\mathbb{R}^n$.
+$\text{(l) }$ The column vectors of $A$ form a basis for $\mathbb{R}^n$.
+$\text{(m) }$ The row vectors of $A$ form a basis for $\mathbb{R}^n$.
+$\text{(n) }$ $A$ has rank $n$.
+$\text{(o) }$ $A$ has nullity $0$.
+$\text{(p) }$ The orthogonal complement of the null space of $A$ is $\mathbb{R}^n$.
+$\text{(q) }$ The orthogonal complement of the row space of $A$ is $\{0\}$.
+$\text{(r) }$ $\lambda = 0$ is not an eigenvalue of $A$.
+$\text{(s) }$ $A^TA$ is invertible.
+$\text{(t) }$ The kernel of $T_{A}$ is $\left\{\mathbf{0}\right\}$.
+$\text{(u) }$ The range of $T_{A}$ is $\mathbb{R}^n$.
+$\text{(v) }$ $T_{A}$ is one-to-one.
+
+### Inverse Linear Transformations
+
+The inverse of multiplication by $A$ is multiplication by $A^{-1}$.
+
+If $T: V \rightarrow W$ is a linear transformation and $\mathbf{w}$ is a vector in $R(T)$ (the range of $T$), the fact that $T$ is one to one means that there exists a transformation using a vector $\mathbf{v}$ from $V$ such that $T(\mathbf{v}) = \mathbf{w}$. 
+
+Now we define a transformation $T^{-1}$, that maps $\mathbf{w} \rightarrow \mathbf{v}$. Thus, $T^{-1}: R(T) \rightarrow V$ is a linear transformation. Note that $T$ and $T^{-1}$ cancel one another out when used in succession.
+
+### Composition of Linear Transformations
+
+If $T_{1}: U \rightarrow V$ and $T_{2}: V \rightarrow W$ are linear transformations, then the **composition** of $T_{2}$ with $T_{1}$ is denoted $T_{2} \circ T_{1}$ and defined by $(T_{2} \circ T_{1})(\mathbf{u}) = T_{2}(T_{1}(\mathbf{u}))$ where $\mathbf{u}$ is a function in $U$.
+
+$\textbf{8.2.5 }$ If $T_{1}: U \rightarrow V$ and $T_{2}: V \rightarrow W$ are linear transformations, then $(T_{2} \circ T_{1}): U \rightarrow W$ is also a linear transformation.
+
+$\textbf{8.2.6 }$ If $T_{1}: U \rightarrow V$ and $T_{2}: V \rightarrow W$ are one-to-one linear transformations, then
+$\text{(a) }$ $T_{2} \circ T_{1}$ is one-to-one.
+$\text{(b) }$ $(T_{2} \circ T_{1})^{-1} = T_{2}^{-1} \circ T_{1}^{-1}$.
