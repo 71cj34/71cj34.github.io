@@ -1,4 +1,2 @@
-# exclude:
-#   - assets/MATH 1ZC3 Study Guide.md
-
-markdown: kramdown
+exclude:
+  - assets\Linear Algebra Study Guide.md
