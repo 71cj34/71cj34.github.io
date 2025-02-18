@@ -1,2 +1,2 @@
-exclude:
-  - assets/Linear Algebra Study Guide.md
+# exclude:
+#   - assets/Linear Algebra Study Guide.md
