@@ -1,7 +1,3 @@
----
-layout: raw
----
-
 # Math 1ZC3 Study Guide
 
 ```ad-info
