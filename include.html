@@ -1,3 +1,4 @@
-<!-- ---
----
-<pre>{% include Linear-Algebra-Study-Guide.md %}</pre> -->
+{%- capture rawContent -%}
+  {%- include_relative posts/Linear-Algebra-Study-Guide.md -%}
+{%- endcapture -%}
+<pre>{{- rawContent -}}</pre>
