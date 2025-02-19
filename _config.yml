@@ -1,5 +1,6 @@
-markdown: kramdown
-kramdown:
-  parse_block_html: true
-  syntax_highlighter: rouge
-  disable_liquid: true
+defaults:
+  -
+    scope:
+      path: "assets/*.md" # an empty string here means all files in the project
+    values:
+      render_with_liquid: false
