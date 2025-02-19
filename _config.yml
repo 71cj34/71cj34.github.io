@@ -1,6 +1,6 @@
-defaults:
-  -
-    scope:
-      path: "assets/Linear Algebra Study Guide.md"
-    values:
-      render_with_liquid: false
+# defaults:
+#   -
+#     scope:
+#       path: "assets/Linear Algebra Study Guide.md"
+#     values:
+#       render_with_liquid: false

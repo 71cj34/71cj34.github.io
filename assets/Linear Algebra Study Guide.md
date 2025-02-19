@@ -1,3 +1,7 @@
+---
+render_with_liquid: false
+---
+
 # Math 1ZC3 Study Guide
 
 ```ad-info
