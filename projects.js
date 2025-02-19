@@ -4,7 +4,7 @@ function parseMarkdown(text) {
     
     text = text.replace(/\*\*([^*]*(?:\*(?!\*)[^*]*)*)\*\*/g, '<span class="md-bold">$1</span>');
     text = text.replace(/\*([^*]*(?:\*(?!\*)[^*]*)*)\*/g, '<span class="md-italic">$1</span>');
-    text = text.replace(/`([^`]*)`/g, '<span class="md-inline-code">$1</span>');
+    text = text.replace(/`([^`]*)`/g, '<span class="md-code">$1</span>');
     
     // restore escapement
     text = text.replace(/&#([*`]);/g, '$1');
@@ -48,8 +48,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     const lastCommitLink = data[0]?.html_url || "https://http.cat/images/404.jpg";
                     const lastCommitDate = data[0]?.commit?.author?.date || data[0]?.commit?.committer?.date || "No commit date found";
                     let mdCommitMessage = parseMarkdown(lastCommitMessage);
-                    commitMessageElement.innerText = mdCommitMessage;
-
+                    console.log(`Data received for message #${index + 1}: ${mdCommitMessage}`)
+                    commitMessageElement.innerHTML = mdCommitMessage;
                     commitMessageElement.setAttribute('href', lastCommitLink)
                     commitDateElement.innerText = new Date(lastCommitDate).toLocaleDateString(); // Formats the date to a more readable form
                 })
@@ -66,6 +66,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     });
     
+    const icon = document.getElementById('modeselection');
+    const body = document.querySelector('body');
+
+    icon.addEventListener('click', () => {
+        const codeblocks = document.getElementsByClassName('md-code');
+        if (body.classList.contains("dark-mode")) {
+            for (let i = 0; i < codeblocks.length; i++) {
+                console.log(`Editing codeblock ${i+1}`);
+                codeblocks[i].style.backgroundColor = "rgba(255, 255, 255, 0.18)";
+                codeblocks[i].style.border = "1px solid rgba(255, 255, 255, 0.5)";
+            }
+        } else {
+            for (let i = 0; i < codeblocks.length; i++) {
+                console.log(`Editing codeblock ${i+1}`);
+                codeblocks[i].style.backgroundColor = "rgba(0, 0, 0, 0.03)";
+                codeblocks[i].style.border = "1px solid rgba(0, 0, 0, 0.15)";
+            }
+        };
+    });
 
     // Replace content when replaceButton is clicked.
     replaceButton.addEventListener('click', () => {

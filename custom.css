@@ -14,7 +14,7 @@
 
 @font-face {
   font-family: "Inconsolata";
-  src: url(../fonts/Inconsolata.ttf);
+  src: url('fonts/Inconsolata.ttf');
 }
 
 .icon {
@@ -155,11 +155,33 @@ body.dark-mode .icon {
   margin-bottom: 0;
 }
 
-code {
+.md-code {
   font-size: 0.95em;
-  display: block;
-  color: black;
   font-family: "Inconsolata", monospace;
+  /* background-color: rgba(246, 246, 246, 1);
+  border: 1px solid rgba(221, 221, 221, 1); */
+  background-color: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  padding: 6px;
+  cursor: pointer;
+  max-width: 50%;
+  transition: 0.25s color;
+}
+
+.md-code:hover {
+  background-color: 
+}
+
+.md-italic {
+  background-color: #f6f6f6;
+  border: 1px solid #ddd;
+  padding: 10px;
+  cursor: pointer;
+  max-width: 50%;
+}
+
+.md-bold {
   background-color: #f6f6f6;
   border: 1px solid #ddd;
   padding: 10px;
