@@ -1,3 +1,4 @@
+{% raw %}
 # Math 1ZC3 Study Guide
 
 ```ad-info
@@ -1824,3 +1825,5 @@ $\textbf{8.2.5 }$ If $T_{1}: U \rightarrow V$ and $T_{2}: V \rightarrow W$ are l
 $\textbf{8.2.6 }$ If $T_{1}: U \rightarrow V$ and $T_{2}: V \rightarrow W$ are one-to-one linear transformations, then
 $\text{(a) }$ $T_{2} \circ T_{1}$ is one-to-one.
 $\text{(b) }$ $(T_{2} \circ T_{1})^{-1} = T_{2}^{-1} \circ T_{1}^{-1}$.
+
+{% endraw %}
