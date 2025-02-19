@@ -1,2 +1,5 @@
-# exclude:
-#   - assets/Linear Algebra Study Guide.md
+markdown: kramdown
+kramdown:
+  parse_block_html: true
+  syntax_highlighter: rouge
+  disable_liquid: true
