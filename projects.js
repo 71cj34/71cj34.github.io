@@ -1,3 +1,18 @@
+function parseMarkdown(text) {
+    // escaped chars
+    text = text.replace(/\\([*`])/g, '&#$1;');
+    
+    text = text.replace(/\*\*([^*]*(?:\*(?!\*)[^*]*)*)\*\*/g, '<span class="md-bold">$1</span>');
+    text = text.replace(/\*([^*]*(?:\*(?!\*)[^*]*)*)\*/g, '<span class="md-italic">$1</span>');
+    text = text.replace(/`([^`]*)`/g, '<span class="md-inline-code">$1</span>');
+    
+    // restore escapement
+    text = text.replace(/&#([*`]);/g, '$1');
+    
+    return text;
+}
+
+
 document.addEventListener('DOMContentLoaded', (event) => {
     const repos = [
         '71cj34/CompressExp',
@@ -12,12 +27,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     const newContent = `
         <p style="font-weight: bold">Exllama</p>
-        <p>Some sort of quantization tool for Exllama. Had a quick gander at the docs. <br>Doesn't look all that bad.</p>
+        <p>Some sort of quantization tool for Exllama. Had a quick gander at the docs. <br><br> 2025 update: ExLlamav2 working on my device, have made prototype for personal use.</p>
         <br>
         <img src="/linev3.png" style="display: block; margin-left: auto; margin-right: auto;">
         <br>
         <p style="font-weight: bold">MTransformer</p>
-        <p>Windows app to convert file formats. I need to look into C++.</p>
+        <p>Windows app to convert file formats. Will be made as a 'capstone' to my C++ self-education.</p>
         <br><br><br><br><br><br>
         <p style="font-style: italic; color: grey; font-size: 80%"> Maybe someday.</p>
     `;
@@ -32,7 +47,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     const lastCommitMessage = data[0]?.commit?.message || "No commit message found";
                     const lastCommitLink = data[0]?.html_url || "https://http.cat/images/404.jpg";
                     const lastCommitDate = data[0]?.commit?.author?.date || data[0]?.commit?.committer?.date || "No commit date found";
-                    commitMessageElement.innerText = lastCommitMessage;
+                    let mdCommitMessage = parseMarkdown(lastCommitMessage);
+                    commitMessageElement.innerText = mdCommitMessage;
+
                     commitMessageElement.setAttribute('href', lastCommitLink)
                     commitDateElement.innerText = new Date(lastCommitDate).toLocaleDateString(); // Formats the date to a more readable form
                 })
