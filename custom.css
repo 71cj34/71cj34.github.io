@@ -163,32 +163,30 @@ body.dark-mode .icon {
   background-color: rgba(0, 0, 0, 0.03);
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 6px;
-  padding: 6px;
+  padding: 0.3em;
   cursor: pointer;
-  max-width: 50%;
   transition: 0.25s color;
 }
 
 .md-italic {
   background-color: #f6f6f6;
+  font-style: italic;
   border: 1px solid #ddd;
   padding: 10px;
-  cursor: pointer;
-  max-width: 50%;
 }
 
 .md-bold {
   background-color: #f6f6f6;
+  font-weight: bold;
   border: 1px solid #ddd;
   padding: 10px;
-  cursor: pointer;
-  max-width: 50%;
 }
 
 a[id^='commit-message-'] {
   display: inline-block;
-  padding-top: 0.3em;
-  padding-bottom: 0.3em;
+  font-size: 1.02em;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
 }
 
 a {
