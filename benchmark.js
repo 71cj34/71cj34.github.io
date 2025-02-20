@@ -1,3 +1,5 @@
+// TODO: refactor for cleanliness
+
 document.addEventListener('DOMContentLoaded', () => {
     const table = document.getElementById('scoreTable');
     const headers = table.querySelectorAll('th');
@@ -67,12 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Function to detect if the user is on a mobile device
     const isMobile = () => {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     };
 
-    // latex
     const toggleLatexButton = content.querySelector('.toggle-latex');
     const latexContent = content.querySelector('.latex-content');
     toggleLatexButton.addEventListener('click', () => {
