@@ -12,9 +12,7 @@ jasoncheng.me
 ```ad-hint
 Your PDF reader may have an **outline** tool! I have embedded heading bookmarks for each chapter, subchapter, and sub-subchapter, so use them to study more efficiently.
 ```
-
 --- 
-
 # 1: Systems of Linear Systems and Matrices
 
 ## 1.1: Introduction to Systems of Linear Equations
@@ -1826,5 +1824,25 @@ $\textbf{8.2.5 }$ If $T_{1}: U \rightarrow V$ and $T_{2}: V \rightarrow W$ are l
 $\textbf{8.2.6 }$ If $T_{1}: U \rightarrow V$ and $T_{2}: V \rightarrow W$ are one-to-one linear transformations, then
 $\text{(a) }$ $T_{2} \circ T_{1}$ is one-to-one.
 $\text{(b) }$ $(T_{2} \circ T_{1})^{-1} = T_{2}^{-1} \circ T_{1}^{-1}$.
+
+## 8.3: Isomorphism
+
+### Isomorphism
+
+A linear transformation $T: V \rightarrow W$ that is both one-to-one and onto is said to be an **isomorphism**, and $W$ is **isomorphic** to $V$.
+
+Essentially, isomorphism means that two different vector spaces share the same algebraic form and their vector operations are conducted in the same fashion, even if the types of objects in the spaces may be different.
+
+$\textbf{8.3.1 }$ Every $n$-dimensional vector space is isomorphic to $\mathbb{R}^{n}$.
+
+$\textbf{8.3.2 }$ If $S$ is an ordered basis for a vector space $V$, then the coordinate map $\mathbf{u} \overset{T}{\longrightarrow} \left( \mathbf{u} \right)_{S}$ is an isomorphism between $V$ and $\mathbb{R}^n$.
+
+### Inner Product Space Isomorphisms
+
+Regular isomorphisms only preserve algebraic structure. To preserve geometric structure, an isomorphism will also preserve inner products. We define $T: V \rightarrow W$ an **inner product space isomorphism** if $\langle T(\mathbf{u}), T(\mathbf{v}) \rangle = \langle \mathbf{u}, \mathbf{v} \rangle$ for all $\mathbf{u}, \mathbf{v}$ in $V$.
+
+$\textbf{8.3.3 }$ If $S = \{\mathbf{v}_{1}, \mathbf{v}_{2}, \dots, \mathbf{v}_{n}\}$ is an ordered orthonormal basis for a real $n$-dimensional inner product space $V$, then the coordinate map $$\mathbf{u} \overset{T}{\rightarrow} \left(\mathbf{u}\right)_{s}$$is an inner product space isomorphism between $V$ and the vector space $\mathbb{R}^n$ with the Euclidean inner product.
+
+## 8.4: Matrices for General Linear Transformations
 
 {% endraw %}
