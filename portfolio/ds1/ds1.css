@@ -19,22 +19,29 @@
 }
 
 body, html {
-  margin: 10vh 8vw 0;
+  margin: 5vh 8vw 0;
   padding: 0;
   height: 100%;
   height: auto; 
   width: auto;
   box-sizing: border-box;
-  font-size: 0.86vw;
+  font-size: 1.05em;
   display: flex;
   font-family:'Input Serif', 'Courier New', monospace;
 }
 
 body {
-  margin: 0 15vw 5vh 15vw;
+  /* margin: 0 15vw 5vh 15vw; */
   flex-direction: column;
   cursor: default;
   transition: opacity 1s;
+}
+
+hr {
+  width: 70vw;
+  margin: 2.5em 0;
+  position: relative;
+  flex: 1;
 }
 
 body.faded {
