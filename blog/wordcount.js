@@ -18,7 +18,7 @@ const text = getTextContent(mainElement);
 
 const words = text.trim().split(/\s+/);
 
-const length = words.filter(word => word.length > 0).length;
+const length = words.filter(word => word.length > 0).length.toLocaleString();
 
 if (length > -1) {
     counter.style.color = "inherit";
