@@ -1,3 +1,4 @@
 {
-    "discord.lowerDetailsEditing": "Lines: {total_lines}"
+    "discord.lowerDetailsEditing": "Lines: {total_lines}",
+    "vscord.app.privacyMode.enable": true
 }

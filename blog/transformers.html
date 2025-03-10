@@ -21,10 +21,31 @@
 <body class="light-mode">
     <main>
         <h1 style="margin-bottom: 0.25em;">Transformers</h1>
-        <h4 style="font-style: italic; color: #979797; margin-top: 0">Miscellaneous ramblings</h4>
+        <h4 style="font-style: italic; color: #979797; margin-top: 0">Word count: <span id="wordcount" style="color: crimson"> &lt; Retrieving word count... &gt; </span></h4>
         <hr>
+
+        <h3>$\mathbf{\emptyset}$. Introduction</h3>
+        <p>When I was getting into the LLM space, I was a dumb high schooler who had never seen a matrix before, 
+            much less a neural network. That was over two years ago. This is dedicated to all the other dumb high
+            schoolers out there who want to learn, but the arxiv papers are too hard to comprehend. I will go through
+            the landmark Transformers paper, as well as the background and implications of the research.
+        </p>
         <h3>I. Background</h3>
-        <p>Transformers</p>
+        <p>Transformers are great.</p>
+        <p>They're the reason LLMs have gotten to the capability they have.</p>
+        <p>But before the Transformer, there was the RNN.</p>
+        <h4>I.I. The RNN</h4>
+        <p>RNNs are neat. Basically, they take in an input, split it into positions, and process it, one position at a time. 
+            They work by mantaining a sequence of 'hidden states' $h_t$, as a function of the last hidden state $h_{t-1}$, and
+            the current input $t$. In this way, it can effectively predict the next input. This is nice, but there's one big problem.
+        </p>
+        <p>
+            It is inherently sequential in nature. This means that no matter what kind of efficiency or methodological improvement you
+            may make, this model is limited to predicting the next input based on a previous input, always one input at a time. What if
+            we have a big sequence? You can't parallelize (do multiple calculations at once), because each calculation depends on the state
+            $h_t$, meaning you need to wait for the next input to be processed before you can go any further.
+        </p>
     </main>
 </body>
+<script src="wordcount.js"></script>
 </html>
