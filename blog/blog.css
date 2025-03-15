@@ -1,0 +1,27 @@
+:root {
+    --heading-color: #540202;
+}
+
+h1, h2, h3, h4, h5 {
+    color: var(--heading-color);
+}
+
+h1 {
+    color: hsl(from var(--heading-color) h s 31);
+}
+
+h3 {
+    font-size: 1.4em;
+    color: hsl(from var(--heading-color) h s 25);
+}
+
+h4 {
+    font-size: 1.15em;
+}
+
+.sub {
+    color: grey; 
+    font-style: italic; 
+    margin: -0.5em 0; 
+    font-size: 0.8em;
+}

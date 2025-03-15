@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jason Cheng</title>
+    <link rel="shortcut icon" href="../img/stariconv2.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\$$', '\$$']]
+          }
+        };
+      </script>
+    <script type="text/javascript" id="MathJax" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>    
+    <link rel="stylesheet" href="../portfolio/ds1/ds1.css" />
+    <link rel="stylesheet" href="blog.css" />
+</head>
+<body class="light-mode">
+    <main>
+        <h1 style="margin-bottom: 0.25em;">Transformers</h1>
+        <h4 class="subheading">Word count: <span id="wordcount" style="color: crimson"> &lt; Retrieving word count... &gt; </span></h4>
+        <hr>
+
+        <h3>$\mathbf{\emptyset}$. Introduction</h3>
+        <p>When I was getting into the LLM space, I was a dumb high schooler who had never seen a matrix before, 
+            much less a neural network. That was over two years ago. This is dedicated to all the other dumb high
+            schoolers out there who want to learn, but the arxiv papers are too hard to comprehend. I will go through
+            the landmark Transformers paper, as well as the background and implications of the research.
+        </p>
+        <h3>I. Background</h3>
+        <p>Transformers are great.</p>
+        <p>They're the reason LLMs have gotten to the capability they have.</p>
+        <p>But before the Transformer, there was the RNN.</p>
+        <h4>I.I. The RNN</h4>
+        <p>RNNs are neat. Basically, they take in an input, split it into positions, and process it, one position at a time. 
+            They work by mantaining a sequence of 'hidden states' $h_t$, as a function of the last hidden state $h_{t-1}$, and
+            the current input $t$. In this way, it can effectively predict the next input. This is nice, but there's one big problem.
+        </p>
+        <p>
+            Imagine a busy grocery store. Let's call it the Tran-store-mer. This store, however, has only one checkout lane. Thus, the poor beleagured cashier 
+            needs to finish with the first customer before even starting on the second one, causing a huge line to build up! Of course, opening a 
+            second lane is the natural solution to the problem, but let's say that there's no room and it's impossible to work on multiple customers at once.
+            Sure, you can give the cashier a superpowered scanner or a powerful conveyor belt, getting to the point where the cashier can scan at 
+            tremendous efficency, but it doesn't help the fact that you need to completely get through one customer before you can even start on the next. 
+        </p>
+        <p>
+          This is the inherent problem with RNNs.
+        </p>
+        <p>
+          No matter what kind of efficiency or methodological improvement you may make like LSTMs or GRUs [1][2], this model is 
+          limited to a strict temporal order; predicting the next input based on a previous input, always one input at a time. If you're doing training with 
+          long sequences, you will need to do each step one after the other, which is slow and sucks. But, the biggest problem is that keeping this whole sequence, 
+          including intermediate states, in memory at the same time, takes a lot of compute. As such, you can't do as many examples at the same time, slowing things 
+          down further.
+        </p>
+        <p> 
+          Back to the Tran-store-mer, let's say we knock down the side walls and install 200 extra checkout lanes. However, it turns out that for some reason, each 
+          successive customer will only check out if they receive the customer in front of them's receipt. As a keepsake. Or something. Also, since we didn't knock 
+          down the back walls, there is limited space, meaning that only a few of these giant chains of customers will be able to fit in the store. So, everything will still 
+          continue through a single-digit number of lanes only, solving nothing. 
+        </p>
+        <p>
+          It's definitely not a perfect analogy, but this is the situation with modern graphics cards and RNNs. We have a bunch of GPU cores, but we can't leverage them well, 
+          since each huge sequence must be processed sequentially. Since we have limited memory (space in the shop), we can only do a limited number of these sequences at once.
+        </p>
+        <p>
+           However, one optimization that researchers developed for the RNN is going to be especially important: Attention.
+        </p>
+        <h4>
+          I.II. Introduction to Attention
+        </h4>
+        <p>
+          Researchers usually pair RNNs with a neat little trick called Attention to get the most out of the model. Let's say we have a huge sequence. Instead of taking equal measure 
+          of each part of that sequence, why don't we just find which parts are actually important, and focus on those instead? Without getting into math, that is essentially as simple as it gets.
+        </p>
+        <p class="sub">Don't think you've escaped the math just yet... this part is called "Introduction" to Attention, after all... >:)</p>
+        <p>
+          But, what if we just... used Attention, without the RNN? If something like that would work, then I guess that
+        </p>
+        <h3>II. Attention is All You Need</h3>
+        <p class="sub">(title drop!)</p>
+        <h4>II.I. Architecture</h4>
+        <p>
+          This is a diagram of the entire model architecture. Keep it in mind. With the power of JS, you can press 
+        </p>
+        <div class="img-cont right_img">
+          <img src="assets/transformers-model.png" style="">
+        </div>
+        <p>
+          asdasdasdadsadasdafjaohio oio jsaiod josaj dosahd osadh saiodh osadh oih diosahdi osahiod 
+        </p>
+    </main>
+</body>
+<script src="wordcount.js"></script>
+</html>
