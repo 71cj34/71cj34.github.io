@@ -77,6 +77,20 @@ main {
   width: 100%;
 }
 
+a[id^='commit-message-'] {
+  display: inline-block;
+  font-size: 1.02em;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+}
+
+a {
+  color:inherit; 
+  text-decoration: underline; 
+  cursor: pointer; 
+  font-weight: bold
+}
+
 main div {
   width: auto;
   text-align: center;
@@ -102,9 +116,9 @@ main div {
     color: white;
     background-color: black;
 }
-.highlight-inline a {
+/* .highlight-inline a {
     color: white;
-}
+} */
 .hidden {
   text-align: center; 
   font-size: 10px; 
@@ -180,20 +194,6 @@ body.dark-mode .icon {
   font-weight: bold;
   border: 1px solid #ddd;
   padding: 10px;
-}
-
-a[id^='commit-message-'] {
-  display: inline-block;
-  font-size: 1.02em;
-  padding-top: 0.4em;
-  padding-bottom: 0.4em;
-}
-
-a {
-  color:inherit; 
-  text-decoration: underline; 
-  cursor: pointer; 
-  font-weight: bold
 }
 
 .bottom-div {
