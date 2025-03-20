@@ -1,0 +1,15 @@
+#peek_item {
+    opacity: 0;
+    transition: opacity 1s linear;
+}
+
+.peek_persistent {
+    position: fixed;
+    max-height: 60vh;
+    width: auto;
+    /* transition: opacity 1s linear; */
+}
+
+.peek_revealed {
+    opacity: 1 !important;
+}
