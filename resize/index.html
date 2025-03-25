@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Upscaler</title>
     <link rel="stylesheet" href="../portfolio/ds1/ds1.css" />
+    <link rel="stylesheet" href="resize.css" />
     <style>
         canvas {
             border: 1px solid black;
@@ -13,11 +14,19 @@
 </head>
 <body>
     <h1>Image Upscaler using Lanczos</h1>
-    <input type="file" id="imageInput" accept="image/*" />
+    <input type="file" id="imageinput" accept="image/*" />
     <br><br>
+    <div id="progressbar" style="display: none">
+    </div> <!--Hide progress bar when resizing not in progress -->
     <canvas id="canvas"></canvas>
-    <br><br>
-    <button onclick="upscaleImage()">Upscale Image</button>
+    <br><br><br>
+    <button class="button" onclick="upscaleImage()">
+        <!-- <span class="shadow"></span> -->
+        <span class="edge"></span>
+        <div class="front">
+          <span>Upscale image</span>
+        </div>
+      </button>
 
     <script src="resize.js"></script>
 </body>
