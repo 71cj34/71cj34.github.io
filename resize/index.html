@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upscaler</title>
+    <link rel="stylesheet" href="../portfolio/ds1/ds1.css" />
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Upscaler using Lanczos</h1>
+    <input type="file" id="imageInput" accept="image/*" />
+    <br><br>
+    <canvas id="canvas"></canvas>
+    <br><br>
+    <button onclick="upscaleImage()">Upscale Image</button>
+
+    <script src="resize.js"></script>
+</body>
+</html>
