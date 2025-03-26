@@ -1,0 +1,14 @@
+@font-face {
+    font-family: "Redaction-10";
+    src: url("Redaction/Redaction10-Regular.otf");
+  }
+
+  @font-face {
+    font-family: "Redaction-20";
+    src: url("Redaction/Redaction20-Regular.otf");
+  }
+
+  @font-face {
+    font-family: "GeistMono";
+    src: url("GeistMono.ttf");
+  }
