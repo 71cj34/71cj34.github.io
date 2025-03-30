@@ -19,23 +19,100 @@ document.addEventListener('DOMContentLoaded', (event) => {
         '71cj34/MergekitHelper',
         '71cj34/71cj34.github.io'
     ];
+    const alt_repos = [
+        '71cj34/rsz',
+        'Prof-Starsky/solarsense'
+    ];
 
     const projectsContent = document.getElementById('projectsContent');
-    const replaceButton = document.getElementById('replaceButton');
     let isContentReplaced = false;
     const originalContent = projectsContent.innerHTML;
 
     const newContent = `
-        <p style="font-weight: bold">Exllama</p>
-        <p>Some sort of quantization tool for Exllama. Had a quick gander at the docs. <br><br> 2025 update: ExLlamav2 working on my device, have made prototype for personal use.</p>
+        <p>
+        <a href="https://github.com/71cj34/rsz/">rsz</a>
+        </p>
+        <p>
+        Fast yet simple Powershell utility to bulk resize images. 
         <br>
+        Made for personal use but expanded for general usability.
+        <br>
+        <a href="https://github.com/71cj34/rsz">Download here.</a>
+        </p>
+        <div style="font-size: 90%">
+        <p class="commit-caption">Last commit: </p>
+        <a id="commit-message-alt-1" href="/">Loading last commit...</a>
+        <div id="commit-date-alt-1">Loading last commit date...</div>
+        </div>
+        <br>
+
         <img src="/linev3.png" style="display: block; margin-left: auto; margin-right: auto;">
+
+        <p>
+        <a href="https://github.com/Prof-Starsky/solarsense/">SolarSense</a>
+        </p>
+        <p>
+        Made for the DeltaHacks XI hackathon.
         <br>
-        <p style="font-weight: bold">MTransformer</p>
-        <p>Windows app to convert file formats. Will be made as a 'capstone' to my C++ self-education.</p>
-        <br><br><br><br><br><br>
-        <p style="font-style: italic; color: grey; font-size: 80%"> Maybe someday.</p>
+        A TypeScript app using Vite and the Cohere, OpenMeteo, and Google Maps API.
+        <br>
+        Upon inputting any location, it tells you how much solar panels cost in that area.
+        <br>
+        <a href="https://solar-sense.co">Try it here.</a>
+        </p>
+        <div style="font-size: 90%">
+        <p class="commit-caption">Last commit: </p>
+        <a id="commit-message-alt-2" href="/">Loading last commit...</a>
+        <div id="commit-date-alt-2">Loading last commit date...</div>   
+        </div
+        <br>
     `;
+
+    
+    // Replace content when replaceButton is clicked.
+    replaceButton.addEventListener('click', () => {
+        if (!isContentReplaced) {
+            projectsContent.innerHTML = newContent;
+            replaceButton.textContent = 'Or, go back to my main projects.';
+        } else {
+            projectsContent.innerHTML = originalContent;
+            replaceButton.textContent = 'See my less glamorous projects.';
+        }
+        isContentReplaced = !isContentReplaced;
+    });
+
+    replaceButton.addEventListener('click', (event) => {
+        if(isContentReplaced === true) {
+            console.log("detected replacebutton click")
+            alt_repos.forEach((repo, index) => {
+                const commitMessageElement = document.getElementById(`commit-message-alt-${index + 1}`);
+                const commitDateElement = document.getElementById(`commit-date-alt-${index + 1}`);
+                
+                if (commitMessageElement && commitDateElement) {
+                    fetch(`https://api.github.com/repos/${repo}/commits`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const lastCommitMessage = data[0]?.commit?.message || "No commit message found";
+                            const lastCommitLink = data[0]?.html_url || "https://http.cat/images/404.jpg";
+                            const lastCommitDate = data[0]?.commit?.author?.date || data[0]?.commit?.committer?.date || "No commit date found";
+                            let mdCommitMessage = parseMarkdown(lastCommitMessage);
+                            console.log(`Data received for message #${index + 1}: ${mdCommitMessage}`)
+                            commitMessageElement.innerHTML = mdCommitMessage;
+                            commitMessageElement.setAttribute('href', lastCommitLink)
+                            commitDateElement.innerText = new Date(lastCommitDate).toLocaleDateString(); // Formats the date to a more readable form
+                        })
+                        .catch(error => {
+                            if (commitMessageElement) {
+                                commitMessageElement.innerText = "Error: Could not fetch commit info.";
+                            }
+                            if (commitDateElement) {
+                                commitDateElement.innerText = "Error: Could not fetch commit info.";
+                            }
+                        });
+                } else { console.warn(`Element with ID "commit-message-alt-${index + 1}" or "commit-date-alt-${index + 1}" not found.`); };
+            });
+        }
+    });
 
     repos.forEach((repo, index) => {
         const commitMessageElement = document.getElementById(`commit-message-${index + 1}`);
@@ -84,17 +161,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 codeblocks[i].style.border = "1px solid rgba(0, 0, 0, 0.15)";
             }
         };
-    });
-
-    // Replace content when replaceButton is clicked.
-    replaceButton.addEventListener('click', () => {
-        if (!isContentReplaced) {
-            projectsContent.innerHTML = newContent;
-            replaceButton.textContent = 'Or, go back to my projects.';
-        } else {
-            projectsContent.innerHTML = originalContent;
-            replaceButton.textContent = 'Or, see my ideas (not-quite-projects).';
-        }
-        isContentReplaced = !isContentReplaced;
     });
 });
