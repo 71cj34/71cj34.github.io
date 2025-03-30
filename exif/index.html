@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exif Viewer</title>
+    <link rel="stylesheet" href="../portfolio/ds1/ds1.css" />
+    <link rel="stylesheet" href="exif.css" />
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Upscaler using Lanczos</h1>
+    <div class="app">
+        <input type="file" id="upload" accept="image/*" />
+        <br><br>
+        <br><br><br>
+        <div id="metadata"></div>
+    
+    
+    </div>
+    <div class="talk">
+        <p>
+        Quick and dirty image upscaler using the Lanczos algorithm. Doesn't use WebGL or anything fancy, just pure <span class="code-inline">canvas</span>. Note: this will slow down your 
+        web browser, especially if you try and resize anything over 2K, since canvas does not have hardware acceleration by default. I do not plan on fixing it. I couldn't find anything 
+        like this online for free, so I made it myself.
+    </p>
+        
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.js"></script>        
+    <script src="exif.js"></script>
+</body>
+</html>
