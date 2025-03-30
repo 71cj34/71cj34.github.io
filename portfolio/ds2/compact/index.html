@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="../../../img/stariconv2.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I. DS1</title>
+    <link rel="stylesheet" href="../ds1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+          <h1 style="font-size: 300%; margin-bottom: 1vh;">Design Project #1</h1>
+          <h2 class="subheading" style="font-size: 175%;">"The Airport"</h2>
+          <br><p style="font-size: 200%; text-align: center;">✈</p><br>
+          <p style="margin-top: 0;">(Press any key to continue...)</p>
+      </div>
+    </div>
+    <!-- PHASE 2 -->
+
+    <!-- <div style="position: absolute; top: 1.5em; left: 50%; transform: translateX(-50%); text-align: center; color: #a24a4b; font-weight:bold;">
+                !! PLEASE VISIT <a href="https://jasoncheng.me/portfolio">THE WEBSITE VERISON</a> FOR THE FULL EXPERIENCE !!
+    </div> -->
+    <h1 style="margin-bottom: 0.25em;">II. NARRATIVE</h1>
+    <h4 style="font-style: italic; color: #979797; margin-top: 0">What we accomplished, what I contributed</h4>
+    <p>During this group project, we designed a system to transfer luggage from a platform to another through Autodesk Inventor, while taking in software input on where to place the luggage with Python. 
+        We then built and tested a prototype using 3D printing and mechanical actuators.</p>
+
+    <h2 class="toggleButton hover-fill" style="margin-bottom: 0.5em;">
+        <i class="fa-solid fa-angles-up arrow"></i>
+        <span>Project</span>
+    </h2>
+    <div class="dropdown-content">
+        <span class="bold">Problem:</span><br>
+        <span style="font-style: italic; color: #979797; margin-top: 0; font-size: 85%">Oct. 3, 2024</span>
+        <ul>
+            <li>
+                <span class="bold">Software</span>
+                <ul>
+                    <li>We were tasked with creating modular programs using <span class="bold">Python</span> to perform data validation and analysis.</li>
+                </ul>
+            </li>
+            <li>
+                <span class="bold">Hardware</span>
+                <ul>
+                    <li>We were tasked with designing a mechanism to transport luggage from Point A to Point B (Fig. 2).</li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="img-cont right_img" style="width: 38%">
+            <img src="../../../img/fig2.png" alt="image of a black structure with two rectangular cuboids. One is taller than the other and labeled Point A, the other Point B. A line in between them is labeled Restriction Line.">
+            <p class="caption"><span class="bold">Fig. 2:</span> Diagram of the challenge. Note restriction line.</p>
+        </div>
+
+        <span class="bold">Problem Analysis:</span><br>
+        <span style="font-style: italic; color: #979797; margin-top: 0; font-size: 85%">Oct. 3, 2024</span>
+        <ul>
+            <li>
+                <span class="bold">Objectives</span>
+                <ul>
+                    <li>Effective at delivering luggage</li>
+                    <li>Consistent under repeated use</li>
+                    <li>Deliver luggage safely</li>
+                </ul>
+            </li>
+            <li>
+                <span class="bold">Functions</span>
+                <ul>
+                    <li>Scan barcode to determine delivery location</li>
+                    <li>Move luggage to right location</li>
+                    <li>Process fleet and passenger data</li>
+                </ul>
+            </li>
+            <li>
+                <span class="bold">Constraints</span>
+                <ul>
+                    <li>Material effective</li>
+                    <li>Timely delivery rate</li>
+                    <li>No part may pass the <span class="bold">restriction line</span> (Fig. 2)</li>
+                    <li>Only moving parts are the two actuators provided: <span class="bold">rotary</span> and <span class="bold">linear</span></li>
+                </ul>
+                <br>
+            </li>
+            <li>
+                <span class="bold">Final Problem Statement</span>
+                <ul>
+                    <li>The problem is that a meaningful proportion of luggage at airports is lost in transit. We aim
+                        to create a system that delivers bags to their correct locations based on airport regulations.
+                        This solution aims to reduce the amount of bags that are lost at airports by using
+                        automation.</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <div class="img-cont left_img" style="width: 50%">
+            <img src="../../../img/fig3-1.png" id="img-swap-0" alt="Image of my design. Large hollow rectangular prism with a ramp inside, below which an adapter houses the tip of the linear actuator, to which is attached a large support with a rotary actuator attachment.">
+            <p class="caption"><span class="bold">Fig. 3:</span> My 'bucket' design. Created through three days of iterative development. The 'bucket', attached to linear actuator, rotates using the rotary actuator. </p>
+        </div>
+
+        <span class="bold">Brainstorming:</span><br>
+        <span style="font-style: italic; color: #979797; margin-top: 0; font-size: 85%">Oct. 4, 2024 - Oct. 10, 2024</span>
+        <p>
+            Two initial solutions:
+        </p>
+        <ul style="margin-left: 0.75em">
+            <li>The <span class="bold">'elbow'</span></li>
+            <li>The <span class="bold">'bucket'</span></li>
+        </ul>
+
+        <p>
+            The 'bucket' was my idea (Fig. 3, click to switch images); functional design features include:
+        </p>
+
+        <ul style="margin-left: 0.75em">
+            <li>A smooth ramped bucket for easy delivery</li>
+            <li>Weighted base to lower stress on screws</li>
+            <li>Hollowed components to lower rotary torque and increase control</li>
+            <li>Extended guards for smoother angular movement</li>
+        </ul>
+
+        <span class="bold">The Solution:</span><br>
+        <span style="font-style: italic; color: #979797; margin-top: 0; font-size: 85%">Oct. 11, 2024 - Nov. 6, 2024</span>
+        <p>
+            Ended up with 'elbow' instead, as my design was too complicated to 3D print. More refinements were made, and each member modeled a part. I modeled a support for the rotary actuator. During this 
+            time, 3D printing opportunities began: I attended most of these as representatives for our group, printing parts.
+        </p>
+        <span class="bold">Code:</span><br>
+        <span style="font-style: italic; color: #979797; margin-top: 0; font-size: 85%">Oct. 31, 2024 - Nov. 25, 2024</span>
+        <p>
+            I was assigned the role of <span class="bold">Software Lead</span>. One function was to be completed by each member; three were to be completed by the team. I completed two of the three team
+            functions, and finished my function <span class="code-inline">time_delay.py</span>. I took iterative feedback from the team in this process.
+        </p>
+        <div class="img-cont right_img" style="width: 40%">
+            <img src="../../../img/fig4.jpg" alt="Image of an Apple IMessage app. I send an image of my monitor showing successful deployment of graphical_teamid; my teammates react with joy.">
+            <p class="caption"><span class="bold">Fig. 4: </span> The moment I notified my team that I got the <span class="code-inline">graphical_teamID.py</span> module running. </p>
+        </div>
+        <p>
+            You can find the full attributed code on GitHub <a href="https://github.com/71cj34/1P13-Project1" target="_blank">here</a>. After the code was finished, I took all modules and executed these steps:
+        </p>
+        <ul>
+            <li>Collected all Python modules and performed unit tests.</li>
+            <li>Standardized all I/O methods.</li>
+            <li>Made code readable + added comments.</li>
+            <li>Linked modules through an external <span class="code-inline">_config.py</span> file.</li>
+            <li>Retrieved and completed the final team function, <span class="code-inline">graphical_teamID.py</span>.</li>
+            <li>Linked all modules to one another as inputs.</li>
+            <li>Tested and optimized <span class="code-inline">graphical_teamID.py</span>.</li>
+            <li>Performed final integration tests for commiting to Github.</li>
+        </ul>
+
+        <p>
+            I might even say that I practically rewrote a significant amount of code to fix bugs, solve edge cases and inefficient chunks, and refactored the whole existing base of 
+            <span class="code-inline">graphical_teamID.py</span>, since it was outdated.
+        </p>
+        <span class="bold">Evaluation:</span><br>
+        <span style="font-style: italic; color: #979797; margin-top: 0; font-size: 85%">Dec. 2, 2024</span><br>
+        <span style="font-style: italic; color: #979797; margin-top: 0; font-size: 85%">Total span: Oct. 3, 2024 - Dec. 2, 2024 (60 days)</span>
+        <p>
+            We finished up our printing and I briefed the team on my changes to their code and final questions on how the code worked. I also assisted on small physical testing of the mechanism.
+            We unfortunately suffered <span class="bold">3D printing issues</span> because of slicing errors and improper supports, meaning we had no testing time for the full mechanism.
+        </p>
+        <p>
+            Luckily, on the day of the evaluation, when we arrived half an hour earlier for our allotted setup time, the solution worked wonderfully. See Fig. 5 for an image of the full assembled
+            solution on the deployment pad. Tap on the image to toggle extended and retracted forms.
+        </p>
+        <p style="text-indent: 0;"><span class="block">■</span></p>
+
+        <div class="img-cont center_img" style="width: 45%">
+            <img src="../../../img/fig5-1.jpeg" alt="Image of the completed setup." id="img-swap-1">
+            <p class="caption" id="img-swap-1-c"><span class="bold">Fig. 5: </span> The finished product, retracted mode. Note additions from initial drafting, like foam rails to prevent luggage damage. I modeled the x-shape blue support.</p>
+        </div>
+    </div>
+
+
+    <h2 class="toggleButton hover-fill" style="margin-bottom: 0.5em;">
+        <i class="fa-solid fa-angles-up arrow"></i>
+        <span>Reflection</span>
+    </h2>
+    <div class="dropdown-content">
+        <span class="bolder" style="text-indent: 0">ON CAD</span>
+        <p>
+            I feel like I could have done some things better. I think that I was <span class="bold">not proactive enough</span> during the CAD section of the project. Another group member took it upon themselves to link together
+            all of the individual components into an assembly and fix the conflicts and errors that arose, like I did with the code. The group member did not ask the rest of the team for help, but I feel like
+            if I had <span class="bold">made my willingness and ability to work with CAD clearer</span> to the group, the member would have let me help them with the assembling. I potentially could have found and fixed some of the 
+            issues that plagued our 3D printing process. That would have led to us having the <span class="bold">testing time</span> that we missed, which could have given us the ability to <span class="bold">do better</span>.
+        </p>
+        <p>
+            However, I feel like I learned a lot about the entire pipeline of 3D printing. I familiarized myself with <span class="bold">PrusaSlicer</span>, the integration of assembly parts in 
+            <span class="bold">AutoDesk Inventor</span>, how to use motion constraints and animate parts, and the creation of <span class="bold">engineering drawings</span> and <span class="bold">exploded views</span>.
+        </p>
+        <span class="bolder" style="text-indent: 0">ON PYTHON</span>
+        <p>
+            Additionally, I feel as if I did not sufficiently ask my teammates for feedback. While I posted occasional progress checks and <span class="code-inline">git commit</span>ed my code regularly,
+            I think that I should have been in active communication with my team members while doing the major refactoring and linking. I wonder if the code could have been even more compact, even more efficient,
+            even more readable had I been coding live with my team?
+        </p>
+        <p>
+            All of my hobby projects have some form of rigor or linkage between files, but not to this level. I learned some new things about Python: while I had casual familiarity with <span class="bold">using Python files as modules</span>, 
+            <span class="bold">reading settings and configuration</span> from a <span class="code-inline">.py</span> file instead of a <span class="code-inline">.yaml</span> or <span class="code-inline">.json</span> file, and working
+            on code with others through <span class="bold">git</span>, this project was my first time putting these principles into action on a real-world codebase. I feel like I gained a greater appreciation for <span class="bold">source control</span>, 
+            <span class="bold">unit tests</span>, and <span class="bold">integration tests</span>. This appreciation was especially evident since I was running and working with code written by others, without guarantees of standardization or proper functionality.
+        </p>
+        <span class="bolder" style="text-indent: 0">ON PROJECT MANAGEMENT</span>
+        <p>
+            I have worked on team projects throughout high school, and this project is my first in higher education. I learned how to raise concerns and communicate effectively in official channels, use sharing 
+            functions of common workplace tools like <span class="bold">Microsoft 365</span> (<span class="bold">Sharepoint</span>, <span class="bold">Teams</span>, etc), and raise team morale through my interpersonal
+            skills (Fig. 6).
+        </p>
+        <p style="text-indent: 0;"><span class="block">■</span></p>
+
+        <div class="img-cont center_img" style="width: 70%">
+            <img src="../../../img/fig6.png" alt="Image of Microsoft Teams chat. Text reads: It is SUNDAY NIGHT and I have received THREE python files! Excellent work everyone! 
+            I have been in touch with the last person and I know they have a special situation going on. I am INCREDIBLY proud of all of you! Give yourselves a pat on the back 
+            for getting your individual functions in on time.">
+            <p class="caption"><span class="bold">Fig. 6:</span> One of my attempts to raise team morale in the midst of the project's toughest crunch time.</p>
+        </div>
+    </div>
+    <a  style="text-align: center; margin-top: 5vh; margin-bottom: 50vh"><span id="p3-toggle">Return to the Portfolio.</span></a>
+    <button id="collapse-dropdowns">Collapse All Dropdowns</button>
+    <button id="verbose" onclick="window.location.href='../'">Full Version</button>
+
+
+    <script src="../ds1.js"></script>
+</body>
+
+<script>
+
+</script>
+</html>
