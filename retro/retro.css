@@ -1,0 +1,17 @@
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100lvh
+}
+
+.window {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.button-container {
+    align-self: flex-end;
+    margin: 0.5rem;
+}
