@@ -300,3 +300,7 @@ strong:hover, .bolder:hover {
 i {
   vertical-align: 0.03em;
 }
+
+.MathJax {
+  user-select: all;
+}

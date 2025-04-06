@@ -67,51 +67,81 @@
             category. See Fig. 1.
          </p>
          <div class="img-cont center_img" style="width: 50%">
-            <img src="../../img/ds2_fig1.png" alt="Image of my design. Large hollow rectangular prism with a ramp inside, below which an adapter houses the tip of the linear actuator, to which is attached a large support with a rotary actuator attachment.">
+            <img src="../../img/ds2_fig1.png" alt="Final objective tree used as brainstorming.">
             <p class="caption"><strong>Fig. 1:</strong> Final objective tree used as brainstorming. </p>
          </div>
          <p>
-            Finally, taking into consideration all objectives and constraints developed in the brainstorming, a problem statement was created to shape the future of the project.
+            Finally, taking into consideration all objectives and constraints developed in the brainstorming, three were chosen: "environmentally friendly", "cost-effective", and "low/easy maintenance".
+            A problem statement was created to inform the future of the project.
          </p>
          <strong>Problem Statement:</strong>
          <p>
-            Our engineering scenario involves designing a filtration system to address the issue of antibiotic contamination in hospital wastewater, specifically targeting ciprofloxacin, 
-            a persistent and harmful antibiotic found in the wastewater of a rural hospital in Byron Bay, Australia. The primary function of the filter is to effectively remove ciprofloxacin 
-            molecules from the wastewater before it is released into the environment. We aim to design a cost-effective, environmentally sustainable, and low-maintenance system that can handle 
-            large volumes of wastewater while considering the rural hospital's limited budget and staffing constraints and the containment size of 5-10 μm. High-level objectives include ensuring 
-            the filter is durable, easy to maintain, and capable of preventing the spread of antibiotic-resistant bacteria, ultimately protecting both the environment and the health of the local community.
+            Our engineering scenario involves designing a filtration system to address the issue of antibiotic contamination in hospital wastewater, specifically targeting ciprofloxacin, a persistent 
+            and harmful antibiotic found in the wastewater of a rural hospital in Byron Bay, Australia. The primary function of the filter is to effectively remove ciprofloxacin  molecules from the 
+            wastewater before it is released into the environment. We aim to design a cost-effective, environmentally sustainable, and low-maintenance system that can handle large volumes of wastewater 
+            while considering the rural hospital's limited budget and staffing constraints and the containment size of $5\text-10 \; \mu \text{m}$. High-level objectives include ensuring  the filter is durable, 
+            easy to maintain, and capable of preventing the spread of antibiotic-resistant bacteria, ultimately protecting both the environment and the health of the local community.
          </p>
-         <div class="img-cont left_img" style="width: 50%">
-            <img src="../../img/fig3-1.png" id="img-swap-0" alt="Image of my design. Large hollow rectangular prism with a ramp inside, below which an adapter houses the tip of the linear actuator, to which is attached a large support with a rotary actuator attachment.">
-            <p class="caption"><strong>Fig. 3:</strong> My 'bucket' design. Created through three days of iterative development. The 'bucket', attached to linear actuator, rotates using the rotary actuator. </p>
-         </div>
-         <strong>The Solution:</strong>
+         <strong>Research:</strong>
          <p>
-            By group consensus, we moved ahead with the 'elbow' design instead, as my 'bucket' design was far too complicated and required too much 3D printing time under our constraints. 
-            After making more quick adjustments and improvements to the design, each member was assigned a part to model. I modeled and submitted my part, a support. Once the model was finished,
-            printing time began. During this time, we began work on the software portion.
+            Research was done to find means of accomplishing the objectives. These means aimed not as much to be realistic but varied, with the goal of capturing the solution space. First, I wrote an executive research 
+            summary on the current state of filtration technology fitting to our scenario, and compared with my teammates' research to come up with a morph chart (Fig. 2).
          </p>
-         <p>
-            By this point, we had talked on who should be lead on what, and I volunteered to lead the software development. Each member was to complete their own function, and three functions had to
-            be completed by the whole team. On the first day, I completed two of the simple team functions while taking feedback from group members, and finished my own function, <span class="code-inline">time_delay.py</span>.
-         </p>
-         <p>You may find the full attributed code on GitHub <a href="https://github.com/71cj34/1P13-Project1" target="_blank">here</a>. I collected all the Python modules, performed unit tests and 
-            standardized all I/O methods, then linked them together as modules through an external <span class="code-inline">_config.py</span> file. I retrieved the progress made on the final team
-            function, <span class="code-inline">graphical_teamID.py</span>, finished it, linked all of the other models as inputs, tested it, and validated it.
-         </p>
-         <div class="img-cont right_img" style="width: 50%">
-            <img src="../../img/fig4.jpg" alt="Image of an Apple IMessage app. I send an image of my monitor showing successful deployment of graphical_teamid; my teammates react with joy.">
-            <p class="caption"><strong>Fig. 4: </strong> The moment I notified my team that I got the <span class="code-inline">graphical_teamID.py</span> module running. </p>
+         <div class="img-cont left_img" style="width: 30%">
+            <img src="../../img/ds2_fig2.png" id="img-swap-0" alt="Image of a morph chart.">
+            <p class="caption"><strong>Fig. 2:</strong> Morph chart of means to accomplish each objective.</p>
          </div>
          <p>
-            I would go as far to say that I practically rewrote a significant amount of code to fix bugs, solve edge cases and inefficient chunks, and refactored the whole existing base of 
-            <span class="code-inline">graphical_teamID.py</span>, since it became outdated after I standardized the way the modules interacted with one another.
+            Afterwards, research was done on numerous real-world concerns regarding the previous researching: potential materials, contaminant/waste standards, electricity standards, optimal placement, and other relevant regulation.
          </p>
          <p>
-            As the date of our project evaluation loomed, I briefed my team on what exactly I had done to the code and how all the modules were connected. I also provided consulting on whether
-            our solution needed tweaks: we had come close to running out of printing time, having had to reprint numerous times because of software bugs in the slicing software. 
-            Thus, we had no time to test if our solution would actually work or not coming into the evaluation.
+            Through weighing the cost of benefits of each means carefully, ozonation was judged to be the most sustainable and efficient method of filtration, beating out other methods such as reverse osmosis and UV light.
+            I researched potential material acquisition, and it was found that only a whitelist of the Australian Government's allowed materials were permitted for contact with water.
          </p>
+         <strong>
+            MPIs:
+         </strong>
+         <p>
+            MPIs were derived for the objectives. I was assigned the MPI of minimizing carbon footprint $\text{CO}_2$, while optimizing for yield strength $\sigma$. 
+            Using the provided functional constraint for $\sigma_y$, the MPI was derived: 
+            $$
+            \begin{align*}
+            m &= ALP & \sigma_y &> \frac{6FL}{bh^2} \\
+            m &= bhlP & \sigma_y &> \frac{6FL}{b(\frac{m}{bLP})^2} \\
+            h &= \frac{m}{bLP} & \sigma_y &> \frac{6FL}{\frac{bm^2}{b^2L^2P^2}} \\
+            \text{subst}&\text{ituting } h \nearrow & \sigma_y &> \frac{6FLbL^2P^2}{m^2} \\
+            && \sigma_y &> \frac{6FL^3bP^2}{m^2} \\
+            && m^2 &< \frac{6FL^3bP^2}{\sigma_y} \\
+            && m &< \sqrt{6FL^2}\frac{P}{\sqrt{\sigma_y}} \\
+            && MPI &= \frac{\sigma_y^{1/2}}{P} = \frac{\sigma_y^{1/2}}{\rho \cdot \text{CO}_2}
+
+            \end{align*}
+            $$
+         </p>
+         <p>
+            This MPI along with the two constraints <strong>Freshwater Durability (excellent)</strong>, <strong>Built Environments (rural)</strong>, were used in the materials database Granta EduPack to
+            find the optimal materials for the project.
+         </p>
+         <div class="img-cont right_img" style="width: 35%">
+            <img src="../../img/ds2_fig3.png" alt="The resultant materials database chart.">
+            <p class="caption"><strong>Fig. 3: </strong> The resultant chart from my MPI and constraints. </p>
+         </div>
+         <p>
+            Upon comparison of my Top 3 matterials with my teammates' materials, a final Top 3 of <strong>coir fiber</strong>, <strong>polypropylene fiber</strong>, and <strong>limestone</strong> was found.
+            I researched the suitability of coir fiber, particularly its availability in the area and envrionmental safety. In the end, since polypropylene fiber has strong anti-bacterial properties on its own,
+            it was selected as the final material.
+         </p>
+         <p>
+            The number of pores for our material was calculated, then the porosity of the overall fiber, then the effective Young's Modulus and yield strength for the material. Upon examination of polypropylene's
+            yield strength (Fig. 4), it satisfied the required yield strength of $154 \; \text{N} / \text{m}^2$.
+         </p>
+         <div class="img-cont left_img" style="width: 35%">
+            <img src="../../img/ds2_fig4.png" alt="Polypropene's passing performance.">
+            <p class="caption"><strong>Fig. 4: </strong> The chart, showing polypropylene above the line. </p>
+         </div>
+         <strong>
+            Eco Audits
+         </strong>
          <p>
             Luckily, on the day of the evaluation, when we arrived half an hour earlier for our allotted setup time, the solution worked wonderfully. See Fig. 5 for an image of the full assembled
             solution on the deployment pad. Tap on the image to toggle extended and retracted forms.
