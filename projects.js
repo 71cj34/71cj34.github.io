@@ -68,10 +68,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         <br>
     `;
 
-    function githubreplace(repolist) {
+    function githubreplace(repolist, numberprefix) {
         repolist.forEach((repo, index) => {
-            const commitMessageElement = document.getElementById(`commit-message-${index + 1}`);
-            const commitDateElement = document.getElementById(`commit-date-${index + 1}`);
+            const commitMessageElement = document.getElementById(`commit-message-${numberprefix}${index + 1}`);
+            const commitDateElement = document.getElementById(`commit-date-${numberprefix}${index + 1}`);
             if (commitMessageElement && commitDateElement) {
                 fetch(`https://api.github.com/repos/${repo}/commits`)
                     .then(response => response.json())
@@ -114,13 +114,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     replaceButton.addEventListener('click', (event) => {
         if(isContentReplaced === true) {
             console.log("detected replacebutton click")
-            githubreplace(alt_repos);
+            githubreplace(alt_repos, "alt-");
         } else {
-            githubreplace(repos);
+            githubreplace(repos, "");
     };
 });
 
-    githubreplace(repos);
+    githubreplace(repos, "");
     
     const icon = document.getElementById('modeselection');
     const body = document.querySelector('body');
