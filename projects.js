@@ -68,6 +68,36 @@ document.addEventListener('DOMContentLoaded', (event) => {
         <br>
     `;
 
+    function githubreplace(repolist) {
+        repolist.forEach((repo, index) => {
+            const commitMessageElement = document.getElementById(`commit-message-${index + 1}`);
+            const commitDateElement = document.getElementById(`commit-date-${index + 1}`);
+            if (commitMessageElement && commitDateElement) {
+                fetch(`https://api.github.com/repos/${repo}/commits`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const lastCommitMessage = data[0]?.commit?.message || "No commit message found";
+                        const lastCommitLink = data[0]?.html_url || "https://http.cat/images/404.jpg";
+                        const lastCommitDate = data[0]?.commit?.author?.date || data[0]?.commit?.committer?.date || "No commit date found";
+                        let mdCommitMessage = parseMarkdown(lastCommitMessage);
+                        console.log(`Data received for message #${index + 1}: ${mdCommitMessage}`)
+                        commitMessageElement.innerHTML = mdCommitMessage;
+                        commitMessageElement.setAttribute('href', lastCommitLink)
+                        commitDateElement.innerText = new Date(lastCommitDate).toLocaleDateString(); // Formats the date to a more readable form
+                    })
+                    .catch(error => {
+                        if (commitMessageElement) {
+                            commitMessageElement.innerText = "Error: Could not fetch commit info.";
+                        }
+                        if (commitDateElement) {
+                            commitDateElement.innerText = "Error: Could not fetch commit info.";
+                        }
+                    });
+            } else {
+                console.warn(`Element with ID "commit-message-${index + 1}" or "commit-date-${index + 1}" not found.`);
+            };
+        });
+    };
     
     // Replace content when replaceButton is clicked.
     replaceButton.addEventListener('click', () => {
@@ -84,64 +114,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     replaceButton.addEventListener('click', (event) => {
         if(isContentReplaced === true) {
             console.log("detected replacebutton click")
-            alt_repos.forEach((repo, index) => {
-                const commitMessageElement = document.getElementById(`commit-message-alt-${index + 1}`);
-                const commitDateElement = document.getElementById(`commit-date-alt-${index + 1}`);
-                
-                if (commitMessageElement && commitDateElement) {
-                    fetch(`https://api.github.com/repos/${repo}/commits`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const lastCommitMessage = data[0]?.commit?.message || "No commit message found";
-                            const lastCommitLink = data[0]?.html_url || "https://http.cat/images/404.jpg";
-                            const lastCommitDate = data[0]?.commit?.author?.date || data[0]?.commit?.committer?.date || "No commit date found";
-                            let mdCommitMessage = parseMarkdown(lastCommitMessage);
-                            console.log(`Data received for message #${index + 1}: ${mdCommitMessage}`)
-                            commitMessageElement.innerHTML = mdCommitMessage;
-                            commitMessageElement.setAttribute('href', lastCommitLink)
-                            commitDateElement.innerText = new Date(lastCommitDate).toLocaleDateString(); // Formats the date to a more readable form
-                        })
-                        .catch(error => {
-                            if (commitMessageElement) {
-                                commitMessageElement.innerText = "Error: Could not fetch commit info.";
-                            }
-                            if (commitDateElement) {
-                                commitDateElement.innerText = "Error: Could not fetch commit info.";
-                            }
-                        });
-                } else { console.warn(`Element with ID "commit-message-alt-${index + 1}" or "commit-date-alt-${index + 1}" not found.`); };
-            });
+            githubreplace(alt_repos);
         } else {
-            repos.forEach((repo, index) => {
-                const commitMessageElement = document.getElementById(`commit-message-${index + 1}`);
-                const commitDateElement = document.getElementById(`commit-date-${index + 1}`);
-                if (commitMessageElement && commitDateElement) {
-                    fetch(`https://api.github.com/repos/${repo}/commits`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const lastCommitMessage = data[0]?.commit?.message || "No commit message found";
-                            const lastCommitLink = data[0]?.html_url || "https://http.cat/images/404.jpg";
-                            const lastCommitDate = data[0]?.commit?.author?.date || data[0]?.commit?.committer?.date || "No commit date found";
-                            let mdCommitMessage = parseMarkdown(lastCommitMessage);
-                            console.log(`Data received for message #${index + 1}: ${mdCommitMessage}`)
-                            commitMessageElement.innerHTML = mdCommitMessage;
-                            commitMessageElement.setAttribute('href', lastCommitLink)
-                            commitDateElement.innerText = new Date(lastCommitDate).toLocaleDateString(); // Formats the date to a more readable form
-                        })
-                        .catch(error => {
-                            if (commitMessageElement) {
-                                commitMessageElement.innerText = "Error: Could not fetch commit info.";
-                            }
-                            if (commitDateElement) {
-                                commitDateElement.innerText = "Error: Could not fetch commit info.";
-                            }
-                        });
-                } else {
-                    console.warn(`Element with ID "commit-message-${index + 1}" or "commit-date-${index + 1}" not found.`);
-                }
-            });
-        }
-    });
+            githubreplace(repos);
+    };
+});
+
+    githubreplace(repos);
     
     const icon = document.getElementById('modeselection');
     const body = document.querySelector('body');
