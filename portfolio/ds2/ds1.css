@@ -217,7 +217,13 @@ img {
 .center_img {
   display: block;
   margin: 0 auto;
-  float: none;
+  float:none;
+}
+
+/* for use with center_img */
+.side_by_side {
+  float: left;
+  margin: 0 1em 0 0.75em;
 }
 
 .block {
@@ -303,4 +309,48 @@ i {
 
 .MathJax {
   user-select: all;
+}
+
+.markdown-list {
+  list-style-type: disc;
+  margin-left: 0;
+  padding-left: 1.5em;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+.markdown-list ul {
+  list-style-type: circle;
+  margin-left: 0;
+  padding-left: 1.5rem;
+}
+
+.markdown-list ul ul {
+  list-style-type: square;
+  margin-left: 0;
+  padding-left: 1.5em;
+}
+
+.markdown-list li {
+  position: relative;
+  margin-bottom: 1em;
+}
+
+.markdown-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #555;
+  font-size: 1.2em;
+  line-height: 0.75;
+}
+
+.markdown-list ul li::before {
+  content: "◦";
+  font-size: 1.1em;
+}
+
+.markdown-list ul ul li::before {
+  content: "▪";
+  font-size: 1.0em;
 }
