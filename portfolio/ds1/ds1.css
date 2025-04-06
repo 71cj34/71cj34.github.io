@@ -138,6 +138,7 @@ div.dropdown-content p:not(.caption) {
   position: relative;
   transition: color 0.5s ease;
   overflow: hidden;
+  user-select: none;
 }
 
 .hover-fill .hover-text {
