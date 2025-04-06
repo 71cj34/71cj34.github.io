@@ -225,7 +225,7 @@ img {
   font-size: 50%
 }
 
-.bold {
+strong {
   color: black;
   font-weight: bold;
   transition: color 0.5s
@@ -238,8 +238,13 @@ img {
   transition: color 0.5s
 }
 
-.bold:hover, .bolder:hover {
+strong .bolder {
+  transition: scale 0.5s;
+}
+
+strong:hover, .bolder:hover {
   color: #32548f;
+  transform: scale(1.1);
 }
 
 .code-inline {
