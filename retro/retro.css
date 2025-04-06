@@ -5,6 +5,13 @@
     height: 100lvh
 }
 
+.window-body img {
+    float: left;
+    transform: scale(1.1);
+    transform-origin: top left;
+    margin: 0.25rem 1em 1em 0.25rem;
+}
+
 .window {
     position: relative;
     display: flex;
