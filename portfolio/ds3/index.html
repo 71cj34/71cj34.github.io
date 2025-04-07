@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!--- 
+    
+    USE REGEX
+    <span class="bold">(.*?)<\/span>
+
+    to
+
+    <strong>$1</strong>
+
+    -->
+   <head>
+      <meta charset="UTF-8">
+      <link rel="shortcut icon" href="../../img/stariconv2.png" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>I. DS2</title>
+      <link rel="stylesheet" href="ds1.css">
+      <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\$$', '\$$']]
+          }
+        };
+      </script>
+      <script type="text/javascript" id="MathJax" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+      </script>    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   </head>
+   <body>
+      <div id="modal" class="modal">
+         <div class="modal-content">
+            <h1 style="font-size: 300%; margin-bottom: 1vh;">Design Project #2</h1>
+            <h2 class="subheading" style="font-size: 175%;">"Wastewater Treatment"</h2>
+            <br>
+            <p style="font-size: 200%; text-align: center;">🌢</p>
+            <br>
+            <p style="margin-top: 0;">(Press any key to continue...)</p>
+         </div>
+      </div>
+      <!-- PHASE 2 -->
+      <h1 style="margin-bottom: 0.25em;">II. NARRATIVE</h1>
+      <h4 style="font-style: italic; color: #979797; margin-top: 0">jasoncheng.me/portfolio/ds2</h4>
+      <p>
+         During this group project, we found the optimal material for a filter fiber for use in a waterwater treatment facility. 
+         This was done with analytical methods such as finding MPIs and developing design objectives, as well as technological methods such as material databases.
+      </p>
+      <h2 class="toggleButton hover-fill" style="margin-bottom: 0.5em;">
+         <i class="fa-solid fa-angles-up arrow"></i>
+         <span>The Project</span>
+      </h2>
+      <div class="dropdown-content">
+         <strong>Problem:</strong>
+         <p>
+            We were given a scenario and usecase for a filter fiber for use in a wastewater system. From this scenario, we were tasked with designing a filter fiber suitable for the situation through
+            <strong>technology and software</strong> like Granta EduPack.
+         </p>
+         <p>
+            Our scenario concerned a hospital in rural Byron Bay, Australia. Local residents were concerned that the hospital's effluent contained antibiotics such as <strong>ciprofloxacin</strong>,
+             which were not adequately filtered out. These antiobiotic strains could cause damage to the environment.
+         </p>
+         <strong>Technical Objectives:</strong>
+         <p>
+            A set of objectives, constraints, and other goals were compiled, using organizational structures to organize our ideas. I led talks on the creation of an objective tree, suggesting key items 
+            such as <strong>modularity</strong>, <strong>weather friendliness</strong> (taking into account Australia's climate), and other restructuring, such as merging "low maintenance" and "repairable" into the same
+            category. See Fig. 1.
+         </p>
+         <div class="img-cont center_img" style="width: 50%">
+            <img src="../../img/ds2_fig1.png" alt="Final objective tree used as brainstorming.">
+            <p class="caption"><strong>Fig. 1:</strong> Final objective tree used as brainstorming. </p>
+         </div>
+         <p>
+            Finally, taking into consideration all objectives and constraints developed in the brainstorming, three were chosen: "environmentally friendly", "cost-effective", and "low/easy maintenance".
+            A problem statement was created to inform the future of the project.
+         </p>
+         <strong>Problem Statement:</strong>
+            <p>
+            The primary function of the filter is to effectively remove ciprofloxacin  molecules from the 
+            wastewater before it is released into the environment. We aim to design a cost-effective, environmentally sustainable, and low-maintenance system that can handle large volumes of wastewater 
+            while considering the rural hospital's limited budget and staffing constraints and the containment size of $5\text-10 \; \mu \text{m}$. 
+            </p>
+            <p>
+            High-level objectives include ensuring  the filter is durable, 
+            easy to maintain, and capable of preventing the spread of antibiotic-resistant bacteria, ultimately protecting both the environment and the health of the local community.
+         </p>
+         <strong>Research:</strong>
+         <p>
+            Research was done to find means of accomplishing the objectives. These means aimed not as much to be realistic but varied, with the goal of capturing the solution space. First, I wrote an executive research 
+            summary on the current state of filtration technology fitting to our scenario, and compared with my teammates' research to come up with a morph chart (Fig. 2).
+         </p>
+         <div class="img-cont left_img" style="width: 35%">
+            <img src="../../img/ds2_fig2.png" id="img-swap-0" alt="Image of a morph chart.">
+            <p class="caption"><strong>Fig. 2:</strong> Morph chart of means to accomplish each objective.</p>
+         </div>
+         <p>
+            Afterwards, research was done on numerous real-world concerns: potential materials, contaminant/waste standards, electricity standards, optimal placement, and other relevant regulation.
+         </p>
+         <p>
+            Through weighing the cost of benefits of each means carefully, <strong>ozonation</strong> was judged to be the most sustainable and efficient method of filtration, 
+            I researched potential material acquisition, finding pertinent information on laws on materials and wastewater for Eastern Australia.
+         </p>
+         <strong>
+            MPIs:
+         </strong>
+         <p>
+            MPIs were derived for the objectives. I was assigned the MPI of minimizing carbon footprint $\text{CO}_2$, while optimizing for yield strength $\sigma$. 
+            Using the provided functional constraint for $\sigma_y$, the MPI was derived: 
+            $$
+            \begin{align*}
+            m &= ALP & \sigma_y &> \frac{6FL}{bh^2} \\
+            m &= bhlP & \sigma_y &> \frac{6FL}{b(\frac{m}{bLP})^2} \\
+            h &= \frac{m}{bLP} & \sigma_y &> \frac{6FL}{\frac{bm^2}{b^2L^2P^2}} \\
+            \text{subst}&\text{ituting } h \nearrow & \sigma_y &> \frac{6FLbL^2P^2}{m^2} \\
+            && \sigma_y &> \frac{6FL^3bP^2}{m^2} \\
+            && m^2 &< \frac{6FL^3bP^2}{\sigma_y} \\
+            && m &< \sqrt{6FL^2}\frac{P}{\sqrt{\sigma_y}} \\
+            && MPI &= \frac{\sigma_y^{1/2}}{P} = \frac{\sigma_y^{1/2}}{\rho \cdot \text{CO}_2}
+
+            \end{align*}
+            $$
+         </p>
+         <p>
+            This MPI along with the two constraints <strong>Freshwater Durability (excellent)</strong>, <strong>Built Environments (rural)</strong>, were used in the materials database Granta EduPack to
+            find the optimal materials for the project.
+         </p>
+         <div class="img-cont right_img" style="width: 35%">
+            <img src="../../img/ds2_fig3.png" alt="The resultant materials database chart.">
+            <p class="caption"><strong>Fig. 3: </strong> The resultant chart from my MPI and constraints. </p>
+         </div>
+         <p>
+            Upon comparison of my Top 3 matterials with my teammates' materials, a final Top 3 was found:
+            <ul class="markdown_list">
+                <li>Coir fiber</li>
+                <li>Polypropylene fiber</li>
+                <li>Limestone</li>
+            </ul>
+            
+            I researched the suitability of coir fiber, particularly its availability in the area and envrionmental safety. In the end, since polypropylene fiber has strong anti-bacterial properties on its own,
+            it was selected as the final material.
+         </p>
+         <p>
+            The number of pores for our material was calculated, then the porosity of the overall fiber, then the effective Young's Modulus and yield strength for the material. 
+            </p>
+            <p>
+            In the resultant chart (Fig. 4), 
+            polypropylene satisfied the required yield strength of $154 \; \text{N} / \text{m}^2$.
+         </p>
+         <strong>
+            Eco Audits
+         </strong>
+         <p>
+            Finally, Granta Eco-Audits (Fig. 5) were performed to ensure the material's ecological performance was up to par.
+        </p>
+        <div class="img-cont right_img" style="width: 35%">
+            <img src="../../img/ds2_fig4.png" alt="Polypropene's passing performance.">
+            <p class="caption"><strong>Fig. 4: </strong> The chart, showing polypropylene above the line. </p>
+         </div> 
+        <p>
+            I created a life-cycle diagram (Fig. 6) for my assigned material of coir fiber, as well as the Eco-Audit
+            for it. It confirmed that while polypropylene used the most energy, it had the most potential for recycling and use after its end of life.
+         </p>
+         <strong>Presentation:</strong>
+         <p>
+            We created a ~10-minute presentation on our process and findings, and I created, wrote, and presented the content for the slides: 
+            <ul class="markdown_list">
+                <li>MPI</li>
+                <li>Material selection</li>
+                <li>Objectives/constraints</li>
+            </ul>
+            
+
+            I also wrote the content for various other slides, such as summarizing our findings on porosity and the eco-audit.
+         </p>
+
+
+
+         <p style="text-indent: 0;"><span class="block">■</span></p>
+        
+         <!-- ALL HAIL THE LINE BREAKS -->
+         <br><br><br><br>
+         <br><br>
+
+         <div style="display: flex; justify-content: center;">
+         <div class="img-cont center_img side_by_side" style="width: 30%;">
+            <img src="../../img/ds2_fig5.png" alt="Image of the completed setup.">
+            <p class="caption"><strong>Fig. 5: </strong> The Eco-Audit for polypropylene.</p>
+         </div>
+         <div class="img-cont center_img side_by_side" style="width: 30%;">
+            <img src="../../img/ds2_fig6.png" alt="Image of the completed setup.">
+            <p class="caption"><strong>Fig. 6: </strong> My life cycle analysis diagram for coir fiber.</p>
+         </div>
+      </div>
+    </div>
+      <h2 class="toggleButton hover-fill" style="margin-bottom: 0.5em;">
+         <i class="fa-solid fa-angles-up arrow"></i>
+         <span>After</span>
+      </h2>
+      <div class="dropdown-content">
+         <span class="bolder" style="text-indent: 0">ON PROCESS</span>
+         <p>
+            I learned a lot about the design process, and how to use it in a real-world project to find the optimal solution in a quantitative and testable way.  
+         </p>
+         <p>
+            From the <a href="/portfolio/ds1">first project</a>, I learned and applied many of the things I learned, such as team leadership, knowing when to defer to others, working efficiently with others to
+            succeed, but I think I was too eager to let others do the work when they offered. 
+            </p>
+            <p>
+            For example, a group member volunteered to calculate an MPI by themselves, but ended up getting it wrong. 
+            Although I knew how to work with MPIs, having to correct and retroactively fix the error while I should have offered to help or look over the result took time away from completing the project. I wonder if I
+            was more available, could we have been able to refine our work even further? In the future, I will definitely make sure to offer my skills instead of letting others do work by themselves often.  
+         </p>
+         <div class="img-cont center_img" style="width: 35%">
+            <img src="../../img/ds2_fig7.png" alt="Screenshot of Microsoft Teams interface.">
+            <p class="caption"><strong>Fig. 7: </strong> Microsoft Teams, the only avenue of communication.</p>
+         </div>
+         <span class="bolder" style="text-indent: 0">ON TECHNOLOGY</span>
+         <p>
+            There were some miscommunications, since each member was doing their own material analysis/eco-audit on their own installation of Granta EduPack. I think that we should have been more clear with our
+            communication, such as putting all of our data into one source instead of having to ask one another for it. This led to incorrect propogations of data and general confusion. In the future, I will 
+            make sure to remind my team to communicate.
+            </p>
+            <p>
+            I became very familiar with the use of software like <strong>material databases</strong> (eg. Granta EduPack), <strong>project design structures</strong> (eg. morph chart, objective tree), and the derivation/use
+            of engineering concepts like <strong>MPIs</strong>, <strong>constraints</strong>, and <strong>product life cycles</strong>.
+            </p>
+         <p style="text-indent: 0;"><span class="block">■</span></p>
+      </div>
+      <a style="text-align: center; margin-top: 5vh; margin-bottom: 50vh"><span id="p3-toggle">Return to the Portfolio.</span></a>
+      <button id="collapse-dropdowns">Collapse All Dropdowns</button>
+      <!-- <button id="verbose" onclick="window.location.href='./compact'">Abridged Version</button> -->
+      <!-- <button id="themeswitch" onclick="window.location.href='./compact'">Abridged Version</button> -->
+      <script src="ds1.js"></script>
+   </body>
+</html>
