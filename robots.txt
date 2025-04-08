@@ -1,0 +1,18 @@
+# If you see this, try sending a post request with header Keycode:'FD1A788153F4A0B4' to jasoncheng.me/asbelow
+
+User-agent: *
+Crawl-delay: 60
+Disallow: /*.css$
+Disallow: /*.js$
+Disallow: /*.tex$
+Disallow: /*.rb$
+Disallow: /*.cpp$
+
+# 88888888
+# 88888888
+# 88888888
+# 88888888
+# 88888888
+# 88888888
+# 88888888
+# 88888888
