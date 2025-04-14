@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     ];
     const alt_repos = [
         '71cj34/rsz',
-        'Prof-Starsky/solarsense'
+        '71cj34/anti-secrets',
+        'Prof-Starsky/solarsense',
     ];
 
     const projectsContent = document.getElementById('projectsContent');
@@ -49,6 +50,27 @@ document.addEventListener('DOMContentLoaded', (event) => {
         <img src="/img/linev3.png" style="display: block; margin-left: auto; margin-right: auto;">
 
         <p>
+        <a href="https://github.com/71cj34/anti-secrets">anti-secrets</a>
+        </p>
+        <p>
+        Cloudflare JavaScript Worker that protects exposed/misconfigured internal links.
+        </p>
+        <p>
+        Written for simplicity, semanticness, and configurability.
+        </p>
+        <p>
+        See an example <a href="/.env" target="_blank">here</a>.
+        </p>
+        <div style="font-size: 90%">
+        <p class="commit-caption">Last commit: </p>
+        <a id="commit-message-alt-2" href="/">Loading last commit...</a>
+        <div id="commit-date-alt-2">Loading last commit date...</div>   
+        </div
+        <br>
+
+        <img src="/img/linev3.png" style="display: block; margin-left: auto; margin-right: auto;">
+
+        <p>
         <a href="https://github.com/Prof-Starsky/solarsense/">SolarSense</a>
         </p>
         <p>
@@ -62,8 +84,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         </p>
         <div style="font-size: 90%">
         <p class="commit-caption">Last commit: </p>
-        <a id="commit-message-alt-2" href="/">Loading last commit...</a>
-        <div id="commit-date-alt-2">Loading last commit date...</div>   
+        <a id="commit-message-alt-3" href="/">Loading last commit...</a>
+        <div id="commit-date-alt-3">Loading last commit date...</div>   
         </div
         <br>
     `;
