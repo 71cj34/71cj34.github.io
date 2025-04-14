@@ -14,15 +14,13 @@ function positionBubble() {
   const max = slider.max ? parseFloat(slider.max) : 100;
   const newVal = Number(((val - min) * 100) / (max - min));
   
-  // Update the text
   sliderValue.innerHTML = val + "x";
   
-  // Position the bubble
+  // 6 too far
   sliderValue.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
 }
 
-
-
+// draws image onto canvas (autoupdates)
 document.getElementById('imageinput').addEventListener('change', function(event) {
     const file = event.target.files[0];
     if (file) {
@@ -61,21 +59,17 @@ function upscaleImage() {
     const newWidth = originalWidth * scaleFactor;
     const newHeight = originalHeight * scaleFactor;
 
-    const progressBar = document.getElementById('progressbar');
-    progressBar.style.display = 'block';
-
     const imageData = ctx.getImageData(0, 0, originalWidth, originalHeight);
-    const resizedImageData = lanczosResize(imageData, newWidth, newHeight, progressBar);
+    const resizedImageData = lanczosResize(imageData, newWidth, newHeight);
 
     canvas.width = newWidth;
     canvas.height = newHeight;
     ctx.putImageData(resizedImageData, 0, 0);
 
     document.getElementById('imgdimensions').textContent = `Upscaled Dimensions: ${newWidth} x ${newHeight}`;
-    progressBar.style.display = 'none';
 }
 
-function lanczosResize(imageData, newWidth, newHeight, progressBar) {
+function lanczosResize(imageData, newWidth, newHeight) {
     const originalWidth = imageData.width;
     const originalHeight = imageData.height;
     const srcData = imageData.data;
@@ -123,12 +117,18 @@ function lanczosResize(imageData, newWidth, newHeight, progressBar) {
             dstData.data[dstIdx + 2] = b / weightSum;
             dstData.data[dstIdx + 3] = a / weightSum;
         }
-
-        // Update progress bar
-        if (y % 10 === 0) {
-            progressBar.style.width = `${(y / newHeight) * 100}%`;
-        }
     }
 
     return dstData;
 }
+
+// Add event listener to the download button
+document.getElementById('downloadImage').addEventListener('click', function() {
+    const canvas = document.getElementById('canvas');
+    const dataURL = canvas.toDataURL('image/png');
+
+    const a = document.createElement('a');
+    a.href = dataURL;
+    a.download = 'upscaled_image.png';
+    a.click();
+});
