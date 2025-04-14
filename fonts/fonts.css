@@ -7,8 +7,87 @@
     font-family: "Redaction-20";
     src: url("Redaction/Redaction20-Regular.otf");
   }
+  
+  @font-face {
+    font-family: "Redaction-35";
+    src: url("Redaction/Redaction35-Regular.otf");
+  }
+
+  @font-face {
+    font-family: "Redaction-50";
+    src: url("Redaction/Redaction50-Regular.otf");
+  }
+
+  @font-face {
+    font-family: "Redaction-70";
+    src: url("Redaction/Redaction70-Regular.otf");
+  }
+
+  @font-face {
+    font-family: "Redaction-100";
+    src: url("Redaction/Redaction100-Regular.otf");
+  }
 
   @font-face {
     font-family: "GeistMono";
     src: url("GeistMono.ttf");
+  }
+
+  @font-face {
+    font-family: "Helvetica";
+    src: url("Helvetica.ttf");
+  }
+
+  @font-face {
+    font-family: "HelveticaNeue";
+    src: url("HelveticaNeue.otf");
+  }
+
+  @font-face {
+    font-family: "IMFellEnglish";
+    src: url("IMFellEnglish-Regular.ttf");
+  }
+
+  @font-face {
+    font-family: "IMFellEnglishSC";
+    src: url("IMFellEnglishSC-Regular.ttf");
+  }
+
+  @font-face {
+    font-family: "Inconsolata";
+    src: url("Inconsolata.ttf");
+  }
+
+  @font-face {
+    font-family: "InputSerif";
+    src: url("InputSerif.ttf");
+  }
+
+  @font-face {
+    font-family: "Inter";
+    src: url("Inter-VariableFont_opsz\,wght.ttf");
+  }
+
+  @font-face {
+    font-family: "LibreBarcode";
+    src: url("LibreBarcode128-Regular.ttf");
+  }
+
+  @font-face {
+    font-family: "LineFont";
+    src: url("Linefont-VariableFont_wdth\,wght.ttf");
+  }
+
+  @font-face {
+    font-family: "Rufina";
+    src: url("Rufina-Regular.ttf");
+  }
+  @font-face {
+    font-family: "Syne";
+    src: url("Syne-VariableFont_wght.ttf");
+  }
+
+  @font-face {
+    font-family: "AverageSans";
+    src: url("AverageSans-Regular.ttf");
   }

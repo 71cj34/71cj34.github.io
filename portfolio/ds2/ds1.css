@@ -20,6 +20,11 @@
   }
 }
 
+:root {
+  --text: 'Input Serif', 'Courier New', monospace;
+  --head: "Inconsolata", 'Courier', 'monospace'
+}
+
 body, html {
   margin: 5vh 8vw 0;
   padding: 0;
@@ -29,7 +34,7 @@ body, html {
   box-sizing: border-box;
   font-size: 1.05em;
   display: flex;
-  font-family:'Input Serif', 'Courier New', monospace;
+  font-family:var(--text);
 }
 
 body {
@@ -52,7 +57,7 @@ body.faded {
 
 h1, h2, h3, h4, h5 {
   font-weight: bold;
-  font-family: "Inconsolata", 'Courier', 'monospace'
+  font-family: var(--head)
 }
 
 h2 {
@@ -208,7 +213,7 @@ img {
 .img-cont .caption {
   display: block;
   text-align: center;
-  font-family: 'Inconsolata', monospace;
+  font-family: var(--head);
   font-style: italic;
   color: #5a5a5a;
   margin-top: 0.2em; /* Space between image and caption */
@@ -273,7 +278,7 @@ strong:hover, .bolder:hover {
 
 #collapse-dropdowns {
   position: fixed;
-  font-family: "Input Serif", "Courier";
+  font-family: var(--text);
   top: 1.2em;
   right: 1.2em;
   padding: 0.75em 1.5em;
@@ -288,7 +293,7 @@ strong:hover, .bolder:hover {
 
 #verbose {
   position: fixed;
-  font-family: "Input Serif", "Courier";
+  font-family: var(--text);
   top: 4.8em;
   right: 1.2em;
   padding: 0.75em 1.5em;
