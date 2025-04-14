@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const commitMessageElement = document.getElementById(`commit-message-${numberprefix}${index + 1}`);
             const commitDateElement = document.getElementById(`commit-date-${numberprefix}${index + 1}`);
             if (commitMessageElement && commitDateElement) {
-                fetch(`https://api.github.com/repos/${repo}/commits`)
+                fetch(`https://api.github.com/repos/${repo}/commits?per_page=1&page=1`)
                     .then(response => response.json())
                     .then(data => {
                         const lastCommitMessage = data[0]?.commit?.message || "No commit message found";
