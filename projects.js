@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         </div>
         <br>
 
-        <img src="/linev3.png" style="display: block; margin-left: auto; margin-right: auto;">
+        <img src="/img/linev3.png" style="display: block; margin-left: auto; margin-right: auto;">
 
         <p>
         <a href="https://github.com/Prof-Starsky/solarsense/">SolarSense</a>
