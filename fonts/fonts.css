@@ -91,3 +91,13 @@
     font-family: "AverageSans";
     src: url("AverageSans-Regular.ttf");
   }
+
+  @font-face {
+    font-family: "IBMPlexMono";
+    src: url("IBMPlexMono-Regular.ttf");
+  }
+  
+  @font-face {
+    font-family: "Geist";
+    src: url("Geist.ttf");
+  }
