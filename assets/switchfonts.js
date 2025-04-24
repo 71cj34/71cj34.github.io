@@ -4,36 +4,42 @@ const textfontlist = [
     "'Redaction-10', 'serif'",
     "'Syne', sans-serif",
     "'Helvetica', 'sans-serif'",
-    "'GeistMono', 'monospace'",
+    "'Geist Mono', 'monospace'",
     "'Average Sans', 'sans-serif'",
     "'Geist', sans-serif",
-    "'IMFellEnglish', 'serif'",
+    "'IM Fell English', 'serif'",
     "'LineFont'",
 ]
 const headfontlist = [
     "'Inconsolata', 'Courier', 'monospace'",
-    "'HelveticaNeue', 'sans-serif'",
+    "'Helvetica Neue', 'sans-serif'",
     "'Inter', 'Arial', 'sans-serif'",
-    "'HelveticaNeue', 'sans-serif'",
+    "'Helvetica Neue', 'sans-serif'",
     "'Redaction-35', serif",
     "'Rufina', 'serif'",
-    "'IBMPlexMono', monospace",
-    "'IMFellEnglishSC', 'cursive'",
-    "'LibreBarcode'",
+    "'IBM Plex Mono', monospace",
+    "'IM Fell English SC', 'cursive'",
+    "'Libre Barcode'",
 ]
 
 let currentIndex = 0;
+let currentHead;
+let currentText;
+let currentHeadSanitized;
+let currentTextSanitized;
 
 switchfont.addEventListener('click', function() {
     currentIndex = (currentIndex + 1) % textfontlist.length;
     document.documentElement.style.setProperty('--text', textfontlist[currentIndex]);
     document.documentElement.style.setProperty('--head', headfontlist[currentIndex]);
     
-    // const getFirstFont = (fontString) => fontString.split(',')[0].trim().replace(/'/g, '');
+    const getFirstFont = (fontString) => fontString.split(',')[0].trim().replace(/'/g, '');
     // const textFont = getFirstFont(textfontlist[currentIndex]);
     // const headFont = getFirstFont(headfontlist[currentIndex]);
     currentText = textfontlist[currentIndex]
     currentHead = headfontlist[currentIndex]
+    currentTextSanitized = getFirstFont(currentText)
+    currentHeadSanitized = getFirstFont(currentHead)
     console.log(`head: ${currentText}`);
     console.log(`text: ${currentHead}`);
 });
@@ -48,7 +54,8 @@ switchfont.addEventListener('click', function() {
       popup.className = 'popup';
       popup.style.opacity = '0';  // Initially hidden
   
-      popup.innerHTML = `<span>Fonts switched to ${currentHead} and ${currentText}</span>`
+      popup.innerHTML = `<span style="font-family: sans-serif">Fonts switched to <span style="font-family: var(--head)">${currentHeadSanitized}</span> 
+      and <span style="font-family: var(--text)">${currentTextSanitized}</span></span>`
       // const textNode = document.createTextNode(`Fonts switched to ${headfont} and ${textfont}`);
       // popup.appendChild(textNode);
   

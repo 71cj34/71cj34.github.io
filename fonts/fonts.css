@@ -29,7 +29,7 @@
   }
 
   @font-face {
-    font-family: "GeistMono";
+    font-family: "Geist Mono";
     src: url("GeistMono.ttf");
   }
 
@@ -39,17 +39,17 @@
   }
 
   @font-face {
-    font-family: "HelveticaNeue";
+    font-family: "Helvetica Neue";
     src: url("HelveticaNeue.otf");
   }
 
   @font-face {
-    font-family: "IMFellEnglish";
+    font-family: "IM Fell English";
     src: url("IMFellEnglish-Regular.ttf");
   }
 
   @font-face {
-    font-family: "IMFellEnglishSC";
+    font-family: "IM Fell English SC";
     src: url("IMFellEnglishSC-Regular.ttf");
   }
 
@@ -59,7 +59,7 @@
   }
 
   @font-face {
-    font-family: "InputSerif";
+    font-family: "Input Serif";
     src: url("InputSerif.ttf");
   }
 
@@ -69,12 +69,12 @@
   }
 
   @font-face {
-    font-family: "LibreBarcode";
+    font-family: "Libre Barcode";
     src: url("LibreBarcode128-Regular.ttf");
   }
 
   @font-face {
-    font-family: "LineFont";
+    font-family: "Line Font";
     src: url("Linefont-VariableFont_wdth\,wght.ttf");
   }
 
@@ -88,12 +88,12 @@
   }
 
   @font-face {
-    font-family: "AverageSans";
+    font-family: "Average Sans";
     src: url("AverageSans-Regular.ttf");
   }
 
   @font-face {
-    font-family: "IBMPlexMono";
+    font-family: "IBM Plex Mono";
     src: url("IBMPlexMono-Regular.ttf");
   }
   
