@@ -47,28 +47,24 @@ switchfont.addEventListener('click', function() {
 /////////////////////
 
 
-(function() { // Wrap in an IIFE to avoid polluting the global scope
+(function() { // Wrap in an iife
 
   function createPopup() {
       const popup = document.createElement('div');
       popup.className = 'popup';
-      popup.style.opacity = '0';  // Initially hidden
+      popup.style.opacity = '0';
   
       popup.innerHTML = `<span style="font-family: sans-serif">Fonts switched to <span style="font-family: var(--head)">${currentHeadSanitized}</span> 
       and <span style="font-family: var(--text)">${currentTextSanitized}</span></span>`
-      // const textNode = document.createTextNode(`Fonts switched to ${headfont} and ${textfont}`);
-      // popup.appendChild(textNode);
   
   
       document.body.appendChild(popup);
       return popup;
     }
   
-  
-  
     function showPopup(popup) {
       popup.classList.add('show');
-      popup.style.opacity = '1';  // Ensure visibility when adding the class
+      popup.style.opacity = '1';
         setTimeout(function() {
             hidePopup(popup);
         }, 3000); // Stay visible for 3 seconds (3000ms)
@@ -83,14 +79,19 @@ switchfont.addEventListener('click', function() {
       }
   
   
-    // Add event listeners to buttons (or other elements) with a specific class
     switchfont.addEventListener('click', function(event) {
-        console.log("asd")
-        const popup = createPopup();
-        showPopup(popup);
+        let popup;
+        let existingModals = document.getElementsByClassName("popup");
+        if (existingModals.length == 0) {
+          popup = createPopup();
+          showPopup(popup);
+
+        } else {
+          existingModals[0].innerHTML = `<span style="font-family: sans-serif">Fonts switched to <span style="font-family: var(--head)">${currentHeadSanitized}</span> 
+      and <span style="font-family: var(--text)">${currentTextSanitized}</span></span>`
+        }
     });
   
-    // Add CSS to the head
     const style = document.createElement('style');
     style.textContent = `
     .popup {
@@ -114,6 +115,22 @@ switchfont.addEventListener('click', function() {
     .popup.show {
       bottom: 10%;
       opacity: 1;
+    }
+    
+    #switch-fonts {
+      position: fixed;
+      top: 3vh;
+      right: 3vh;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 1.15rem;
+      cursor: pointer;
+      border-radius: 5px;
+      z-index: 1000;
     }
     `;
     document.head.appendChild(style);
