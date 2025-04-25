@@ -4,23 +4,29 @@ const textfontlist = [
     "'Redaction-10', 'serif'",
     "'Syne', sans-serif",
     "'Helvetica', 'sans-serif'",
-    "'GeistMono', 'monospace'",
+    "'Geist Mono', 'monospace'",
     "'Average Sans', 'sans-serif'",
-    "'IMFellEnglish', 'serif'",
-    "'LineFont'"
+    "'Geist', sans-serif",
+    "'IM Fell English', 'serif'",
+    "'LineFont'",
 ]
 const headfontlist = [
     "'Inconsolata', 'Courier', 'monospace'",
-    "'HelveticaNeue', 'sans-serif'",
+    "'Helvetica Neue', 'sans-serif'",
     "'Inter', 'Arial', 'sans-serif'",
-    "'HelveticaNeue', 'sans-serif'",
-    "'Redaction-50', serif",
+    "'Helvetica Neue', 'sans-serif'",
+    "'Redaction-35', serif",
     "'Rufina', 'serif'",
-    "'IMFellEnglishSC', 'cursive'",
-    "'LibreBarcode'"
+    "'IBM Plex Mono', monospace",
+    "'IM Fell English SC', 'cursive'",
+    "'Libre Barcode'",
 ]
 
 let currentIndex = 0;
+let currentHead;
+let currentText;
+let currentHeadSanitized;
+let currentTextSanitized;
 
 switchfont.addEventListener('click', function() {
     currentIndex = (currentIndex + 1) % textfontlist.length;
@@ -28,8 +34,107 @@ switchfont.addEventListener('click', function() {
     document.documentElement.style.setProperty('--head', headfontlist[currentIndex]);
     
     const getFirstFont = (fontString) => fontString.split(',')[0].trim().replace(/'/g, '');
-    const textFont = getFirstFont(textfontlist[currentIndex]);
-    const headFont = getFirstFont(headfontlist[currentIndex]);
-    console.log(`head: ${headFont}`);
-    console.log(`text: ${textFont}`);
+    // const textFont = getFirstFont(textfontlist[currentIndex]);
+    // const headFont = getFirstFont(headfontlist[currentIndex]);
+    currentText = textfontlist[currentIndex]
+    currentHead = headfontlist[currentIndex]
+    currentTextSanitized = getFirstFont(currentText)
+    currentHeadSanitized = getFirstFont(currentHead)
+    console.log(`head: ${currentText}`);
+    console.log(`text: ${currentHead}`);
 });
+
+/////////////////////
+
+
+(function() { // Wrap in an iife
+
+  function createPopup() {
+      const popup = document.createElement('div');
+      popup.className = 'popup';
+      popup.style.opacity = '0';
+  
+      popup.innerHTML = `<span style="font-family: sans-serif">Fonts switched to <span style="font-family: var(--head)">${currentHeadSanitized}</span> 
+      and <span style="font-family: var(--text)">${currentTextSanitized}</span></span>`
+  
+  
+      document.body.appendChild(popup);
+      return popup;
+    }
+  
+    function showPopup(popup) {
+      popup.classList.add('show');
+      popup.style.opacity = '1';
+        setTimeout(function() {
+            hidePopup(popup);
+        }, 3000); // Stay visible for 3 seconds (3000ms)
+    }
+  
+      function hidePopup(popup) {
+          popup.classList.remove('show');
+          popup.style.opacity = '0';  // Ensure hiding happens
+          setTimeout(() => {
+              popup.remove();
+          }, 500)
+      }
+  
+  
+    switchfont.addEventListener('click', function(event) {
+        let popup;
+        let existingModals = document.getElementsByClassName("popup");
+        if (existingModals.length == 0) {
+          popup = createPopup();
+          showPopup(popup);
+
+        } else {
+          existingModals[0].innerHTML = `<span style="font-family: sans-serif">Fonts switched to <span style="font-family: var(--head)">${currentHeadSanitized}</span> 
+      and <span style="font-family: var(--text)">${currentTextSanitized}</span></span>`
+        }
+    });
+  
+    const style = document.createElement('style');
+    style.textContent = `
+    .popup {
+      position: fixed;
+      bottom: -100px; /* Start off-screen */
+      left: 50%;
+      transform: translateX(-50%);
+      color: black;
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.075);
+      border-radius: 10px;
+      padding: 10px 20px;
+      transition: bottom 0.5s ease, opacity 0.5s ease;
+      z-index: 1000;
+      opacity: 0;
+    }
+  
+    .popup.show {
+      bottom: 10%;
+      opacity: 1;
+    }
+    
+    #switch-fonts {
+      position: fixed;
+      top: 3vh;
+      right: 3vh;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 1.15rem;
+      cursor: pointer;
+      border-radius: 5px;
+      z-index: 1000;
+    }
+    `;
+    document.head.appendChild(style);
+  
+  })();
+  
+  
