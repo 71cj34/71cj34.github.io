@@ -134,6 +134,9 @@ switchfont.addEventListener('click', function() {
       transition: bottom 3s ease, opacity 0.5s ease;
       z-index: 1000;
       opacity: 0;
+      max-width: 70vw;
+      text-align: center;
+      font-size: clamp(0.5em, calc(0.85em + 0.5 * ((100vw - 320px) / 880)), 1.15em);
     }
   
     .popup.show {
@@ -147,11 +150,11 @@ switchfont.addEventListener('click', function() {
       right: 2rem;
       border: none;
       color: white;
-      padding: 15px 32px;
+      padding: 15px 28px;
       text-align: center;
       text-decoration: none;
       display: inline-block;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       cursor: pointer;
       border-radius: 5px;
       z-index: 1000;
