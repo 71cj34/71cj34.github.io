@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>get spinned idoit</title>
+    <link rel="shortcut icon" href="/img/stariconv2.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        p {
+          color: inherit;
+          transition: color 0.3s ease-in;
+        }
+        
+        p:hover {
+          color: #a24a4b;
+        }
+        
+        #root, .css-1cd408u, .css-1xdsfqv{
+          animation: hueRotateAndBlur 3s ease-in infinite alternate, chaos 0.1s steps(7, jump-start) infinite;
+          color: #BE7777 !important; 
+        }
+        
+        .wiggles {
+          animation: wiggle 0.2s infinite;
+        }
+        
+        
+        
+        @keyframes chaos {
+          0% {
+            transform: 
+              translate(100vw, -100vh) 
+              rotate3d(1,0,0, 720deg) 
+              scale(3) 
+              skew(60deg);
+            opacity: 0;
+          }
+          15% {
+            transform: 
+              translate(-200%, 500px) 
+              rotate3d(0,1,0, -360deg) 
+              scale(0.2) 
+              skew(-30deg);
+            filter: hue-rotate(180deg);
+          }
+          30% {
+            transform: 
+              translate(80vw, 150vh) 
+              rotate3d(1,1,0, 180deg) 
+              scale(4) 
+              skew(90deg);
+            opacity: 0.5;
+          }
+          45% {
+            transform: 
+              translate(-500px, -300%) 
+              rotate3d(2,1,1, 1080deg) 
+              scale(0.1);
+            filter: blur(10px);
+          }
+          60% {
+            transform: 
+              translate(200vw, -80vh) 
+              rotate3d(0.5,2,1, -720deg) 
+              scale(2.5) 
+              skew(-60deg);
+            opacity: 1;
+          }
+          80% {
+            transform: 
+              translate(-1000%, 600px) 
+              rotate3d(3,2,1, 3600deg) 
+              scale(0.5);
+            filter: hue-rotate(360deg);
+          }
+          100% {
+            transform: 
+              translate(-200px, -200px) 
+              rotate3d(1,1,1, 1440deg) 
+              scale(10) 
+              skew(180deg);
+            opacity: 0;
+          }
+        }
+        
+        @keyframes hueRotateAndBlur {
+          0% {
+            filter: hue-rotate(0deg) blur(0px);
+          }
+          15% {
+            filter: hue-rotate(54deg) blur(0px);
+          }
+          80% {
+            filter: hue-rotate(288deg) blur(4.5px);
+          }
+          100% {
+            filter: hue-rotate(360deg) blur(5px);
+          }
+        }
+        </style>
+</head>
+<body id="root">
+<main>
+    <div>
+        <span class="top-right-icon" id="modeselection"> Dark mode.</span>
+    
+        <p><span class="highlight-inline">Sorry.</span></p>
+        <p>Seems like we couldn't find that page.</p> <br>
+        <p>This site gets bigger every day.</p><br>
+        <p>Check back sometime else.</p><br><br>
+        <a href="/">Return to home.</a>
+        <br>
+    <br><br>
+    </div>
+</main>
+</body>
+</html>
