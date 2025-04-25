@@ -49,6 +49,9 @@ switchfont.addEventListener('click', function() {
 
 (function() { // Wrap in an iife
 
+  let popupTimeout;
+  let popupHiding = false;
+
   function createPopup() {
       const popup = document.createElement('div');
       popup.className = 'popup';
@@ -65,17 +68,28 @@ switchfont.addEventListener('click', function() {
     function showPopup(popup) {
       popup.classList.add('show');
       popup.style.opacity = '1';
-        setTimeout(function() {
+      popup.style.bottom = '10%'; // Ensure it's visible
+      popupHiding = false; // Reset the hiding flag
+      clearTimeout(popupTimeout); // Clear any existing timeouts
+
+        popupTimeout = setTimeout(function() {
             hidePopup(popup);
-        }, 3000); // Stay visible for 3 seconds (3000ms)
+        }, 3000);
     }
   
       function hidePopup(popup) {
+          popupHiding = true; // Set the hiding flag
           popup.classList.remove('show');
-          popup.style.opacity = '0';  // Ensure hiding happens
-          setTimeout(() => {
-              popup.remove();
-          }, 500)
+          popup.style.opacity = '0';
+          popup.style.bottom = '-100px'; // Move off-screen
+          clearTimeout(popupTimeout); // Clear any existing timeouts
+
+          popupTimeout = setTimeout(() => {
+              if (document.body.contains(popup)) { //Check that the popup exists before trying to remove it
+                popup.remove();
+              }
+              popupHiding = false;
+          }, 500);
       }
   
   
@@ -84,11 +98,22 @@ switchfont.addEventListener('click', function() {
         let existingModals = document.getElementsByClassName("popup");
         if (existingModals.length == 0) {
           popup = createPopup();
+          showPopup(popup);
         } else {
-          existingModals[0].innerHTML = `<span style="font-family: sans-serif">Fonts switched to <span style="font-family: var(--head)">${currentHeadSanitized}</span> 
-      and <span style="font-family: var(--text)">${currentTextSanitized}</span></span>`
+          popup = existingModals[0];
+          clearTimeout(popupTimeout); // Clear any existing timeouts
+          if (popupHiding) {
+            // Reverse the hiding animation
+            popup.style.transition = 'bottom 0.25s ease, opacity 0.25s ease'; // Reduced time
+            showPopup(popup);
+            popup.style.transition = 'bottom 0.5s ease, opacity 0.5s ease'; //Reset transition
+          } else {
+            //Update the content if it already exists
+            popup.innerHTML = `<span style="font-family: sans-serif">Fonts switched to <span style="font-family: var(--head)">${currentHeadSanitized}</span> 
+            and <span style="font-family: var(--text)">${currentTextSanitized}</span></span>`
+            showPopup(popup);
+          }
         }
-        showPopup(popup);
     });
   
     const style = document.createElement('style');
@@ -106,7 +131,7 @@ switchfont.addEventListener('click', function() {
       border: 1px solid rgba(255, 255, 255, 0.075);
       border-radius: 10px;
       padding: 10px 20px;
-      transition: bottom 0.5s ease, opacity 0.5s ease;
+      transition: bottom 3s ease, opacity 0.5s ease;
       z-index: 1000;
       opacity: 0;
     }
@@ -135,5 +160,3 @@ switchfont.addEventListener('click', function() {
     document.head.appendChild(style);
   
   })();
-  
-  
