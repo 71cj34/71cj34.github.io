@@ -8,7 +8,7 @@ const textfontlist = [
     "'Average Sans', 'sans-serif'",
     "'Geist', sans-serif",
     "'IM Fell English', 'serif'",
-    "'Line Font'",
+    "'LineFont'",
 ]
 const headfontlist = [
     "'Inconsolata', 'Courier', 'monospace'",
