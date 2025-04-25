@@ -84,12 +84,11 @@ switchfont.addEventListener('click', function() {
         let existingModals = document.getElementsByClassName("popup");
         if (existingModals.length == 0) {
           popup = createPopup();
-          showPopup(popup);
-
         } else {
           existingModals[0].innerHTML = `<span style="font-family: sans-serif">Fonts switched to <span style="font-family: var(--head)">${currentHeadSanitized}</span> 
       and <span style="font-family: var(--text)">${currentTextSanitized}</span></span>`
         }
+        showPopup(popup);
     });
   
     const style = document.createElement('style');
@@ -119,8 +118,8 @@ switchfont.addEventListener('click', function() {
     
     #switch-fonts {
       position: fixed;
-      top: 3vh;
-      right: 3vh;
+      top: 2rem;
+      right: 2rem;
       border: none;
       color: white;
       padding: 15px 32px;
