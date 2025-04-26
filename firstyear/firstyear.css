@@ -3,13 +3,13 @@
     --text: "Input Serif", sans-serif;
     --primary-color: #3498db; /* Vibrant Blue */
     --background-color: #f5f5f5;
-    --text-color: #333;
+    --text-color: #212121;
     --light-grey: #ddd;
     --dark-grey: #777;
   }
   
   body, html {
-    margin: 5vh 8vw 0;
+    margin: 8vh 10vw 0;
     padding: 0;
     height: 100%;
     height: auto; 
@@ -44,6 +44,8 @@
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
+
+  
   
   h1, h2 {
     font-family: var(--head);
@@ -64,6 +66,13 @@
     padding: 0;
   }
   
+h4 {
+  font-style: italic;
+  color: var(--dark-grey);
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+
   li {
     margin-bottom: 0.5em;
   }
@@ -83,22 +92,43 @@
   }
   
   /* does not use imported switchfonts set */
-  /* button {
+  /* button:not(#switch-fonts) {
     background-color: var(--primary-color);
     color: #fff;
     border: none;
-    padding: 0.75em 1.25em;
+    padding: 0.6em 1em;
+    margin: auto 1vw auto 0;
     border-radius: 5px;
     cursor: pointer;
-    font-size: clamp(0.5em, calc(0.85em + 0.5 * ((100vw - 320px) / 880)), 1.15em);
+    font-size: 1rem;
     font-family: var(--text);
     transition: background-color 0.3s ease;
-  } */
+  }
   
-  /* button:hover {
+  button:not(#switch-fonts):hover {
     background-color: #2980b9;
   } */
   
+  a.dl {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 0.6em 1em;
+    margin: auto 1vw auto 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: var(--text);
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  a.dl:hover {
+    background-color: #2980b9;
+  }
+  
+
   p {
     color: var(--dark-grey);
     font-size: 1em;
@@ -118,4 +148,21 @@
     a {
       padding: 0.5em 0.75em;
     }
+  }
+
+
+  .code-inline {
+    padding: .2em .4em;
+    font-family: "Courier New";
+    font-weight: bold;
+    cursor: default;
+    margin: 0;
+    font-size: 90%;
+    border-radius: 6px;
+    background-color: #e0e6eb;
+    transition: background-color 0.3s ease;
+  }
+  
+  .code-inline:hover {
+    background-color: #ccd4dc;
   }
