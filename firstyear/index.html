@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Jason Cheng</title>
     <link rel="shortcut icon" href="../img/stariconv2.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
         MathJax = {
@@ -21,12 +22,21 @@
 </head>
 <body class="light-mode">
     <main>
-        <button id="switch-fonts"></button>
-        <h2>First Year Items</h2>
+        <h2>First Year Resources</h2>
         <p>
-          asdasdasdadsadasdafjaohio oio jsaiod josaj dosahd osadh saiodh osadh oih diosahdi osahiod 
+          Here are several resources for first-year engineers. I appreciate credit on sharing. 
         </p>
+
+        <div class="heading-container">
+          <h3 id="section-1">Section 1</h3>
+          <span class="copy-link" onclick="copyHeadingId(this)">
+            <i class="fas fa-link"></i>
+        </span>
+      </div>
+      
+      <button id="switch-fonts" style="opacity: 0.8; transform-origin: right; transform: scale(0.8); color: black; border-style: solid; border-width: 1px; border-color: black">Switch Fonts</button>
     </main>
     <script src="../assets/switchfonts.js"></script>
+    <script src="../assets/headinglinks.js"></script>
 </body>
 </html>

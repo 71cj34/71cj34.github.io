@@ -145,10 +145,11 @@ switchfont.addEventListener('click', function() {
     }
     
     #switch-fonts {
-      position: fixed;
+      position: absolute;
       top: 2rem;
       right: 2rem;
       border: none;
+      font-family: var(--text)
       color: white;
       padding: 15px 28px;
       text-align: center;
