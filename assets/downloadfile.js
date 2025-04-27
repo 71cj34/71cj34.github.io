@@ -1,5 +1,7 @@
 /* 
 Usage: Add 'dl' class to <a>, file to file location
+
+DEPRECATED AS OF 04/26
 */
 
 const dlButtons = document.getElementsByClassName("dl");
