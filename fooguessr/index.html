@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--     <base href="https://jasoncheng.me/">
+    <meta charset="UTF-8"> -->
+    <link rel="shortcut icon" href="https://jasoncheng.me/img/stariconv2.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upscaler</title>
+    <link rel="stylesheet" href="https://jasoncheng.me/fonts/fonts.css" />
+    <link rel="stylesheet" href="resize.css" />
+    <link rel="stylesheet" href="ds1_cloned.css" />
+    <link rel="stylesheet" href="https://jasoncheng.me/api/docs/code.css" />
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>FooGuessr</h1>
+    <p>
+        A <strong>browser-based game</strong> where you guess the programming language of a random snippet from Github. 
+    </p>
+    <div class="app">
+        <p id="rounds">ROUND <span id="round-1">x</span> OF <span id="round-2">x</span>:</p>
+        <pre><code class="code_block">fetch("jasoncheng.me/api", {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/json"
+                "Query": "helloworld"
+            }
+        });</pre></code>
+
+        <button class="button">
+        <!-- <span class="shadow"></span> -->
+        <!-- <span class="edge"></span> -->
+        <div class="front">
+            <span>Submit Guess</span>
+        </div>
+        </button>
+        <br>
+
+    </div>
+    <div class="talk">
+    <p>
+        Quick and dirty image upscaler using the Lanczos algorithm. Doesn't use WebGL or anything fancy, just pure <span class="code-inline">canvas</span>. Note: this will slow down your 
+        web browser, especially if you try and resize anything over 2K, since canvas does not have hardware acceleration by default. I do not plan on fixing it. I couldn't find anything 
+        like this online for free, so I made it myself.
+    </p>
+    <p>
+        Report bugs/feature requests/issues on <a target="_blank" href="https://github.com/71cj34/resize/issues">Github Issues</a>.
+    </p>
+
+    <br><br><br>
+
+    <p class="footer">Released under MIT License. By Jason Cheng. Find source <a href="https://github.com/71cj34/resize">here</a>.</p>
+    </div>
+    <button style="opacity: 0.8; transform-origin: right; transform: scale(0.8); color: black; border-style: solid; border-width: 1px; border-color: black" id="switch-fonts">
+        Switch Fonts
+    </button>
+    <script src="fooguessr.js" type="module"></script>
+    <script src="https://jasoncheng.me/assets/switchfonts.js"></script>
+</body>
+</html>
