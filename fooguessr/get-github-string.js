@@ -1,25 +1,85 @@
-(async () => {
-  // Adjust this to specify the language you want
-  const language = 'javascript';
+let languages = new Array();
+let language = ""
 
+(async () => {
   // Map some common languages to typical file extensions
   const languageExtensions = {
-    javascript: ['js', 'jsx', 'mjs', 'cjs'],
-    python: ['py'],
-    ruby: ['rb'],
-    java: ['java'],
-    go: ['go'],
-    c: ['c', 'h'],
-    cpp: ['cpp', 'cc', 'cxx', 'hpp', 'hh', 'hxx'],
-    typescript: ['ts', 'tsx'],
-    php: ['php'],
-    shell: ['sh', 'bash'],
-    // Add more languages and extensions if needed
+    JavaScript: ['js', 'jsx', 'mjs', 'cjs', 'ts', 'typescript'],
+    Python: ['py'],
+    Ruby: ['rb'],
+    Java: ['java'],
+    Go: ['go'],
+    C: ['c'],
+    "C++": ['cpp', 'cc', 'cxx', 'hpp', 'hh', 'hxx'],
+    PHP: ['php'],
+    Shell: ['sh', 'bash'],
+    ActionScript: ['as'],
+    Assembly: ['i', 'asm'],
+    Bash: ['sh', 'bash'],
+    BASIC: ['bas'],
+    Batch: ['bat', 'cmd'],
+    Brainfuck: ['bf'],
+    'C#': ['cs'],
+    COBOL: ['cbl', 'cob'],
+    CoffeeScript: ['coffee'],
+    CSS: ['css'],
+    D: ['d'],
+    Dart: ['dart'],
+    Docker: ['dockerfile', 'dockerignore'],
+    Fortran: ['f90', 'f', 'for', 'f03', 'f08'],
+    'G-Code': ['gcode', 'nc'],
+    GraphQL: ['graphql', 'gql'],
+    Groovy: ['groovy'],
+    Haskell: ['hs'],
+    HTML: ['html', 'htm'],
+    Kotlin: ['kt', 'kts'],
+    TeX: ['tex'],
+    Lisp: ['lisp', 'lsp', 'cl'],
+    Lua: ['lua'],
+    Makefile: ['makefile', 'Makefile', 'mk'],
+    Markdown: ['md', 'markdown'],
+    MatLab: ['m'],
+    Nix: ['nix'],
+    'Objective-C': ['m'],
+    OCaml: ['ml', 'mli'],
+    Pascal: ['pas', 'pp'],
+    Perl: ['pl', 'pm'],
+    Powershell: ['ps1', 'psm1', 'psd1'],
+    R: ['r'],
+    Rust: ['rs'],
+    Scala: ['scala'],
+    Smalltalk: ['st'],
+    SQL: ['sql'],
+    Swift: ['swift'],
+    'VB.net': ['vb'],
+    Verilog: ['v', 'vh'],
+    'Visual Basic': ['vb', 'vba'],
+    WebAssembly: ['wasm'],
+    Zig: ['zig'],
   };
 
-  function getRandomInt(max) {
+  languages = Object.keys(languageExtensions)
+
+  // create the <select> on the fly
+  let select = document.getElementById('programmingLanguages');
+  let initialOpt = document.createElement('option');
+  initialOpt.value = "";
+  initialOpt.innerHTML = "(Choose a Language)";
+  select.appendChild(initialOpt);
+  for (var i = 0; i<languages.length; i++){
+    let opt = document.createElement('option');
+    opt.value = languages.sort()[i];
+    opt.innerHTML = languages.sort()[i];
+    select.appendChild(opt);
+}
+
+   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
+
+  // TODO: UPDATE THIS WHEN ADDING NEW LANGS!!!!!!!!!!
+  language = languages[getRandomInt(languages.length)];
+  const pre = document.getElementById('pre');
 
   // Step 1: Search for repos in the specified language
   async function searchRepos(language, page = 1) {
@@ -41,7 +101,6 @@
     return data.items;
   }
 
-  // Fetch contents of a directory in repo (not recursive)
   async function fetchDirectoryContents(owner, repo, path = '') {
     let url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
     const res = await fetch(url, {
@@ -53,9 +112,8 @@
     return await res.json();
   }
 
-  // Filter files by extension matching the language
   function filterFilesByLanguage(files, language) {
-    const exts = languageExtensions[language.toLowerCase()];
+    const exts = languageExtensions[language];
     if (!exts) return [];
     return files.filter(file => {
       if (file.type !== 'file') return false;
@@ -77,30 +135,41 @@
     return await res.text();
   }
 
-  function maskItems(text, mask) {
-  if (!textArray || !Array.isArray(textArray) || textArray.length === 0 || !mask || !Array.isArray(mask) || mask.length === 0) {
-    return text; // Handle empty input gracefully
-  }
+function maskItems(text, mask) {
+    console.log("triggered maskItems");
+    if (Array.isArray(text)) {
+        text = text.join("ʥʥʥʥʥ");
+        console.log("array joined");
+    }
 
-  const escapedTerms = mask.map(term => term.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
+    if (!text || !mask || mask.length === 0) {
+        return text; // Handle empty input gracefully
+    }
 
-  const regex = new RegExp(`(${escapedTerms.join('|')})`, 'gi');  // 'gi' flag for global and case-insensitive
+    const escapedTerms = mask.map(term => term.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
 
-  return textArray.map(text => {
-      if (typeof text !== 'string') { // handle non-string elements gracefully, returning them unchanged
-          return text;
-      }
-      const maskedText = text.replace(regex, (match) => {
+    // Modified regex with lookbehind and lookahead
+    const regex = new RegExp(
+        `(?<=^|[\\s.])(?:${escapedTerms.join('|')})(?=$|[\\s])`, 
+        'gi' // 'gi' flag for global and case-insensitive
+    );
+
+    const maskedText = text.replace(regex, (match) => {
         return '█'.repeat(match.length);
-      });
-      return maskedText;
     });
+
+    if (Array.isArray(text)) {
+        return maskedText.split("ʥʥʥʥʥ");
+    }
+    return maskedText.split("ʥʥʥʥʥ");
 }
+
+
 
   // Pick 10 consecutive lines from file content (random offset)
   function pickConsecutiveLines(text, count) {
     const maskedTerms = [language, ...languageExtensions[language]];
-    const lines = text.split(/\r?\n/).filter(line => line.trim() !== '');
+    const lines = maskItems(text.split(/\r?\n/).filter(line => line.trim() !== ''), maskedTerms);
     if (lines.length === 0) return [];
 
     if (lines.length <= count) {
@@ -108,6 +177,7 @@
       return lines;
     } else {
       const startIndex = getRandomInt(lines.length - count + 1);
+      pre.setAttribute("data-start", startIndex)
       return lines.slice(startIndex, startIndex + count);
     }
   }
@@ -188,7 +258,6 @@
       return;
     }
 
-    // Output: assuming you have an element with id="operating-table"
     const output = document.getElementById('operating-table');
     if (output) output.innerText = lines.join('\n');
 
