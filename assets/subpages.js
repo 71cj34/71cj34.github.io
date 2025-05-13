@@ -1,3 +1,6 @@
+const content = document.querySelector('main');
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('subpagesHeader');
     const linksContainer = header.querySelector('.subpages-links');
@@ -10,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 0);
 
         if (window.innerWidth >= 768) {
+            if (content) content.style.marginTop = header.offsetHeight - 50 + 'px';
             if (linksWidth > containerWidth) {
                 header.classList.add('expandable');
                 linksContainer.style.flexWrap = 'wrap';
@@ -34,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
             maxMargin = newMax;
         }
 
-        const content = document.querySelector('main');
         isExpanded = !isExpanded;
 
         if (isExpanded) {
@@ -79,8 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-const style = document.createElement('style');
-style.textContent = `
+const styleLinks = document.createElement('style');
+styleLinks.textContent = `
 .subpages-header {
     position: fixed;
     display: inline-block;
@@ -182,4 +185,4 @@ main {
 }
 
 `;
-document.head.appendChild(style);
+document.head.appendChild(styleLinks);

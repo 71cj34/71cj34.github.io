@@ -1,6 +1,6 @@
 function copyHeadingId(element) {
-    const heading = element.previousElementSibling;
-    const headingId = heading.id;
+    const headingName = element.previousElementSibling;
+    const headingId = headingName.id;
     const url = window.location;
     
     navigator.clipboard.writeText(`${url}#${headingId}`)
@@ -20,8 +20,8 @@ function copyHeadingId(element) {
         });
 }
 
-const style = document.createElement('style');
-style.textContent = `
+const styleHeadings = document.createElement('style');
+styleHeadings.textContent = `
 .heading-container {
     display: flex;
     align-items: center;
@@ -44,4 +44,4 @@ style.textContent = `
     color: #222;
 }
 `;
-document.head.appendChild(style);
+document.head.appendChild(styleHeadings);
