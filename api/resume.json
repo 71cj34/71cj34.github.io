@@ -1,0 +1,136 @@
+{
+  "resume": {
+    "name": "JASON CHENG",
+    "contact": {
+      "phone": "(226)-792-2299",
+      "email": "chenj692@mcmaster.ca",
+      "website": "jasoncheng.me",
+      "project_links": [
+        "github.com/71cj34",
+        "huggingface.co/tssst"
+      ]
+    },
+    "highlights": {
+      "microsoft_office": {
+        "experience": [
+          "10 years in Excel data analysis",
+          "Proficient in Word/TEX formatting",
+          "4 years with VBA macros"
+        ]
+      },
+      "programming": {
+        "experience": [
+          "Python: 6 years coding experience",
+          "HTML/CSS/JS: 3 years' experience",
+          "C/C+: Basic skills",
+          "SQL: Query knowledge",
+          "Others: Regex, ffmpeg, git, Powershell, API construction/use"
+        ]
+      },
+      "other_software_tools": [
+        "Matlab",
+        "Autodesk Inventor"
+      ],
+      "ai_/_llm": {
+        "experience": [
+          "Inference/quantization with llama.cpp, exllamav2",
+          "Merging with mergekit",
+          "Cloud providers, e.g. HuggingFace, Gemini, Anthropic, OpenAI",
+          "Familiar with multimeters/circuitry"
+        ]
+      }
+    },
+    "education": [
+      {
+        "degree": "IB Diploma",
+        "school": "Glenview Park",
+        "year": "2024"
+      },
+      {
+        "degree": "DELF (Française)",
+        "level": "B1",
+        "year": "2024"
+      },
+      {
+        "degree": "B. Eng.",
+        "school": "McMaster",
+        "year": "2024 - Present"
+      }
+    ],
+    "awards": [
+      {
+        "name": "SHAD 2022 Design Project",
+        "details": [
+          "Best Presentation, Best Overall"
+        ]
+      },
+      {
+        "name": "Avogadro Chemistry Contest 2023",
+        "details": [
+          "#183 out of 2957 in Canada"
+        ]
+      }
+    ],
+    "hobbies": [
+      "Swimming",
+      "biking",
+      "piano",
+      "AI/LLM",
+      "software dev.",
+      "building PCs etc."
+    ],
+    "work_experience": [
+      {
+        "title": "Laboratory Technician",
+        "organization": "Waterloo Region District School Board",
+        "duration": "09/2021 - 06/2024",
+        "responsibilities": [
+          "Followed procedures such as safety, waste disposal, WHMIS, and PPE",
+          "Prepared lab equipment and materials for upcoming lessons",
+          "Assisted teachers conducting experiments",
+          "Created & maintained electronic inventory of equipment and supplies",
+          "Collaborated with coworkers for efficient workflow, ensuring timely completion of tasks during high-volume shifts"
+        ]
+      },
+      {
+        "title": "CAP Staffer",
+        "organization": "Department of National Defense",
+        "duration": "07/2023 - 08/2023",
+        "responsibilities": [
+          "Led leadership and personal growth activities for 100+ young cadets",
+          "Created successful and lasting connections with cadets and officers",
+          "Developed ethical decision-making skills",
+          "Fostered a positive and supportive team environment",
+          "Used weekly feedback sessions to gather input from cadets and staff, implementing improvements to the program"
+        ]
+      }
+    ],
+    "selected_projects": [
+      {
+        "name": "MergekitHelper",
+        "description": "A utility using mergekit and llama.cpp to merge and quantize large language models automatically",
+        "tools": [
+          "Python/Batch/Powershell"
+        ]
+      },
+      {
+        "name": "SHAD 2022 Design Project (TempoHealth kit)",
+        "description": "A health kit with a novel portable transducer/ECG combo for rural Canadians",
+        "achievements": [
+          "Complete product design cycle: from business analyses, hardware models to software mockups",
+          "Served as lead UI/UX designer, and hardware QA"
+        ]
+      },
+      {
+        "name": "Linear Algebra Guidebook",
+        "description": "Wrote a 64-page guidebook for linear algebra content up to third-year levels in Markdown and LaTeX",
+        "availability": "Available for free here"
+      },
+      {
+        "name": "Traffic Light Control (IB Calculus Course Project)",
+        "description": "Collected and analyzed traffic data at local intersections, Developed a mathematical model to coordinate lights, Created a report formatted in LaTeX"
+      }
+    ],
+    "references": "Available upon request"
+  }
+}

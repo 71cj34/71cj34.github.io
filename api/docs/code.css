@@ -7,7 +7,7 @@ code {
     border: 1px solid #ddd;
     padding: 10px;
     cursor: pointer;
-    max-width: 50%;
+    max-width: max(50%, 350px);
 }
 
 .code_block {
@@ -24,7 +24,7 @@ pre code {
     white-space: pre-wrap;
     -webkit-overflow-scrolling: touch;
     overflow-x: scroll;
-    max-width: 50%;
+    max-width: max(50%, 350px);
     min-width: 100px;
     padding: 0;
 }
