@@ -36,7 +36,7 @@
 //     const url = `https://api.github.com/search/repositories?${params.toString()}`;
 //     const res = await fetch(url, {
 //         headers: {
-//             "Authorization": `Bearer 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`
+//             "Authorization": `Bearer XXXXXXXXXX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`
 //         }
 //     });
 //     if (!res.ok) throw new Error(`Failed to search repos: ${res.status} ${res.statusText}`);
@@ -202,8 +202,7 @@
     const url = `https://api.github.com/search/repositories?${params.toString()}`;
     const res = await fetch(url, {
       headers: {
-        // Put your GitHub token here if you have one, else remove this header
-        //"Authorization": `Bearer YOUR_GITHUB_TOKEN`
+        "Authorization": `Bearer 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`
       }
     });
     if (!res.ok) throw new Error(`Failed to search repos: ${res.status} ${res.statusText}`);
@@ -214,7 +213,11 @@
   // Fetch contents of a directory in repo (not recursive)
   async function fetchDirectoryContents(owner, repo, path = '') {
     let url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      headers: {
+        "Authorization": "Bearer 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"
+      }
+    });
     if (!res.ok) throw new Error(`Failed to fetch contents: ${res.status} ${res.statusText}`);
     return await res.json();
   }
