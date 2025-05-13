@@ -18,12 +18,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 linksContainer.style.maxHeight = 'none';
             }
         } else {
+            const title = document.getElementsByClassName('subpages-title');
+            title[0].innerText = "Subpages (Click to Expand)";
             header.removeEventListener('click', mobileToggleHandler);
             header.addEventListener('click', mobileToggleHandler);
         }
     }
 
-    function mobileToggleHandler() {
+    function mobileToggleHandler(e) {
+        if (e.target.closest('.subpage-link')) {
+            return;
+        }
+
         function updateMargin(newMax) {
             maxMargin = newMax;
         }
@@ -47,14 +53,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 100);
 
             setTimeout(() => updateMargin(header.offsetHeight), 0.3);
-
-
         } else {
             header.classList.remove('expandable');
             linksContainer.style.maxHeight = '1.5em';
             linksContainer.style.flexWrap = 'nowrap';
 
-            // Trigger reflow again for accurate calculation before collapse
             void header.offsetHeight;
 
             if (content) {
@@ -62,6 +65,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+
+    const subpageLinks = document.querySelectorAll('.subpage-link');
+    subpageLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent the event from bubbling up to the header
+        });
+    });
 
     checkOverflow();
     window.addEventListener('resize', checkOverflow);
