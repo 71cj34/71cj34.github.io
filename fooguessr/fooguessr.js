@@ -1,102 +1,347 @@
-async function getRandomLinesFromGitHub(language) {
-    try {
-        // Step 1: Search for repositories in the specified language
-        const reposResponse = await axios.get('https://corsproxy.io/?url=https://api.github.com/search/repositories', {
-            params: {
-                q: `language:${language}`,
-                sort: 'stars',
-                order: 'desc',
-                per_page: 100 // Get up to 100 repos (API max per page)
-            },
-            headers: {
-                'Accept': 'application/vnd.github.v3+json',
-                'User-Agent': 'RandomCodeLinesApp'
-            }
-        });
+// (async () => {
+//   // Adjust this to specify the language you want
+//   const language = 'javascript';
 
-        if (reposResponse.data.items.length === 0) {
-            throw new Error(`No repositories found for language: ${language}`);
-        }
+//   // Map some common languages to typical file extensions
+//   const languageExtensions = {
+//     javascript: ['js', 'jsx', 'mjs', 'cjs'],
+//     python: ['py'],
+//     ruby: ['rb'],
+//     java: ['java'],
+//     go: ['go'],
+//     c: ['c', 'h'],
+//     cpp: ['cpp', 'cc', 'cxx', 'hpp', 'hh', 'hxx'],
+//     typescript: ['ts', 'tsx'],
+//     php: ['php'],
+//     shell: ['sh', 'bash'],
+//     // Add more languages and extensions if needed
+//   };
 
-        // Step 2: Pick a random repository
-        const randomRepo = reposResponse.data.items[
-            Math.floor(Math.random() * reposResponse.data.items.length)
-        ];
-        const repoName = randomRepo.full_name;
+//   function getRandomInt(maxi) {
+//     return Math.floor(Math.random() * maxi);
+//   }
 
-        // Step 3: Get repository contents
-        const contentsResponse = await axios.get(
-            `https://api.github.com/repos/${repoName}/contents`, {
-                headers: {
-                    'Accept': 'application/vnd.github.v3+json',
-                    'User-Agent': 'RandomCodeLinesApp'
-                }
-            }
-        );
+//   // Helper to pause for ms milliseconds (to avoid rate limits sometimes)
+//   const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-        // Filter for files (not directories) and files that are likely code
-        const files = contentsResponse.data.filter(
-            item => item.type === 'file' &&
-            item.size < 100000 && // Limit to files under 100KB
-            !item.name.includes('LICENSE') && // Exclude license files
-            !item.name.includes('README') // Exclude readme files
-        );
+//   // Step 1: Search for repos in the specified language
+//   async function searchRepos(language, page = 1) {
+//     const params = new URLSearchParams({
+//       q: `language:${language}`,
+//       sort: 'stars',
+//       order: 'desc',
+//       per_page: '30',
+//       page: page.toString()
+//     });
+//     const url = `https://api.github.com/search/repositories?${params.toString()}`;
+//     const res = await fetch(url, {
+//         headers: {
+//             "Authorization": `Bearer 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`
+//         }
+//     });
+//     if (!res.ok) throw new Error(`Failed to search repos: ${res.status} ${res.statusText}`);
+//     const data = await res.json();
+//     return data.items;
+//   }
 
-        if (files.length === 0) {
-            throw new Error('No suitable files found in the repository');
-        }
+//   // Step 2 & 3: List files recursively in the repo
+//   async function fetchRepoFiles(owner, repo, path = '') {
+//     const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+//     const res = await fetch(url);
+//     if (!res.ok) throw new Error(`Failed to fetch contents: ${res.status} ${res.statusText}`);
+//     const files = await res.json();
+//     let allFiles = [];
 
-        // Pick a random file
-        const randomFile = files[Math.floor(Math.random() * files.length)];
+//     for (const file of files) {
+//       if (file.type === 'file') {
+//         allFiles.push(file);
+//       } else if (file.type === 'dir') {
+//         // Recursively get files for subdirectory
+//         const subFiles = await fetchRepoFiles(owner, repo, file.path);
+//         allFiles = allFiles.concat(subFiles);
+//       }
+//     }
+//     return allFiles;
+//   }
 
-        // Step 4: Get the file content
-        const fileResponse = await axios.get(randomFile.download_url, {
-            headers: {
-                'User-Agent': 'RandomCodeLinesApp'
-            }
-        });
+//   function filterFilesByLanguage(files, language) {
+//     const exts = languageExtensions[language.toLowerCase()];
+//     if (!exts) return []; // no extension mapping, skip
+//     return files.filter(file => {
+//       const ext = file.name.split('.').pop().toLowerCase();
+//       return exts.includes(ext);
+//     });
+//   }
 
-        const fileContent = fileResponse.data;
-        const lines = fileContent.split('\n').filter(line => line.trim() !== '');
+//   // Step 5: Fetch raw content of a file
+//   async function fetchFileContent(file) {
+//     // The 'download_url' provides direct raw content link
+//     if (!file.download_url) throw new Error('No download_url');
+//     const res = await fetch(file.download_url);
+//     if (!res.ok) throw new Error(`Failed to fetch file content: ${res.status} ${res.statusText}`);
+//     return await res.text();
+//   }
 
-        if (lines.length === 0) {
-            throw new Error('File is empty or contains no lines');
-        }
+//   // Step 6: Pick 10 random lines from file content
+//   function pickRandomLines(text, count) {
+//     const lines = text.split(/\r?\n/).filter(line => line.trim() !== '');
+//     if (lines.length === 0) return [];
 
-        // Step 5: Get 10 random lines
-        const randomLines = [];
-        const lineCount = Math.min(10, lines.length);
+//     const result = [];
+//     const totalLines = lines.length;
+    
+//     for (let i = 0; i < count; i++)
+//         result.push(lines[i + getRandomInt(Math.max(totalLines - (count + 1), 0))])
 
-        // To ensure we get unique lines, we'll shuffle and take first 10
-        const shuffled = [...lines].sort(() =>
-            0.5 - Math.random()
-        );
-        randomLines.push(...shuffled.slice(0, lineCount));
+//     return result;
+//   }
 
-        return {
-            repository: repoName,
-            file: randomFile.name,
-            lines: randomLines,
-            url: randomFile.html_url
-        };
-    } catch (error) {
-        console.error('Error fetching random lines:', error.message);
-        throw error; // Re-throw to allow caller to handle
-    }
-}
+//   // Main process:
+//   try {
+//     console.log(`Searching repositories for language: ${language}...`);
+//     // GitHub search only returns up to 1000 results, 30 per page, max 34 pages
+//     // We'll randomly pick a page between 1 and 5 to diversify more
+//     let repos = [];
+//     let attempts = 0;
 
-// Example usage:
+//     // Try to get repos until at least one is found or max tries reached
+//     while (repos.length === 0 && attempts < 5) {
+//       const page = 1 + getRandomInt(5);
+//       try {
+//         repos = await searchRepos(language, page);
+//       } catch (e) {
+//         console.warn('Error fetching repos:', e.message);
+//       }
+//       attempts++;
+//     }
+
+//     if (repos.length === 0) {
+//       console.error('No repositories found.');
+//       return;
+//     }
+
+//     // Pick random repository
+//     const repo = repos[getRandomInt(repos.length)];
+//     console.log(`Selected repository: ${repo.full_name}`);
+
+//     // Fetch files
+//     let allFiles = [];
+//     try {
+//       allFiles = await fetchRepoFiles(repo.owner.login, repo.name);
+//     } catch (e) {
+//       console.error(`Could not fetch files for ${repo.full_name}:`, e.message);
+//       return;
+//     }
+
+//     const filteredFiles = filterFilesByLanguage(allFiles, language);
+//     if (filteredFiles.length === 0) {
+//       console.error(`No ${language} source files found in the repo.`);
+//       return;
+//     }
+
+//     // Pick random file
+//     const file = filteredFiles[getRandomInt(filteredFiles.length)];
+//     console.log(`Selected file: ${file.path}`);
+
+//     // Fetch file content
+//     const content = await fetchFileContent(file);
+
+//     // Pick 10 random lines
+//     const randomLines = pickRandomLines(content, 10);
+//     if (randomLines.length === 0) {
+//       console.warn('Selected file is empty or has no lines.');
+//       return;
+//     }
+
+//     const output = document.getElementById('operating-table');
+//     output.innerText = randomLines
+
+//     console.log('10 random lines from the file:');
+//     randomLines.forEach((line) => {
+//       console.log(`${line}`);
+//     });
+
+//   } catch (error) {
+//     console.error('Error:', error.message);
+//   }
+// })();
+
+
 (async () => {
-    try {
-        const language = 'Powershell'; // You can change this to any language
-        const result = await getRandomLinesFromGitHub(language);
+  // Adjust this to specify the language you want
+  const language = 'javascript';
 
-        console.log(`Repository: ${result.repository}`);
-        console.log(`File: ${result.file}`);
-        console.log(`URL: ${result.url}`);
-        console.log('\nRandom lines:');
-        result.lines.forEach((line, i) => console.log(`${i + 1}. ${line}`));
-    } catch (error) {
-        console.error('Failed to get random lines:', error.message);
+  // Map some common languages to typical file extensions
+  const languageExtensions = {
+    javascript: ['js', 'jsx', 'mjs', 'cjs'],
+    python: ['py'],
+    ruby: ['rb'],
+    java: ['java'],
+    go: ['go'],
+    c: ['c', 'h'],
+    cpp: ['cpp', 'cc', 'cxx', 'hpp', 'hh', 'hxx'],
+    typescript: ['ts', 'tsx'],
+    php: ['php'],
+    shell: ['sh', 'bash'],
+    // Add more languages and extensions if needed
+  };
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  // Step 1: Search for repos in the specified language
+  async function searchRepos(language, page = 1) {
+    const params = new URLSearchParams({
+      q: `language:${language}`,
+      sort: 'stars',
+      order: 'desc',
+      per_page: '30',
+      page: page.toString()
+    });
+    const url = `https://api.github.com/search/repositories?${params.toString()}`;
+    const res = await fetch(url, {
+      headers: {
+        // Put your GitHub token here if you have one, else remove this header
+        //"Authorization": `Bearer YOUR_GITHUB_TOKEN`
+      }
+    });
+    if (!res.ok) throw new Error(`Failed to search repos: ${res.status} ${res.statusText}`);
+    const data = await res.json();
+    return data.items;
+  }
+
+  // Fetch contents of a directory in repo (not recursive)
+  async function fetchDirectoryContents(owner, repo, path = '') {
+    let url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Failed to fetch contents: ${res.status} ${res.statusText}`);
+    return await res.json();
+  }
+
+  // Filter files by extension matching the language
+  function filterFilesByLanguage(files, language) {
+    const exts = languageExtensions[language.toLowerCase()];
+    if (!exts) return [];
+    return files.filter(file => {
+      if (file.type !== 'file') return false;
+      const ext = file.name.split('.').pop().toLowerCase();
+      return exts.includes(ext);
+    });
+  }
+
+  // Filter directories from contents
+  function filterDirectories(files) {
+    return files.filter(file => file.type === 'dir');
+  }
+
+  // Fetch raw content of a file
+  async function fetchFileContent(file) {
+    if (!file.download_url) throw new Error('No download_url');
+    const res = await fetch(file.download_url);
+    if (!res.ok) throw new Error(`Failed to fetch file content: ${res.status} ${res.statusText}`);
+    return await res.text();
+  }
+
+  // Pick 10 consecutive lines from file content (random offset)
+  function pickConsecutiveLines(text, count) {
+    const lines = text.split(/\r?\n/).filter(line => line.trim() !== '');
+    if (lines.length === 0) return [];
+
+    if (lines.length <= count) {
+      // If not enough lines, return all
+      return lines;
+    } else {
+      const startIndex = getRandomInt(lines.length - count + 1);
+      return lines.slice(startIndex, startIndex + count);
     }
+  }
+
+  try {
+    console.log(`Searching repositories for language: ${language}...`);
+    let repos = [];
+    let attempts = 0;
+
+    // Get some repos, try up to 5 pages randomly
+    while (repos.length === 0 && attempts < 5) {
+      const page = 1 + getRandomInt(5);
+      try {
+        repos = await searchRepos(language, page);
+      } catch (e) {
+        console.warn('Error fetching repos:', e.message);
+      }
+      attempts++;
+    }
+
+    if (repos.length === 0) {
+      console.error('No repositories found.');
+      return;
+    }
+
+    // Pick a random repo
+    const repo = repos[getRandomInt(repos.length)];
+    console.log(`Selected repository: ${repo.full_name}`);
+
+    const owner = repo.owner.login;
+    const repoName = repo.name;
+
+    // Breadth-first exploration of directories until we find a language file
+    const dirQueue = [''];  // start from root directory
+    let selectedFile = null;
+
+    while (dirQueue.length > 0 && selectedFile === null) {
+      const currentPath = dirQueue.shift();
+      let contents = [];
+
+      try {
+        contents = await fetchDirectoryContents(owner, repoName, currentPath);
+      } catch (e) {
+        console.warn(`Failed to fetch contents of ${currentPath}: ${e.message}`);
+        continue;
+      }
+
+      // Check for language files in this directory
+      const langFiles = filterFilesByLanguage(contents, language);
+
+      if (langFiles.length > 0) {
+        // Pick a random file from matching files here
+        selectedFile = langFiles[getRandomInt(langFiles.length)];
+        break;
+      }
+
+      // If no language files, add subdirectories to queue
+      const subDirs = filterDirectories(contents);
+      for (const dir of subDirs) {
+        dirQueue.push(dir.path);
+      }
+    }
+
+    if (!selectedFile) {
+      console.error(`No ${language} source files found in the repository.`);
+      return;
+    }
+
+    console.log(`Selected file: ${selectedFile.path}`);
+
+    // Fetch file content
+    const content = await fetchFileContent(selectedFile);
+
+    // Pick 10 consecutive lines:
+    const lines = pickConsecutiveLines(content, 10);
+    if (lines.length === 0) {
+      console.warn('Selected file is empty or has no lines.');
+      return;
+    }
+
+    // Output: assuming you have an element with id="operating-table"
+    const output = document.getElementById('operating-table');
+    if (output) output.innerText = lines.join('\n');
+
+    console.log('10 consecutive lines from the file:');
+    lines.forEach(line => console.log(line));
+
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
 })();
+ 
