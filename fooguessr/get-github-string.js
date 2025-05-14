@@ -85,6 +85,10 @@ export async function getSnippet(lang) {
   try {
     language = lang
     console.log(`Searching repositories for language: ${language}...`);
+    
+    reveal = document.getElementById('reveal');
+    reveal.style.display = 'none';
+
     output.innerHTML = "<span style='color: #fffbd6'> If this textbox freezes for more than 5 seconds, open your browser console and check for errors.</span>\n\nLoading code snippet...";
     output.innerText += "\nSearching repositories for language...";
     let repos = [];
@@ -169,8 +173,6 @@ export async function getSnippet(lang) {
       return;
     }
 
-    console.log(`Selected file: ${selectedFile.path}`);
-
     // go fetch
     output.innerText += "\nFetching file content...";
     const content = await fetchFileContent(selectedFile);
@@ -252,10 +254,8 @@ export async function getSnippet(lang) {
   }
 
 function maskItems(text, mask) {
-    console.log("triggered maskItems");
     if (Array.isArray(text)) {
         text = text.join("ʥʥʥʥʥ");
-        console.log("array joined");
     }
 
     if (!text || !mask || mask.length === 0) {
@@ -277,12 +277,39 @@ function maskItems(text, mask) {
     return maskedText.split("ʥʥʥʥʥ");
 }
 
+function normalizeIndentation(lines) {
+  const indentLengths = lines
+    .filter(line => line.trim().length > 0) // skip empty lines
+    .map(line => {
+      const match = line.match(/^(\s*)/);
+      return match ? match[1].length : 0;
+    });
 
+  if (indentLengths.length === 0) {
+    return lines;
+  }
+
+  // find min indent among all non-empty lines
+  const minIndent = Math.min(...indentLengths);
+
+  // hedge trimmin
+  return lines.map(line => {
+    if (line.trim().length === 0) {
+      // empty line
+      return line;
+    }
+    // Remove exactly minIndent characters from start
+    // assuming indent is by characters (could be space or tab)
+    return line.slice(minIndent);
+  });
+}
 
   // Pick 10 consecutive lines from file content (random offset)
   function pickConsecutiveLines(text, count) {
     const maskedTerms = [language, ...languageExtensions[language]];
-    const lines = maskItems(text.split(/\r?\n/).filter(line => line.trim() !== ''), maskedTerms);
+    // const lines = maskItems(text.split(/\r?\n/).filter(line => line.trim() !== ''), maskedTerms);
+    // const lines = maskItems(text.split(/\r?\n/).map(line => line.trim()), maskedTerms);
+    const lines = maskItems(normalizeIndentation(text.split(/\r?\n/)), maskedTerms);
     if (lines.length === 0) return [];
 
     if (lines.length <= count) {
@@ -291,7 +318,7 @@ function maskItems(text, mask) {
     } else {
       const startIndex = getRandomInt(lines.length - count + 1);
       pre.setAttribute("data-start", startIndex)
-      return [lines.slice(startIndex, startIndex + count), `${startIndex+1} - ${startIndex + count}`];
+      return [lines.slice(startIndex, startIndex + count), `${startIndex+1} - ${startIndex+1 + count}`];
     }
   }
 

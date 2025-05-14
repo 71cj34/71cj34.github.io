@@ -72,7 +72,7 @@ function youLose() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-document.getElementById('submit').addEventListener('click', () => {
+document.getElementById('submit').addEventListener('click', async () => {
     const ans = document.getElementById('programmingLanguages');
     console.log("here")
     if (language == ans.value) {
@@ -81,20 +81,29 @@ document.getElementById('submit').addEventListener('click', () => {
         youLose();
     }
 
-    let url = "";
-    fetch('https://api.github.com/repos/' + repo.full_name)
-  .then(response => response.json())
-  .then(data => {
+    const response = await fetch('https://api.github.com/repos/' + repo.full_name, {
+        headers: {
+            'Accept': 'application/vnd.github.v3+json',
+            'Authorization': 'Bearer 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'
+        }
+    });
+    const data = await response.json();
+    console.log(dupletLines);
     const defaultBranch = data.default_branch;
-    url = 'https://github.com/' + repo.full_name + '/tree/' + defaultBranch + '/' + selectedFile.path;
+    const url = 'https://github.com/' + repo.full_name + '/tree/' + defaultBranch + '/' + selectedFile.path + "#L" + dupletLines[1].split(" - ")[0] + "-L" + dupletLines[1].split(" - ")[1];
     console.log(url);
-  });
+
 
     reveal = document.getElementById('reveal');
-    reveal.innerHTML = `${language != ans.value ? "<span style='color: red'>You lose...</span>" : "<span style='color: green'>You win!</span>"}\n\n
+    reveal.style.display = 'inline-block';
+
+    // classes are for cowards
+    reveal.innerHTML = `<div style='border: 1px solid ${language != ans.value ? "red" : "green"}; border-radius: 8px; padding: 10px;'>
+    <${language != ans.value ? "span style='color: red; font-size: 1.2rem'>You lose...</span>" : "<span style='color: green'>You win!</span>"}<br><br>
     
-    This snippet was <strong><code>${language}</strong></code> code from the repository <a href="${"https://github.com/" + repo.full_name}" target="_blank"><code>${repo.full_name}</code></a> 
-    from lines ${dupletLines[1]} of file <a href="${url}" target="_blank"><code>${selectedFile.path.split("/")[1] ? selectedFile.path.split("/")[1] : selectedFile.path}</code></a>. 
+    This snippet was <strong><code class="code-inline special-code" style="text-decoration: none;">${language}</strong></code> code from the repository <a href="${"https://github.com/" + repo.full_name}"
+     target="_blank"><code class="code-inline special-code">${repo.full_name}</code></a> from lines ${dupletLines[1]} of file <a href="${url}" target="_blank">
+     <code class="code-inline special-code">${selectedFile.path.split("/")[1] ? selectedFile.path.split("/")[1] : selectedFile.path}</code></a>.</div>
     `
 });
 });
