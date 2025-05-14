@@ -13,27 +13,37 @@
     <link rel="stylesheet" href="assets/prism.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
-        canvas {
-            border: 1px solid black;
+        code {
+            margin: 1em 0;
         }
     </style>
 </head>
 <body>
     <h1>FooGuessr</h1>
     <p>
-        A <strong>browser-based game</strong> where you guess the programming language of a random snippet from Github. 
+        A <strong>browser-based game</strong> where you guess the programming language of a random snippet from Github.
+    </p>
+    <p>
+        Note that identifying features, more specifically things like the name of the language and its extensions, are censored with ██████. Can't make it too easy ;) 
     </p>
     <div class="app">
-        <button id="generateButton">asdasd</button>
-        <p id="rounds">ROUND <span id="round-1">x</span> OF <span id="round-2">x</span>:</p>
-        <pre data-start="1" class="line-numbers" id="pre" style="max-width: 70%"><code class="code_block" id="operating-table" style="width: 100%; max-width: 100%;">Press the button above to start!</pre></code>
+        <button id="generateButton" class="button" style="transform: scale(0.8); transform-origin: top left">
+        
+        <!-- <span class="shadow"></span> -->
+        <!-- <span class="edge"></span> -->
+        <div class="front">
+            <span>Start!</span>
+        </div>
+        </button>
+        <!-- <p id="rounds">ROUND <span id="round-1">x</span> OF <span id="round-2">x</span>:</p> -->
+        <pre data-start="1" class="line-numbers" id="pre" style="max-width: 95%; overflow-x: auto; white-space: nowrap;"><code class="code_block" id="operating-table" style="width: 100%; max-width: 100%;">Press the button above to start!</pre></code>
 
         <div>
             <select id="programmingLanguages" name="programmingLanguages">
             </select>
         </div>
 
-        <button class="button">
+        <button class="button" id="submit">
         <!-- <span class="shadow"></span> -->
         <!-- <span class="edge"></span> -->
         <div class="front">
@@ -41,6 +51,7 @@
         </div>
         </button>
         <br>
+        <p id="reveal"></p>
 
     </div>
     <div class="talk">
@@ -62,6 +73,7 @@
     </button>
     <!-- <script src="get-github-string.js"></script> -->
     <script src="assets/prism.js"></script>
+    <script src="check-ans.js" type="module"></script>
     <script src="https://jasoncheng.me/assets/switchfonts.js"></script>
 
     <script type="module">
