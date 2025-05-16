@@ -342,6 +342,10 @@ a.subpage-link {
         display: none;
         opacity: 1;
     }
+
+    .subpage-link.has-subdropdown .dropdown-arrow { /* Hide the original arrow on mobile */
+    display: none;
+}
     
     .subpage-link.has-subdropdown::after {
         content: ' ▼';
