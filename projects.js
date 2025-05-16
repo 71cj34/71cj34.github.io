@@ -15,13 +15,14 @@ function parseMarkdown(text) {
 
 document.addEventListener('DOMContentLoaded', (event) => {
     const repos = [
-        '71cj34/CompressExp',
+        '71cj34/fooguessr',
         '71cj34/MergekitHelper',
         '71cj34/71cj34.github.io'
     ];
     const alt_repos = [
         '71cj34/rsz',
         '71cj34/anti-secrets',
+        '71cj34/CompressExp',
         'Prof-Starsky/solarsense',
     ];
 
@@ -30,64 +31,76 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const originalContent = projectsContent.innerHTML;
 
     const newContent = `
-        <p>
-        <a href="https://github.com/71cj34/rsz/">rsz</a>
-        </p>
-        <p>
-        Fast yet simple Powershell utility to bulk resize images. 
-        <br>
-        Made for personal use but expanded for general usability.
-        <br>
-        <a href="https://github.com/71cj34/rsz">Download here.</a>
-        </p>
-        <div style="font-size: 90%">
-        <p class="commit-caption">Last commit: </p>
-        <a id="commit-message-alt-1" href="/">Loading last commit...</a>
-        <div id="commit-date-alt-1">Loading last commit date...</div>
-        </div>
-        <br>
-
-        <img src="/img/linev3.png" style="display: block; margin-left: auto; margin-right: auto;">
-
-        <p>
-        <a href="https://github.com/71cj34/anti-secrets">anti-secrets</a>
-        </p>
-        <p>
-        Cloudflare JavaScript Worker that protects exposed/misconfigured internal links.
-        </p>
-        <p>
-        Written for simplicity, semanticness, and configurability.
-        </p>
-        <p>
-        See an example <a href="/.env" target="_blank">here</a>.
-        </p>
-        <div style="font-size: 90%">
-        <p class="commit-caption">Last commit: </p>
-        <a id="commit-message-alt-2" href="/">Loading last commit...</a>
-        <div id="commit-date-alt-2">Loading last commit date...</div>   
-        </div
-        <br>
-
-        <img src="/img/linev3.png" style="display: block; margin-left: auto; margin-right: auto;">
-
-        <p>
-        <a href="https://github.com/Prof-Starsky/solarsense/">SolarSense</a>
-        </p>
-        <p>
-        Made for the DeltaHacks XI hackathon.
-        <br>
-        A TypeScript app using Vite and the Cohere, OpenMeteo, and Google Maps API.
-        <br>
-        Upon inputting any location, it tells you how much solar panels cost in that area.
-        <br>
-        <a href="https://solar-sense.co">Try it here.</a>
-        </p>
-        <div style="font-size: 90%">
-        <p class="commit-caption">Last commit: </p>
-        <a id="commit-message-alt-3" href="/">Loading last commit...</a>
-        <div id="commit-date-alt-3">Loading last commit date...</div>   
-        </div
-        <br>
+            <p>
+            <a href="https://github.com/71cj34/rsz/">rsz</a>
+            </p>
+            <p>
+            Fast yet simple Powershell utility to bulk resize images. 
+            <br>
+            Made for personal use but expanded for general usability.
+            <br>
+            <a href="https://github.com/71cj34/rsz">Download here.</a>
+            </p>
+            <div style="font-size: 90%">
+            <p class="commit-caption">Last commit: </p>
+            <a id="commit-message-alt-1" href="/">Loading last commit...</a>
+            <div id="commit-date-alt-1">Loading last commit date...</div>
+            </div>
+            <br>
+            <img src="/img/linev3.png" style="display: block; margin-left: auto; margin-right: auto;">
+            <p>
+            <a href="https://github.com/71cj34/anti-secrets">anti-secrets</a>
+            </p>
+            <p>
+            Cloudflare JavaScript Worker that protects exposed/misconfigured internal links.
+            </p>
+            <p>
+            Written for simplicity, semanticness, and configurability.
+            </p>
+            <p>
+            See an example <a href="/.env" target="_blank">here</a>.
+            </p>
+            <div style="font-size: 90%">
+            <p class="commit-caption">Last commit: </p>
+            <a id="commit-message-alt-2" href="/">Loading last commit...</a>
+            <div id="commit-date-alt-2">Loading last commit date...</div>
+            </div
+            <br>
+            <img src="/img/linev3.png" style="display: block; margin-left: auto; margin-right: auto;">
+            <p>
+            <a href="https://github.com/71cj34/CompressExp/">CompressExp</a>
+            </p>
+            <p>
+            Electron program leveraging <a href="https://github.com/FFmpeg/FFmpeg">ffmpeg</a> to compress videos easily. 
+            <br>
+            Stable binaries are released for use. Completed.
+            <br>
+            <a href="https://github.com/71cj34/CompressExp/releases">Download here.</a>
+            </p>
+            <div style="font-size: 90%">
+            <p class="commit-caption">Last commit: </p>
+            <a id="commit-message-alt-3" href="/">Loading last commit...</a>
+            <div id="commit-date-alt-3">Loading last commit date...</div>
+            </div>
+            <img src="/img/linev3.png" style="display: block; margin-left: auto; margin-right: auto;">
+            <p>
+            <a href="https://github.com/Prof-Starsky/solarsense/">SolarSense</a>
+            </p>
+            <p>
+            Made for the DeltaHacks XI hackathon.
+            <br>
+            A TypeScript app using Vite and the Cohere, OpenMeteo, and Google Maps API.
+            <br>
+            Upon inputting any location, it tells you how much solar panels cost in that area.
+            <br>
+            <a href="https://solar-sense.co">Try it here.</a>
+            </p>
+            <div style="font-size: 90%">
+            <p class="commit-caption">Last commit: </p>
+            <a id="commit-message-alt-4" href="/">Loading last commit...</a>
+            <div id="commit-date-alt-4">Loading last commit date...</div>
+            </div>
+            <br>
     `;
 
     function githubreplace(repolist, numberprefix) {
