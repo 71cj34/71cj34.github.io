@@ -84,11 +84,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 dropdownRect = subdropdown.getBoundingClientRect();
                 subdropdown.style.display = 'none';
                 subdropdown.style.visibility = 'visible';
-            }, "80");
+            }, "60");
 
             const parentRect = subdropdown.offsetParent.getBoundingClientRect();
 
-            console.log(dropdownRect);
 
             // Position the dropdown under its parent link
             function positionDropdown() {
@@ -98,9 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 let dropdownWidth = dropdownRect.right - dropdownRect.left;
 
                 // subdropdown.style.left = `${linkRect.left - header.getBoundingClientRect().left - linkRect.width/4}px`;
-                console.log(dropdownRect);
-                console.log(linkCenter - dropdownWidth / 2);
-                console.log(linkCenter + dropdownWidth / 2);
+
                 subdropdown.style.left = `${linkCenter - parentRect.left - (dropdownRect.width / 2)}px`;
                 subdropdown.style.top = `${linkRect.bottom - header.getBoundingClientRect().top}px`;
             }
@@ -232,7 +229,7 @@ body.dark-mode .subpages-title {
     position: relative;
     text-decoration: none;
     color: #333;
-    padding: 2px 4px;
+    padding: 4px 8px;
     white-space: nowrap;
     transition: color 0.2s ease;
     line-height: 1.4;
@@ -312,6 +309,24 @@ body.dark-mode .subdropdown-link {
 body.dark-mode .subdropdown-link:hover {
     background-color: #444;
     color: #c0392b;
+}
+
+.subpage-link.has-subdropdown {
+    font-weight: bold;
+}
+
+a.subpage-link {
+    font-weight: normal;
+}
+
+.dropdown-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  transform-origin: center;
+}
+
+.subpage-link:hover > .dropdown-arrow {
+  transform: rotate(180deg);
 }
 
 /* Better mobile experience */
