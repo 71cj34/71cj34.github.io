@@ -1,10 +1,10 @@
 const content = document.querySelector('main');
 
-
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('subpagesHeader');
     const linksContainer = header.querySelector('.subpages-links');
     let isExpanded = false;
+    let hideTimeout = null;
 
     function checkOverflow() {
         const containerWidth = header.offsetWidth;
@@ -30,12 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function mobileToggleHandler(e) {
-        if (e.target.closest('.subpage-link')) {
+        if (e.target.closest('.subpage-link') || e.target.closest('.subdropdown')) {
             return;
-        }
-
-        function updateMargin(newMax) {
-            maxMargin = newMax;
         }
 
         isExpanded = !isExpanded;
@@ -54,8 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     clearInterval(interval);
                 }
             }, 100);
-
-            setTimeout(() => updateMargin(header.offsetHeight), 0.3);
         } else {
             header.classList.remove('expandable');
             linksContainer.style.maxHeight = '1.5em';
@@ -66,21 +60,122 @@ document.addEventListener('DOMContentLoaded', function() {
             if (content) {
                 content.style.marginTop = '0';
             }
+
+            document.querySelectorAll('.subdropdown').forEach(dropdown => {
+                dropdown.style.opacity = '0';
+                setTimeout(() => {
+                    dropdown.style.display = 'none';
+                }, 300);
+            });
         }
     }
 
-    const subpageLinks = document.querySelectorAll('.subpage-link');
+    ///////////////////////////////////
+
+    function initSubdropdowns() {
+        document.querySelectorAll('.subpage-link.has-subdropdown').forEach(link => {
+            const subdropdown = link.nextElementSibling;
+
+            let dropdownRect;
+
+            subdropdown.style.display = 'block';
+            subdropdown.style.visibility = 'hidden';
+            setTimeout(() => {
+                dropdownRect = subdropdown.getBoundingClientRect();
+                subdropdown.style.display = 'none';
+                subdropdown.style.visibility = 'visible';
+            }, "80");
+
+            const parentRect = subdropdown.offsetParent.getBoundingClientRect();
+
+            console.log(dropdownRect);
+
+            // Position the dropdown under its parent link
+            function positionDropdown() {
+                const linkRect = link.getBoundingClientRect();
+
+                let linkCenter = (linkRect.left + linkRect.right) / 2.0;
+                let dropdownWidth = dropdownRect.right - dropdownRect.left;
+
+                // subdropdown.style.left = `${linkRect.left - header.getBoundingClientRect().left - linkRect.width/4}px`;
+                console.log(dropdownRect);
+                console.log(linkCenter - dropdownWidth / 2);
+                console.log(linkCenter + dropdownWidth / 2);
+                subdropdown.style.left = `${linkCenter - parentRect.left - (dropdownRect.width / 2)}px`;
+                subdropdown.style.top = `${linkRect.bottom - header.getBoundingClientRect().top}px`;
+            }
+
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth < 768) {
+                    e.preventDefault();
+                    const isVisible = subdropdown.style.display === 'block';
+                    document.querySelectorAll('.subdropdown').forEach(d => {
+                        d.style.display = 'none';
+                        d.style.opacity = '0';
+                    });
+                    positionDropdown();
+                    subdropdown.style.display = 'block';
+                    subdropdown.style.opacity = '1';
+                }
+            });
+
+            link.addEventListener('mouseenter', function() {
+                if (window.innerWidth >= 768) {
+                    clearTimeout(hideTimeout);
+                    document.querySelectorAll('.subdropdown').forEach(d => {
+                        d.style.display = 'none';
+                        d.style.opacity = '0';
+                    });
+                    positionDropdown();
+                    subdropdown.style.display = 'block';
+                    setTimeout(() => {
+                        subdropdown.style.opacity = '1';
+                    }, 10);
+                }
+            });
+
+            link.addEventListener('mouseleave', function(e) {
+                if (window.innerWidth >= 768) {
+                    startHideTimeout(subdropdown);
+                }
+            });
+
+            subdropdown.addEventListener('mouseenter', function() {
+                if (window.innerWidth >= 768) {
+                    clearTimeout(hideTimeout);
+                    subdropdown.style.opacity = '1';
+                }
+            });
+
+            subdropdown.addEventListener('mouseleave', function() {
+                if (window.innerWidth >= 768) {
+                    startHideTimeout(subdropdown);
+                }
+            });
+        });
+    }
+
+    function startHideTimeout(subdropdown) {
+        clearTimeout(hideTimeout);
+        hideTimeout = setTimeout(() => {
+            subdropdown.style.opacity = '0';
+            setTimeout(() => {
+                subdropdown.style.display = 'none';
+            }, 300);
+        }, 1000); // 1 second delay before fade starts
+    }
+
+    const subpageLinks = document.querySelectorAll('.subpage-link, .subdropdown, .subdropdown-link');
     subpageLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent the event from bubbling up to the header
+            e.stopPropagation();
         });
     });
 
     checkOverflow();
+    initSubdropdowns();
     window.addEventListener('resize', checkOverflow);
 });
-
-
 
 const styleLinks = document.createElement('style');
 styleLinks.textContent = `
@@ -94,6 +189,7 @@ styleLinks.textContent = `
     padding: 10px;
     border-radius: 4px;
     transition: background-color 0.3s ease;
+    z-index: 1000;
 }
 
 .subpages-header:hover {
@@ -130,7 +226,6 @@ body.dark-mode .subpages-title {
 
 .subpages-header.expandable:hover .subpages-links {
     max-height: 500px;
-    // gap: 10px 20px;
 }
 
 .subpage-link {
@@ -177,12 +272,69 @@ main {
     background-color: #c0392b;
 }
 
+/* Subdropdown styles */
+.subdropdown {
+    display: none;
+    opacity: 0;
+    position: absolute;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    padding: 5px 0;
+    min-width: 150px;
+    z-index: 1001;
+    transition: opacity 0.3s ease;
+}
+
+body.dark-mode .subdropdown {
+    background-color: #333;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.subdropdown-link {
+    display: block;
+    padding: 8px 15px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+body.dark-mode .subdropdown-link {
+    color: #ccc;
+}
+
+.subdropdown-link:hover {
+    background-color: #f0f0f0;
+    color: #e74c3c;
+    padding-left: 20px;
+}
+
+body.dark-mode .subdropdown-link:hover {
+    background-color: #444;
+    color: #c0392b;
+}
+
 /* Better mobile experience */
 @media (max-width: 768px) {
     .subpages-header.expandable .subpages-links {
         max-height: none;
     }
+    
+    .subdropdown {
+        position: static;
+        box-shadow: none;
+        padding-left: 15px;
+        display: none;
+        opacity: 1;
+    }
+    
+    .subpage-link.has-subdropdown::after {
+        content: ' ▼';
+        position: static;
+        display: inline;
+        background: none;
+        transform: none;
+    }
 }
-
 `;
 document.head.appendChild(styleLinks);
