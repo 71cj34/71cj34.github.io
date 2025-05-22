@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const styleLinks = document.createElement('style');
 styleLinks.textContent = `
 .subpages-header {
-    position: fixed;
+    position: absolute;
     display: inline-block;
     top: 1vh;
     left: 1vw;
