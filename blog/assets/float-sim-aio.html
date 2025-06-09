@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IEEE 754 Float Simulator</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    max-width: 720px;
+  }
+  h1 {
+    margin-bottom: 0.1em;
+  }
+  .bit-row {
+    display: flex;
+    flex-wrap: none;
+    margin-bottom: 0.5em;
+    user-select: none;
+  }
+  .bit {
+    width: 24px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    margin: 1px;
+    border: 1px solid #888;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: monospace;
+    background: #f0f0f0;
+    transition: background 0.2s, color 0.2s;
+  }
+  .bit.on {
+    background: #4a90e2;
+    color: white;
+  }
+  .bit.sign {
+    font-weight: bolder;
+    width: 34px;
+  }
+  .bit-label {
+    font-size: 0.75em;
+    width: 24px;
+    text-align: center;
+    margin: 0 1px;
+    user-select: none;
+    color: #555;
+  }
+  label {
+    display: inline-block;
+    margin-right: 1em;
+  }
+  input[type="number"] {
+    width: 120px;
+    font-size: 1em;
+    padding: 0.2em 0.4em;
+    font-family: monospace;
+  }
+  .error {
+    color: #c00;
+    font-weight: bold;
+  }
+  .info {
+    margin-bottom: 1em;
+    font-size: 0.9em;
+    color: #555;
+  }
+  footer {
+    margin-top: 3em;
+    font-size: 0.8em;
+    color: #888;
+  }
+</style>
+</head>
+<body>
+<h1>IEEE 754 Float Simulator</h1>
+
+<div class="info">
+  Select format:
+  <label><input type="radio" name="format" value="32" checked /> 32-bit (single precision)</label>
+  <label><input type="radio" name="format" value="16" /> 16-bit (half precision)</label>
+</div>
+
+<div>
+  Enter decimal number:
+  <input type="number" id="decimalInput" step="any" />
+  <button id="decimalToBitsBtn">Set bits</button>
+</div>
+
+<div style="margin-top:1em;">
+  <div id="bitLabels" class="bit-row"></div>
+  <div id="bitRow" class="bit-row"></div>
+</div>
+
+<div style="margin-top: 1em; font-family: monospace; font-size: 1.1em;">
+  <div>
+    <strong>Binary:</strong> <span id="binaryDisplay"></span>
+  </div>
+  <div>
+    <strong>Float value:</strong> <span id="floatValue"></span>
+  </div>
+  <div>
+    <strong>Error (float - input):</strong> <span id="errorValue"></span>
+  </div>
+</div>
+
+<script>
+(() => {
+  // Constants for IEEE754
+  const FORMATS = {
+    32: {
+      bits: 32,
+      expBits: 8,
+      fracBits: 23,
+      bias: 127,
+      floatType: 'single',
+    },
+    16: {
+      bits: 16,
+      expBits: 5,
+      fracBits: 10,
+      bias: 15,
+      floatType: 'half',
+    },
+  };
+
+  let currentFormat = FORMATS[32];
+  let bits = new Uint8Array(currentFormat.bits);
+
+  const bitRow = document.getElementById('bitRow');
+  const bitLabels = document.getElementById('bitLabels');
+  const floatValueEl = document.getElementById('floatValue');
+  const errorValueEl = document.getElementById('errorValue');
+  const binaryDisplayEl = document.getElementById('binaryDisplay');
+  const decimalInput = document.getElementById('decimalInput');
+  const decimalToBitsBtn = document.getElementById('decimalToBitsBtn');
+  const formatRadios = document.querySelectorAll('input[name="format"]');
+
+  // Create bit toggles and label positions
+  function makeLabelsAndBits() {
+    bitRow.innerHTML = '';
+    bitLabels.innerHTML = '';
+    const { bits: totalBits, expBits, fracBits } = currentFormat;
+
+    // bits index: 0 = sign bit, next expBits bits for exponent, then fracBits fraction bits
+    // we display bits from MSB (bit 0) to LSB (bit n-1)
+
+    // labels to show bit positions and categories
+
+    // For 32-bit:
+    // bits 31 = sign
+    // bits 30-23 = exponent
+    // bits 22-0 = fraction
+    // but our bits array is bits[0]...bits[bits-1] with bits[0] = MSB as sign bit
+
+    // we show bit indices from left (msb) to right (lsb)
+    // so bit 0 is msb (sign), bit totalBits-1 is lsb
+
+    for (let i = 0; i < totalBits; i++) {
+      const lbl = document.createElement('div');
+      lbl.className = 'bit-label';
+
+      // show category letter
+      if (i === 0) lbl.textContent = 'S';
+      else if (i <= expBits) lbl.textContent = 'E';
+      else lbl.textContent = 'F';
+
+      bitLabels.appendChild(lbl);
+    }
+
+    for (let i = 0; i < totalBits; i++) {
+      const b = document.createElement('div');
+      b.className = 'bit';
+      if (i === 0) b.classList.add('sign');
+      b.textContent = '0';
+      b.title = `Bit ${i} (${i === 0 ? 'sign' : i <= expBits ? 'exponent' : 'fraction'})`;
+
+      b.dataset.index = i;
+      b.addEventListener('click', () => {
+        toggleBit(i);
+      });
+
+      bitRow.appendChild(b);
+    }
+  }
+
+  // Update visual bits given bits array
+  function updateBitUI() {
+    const bitDivs = bitRow.children;
+    for (let i = 0; i < bits.length; i++) {
+      bitDivs[i].textContent = bits[i];
+      if (bits[i] === 1) {
+        bitDivs[i].classList.add('on');
+      } else {
+        bitDivs[i].classList.remove('on');
+      }
+    }
+  }
+
+  // Toggle bit at index
+  function toggleBit(i) {
+    bits[i] = bits[i] ^ 1;
+    updateBitUI();
+    updateFloatDisplays();
+  }
+
+  // Convert bits array to number (float)
+  // We'll implement a parser for 16-bit and 32-bit IEEE754 floats manually
+  function bitsToFloat() {
+    const { bits: totalBits, expBits, fracBits, bias } = currentFormat;
+
+    // Extract values from bits
+    // bits[0] = sign
+    // bits[1..expBits] = exponent
+    // bits[expBits+1 .. totalBits-1] = fraction
+
+    const sign = bits[0];
+    let exponent = 0;
+    for (let i = 1; i <= expBits; i++) {
+      exponent = (exponent << 1) | bits[i];
+    }
+
+    let fraction = 0;
+    for (let i = expBits + 1; i < totalBits; i++) {
+      fraction = (fraction << 1) | bits[i];
+    }
+
+    // Special cases:
+    if (exponent === (1 << expBits) - 1) {
+      if (fraction === 0) return sign ? -Infinity : Infinity; // Inf
+      return NaN; // NaN
+    }
+
+    // Denormalized number
+    if (exponent === 0) {
+      if (fraction === 0) return sign ? -0 : 0; // Zero signed
+
+      // Subnormal: exponent = 1 - bias, no implicit leading 1
+      const mantissa = fraction / (1 << fracBits);
+
+      const val = (Math.pow(2, 1 - bias)) * mantissa;
+      return sign ? -val : val;
+    }
+
+    // Normalized number
+    // Implicit leading 1 in mantissa
+    const mantissa = 1 + fraction / (1 << fracBits);
+    const val = Math.pow(2, exponent - bias) * mantissa;
+
+    return sign ? -val : val;
+  }
+
+  // Convert a JS number to bits in current format (16 or 32-bit IEEE754)
+  // For 32 bits, we can use DataView easily
+  // For 16 bits, we must implement conversion because JS does not have 16-bit floats natively
+  // For 16-bit, implement a standard float-to-half converter
+
+  function floatToBits(num) {
+    const { bits: totalBits, expBits, fracBits, bias } = currentFormat;
+
+    if (currentFormat.bits === 32) {
+      // Use DataView
+      const buffer = new ArrayBuffer(4);
+      const view = new DataView(buffer);
+      view.setFloat32(0, num, false); // Big endian to match bit order
+
+      bits = new Uint8Array(totalBits);
+
+      // get bits from DataView
+      // We'll get from MSB to LSB
+      const val = view.getUint32(0, false);
+      for (let i = 0; i < totalBits; i++) {
+        bits[i] = (val >>> (totalBits - 1 - i)) & 1;
+      }
+      return bits;
+    } else if (currentFormat.bits === 16) {
+      // Convert to 16-bit float manually
+      // Implementation based on the IEEE 754 half precision format
+
+      // Handle special cases first
+      if (isNaN(num)) {
+        // NaN: exponent all 1s, fraction != 0
+        bits = new Uint8Array(totalBits);
+        bits[0] = 0; // sign 0
+        for (let i = 1; i <= expBits; i++) bits[i] = 1;
+        bits[expBits + 1] = 1; // fraction not zero
+        return bits;
+      }
+      if (num === Infinity) {
+        bits = new Uint8Array(totalBits);
+        bits[0] = 0;
+        for (let i = 1; i <= expBits; i++) bits[i] = 1;
+        for (let i = expBits + 1; i < totalBits; i++) bits[i] = 0;
+        return bits;
+      }
+      if (num === -Infinity) {
+        bits = new Uint8Array(totalBits);
+        bits[0] = 1;
+        for (let i = 1; i <= expBits; i++) bits[i] = 1;
+        for (let i = expBits + 1; i < totalBits; i++) bits[i] = 0;
+        return bits;
+      }
+      if (num === 0) {
+        bits = new Uint8Array(totalBits);
+        // sign bit might be set if negative zero
+        bits[0] = (Object.is(num, -0)) ? 1 : 0;
+        return bits;
+      }
+
+      const sign = num < 0 ? 1 : 0;
+      let absNum = Math.abs(num);
+
+      // Extract exponent and fraction for normal and subnormal numbers
+      let exp = 0;
+      let frac = 0.0;
+
+      // Get exponent in base 2 (using Math.log2)
+      let e = Math.floor(Math.log2(absNum));
+      const bias = currentFormat.bias;
+
+      // Calculate mantissa
+      // number = mantissa * 2^e with mantissa in [1, 2)
+      let mant = absNum / Math.pow(2, e);
+
+      // For half precision:
+      // Exponent range is -14 to 15 (after bias 15)
+      // Handle subnormal number
+      if (e < -14) {
+        // Subnormal
+        // Shift mantissa accordingly
+        // mantissa = absNum / 2^-14
+        mant = absNum / Math.pow(2, -14);
+        e = -14;
+        exp = 0;
+        frac = mant * Math.pow(2, fracBits);
+        frac = Math.round(frac);
+      } else if (e > 15) {
+        // Overflow to Inf
+        exp = (1 << expBits) - 1;
+        frac = 0;
+      } else {
+        // Normal range
+        exp = e + bias;
+        if (exp <= 0) {
+          // Subnormal as well
+          // This should have been caught above, but keep here for safety
+          exp = 0;
+          frac = 0;
+        } else {
+          // Normal number: mantissa - 1 (implicit leading 1)
+          frac = (mant - 1) * Math.pow(2, fracBits);
+          frac = Math.round(frac);
+          if (frac === (1 << fracBits)) {
+            // Rounding overflow, adjust exponent
+            exp += 1;
+            frac = 0;
+          }
+          if (exp >= (1 << expBits) - 1) {
+            // Overflow to infinity
+            exp = (1 << expBits) - 1;
+            frac = 0;
+          }
+        }
+      }
+
+      bits = new Uint8Array(totalBits);
+      bits[0] = sign;
+
+      // Set exponent bits
+      for (let i = expBits; i >= 1; i--) {
+        bits[i] = (exp >>> (expBits - i)) & 1;
+      }
+
+      // Set fraction bits
+      for (let i = 0; i < fracBits; i++) {
+        bits[expBits + 1 + i] = (frac >>> (fracBits - 1 - i)) & 1;
+      }
+
+      return bits;
+    }
+  }
+
+  // Updates float display and error based on current bits and decimal input
+  function updateFloatDisplays() {
+    const floatVal = bitsToFloat();
+    const floatStr = formatFloatForDisplay(floatVal);
+
+    floatValueEl.textContent = floatStr;
+
+    binaryDisplayEl.textContent = bitsToBinaryString();
+
+    // Calculate error if decimal input has value
+    const decimalEntered = decimalInput.value !== "";
+    if (decimalEntered) {
+      const inputNum = Number(decimalInput.value);
+      const error = floatVal - inputNum;
+      errorValueEl.textContent = formatFloatForDisplay(error);
+      errorValueEl.classList.toggle('error', Math.abs(error) > Number.EPSILON);
+    } else {
+      errorValueEl.textContent = '';
+    }
+  }
+
+  // Helper: format float numbers nicely
+  function formatFloatForDisplay(num) {
+    if (Number.isNaN(num)) return 'NaN';
+    if (num === Infinity) return 'Infinity';
+    if (num === -Infinity) return '-Infinity';
+    if (Object.is(num, -0)) return '-0';
+    if (num === 0) return '0';
+    // Use precision: display with up to 12 decimal digits (adaptable)
+    return num.toPrecision(12).replace(/\.?0+$/, '');
+  }
+
+  // Convert bits array to a spaced binary string for display
+  function bitsToBinaryString() {
+    const { bits: totalBits, expBits, fracBits } = currentFormat;
+    // Format: S | EEEEEEEE | FFFFFFFFFFFFFFFFFFFFFFF (for 32-bit)
+    // We'll add spaces: after sign bit and exponent bits
+    let s = bits[0] ? '1' : '0';
+    s += ' ';
+    for (let i = 1; i <= expBits; i++) {
+      s += bits[i] ? '1' : '0';
+    }
+    s += ' ';
+    for (let i = expBits + 1; i < totalBits; i++) {
+      s += bits[i] ? '1' : '0';
+    }
+    return s;
+  }
+
+
+  // When user inputs decimal and clicks Set bits, convert decimal to bits
+  decimalToBitsBtn.addEventListener('click', () => {
+    const val = decimalInput.value;
+    if (val === '') return;
+    const num = Number(val);
+    if (isNaN(num)) {
+      alert('Invalid input number');
+      return;
+    }
+    floatToBits(num);
+    updateBitUI();
+    updateFloatDisplays();
+  });
+
+  // When format selection changes, adapt bits length and UI
+  formatRadios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      if (radio.checked) {
+        currentFormat = FORMATS[radio.value];
+        bits = new Uint8Array(currentFormat.bits);
+        // Reset bits to zero
+        for (let i = 0; i < bits.length; i++) bits[i] = 0;
+        makeLabelsAndBits();
+        updateBitUI();
+        updateFloatDisplays();
+      }
+    });
+  });
+
+
+  // Initialization
+  function init() {
+    makeLabelsAndBits();
+    // Set initial to 0.0 float bits for selected format
+    floatToBits(0);
+    updateBitUI();
+    updateFloatDisplays();
+  }
+
+  init();
+
+})();
+</script>
+</body>
+</html>
