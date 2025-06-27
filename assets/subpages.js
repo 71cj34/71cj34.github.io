@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function initSubdropdowns() {
         document.querySelectorAll('.subpage-link.has-subdropdown').forEach(link => {
+            alert(link.outerHTML);
             const subdropdown = link.nextElementSibling;
 
              // Unique ID for each dropdown
@@ -146,13 +147,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Mobile dropdown toggle
-            link.addEventListener('click', function(e) {
+            link.addEventListener('touchstart', function(e) {
                 alert('Clicked on subpage link');
 
                 if (window.innerWidth < 768) {
                     test.innerHTML += "\nPassed widthcheck"
                     try {
-                        e.preventDefault();
+                        // e.preventDefault();
                         e.stopPropagation();
 
                         const isOpening = subdropdown !== activeMobileDropdown;
