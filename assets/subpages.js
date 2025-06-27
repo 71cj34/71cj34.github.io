@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Unique ID for each dropdown
                 const dropdownId = link.getAttribute('dropdown-id') || generateId();
                 link.setAttribute('dropdown-id', dropdownId);
-                test.innerHTML += `Set ID ${dropdownID} to ${link.textContent.trim()}`;
+                test.innerHTML += `Set ID ${dropdownId} to ${link.textContent.trim()}`;
 
                 // Initial calculation
                 calculateDropdownData();
