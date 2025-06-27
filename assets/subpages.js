@@ -208,11 +208,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     passive: false
                 });
                 link.addEventListener('click', mobileDropdownToggleHandler);
-            } catch ({
-                a,
-                b
-            }) {
-                test.innerHTML += `Error:${a} - ${b}`
+            } catch (e) {
+                test.innerHTML += `Error:${e}`
             }
             test.innerHTML += `Added event handler to: ${link.textContent.trim()}<br>`;
 
@@ -309,8 +306,8 @@ document.addEventListener('DOMContentLoaded', function() {
         checkOverflow();
         recalculateDropdownPositions();
     });
-    } catch({a,b}) {
-        test.innerHTML = `ERROR FOUND:${a} - ${b}`
+    } catch(e) {
+        test.innerHTML = `ERROR FOUND:${e}`
     }
 });
 
