@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 try {
                     const dropdownId = link.getAttribute('dropdown-id') || generateId();
                 link.setAttribute('dropdown-id', dropdownId);
-                test.innerHTML += `Set ID to link: ${link.textContent.trim()}<br>`;
+                test.innerHTML += `Set ID ${dropdownId} to link: ${link.textContent.trim()}<br>`;
                 } catch(e) {                
                     test.innerHTML += `Failed to set ID for: ${link.textContent.trim()}<br>`;
                     test.innerHTML += `Error with ID: ${e}`
@@ -171,15 +171,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
 
-
-                const links = document.querySelectorAll('.subpage-link.has-subdropdown');
-                links.forEach(link => {
-                    link.style.outline = '2px solid red'; // visually confirm
-                });
-
                 // Mobile dropdown toggle
                 function mobileDropdownToggleHandler(e) {
-                    test.innerHTML += `Window width: ${window.innerWidth}<br>`;
+                    try {
+                                            test.innerHTML += `Window width: ${window.innerWidth}<br>`;
                     test.innerHTML += "Handler started<br>";
                     if (window.innerWidth >= 768) {
                         test.innerHTML = "returned wrong??";
@@ -215,6 +210,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         activeMobileDropdown = subdropdown;
                     } else {
                         activeMobileDropdown = null;
+                    }
+                    } catch(ex) {
+                        test.innerHTML += `Error caught AFTER CLICKING: ${ex}`
                     }
                 }
 
