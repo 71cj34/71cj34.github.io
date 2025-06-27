@@ -195,8 +195,10 @@ test.innerHTML += `Window width: ${window.innerWidth}<br>`;
     }
 }
 
-link.addEventListener('touchstart', mobileDropdownToggleHandler, { passive: false });
-link.addEventListener('click', mobileDropdownToggleHandler);
+try {link.addEventListener('touchstart', mobileDropdownToggleHandler, { passive: false });
+link.addEventListener('click', mobileDropdownToggleHandler);} catch({a,b}) {
+    test.innerHTML+=`Error:${a} - ${b}`
+}
 test.innerHTML += `Added event handler to: ${link.textContent.trim()}<br>`;
 
 
