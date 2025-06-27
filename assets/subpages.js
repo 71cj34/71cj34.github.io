@@ -99,11 +99,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 try {
                     const dropdownId = link.getAttribute('dropdown-id') || generateId();
                 link.setAttribute('dropdown-id', dropdownId);
-                } catch(e) {
+                test.innerHTML += `Set ID to link: ${link.textContent.trim()}<br>`;
+                } catch(e) {                
+                    test.innerHTML += `Failed to set ID for: ${link.textContent.trim()}<br>`;
                     test.innerHTML += `Error with ID: ${e}`
                 }
 
-                test.innerHTML += `Setting ID to link: ${link.textContent.trim()}<br>`;
 
                 // Generate a unique ID if one doesn't exist
                 function generateId() {
@@ -112,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Function to calculate and store dropdown dimensions and position data
                 function calculateDropdownData() {
+                    test.innerHTML += `calculateDropDownData called for iter: ${link.textContent.trim()}<br>`;
                     subdropdown.style.display = 'block';
                     subdropdown.style.visibility = 'hidden';
 
