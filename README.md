@@ -3,7 +3,7 @@
 Welcome to the repository my personal site [jasoncheng.me](https://jasoncheng.me) is served from.
 
 It uses only plain HTML/JS/CSS with no frameworks or build tools (except Github Pages' default Jekyll compiler). As such, any non-standard elements are made from scratch, from CSS and JS. For example, the dropdown header menu found on some of the pages are made with over 
-**350 lines of JavaScript**. Here are some notes on the repository if you wish to explore:
+**520 lines of pure JavaScript**. Here are some notes on the repository if you wish to explore:
 
 - `.depr`
   - Old and unfinished projects and files. Does not get built onto the website because of a Jekyll rule.
@@ -14,7 +14,7 @@ It uses only plain HTML/JS/CSS with no frameworks or build tools (except Github 
 - `assets`
   - Any non-image assets served from the website. Additionally, module-style JavaScript files used throughout the website (such as the font-switching script [`switchfonts.js`](https://github.com/71cj34/71cj34.github.io/blob/7cef1c6b520e2c905e42dee3366dd2e2ab295ecc/assets/switchfonts.js)).
 - `blog`
-  - Unfinished blog hub. Contains a short snippet of an unfinished article on the Transformers model, before I migrated to writing the articles on proper writing software.
+  - Unfinished blog hub. Contains a short snippet of an unfinished article on the Transformers model, before I migrated to writing the articles on proper writing software. However, does feature someneat stuff, like an [all-in-one IEEE 754 float simulator html file](https://jasoncheng.me/blog/assets/float-sim-aio).
 - `exif`
   - Unfinished browser app, like [`resize`](https://resize.jasoncheng.me), that gets EXIF data from an uploaded image.
 - `firstyear`
