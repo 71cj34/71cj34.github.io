@@ -215,7 +215,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 test.innerHTML += `Attempting to add event handler to: ${link.textContent.trim()}<br>`;
-                link.addEventListener('click', mobileDropdownToggleHandler(e, link, subdropdown));
+                link.addEventListener('click', function(e) {
+                    mobileDropdownToggleHandler(e, link, subdropdown);
+                });
 
                 test.innerHTML += `Added event handler to: ${link.textContent.trim()}<br>`;
 
