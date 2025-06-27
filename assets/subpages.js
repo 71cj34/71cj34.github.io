@@ -77,9 +77,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let dropdownData = {}; // Store precalc dropdown data
 
     function initSubdropdowns() {
+            let foundLinks = document.querySelectorAll('.subpage-link.has-subdropdown');
+test.innerHTML += `Found ${foundLinks.length} .subpage-link.has-subdropdown elements\n`;
+foundLinks.forEach(link => {
+    test.innerHTML += `- ${link.textContent}\n`;
+});
         document.querySelectorAll('.subpage-link.has-subdropdown').forEach(link => {
-            alert(link.outerHTML);
-test.innerHTML += `\nInit link: ${link.textContent}`;
+
             const subdropdown = link.nextElementSibling;
 
              // Unique ID for each dropdown
@@ -148,48 +152,44 @@ test.innerHTML += `\nInit link: ${link.textContent}`;
             }
 
             // Mobile dropdown toggle
-            link.addEventListener('touchstart', function(e) {
-                alert('Clicked on subpage link');
+function mobileDropdownToggleHandler(e) {
+    if (window.innerWidth >= 768) return;
+    test.innerHTML += "BUTTON PRESS DETECTED!!!"
 
-                if (window.innerWidth < 768) {
-                    test.innerHTML += "\nPassed widthcheck"
-                    try {
-                        e.preventDefault();
-                        e.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
 
-                        const isOpening = subdropdown !== activeMobileDropdown;
+    const isOpening = subdropdown !== activeMobileDropdown;
 
-                        // Close any open dropdown first
-                        if (activeMobileDropdown) {
-                            activeMobileDropdown.style.transform = 'translateY(-10px)';
-                            activeMobileDropdown.style.opacity = '0';
-                            setTimeout(() => {
-                                activeMobileDropdown.style.display = 'none';
-                            }, 300);
-                        }
+    if (activeMobileDropdown) {
+        activeMobileDropdown.style.transform = 'translateY(-10px)';
+        activeMobileDropdown.style.opacity = '0';
+        setTimeout(() => {
+            activeMobileDropdown.style.display = 'none';
+        }, 300);
+    }
 
-                        if (isOpening) {
-                            const data = dropdownData[dropdownId];
-                            positionDropdown(data);
-                            subdropdown.style.display = 'block';
-                            subdropdown.style.transform = 'translateY(-10px)';
-                            subdropdown.style.opacity = '0';
+    if (isOpening) {
+        const data = dropdownData[dropdownId];
+        positionDropdown(data);
+        subdropdown.style.display = 'block';
+        subdropdown.style.transform = 'translateY(-10px)';
+        subdropdown.style.opacity = '0';
 
-                            // Trigger animation
-                            setTimeout(() => {
-                                subdropdown.style.transform = 'translateY(0)';
-                                subdropdown.style.opacity = '1';
-                            }, 10);
+        setTimeout(() => {
+            subdropdown.style.transform = 'translateY(0)';
+            subdropdown.style.opacity = '1';
+        }, 10);
 
-                            activeMobileDropdown = subdropdown;
-                        } else {
-                            activeMobileDropdown = null;
-                        }
-                    } catch ({ name, message }) {
-                        test.innerHTML += `\n\nError: ${name}: ${message}`
-                    }
-                }
-            },{ passive: false });
+        activeMobileDropdown = subdropdown;
+    } else {
+        activeMobileDropdown = null;
+    }
+}
+
+link.addEventListener('touchstart', mobileDropdownToggleHandler, { passive: false });
+link.addEventListener('click', mobileDropdownToggleHandler);
+
 
             // Desktop hover behavior
             link.addEventListener('mouseenter', function() {
@@ -283,7 +283,7 @@ test.innerHTML += `\nInit link: ${link.textContent}`;
     checkOverflow();
     setTimeout(() => {
         initSubdropdowns();
-    }, 200);
+    }, 1000);
         window.addEventListener('resize', () => {
         checkOverflow();
         recalculateDropdownPositions();
