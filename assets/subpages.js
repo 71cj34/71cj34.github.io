@@ -1,5 +1,5 @@
 const content = document.querySelector('main');
-let test = document.getElementById('testtest');
+const test = document.getElementById('testtest');
 
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('subpagesHeader');
@@ -146,8 +146,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Mobile dropdown toggle
-            link.addEventListener('touchend', function(e) {
-                test.innerHTML += `${window.innerWidth}\nInitiated click`;
+            link.addEventListener('click', function(e) {
+                alert('Clicked on subpage link');
 
                 if (window.innerWidth < 768) {
                     test.innerHTML += "\nPassed widthcheck"
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         test.innerHTML += `\n\nError: ${name}: ${message}`
                     }
                 }
-            });
+            },{ passive: false });
 
             // Desktop hover behavior
             link.addEventListener('mouseenter', function() {
