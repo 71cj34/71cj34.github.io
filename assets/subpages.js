@@ -1,5 +1,6 @@
 const content = document.querySelector('main');
 const test = document.getElementById('testtest');
+test.parentElement.closest('div').style.display = "none"; // REMOVE IF NEED MORE TESTING
 
 document.addEventListener('DOMContentLoaded', function() {
     try {
