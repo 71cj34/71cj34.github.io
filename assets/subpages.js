@@ -151,8 +151,16 @@ foundLinks.forEach(link => {
                 }
             }
 
+
+            const links = document.querySelectorAll('.subpage-link.has-subdropdown');
+links.forEach(link => {
+  link.style.outline = '2px solid red'; // visually confirm
+});
+
             // Mobile dropdown toggle
 function mobileDropdownToggleHandler(e) {
+test.innerHTML += `Window width: ${window.innerWidth}<br>`;
+  test.innerHTML += "Handler started<br>";
     if (window.innerWidth >= 768) { test.innerHTML = "returned wrong??"; return;}
     test.innerHTML += "BUTTON PRESS DETECTED!!!"
 
@@ -189,6 +197,7 @@ function mobileDropdownToggleHandler(e) {
 
 link.addEventListener('touchstart', mobileDropdownToggleHandler, { passive: false });
 link.addEventListener('click', mobileDropdownToggleHandler);
+test.innerHTML += `Added event handler to: ${link.textContent.trim()}<br>`;
 
 
             // Desktop hover behavior
