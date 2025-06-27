@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 calculateDropdownData();
 
                 // Mobile dropdown toggle
-                function mobileDropdownToggleHandler(e) {
+                function mobileDropdownToggleHandler(e, link, subdropdown) {
                     try {
                                             test.innerHTML += `Window width: ${window.innerWidth}<br>`;
                     test.innerHTML += "Handler started<br>";
@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 test.innerHTML += `Attempting to add event handler to: ${link.textContent.trim()}<br>`;
-                link.addEventListener('click', mobileDropdownToggleHandler);
+                link.addEventListener('click', mobileDropdownToggleHandler(e, link, subdropdown));
 
                 test.innerHTML += `Added event handler to: ${link.textContent.trim()}<br>`;
 
