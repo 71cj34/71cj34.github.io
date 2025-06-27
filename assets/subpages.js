@@ -85,6 +85,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 test.innerHTML += `- ${link.textContent.trim()}<br>`;
             });
 
+            // Generate a unique ID if one doesn't exist
+            function generateId() {
+                return 'dropdown-' + Math.random().toString(36).substring(2, 15);
+            }
+
+                        // Function to calculate and store dropdown dimensions and position data
+            function calculateDropdownData() {
+                test.innerHTML += `calculateDropDownData called for iter: ${link.textContent.trim()}<br>`;
+                subdropdown.style.display = 'block';
+                subdropdown.style.visibility = 'hidden';
+
+                dropdownData[dropdownId] = {
+                    dropdownRect: subdropdown.getBoundingClientRect(),
+                    parentRect: subdropdown.offsetParent.getBoundingClientRect(),
+                    linkRect: link.getBoundingClientRect(),
+                };
+
+
+                subdropdown.style.display = 'none';
+                subdropdown.style.visibility = 'visible';
+                return dropdownData[dropdownId];
+
+
+            }
+
             document.querySelectorAll('.subpage-link.has-subdropdown').forEach(link => {
 
                 const subdropdown = link.nextElementSibling;
@@ -103,32 +128,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 } catch(e) {                
                     test.innerHTML += `Failed to set ID for: ${link.textContent.trim()}<br>`;
                     test.innerHTML += `Error with ID: ${e}`
-                }
-
-
-                // Generate a unique ID if one doesn't exist
-                function generateId() {
-                    return 'dropdown-' + Math.random().toString(36).substring(2, 15);
-                }
-
-                // Function to calculate and store dropdown dimensions and position data
-                function calculateDropdownData() {
-                    test.innerHTML += `calculateDropDownData called for iter: ${link.textContent.trim()}<br>`;
-                    subdropdown.style.display = 'block';
-                    subdropdown.style.visibility = 'hidden';
-
-                    dropdownData[dropdownId] = {
-                        dropdownRect: subdropdown.getBoundingClientRect(),
-                        parentRect: subdropdown.offsetParent.getBoundingClientRect(),
-                        linkRect: link.getBoundingClientRect(),
-                    };
-
-
-                    subdropdown.style.display = 'none';
-                    subdropdown.style.visibility = 'visible';
-                    return dropdownData[dropdownId];
-
-
                 }
 
                 // Initial calculation
