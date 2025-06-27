@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const title = document.getElementsByClassName('subpages-title');
             title[0].innerText = "Subpages (Click to Expand)";
             header.removeEventListener('click', mobileToggleHandler);
-            header.addEventListener('click', mobileToggleHandler);
+            header.addEventListener('touchend', mobileToggleHandler);
         }
     }
 
@@ -78,7 +78,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function initSubdropdowns() {
         document.querySelectorAll('.subpage-link.has-subdropdown').forEach(link => {
-            test.innerHTML += (`Attempting to initialize ${link}...\n`)
             const subdropdown = link.nextElementSibling;
 
              // Unique ID for each dropdown
@@ -147,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Mobile dropdown toggle
-            link.addEventListener('click', function(e) {
+            link.addEventListener('touchend', function(e) {
                 test.innerHTML += `${window.innerWidth}\nInitiated click`;
 
                 if (window.innerWidth < 768) {
@@ -237,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
     }
 
-    document.addEventListener('click', function(e) {
+    document.addEventListener('touchend', function(e) {
         if (window.innerWidth < 768 && activeMobileDropdown &&
             !e.target.closest('.subdropdown') &&
             !e.target.closest('.subpage-link.has-subdropdown')) {
