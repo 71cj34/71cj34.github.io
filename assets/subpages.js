@@ -77,8 +77,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let dropdownData = {}; // Store precalc dropdown data
 
     function initSubdropdowns() {
-        test.innerHTML += (`Attempting to initialize ${link}...\n`)
         document.querySelectorAll('.subpage-link.has-subdropdown').forEach(link => {
+            test.innerHTML += (`Attempting to initialize ${link}...\n`)
             const subdropdown = link.nextElementSibling;
 
              // Unique ID for each dropdown
