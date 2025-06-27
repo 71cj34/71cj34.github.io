@@ -120,6 +120,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     return; // Skip this iteration if subdropdown is not found
                 }
 
+                const placeholder = document.body.appendChild(document.createElement("details"));
+                placeholder.innerHTML = "HERE IS MutATOR";
+
                 // Unique ID for each dropdown
                 try {
                     const dropdownId = link.getAttribute('dropdown-id') || generateId();
