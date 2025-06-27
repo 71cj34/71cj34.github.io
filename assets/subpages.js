@@ -77,6 +77,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let dropdownData = {}; // Store precalc dropdown data
 
+        function positionDropdown(data) {
+            if (!data) {
+                data = dropdownData[dropdownId]
+            }
+            if (!data) return; // Exit if data isn't available.
+
+            const {
+                dropdownRect,
+                parentRect,
+                linkRect
+            } = data;
+            let linkCenter = (linkRect.left + linkRect.right) / 2.0;
+
+            if (window.innerWidth >= 768) {
+                // Desktop positioning
+                subdropdown.style.position = 'absolute'; // Ensure correct positioning
+                subdropdown.style.left = `${linkCenter - parentRect.left - (dropdownRect.width / 2)}px`;
+                subdropdown.style.top = `${linkRect.bottom - header.getBoundingClientRect().top}px`;
+                subdropdown.style.width = 'auto'; // Reset width
+                subdropdown.style.maxWidth = 'none';
+                subdropdown.style.borderRadius = '4px';
+                subdropdown.style.boxShadow = '0 2px 10px rgba(0,0,0,0.15)';
+
+
+            } else {
+                // Mobile positioning - make it full width and positioned relative to viewport
+                subdropdown.style.position = 'fixed';
+                subdropdown.style.left = '0';
+                subdropdown.style.right = '0';
+                subdropdown.style.top = `${linkRect.bottom}px`;
+                subdropdown.style.width = '100%';
+                subdropdown.style.maxWidth = 'none';
+                subdropdown.style.borderRadius = '0';
+                subdropdown.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+            }
+    }
+
         function initSubdropdowns() {
             let foundLinks = document.querySelectorAll('.subpage-link.has-subdropdown');
             test.innerHTML += `Found ${foundLinks.length} .subpage-link.has-subdropdown elements<br>`;
@@ -126,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Unique ID for each dropdown
                 let dropdownId;
                 try {
-                    dropdownID = link.getAttribute('dropdown-id') || generateId(); 
+                    dropdownId = link.getAttribute('dropdown-id') || generateId(); 
                 link.setAttribute('dropdown-id', dropdownId);
                 test.innerHTML += `Set ID ${dropdownId} to link: ${link.textContent.trim()}<br>`;
                 } catch(e) {                
@@ -136,44 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Initial calculation
                 calculateDropdownData();
-
-                // Position the dropdown under its parent link
-                function positionDropdown(data) {
-                    if (!data) {
-                        data = dropdownData[dropdownId]
-                    }
-                    if (!data) return; // Exit if data isn't available.
-
-                    const {
-                        dropdownRect,
-                        parentRect,
-                        linkRect
-                    } = data;
-                    let linkCenter = (linkRect.left + linkRect.right) / 2.0;
-
-                    if (window.innerWidth >= 768) {
-                        // Desktop positioning
-                        subdropdown.style.position = 'absolute'; // Ensure correct positioning
-                        subdropdown.style.left = `${linkCenter - parentRect.left - (dropdownRect.width / 2)}px`;
-                        subdropdown.style.top = `${linkRect.bottom - header.getBoundingClientRect().top}px`;
-                        subdropdown.style.width = 'auto'; // Reset width
-                        subdropdown.style.maxWidth = 'none';
-                        subdropdown.style.borderRadius = '4px';
-                        subdropdown.style.boxShadow = '0 2px 10px rgba(0,0,0,0.15)';
-
-
-                    } else {
-                        // Mobile positioning - make it full width and positioned relative to viewport
-                        subdropdown.style.position = 'fixed';
-                        subdropdown.style.left = '0';
-                        subdropdown.style.right = '0';
-                        subdropdown.style.top = `${linkRect.bottom}px`;
-                        subdropdown.style.width = '100%';
-                        subdropdown.style.maxWidth = 'none';
-                        subdropdown.style.borderRadius = '0';
-                        subdropdown.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-                    }
-                }
 
                 // Mobile dropdown toggle
                 function mobileDropdownToggleHandler(e) {
@@ -303,18 +302,24 @@ document.addEventListener('DOMContentLoaded', function() {
         function recalculateDropdownPositions() {
             document.querySelectorAll('.subpage-link.has-subdropdown').forEach(link => {
                 const dropdownId = link.getAttribute('dropdown-id');
+                if (!dropdownId) return;
+                
                 const subdropdown = link.nextElementSibling;
-                console.log(subdropdown);
-
+                if (!subdropdown || !subdropdown.classList.contains('subdropdown')) return;
+                
+                // Fallback to header if offsetParent is null
+                const parentElement = subdropdown.offsetParent || header;
+                
                 dropdownData[dropdownId] = {
                     dropdownRect: subdropdown.getBoundingClientRect(),
-                    parentRect: subdropdown.offsetParent.getBoundingClientRect(),
+                    parentRect: parentElement.getBoundingClientRect(),
                     linkRect: link.getBoundingClientRect(),
                 };
-                positionDropdown(dropdownData[dropdownId]);
-
+                
+                positionDropdown(subdropdown, dropdownData[dropdownId], header);
             });
         }
+
 
         checkOverflow();
         setTimeout(() => {
