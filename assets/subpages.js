@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function initSubdropdowns() {
         document.querySelectorAll('.subpage-link.has-subdropdown').forEach(link => {
             alert(link.outerHTML);
+            test.outerHTML += link
             const subdropdown = link.nextElementSibling;
 
              // Unique ID for each dropdown
