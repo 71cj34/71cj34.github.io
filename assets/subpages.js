@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let dropdownData = {}; // Store precalc dropdown data
 
-        function positionDropdown(data) {
+        function positionDropdown(subdropdown, data) {
             if (!data) {
                 data = dropdownData[dropdownId]
             }
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 test.innerHTML += `Set ID ${dropdownId} to ${link.textContent.trim()}`;
 
                 // Initial calculation
-                calculateDropdownData();
+                calculateDropdownData(link, subdropdown);
 
                 // Mobile dropdown toggle
                 function mobileDropdownToggleHandler(e, link, subdropdown) {
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     if (isOpening) {
                         const data = dropdownData[dropdownId];
-                        positionDropdown(data);
+                        positionDropdown(subdropdown, data);
                         subdropdown.style.display = 'block';
                         subdropdown.style.transform = 'translateY(-10px)';
                         subdropdown.style.opacity = '0';
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             d.style.display = 'none';
                             d.style.opacity = '0';
                         });
-                        positionDropdown(dropdownData[dropdownId]);
+                        positionDropdown(subdropdown, dropdownData[dropdownId]);
                         subdropdown.style.display = 'block';
                         setTimeout(() => {
                             subdropdown.style.opacity = '1';
