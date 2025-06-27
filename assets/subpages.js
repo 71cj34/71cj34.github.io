@@ -480,5 +480,13 @@ a.subpage-link {
         border-bottom-color: #444;
     }
 }
+
+@media (max-width: 768px) {
+  /* For debug: force outline on links with has-subdropdown */
+  .subpage-link.has-subdropdown {
+    outline: 2px solid red !important;
+  }
+}
+
 `;
 document.head.appendChild(styleLinks);
