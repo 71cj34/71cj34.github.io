@@ -79,13 +79,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function initSubdropdowns() {
         let foundLinks = document.querySelectorAll('.subpage-link.has-subdropdown');
-        test.innerHTML += `Found ${foundLinks.length} .subpage-link.has-subdropdown elements\n`;
+        test.innerHTML += `Found ${foundLinks.length} .subpage-link.has-subdropdown elements<br>`;
+        
         foundLinks.forEach(link => {
-            test.innerHTML += `- ${link.textContent}\n`;
+            test.innerHTML += `- ${link.textContent.trim()}<br>`;
         });
+
         document.querySelectorAll('.subpage-link.has-subdropdown').forEach(link => {
 
-            const subdropdown = link.nextElementSibling;
+                const subdropdown = link.nextElementSibling;
+                test.innerHTML += `Processing link: ${link.textContent.trim()}<br>`;
+
+                    if (!subdropdown || !subdropdown.classList.contains('subdropdown')) {
+            test.innerHTML += `Subdropdown not found for link: ${link.textContent.trim()}<br>`;
+            return; // Skip this iteration if subdropdown is not found
+        }
 
             // Unique ID for each dropdown
             const dropdownId = link.getAttribute('dropdown-id') || generateId();
@@ -204,6 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             try {
+                test.innerHTML += `Attempting to add event handler to: ${link.textContent.trim()}<br>`;
                 link.addEventListener('touchstart', mobileDropdownToggleHandler, {
                     passive: false
                 });
