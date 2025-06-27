@@ -96,9 +96,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 subdropdown.style.display = 'block';
                 subdropdown.style.visibility = 'hidden';
 
+                const parentRect = subdropdown.offsetParent?.getBoundingClientRect() || header.getBoundingClientRect(); // Fallback to header
+
                 dropdownData[dropdownId] = {
                     dropdownRect: subdropdown.getBoundingClientRect(),
-                    parentRect: subdropdown.offsetParent.getBoundingClientRect(),
+                    // parentRect: subdropdown.offsetParent.getBoundingClientRect(),
+                    parentRect: parentRect,
                     linkRect: link.getBoundingClientRect(),
                 };
 
@@ -124,8 +127,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 placeholder.innerHTML = "HERE IS MutATOR";
 
                 // Unique ID for each dropdown
+                let dropdownId;
                 try {
-                    const dropdownId = link.getAttribute('dropdown-id') || generateId();
+                    dropdownID = link.getAttribute('dropdown-id') || generateId(); 
                 link.setAttribute('dropdown-id', dropdownId);
                 test.innerHTML += `Set ID ${dropdownId} to link: ${link.textContent.trim()}<br>`;
                 } catch(e) {                
@@ -318,7 +322,7 @@ document.addEventListener('DOMContentLoaded', function() {
         checkOverflow();
         setTimeout(() => {
             initSubdropdowns();
-        }, 1000);
+        }, 100);
         window.addEventListener('resize', () => {
             checkOverflow();
             recalculateDropdownPositions();
