@@ -153,7 +153,7 @@ foundLinks.forEach(link => {
 
             // Mobile dropdown toggle
 function mobileDropdownToggleHandler(e) {
-    if (window.innerWidth >= 768) return;
+    if (window.innerWidth >= 768) { test.innerHTML = "returned wrong??"; return;}
     test.innerHTML += "BUTTON PRESS DETECTED!!!"
 
     e.preventDefault();
