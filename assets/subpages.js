@@ -154,7 +154,7 @@ test.innerHTML += `\nInit link: ${link.textContent}`;
                 if (window.innerWidth < 768) {
                     test.innerHTML += "\nPassed widthcheck"
                     try {
-                        // e.preventDefault();
+                        e.preventDefault();
                         e.stopPropagation();
 
                         const isOpening = subdropdown !== activeMobileDropdown;
@@ -238,6 +238,11 @@ test.innerHTML += `\nInit link: ${link.textContent}`;
         }, 1000);
     }
 
+    document.body.addEventListener('touchstart', e => {
+    test.innerHTML += `\ntouchstart on ${e.target.className}`;
+});
+
+
     document.addEventListener('touchend', function(e) {
         if (window.innerWidth < 768 && activeMobileDropdown &&
             !e.target.closest('.subdropdown') &&
@@ -276,8 +281,10 @@ test.innerHTML += `\nInit link: ${link.textContent}`;
     }
 
     checkOverflow();
-    initSubdropdowns();
-    window.addEventListener('resize', () => {
+    setTimeout(() => {
+        initSubdropdowns();
+    }, 200);
+        window.addEventListener('resize', () => {
         checkOverflow();
         recalculateDropdownPositions();
     });
@@ -335,6 +342,7 @@ body.dark-mode .subpages-title {
 }
 
 .subpage-link {
+pointer-events: auto;
     position: relative;
     text-decoration: none;
     color: #333;
