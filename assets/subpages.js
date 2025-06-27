@@ -153,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.subpage-link.has-subdropdown').forEach(link => {
 
                 const subdropdown = link.nextElementSibling;
+                if (!subdropdown || !subdropdown.classList.contains('subdropdown')) {console.warn("No subdropdowns found..."); return;}
                 test.innerHTML += `Processing link: ${link.textContent.trim()}<br>`;
 
                 if (!subdropdown || !subdropdown.classList.contains('subdropdown')) {
@@ -161,15 +162,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 // Unique ID for each dropdown
-                let dropdownId;
-                try {
-                    dropdownId = link.getAttribute('dropdown-id') || generateId(); 
+                const dropdownId = link.getAttribute('dropdown-id') || generateId();
                 link.setAttribute('dropdown-id', dropdownId);
-                test.innerHTML += `Set ID ${dropdownId} to link: ${link.textContent.trim()}<br>`;
-                } catch(e) {                
-                    test.innerHTML += `Failed to set ID for: ${link.textContent.trim()}<br>`;
-                    test.innerHTML += `Error with ID: ${e}`
-                }
+                test.innerHTML += `Set ID ${dropdownID} to ${link.textContent.trim()}`;
 
                 // Initial calculation
                 calculateDropdownData();
@@ -219,15 +214,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
 
-                try {
-                    test.innerHTML += `Attempting to add event handler to: ${link.textContent.trim()}<br>`;
-                    link.addEventListener('touchstart', mobileDropdownToggleHandler, {
-                        passive: false
-                    });
-                    link.addEventListener('click', mobileDropdownToggleHandler);
-                } catch (e) {
-                    test.innerHTML += `Error:${e}`
-                }
+                test.innerHTML += `Attempting to add event handler to: ${link.textContent.trim()}<br>`;
+                link.addEventListener('click', mobileDropdownToggleHandler);
+
                 test.innerHTML += `Added event handler to: ${link.textContent.trim()}<br>`;
 
 
