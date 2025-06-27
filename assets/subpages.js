@@ -77,20 +77,20 @@ document.addEventListener('DOMContentLoaded', function() {
     let dropdownData = {}; // Store precalc dropdown data
 
     function initSubdropdowns() {
-            let foundLinks = document.querySelectorAll('.subpage-link.has-subdropdown');
-test.innerHTML += `Found ${foundLinks.length} .subpage-link.has-subdropdown elements\n`;
-foundLinks.forEach(link => {
-    test.innerHTML += `- ${link.textContent}\n`;
-});
+        let foundLinks = document.querySelectorAll('.subpage-link.has-subdropdown');
+        test.innerHTML += `Found ${foundLinks.length} .subpage-link.has-subdropdown elements\n`;
+        foundLinks.forEach(link => {
+            test.innerHTML += `- ${link.textContent}\n`;
+        });
         document.querySelectorAll('.subpage-link.has-subdropdown').forEach(link => {
 
             const subdropdown = link.nextElementSibling;
 
-             // Unique ID for each dropdown
+            // Unique ID for each dropdown
             const dropdownId = link.getAttribute('dropdown-id') || generateId();
             link.setAttribute('dropdown-id', dropdownId);
 
-                         // Generate a unique ID if one doesn't exist
+            // Generate a unique ID if one doesn't exist
             function generateId() {
                 return 'dropdown-' + Math.random().toString(36).substring(2, 15);
             }
@@ -104,7 +104,7 @@ foundLinks.forEach(link => {
                     dropdownRect: subdropdown.getBoundingClientRect(),
                     parentRect: subdropdown.offsetParent.getBoundingClientRect(),
                     linkRect: link.getBoundingClientRect(),
-                 };
+                };
 
 
                 subdropdown.style.display = 'none';
@@ -124,7 +124,11 @@ foundLinks.forEach(link => {
                 }
                 if (!data) return; // Exit if data isn't available.
 
-                const { dropdownRect, parentRect, linkRect } = data;
+                const {
+                    dropdownRect,
+                    parentRect,
+                    linkRect
+                } = data;
                 let linkCenter = (linkRect.left + linkRect.right) / 2.0;
 
                 if (window.innerWidth >= 768) {
@@ -153,53 +157,63 @@ foundLinks.forEach(link => {
 
 
             const links = document.querySelectorAll('.subpage-link.has-subdropdown');
-links.forEach(link => {
-  link.style.outline = '2px solid red'; // visually confirm
-});
+            links.forEach(link => {
+                link.style.outline = '2px solid red'; // visually confirm
+            });
 
             // Mobile dropdown toggle
-function mobileDropdownToggleHandler(e) {
-test.innerHTML += `Window width: ${window.innerWidth}<br>`;
-  test.innerHTML += "Handler started<br>";
-    if (window.innerWidth >= 768) { test.innerHTML = "returned wrong??"; return;}
-    test.innerHTML += "BUTTON PRESS DETECTED!!!"
+            function mobileDropdownToggleHandler(e) {
+                test.innerHTML += `Window width: ${window.innerWidth}<br>`;
+                test.innerHTML += "Handler started<br>";
+                if (window.innerWidth >= 768) {
+                    test.innerHTML = "returned wrong??";
+                    return;
+                }
+                test.innerHTML += "BUTTON PRESS DETECTED!!!"
 
-    e.preventDefault();
-    e.stopPropagation();
+                e.preventDefault();
+                e.stopPropagation();
 
-    const isOpening = subdropdown !== activeMobileDropdown;
+                const isOpening = subdropdown !== activeMobileDropdown;
 
-    if (activeMobileDropdown) {
-        activeMobileDropdown.style.transform = 'translateY(-10px)';
-        activeMobileDropdown.style.opacity = '0';
-        setTimeout(() => {
-            activeMobileDropdown.style.display = 'none';
-        }, 300);
-    }
+                if (activeMobileDropdown) {
+                    activeMobileDropdown.style.transform = 'translateY(-10px)';
+                    activeMobileDropdown.style.opacity = '0';
+                    setTimeout(() => {
+                        activeMobileDropdown.style.display = 'none';
+                    }, 300);
+                }
 
-    if (isOpening) {
-        const data = dropdownData[dropdownId];
-        positionDropdown(data);
-        subdropdown.style.display = 'block';
-        subdropdown.style.transform = 'translateY(-10px)';
-        subdropdown.style.opacity = '0';
+                if (isOpening) {
+                    const data = dropdownData[dropdownId];
+                    positionDropdown(data);
+                    subdropdown.style.display = 'block';
+                    subdropdown.style.transform = 'translateY(-10px)';
+                    subdropdown.style.opacity = '0';
 
-        setTimeout(() => {
-            subdropdown.style.transform = 'translateY(0)';
-            subdropdown.style.opacity = '1';
-        }, 10);
+                    setTimeout(() => {
+                        subdropdown.style.transform = 'translateY(0)';
+                        subdropdown.style.opacity = '1';
+                    }, 10);
 
-        activeMobileDropdown = subdropdown;
-    } else {
-        activeMobileDropdown = null;
-    }
-}
+                    activeMobileDropdown = subdropdown;
+                } else {
+                    activeMobileDropdown = null;
+                }
+            }
 
-try {link.addEventListener('touchstart', mobileDropdownToggleHandler, { passive: false });
-link.addEventListener('click', mobileDropdownToggleHandler);} catch({a,b}) {
-    test.innerHTML+=`Error:${a} - ${b}`
-}
-test.innerHTML += `Added event handler to: ${link.textContent.trim()}<br>`;
+            try {
+                link.addEventListener('touchstart', mobileDropdownToggleHandler, {
+                    passive: false
+                });
+                link.addEventListener('click', mobileDropdownToggleHandler);
+            } catch ({
+                a,
+                b
+            }) {
+                test.innerHTML += `Error:${a} - ${b}`
+            }
+            test.innerHTML += `Added event handler to: ${link.textContent.trim()}<br>`;
 
 
             // Desktop hover behavior
@@ -272,16 +286,16 @@ test.innerHTML += `Added event handler to: ${link.textContent.trim()}<br>`;
 
     function recalculateDropdownPositions() {
         document.querySelectorAll('.subpage-link.has-subdropdown').forEach(link => {
-          const dropdownId = link.getAttribute('dropdown-id');
-          const subdropdown = link.nextElementSibling;
-          console.log(subdropdown);
+            const dropdownId = link.getAttribute('dropdown-id');
+            const subdropdown = link.nextElementSibling;
+            console.log(subdropdown);
 
-          dropdownData[dropdownId] = {
+            dropdownData[dropdownId] = {
                 dropdownRect: subdropdown.getBoundingClientRect(),
                 parentRect: subdropdown.offsetParent.getBoundingClientRect(),
                 linkRect: link.getBoundingClientRect(),
             };
-          positionDropdown(dropdownData[dropdownId]);
+            positionDropdown(dropdownData[dropdownId]);
 
         });
     }
@@ -290,7 +304,7 @@ test.innerHTML += `Added event handler to: ${link.textContent.trim()}<br>`;
     setTimeout(() => {
         initSubdropdowns();
     }, 1000);
-        window.addEventListener('resize', () => {
+    window.addEventListener('resize', () => {
         checkOverflow();
         recalculateDropdownPositions();
     });
