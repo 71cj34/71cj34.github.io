@@ -128,26 +128,23 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
                         // Function to calculate and store dropdown dimensions and position data
-            function calculateDropdownData() {
+            function calculateDropdownData(link, subdropdown) {
                 test.innerHTML += `calculateDropDownData called for iter: ${link.textContent.trim()}<br>`;
                 subdropdown.style.display = 'block';
                 subdropdown.style.visibility = 'hidden';
 
-                const parentRect = subdropdown.offsetParent?.getBoundingClientRect() || header.getBoundingClientRect(); // Fallback to header
+                const parentRect = subdropdown.offsetParent?.getBoundingClientRect() || header.getBoundingClientRect();
 
+                const dropdownId = link.getAttribute('dropdown-id');
                 dropdownData[dropdownId] = {
                     dropdownRect: subdropdown.getBoundingClientRect(),
-                    // parentRect: subdropdown.offsetParent.getBoundingClientRect(),
                     parentRect: parentRect,
                     linkRect: link.getBoundingClientRect(),
                 };
 
-
                 subdropdown.style.display = 'none';
                 subdropdown.style.visibility = 'visible';
                 return dropdownData[dropdownId];
-
-
             }
 
             document.querySelectorAll('.subpage-link.has-subdropdown').forEach(link => {
