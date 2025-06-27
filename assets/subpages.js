@@ -2,7 +2,8 @@ const content = document.querySelector('main');
 const test = document.getElementById('testtest');
 
 document.addEventListener('DOMContentLoaded', function() {
-    const header = document.getElementById('subpagesHeader');
+    try {
+            const header = document.getElementById('subpagesHeader');
     const linksContainer = header.querySelector('.subpages-links');
     let isExpanded = false;
     let hideTimeout = null;
@@ -308,6 +309,9 @@ document.addEventListener('DOMContentLoaded', function() {
         checkOverflow();
         recalculateDropdownPositions();
     });
+    } catch({a,b}) {
+        test.innerHTML = `ERROR FOUND:${a} - ${b}`
+    }
 });
 
 const styleLinks = document.createElement('style');
