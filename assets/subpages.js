@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } else {
             const title = document.getElementsByClassName('subpages-title');
-            title[0].innerText = "Subpages (Click to Expand)";
-            header.removeEventListener('click', mobileToggleHandler);
-            header.addEventListener('click', mobileToggleHandler);
+            title[0].innerText = "Subpages (touchstart to Expand)";
+            header.removeEventListener('touchstart', mobileToggleHandler);
+            header.addEventListener('touchstart', mobileToggleHandler);
         }
     }
 
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Mobile dropdown toggle
-            link.addEventListener('click', function(e) {
+            link.addEventListener('touchstart', function(e) {
                 if (window.innerWidth < 768) {
                     e.preventDefault();
                     e.stopPropagation();
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
     }
 
-    document.addEventListener('click', function(e) {
+    document.addEventListener('touchstart', function(e) {
         if (window.innerWidth < 768 && activeMobileDropdown &&
             !e.target.closest('.subdropdown') &&
             !e.target.closest('.subpage-link.has-subdropdown')) {
@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const subpageLinks = document.querySelectorAll('.subpage-link, .subdropdown, .subdropdown-link');
     subpageLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('touchstart', function(e) {
             e.stopPropagation();
         });
     });
