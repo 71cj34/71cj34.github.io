@@ -238,11 +238,6 @@ link.addEventListener('click', mobileDropdownToggleHandler);
         }, 1000);
     }
 
-    document.body.addEventListener('touchstart', e => {
-    test.innerHTML += `\ntouchstart on ${e.target.className}`;
-});
-
-
     document.addEventListener('touchend', function(e) {
         if (window.innerWidth < 768 && activeMobileDropdown &&
             !e.target.closest('.subdropdown') &&
