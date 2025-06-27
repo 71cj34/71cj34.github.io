@@ -1,4 +1,5 @@
 const content = document.querySelector('main');
+let test = document.getElementById('testtest');
 
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('subpagesHeader');
@@ -76,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let dropdownData = {}; // Store precalc dropdown data
 
     function initSubdropdowns() {
+        test.innerHTML += (`Attempting to initialize ${link}...\n`)
         document.querySelectorAll('.subpage-link.has-subdropdown').forEach(link => {
             const subdropdown = link.nextElementSibling;
 
@@ -146,7 +148,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Mobile dropdown toggle
             link.addEventListener('click', function(e) {
-                let test = document.getElementById('testtest');
                 test.innerHTML += `${window.innerWidth}\nInitiated click`;
 
                 if (window.innerWidth < 768) {
