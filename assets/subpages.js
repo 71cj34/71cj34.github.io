@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Mobile dropdown toggle
             link.addEventListener('click', function(e) {
                 let test = document.getElementById('testtest');
-                test.innerHTML += "Initiated click";
+                test.innerHTML += `${window.innerWidth}\nInitiated click`;
 
                 if (window.innerWidth < 768) {
                     test.innerHTML += "\nPassed widthcheck"
