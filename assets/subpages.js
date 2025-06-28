@@ -1,6 +1,5 @@
 const content = document.querySelector('main');
-const test = document.getElementById('testtest');
-test.parentElement.closest('div').style.display = "none"; // REMOVE IF NEED MORE TESTING
+
 
 document.addEventListener('DOMContentLoaded', function() {
     try {
@@ -76,13 +75,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         ///////////////////////////////////
 
-        let dropdownData = {}; // Store precalc dropdown data
+        let dropdownData = {}; // store precalc dropdown data
 
         function positionDropdown(subdropdown, data) {
             if (!data) {
                 data = dropdownData[dropdownId]
             }
-            if (!data) return; // Exit if data isn't available.
+            if (!data) return; // exit if data not available
 
             const {
                 dropdownRect,
@@ -92,18 +91,16 @@ document.addEventListener('DOMContentLoaded', function() {
             let linkCenter = (linkRect.left + linkRect.right) / 2.0;
 
             if (window.innerWidth >= 768) {
-                // Desktop positioning
-                subdropdown.style.position = 'absolute'; // Ensure correct positioning
+                subdropdown.style.position = 'absolute';
                 subdropdown.style.left = `${linkCenter - parentRect.left - (dropdownRect.width / 2)}px`;
                 subdropdown.style.top = `${linkRect.bottom - header.getBoundingClientRect().top}px`;
-                subdropdown.style.width = 'auto'; // Reset width
+                subdropdown.style.width = 'auto'; // reset width
                 subdropdown.style.maxWidth = 'none';
                 subdropdown.style.borderRadius = '4px';
                 subdropdown.style.boxShadow = '0 2px 10px rgba(0,0,0,0.15)';
 
 
             } else {
-                // Mobile positioning - make it full width and positioned relative to viewport
                 subdropdown.style.position = 'fixed';
                 subdropdown.style.left = '0';
                 subdropdown.style.right = '0';
@@ -116,21 +113,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
         function initSubdropdowns() {
-            let foundLinks = document.querySelectorAll('.subpage-link.has-subdropdown');
-            test.innerHTML += `Found ${foundLinks.length} .subpage-link.has-subdropdown elements<br>`;
-
-            foundLinks.forEach(link => {
-                test.innerHTML += `- ${link.textContent.trim()}<br>`;
-            });
-
-            // Generate a unique ID if one doesn't exist
             function generateId() {
                 return 'dropdown-' + Math.random().toString(36).substring(2, 15);
             }
 
-                        // Function to calculate and store dropdown dimensions and position data
             function calculateDropdownData(link, subdropdown) {
-                test.innerHTML += `calculateDropDownData called for iter: ${link.textContent.trim()}<br>`;
                 subdropdown.style.display = 'block';
                 subdropdown.style.visibility = 'hidden';
 
@@ -152,31 +139,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 const subdropdown = link.nextElementSibling;
                 if (!subdropdown || !subdropdown.classList.contains('subdropdown')) {console.warn("No subdropdowns found..."); return;}
-                test.innerHTML += `Processing link: ${link.textContent.trim()}<br>`;
 
                 if (!subdropdown || !subdropdown.classList.contains('subdropdown')) {
-                    test.innerHTML += `Subdropdown not found for link: ${link.textContent.trim()}<br>`;
-                    return; // Skip this iteration if subdropdown is not found
+                    return; // skip this iteration if subdropdown is not found
                 }
 
-                // Unique ID for each dropdown
                 const dropdownId = link.getAttribute('dropdown-id') || generateId();
                 link.setAttribute('dropdown-id', dropdownId);
-                test.innerHTML += `Set ID ${dropdownId} to ${link.textContent.trim()}`;
 
-                // Initial calculation
                 calculateDropdownData(link, subdropdown);
 
-                // Mobile dropdown toggle
                 function mobileDropdownToggleHandler(e, link, subdropdown) {
                     try {
-                                            test.innerHTML += `Window width: ${window.innerWidth}<br>`;
-                    test.innerHTML += "Handler started<br>";
                     if (window.innerWidth >= 768) {
-                        test.innerHTML = "returned wrong??";
                         return;
                     }
-                    test.innerHTML += "BUTTON PRESS DETECTED!!!"
+                    console.log("BUTTON PRESS DETECTED!!!");
 
                     e.preventDefault();
                     e.stopPropagation();
@@ -208,19 +186,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         activeMobileDropdown = null;
                     }
                     } catch(ex) {
-                        test.innerHTML += `Error caught AFTER CLICKING: ${ex}`
+                        console.log(`Error caught AFTER CLICKING: ${ex}`)
                     }
                 }
 
-                test.innerHTML += `Attempting to add event handler to: ${link.textContent.trim()}<br>`;
                 link.addEventListener('click', function(e) {
                     mobileDropdownToggleHandler(e, link, subdropdown);
                 });
 
-                test.innerHTML += `Added event handler to: ${link.textContent.trim()}<br>`;
-
-
-                // Desktop hover behavior
                 link.addEventListener('mouseenter', function() {
                     if (window.innerWidth >= 768) {
                         clearTimeout(hideTimeout);
@@ -319,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
             recalculateDropdownPositions();
         });
     } catch (e) {
-        test.innerHTML = `ERROR FOUND:${e}`
+        console.log(`ERROR FOUND:${e}`)
     }
 });
 
@@ -419,7 +392,6 @@ main {
     background-color: #c0392b;
 }
 
-/* Subdropdown styles */
 .subdropdown {
     display: none;
     opacity: 0;
@@ -509,13 +481,5 @@ a.subpage-link {
         border-bottom-color: #444;
     }
 }
-
-@media (max-width: 768px) {
-  /* For debug: force outline on links with has-subdropdown */
-  .subpage-link.has-subdropdown {
-    outline: 2px solid red !important;
-  }
-}
-
 `;
 document.head.appendChild(styleLinks);
