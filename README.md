@@ -12,7 +12,7 @@ It uses only plain HTML/JS/CSS with no frameworks or build tools (except Github 
 - `api`
   - My API served through Cloudflare Workers. Since I don't pay for any serverside hosting, sadly I couldn't make an actual 'real' server-fetch/serve style API.
 - `assets`
-  - Any non-image assets served from the website. Additionally, module-style JavaScript files used throughout the website (such as the font-switching script [`switchfonts.js`](https://github.com/71cj34/71cj34.github.io/blob/7cef1c6b520e2c905e42dee3366dd2e2ab295ecc/assets/switchfonts.js)).
+  - Any non-image assets served from the website. Additionally, module-style JavaScript files used throughout the website (such as the font-switching script [`switchfonts.js`](https://github.com/71cj34/71cj34.github.io/blob/main/assets/switchfonts.js)).
 - `blog`
   - Unfinished blog hub. Contains a short snippet of an unfinished article on the Transformers model, before I migrated to writing the articles on proper writing software. However, does feature someneat stuff, like an [all-in-one IEEE 754 float simulator html file](https://jasoncheng.me/blog/assets/float-sim-aio).
 - `exif`
