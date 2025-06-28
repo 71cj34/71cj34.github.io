@@ -296,6 +296,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+
+/////////////////
+
+const linkbar = document.getElementsByClassName("subpages-links")[0];
+linkbar.style.fontSize = window.innerWidth < 768 ? (0.5 + (Math.min((768 - window.innerWidth)/768, 0.3))).toString() + "rem" : "1rem";
+
+console.log((0.5 + (Math.min((768 - window.innerWidth)/768 - 0.5, 0.3))).toString() + "rem");
+
 const styleLinks = document.createElement('style');
 styleLinks.textContent = `
 .subpages-header {
