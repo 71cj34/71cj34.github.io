@@ -8,6 +8,10 @@
     --dark-grey: #777;
   }
   
+main {
+  max-width: 90vw
+}
+
   body, html {
     margin: 8vh 10vw 0;
     padding: 0;
@@ -171,4 +175,62 @@ h4 {
   
   .code-inline:hover {
     background-color: #ccd4dc;
+  }
+
+  .progress-container {
+    width: 400px;
+    position: relative;
+  }
+
+  .progress-bar {
+    position: relative;
+    height: 30px;
+    width: 100%;
+    background: #ddd;
+    border-radius: 15px;
+    overflow: visible;
+  }
+
+  .progress-fill {
+    position: relative;
+    height: 100%;
+    background: #a0d8f7;
+    border-radius: 15px 0 0 15px;
+    width: 0%;
+    transition: width 1s ease;
+    overflow: visible;
+  }
+
+  /* Wave SVG container styling */
+  .wave {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 30px;
+    width: 30px;
+    overflow: visible;
+  }
+
+  /* Wave animation */
+  @keyframes wave-move {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(5px) translateY(-3px) rotate(3deg); }
+    100% { transform: translateX(0); }
+  }
+
+  .wave path {
+    animation: wave-move 1.5s ease-in-out infinite;
+    fill: #a0d8f7;
+  }
+
+  /* Numerical label below the bar */
+  .progress-value {
+    position: absolute;
+    top: 40px;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: #333;
+    font-weight: 600;
+    user-select: none;
+    white-space: nowrap;
   }

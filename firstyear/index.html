@@ -66,7 +66,8 @@
         goes to Chapter 6 or so, so read the extra part if you wish. Also includes the  <span class="code-inline">.md</span> source file, meaning you can open it with a markdown editor like Obsidian to customize and annotate it however you like.
       </p>
         <h4>Preview (PDF):</h4>
-        <embed src="../assets/Linear Algebra Study Guide.pdf" width="400" height="500" type="application/pdf"><br>
+        <embed src="../assets/Linear Algebra Study Guide.pdf" width="400" height="500" type="application/pdf" style="margin-bottom:0"><br>
+        <span style="font-size:0.55em; color:grey; font-style:italic; margin-top:0">^ Having trouble reading this? Flip your phone sideways to resize it!</span>
         <a class="dl" href="../assets/Linear Algebra Study Guide.pdf" download>Download (PDF)</a>
         <a class="dl" href="../assets/Linear Algebra Study Guide.md" download>Download (.md)</a>
 
@@ -128,7 +129,12 @@
       <hr>
 
       <h2>End</h2>
-      <p>I know you can do it.</p>
+      <p>You might feel like you fell off from high school. You might feel like you never were up in high school and shouldn't be here.</p>
+      <p>That was then. We're all here now.</p>
+      <p>What you do now is what matters.</p>
+      <p>Eat well, sleep well, go for a walk, make friends, join a club or two, talk to the people sitting beside you, go to lecture (yes, even the 8:30s), 
+        do the LONCAPAs early, don't buy the textbooks unless you're <em>really</em> sure you actually need them because you can just get them online for <a href="https://annas-archive.org/" target="_blank">a lot less</a>.</p>
+      <p>I know that you can do it.</p>
 
       <br>
 
@@ -142,8 +148,62 @@
 
       <a style="text-align: center; display: block; margin-bottom: 6em" href="/">Return to home.</a>
 
+      <hr>        <br>
+      <br>        <br>
+      <br><br><br><br>
+      <br><br><br><br> <!-- hehe minecraft chestplate -->
+      <br><br><br><br>
+      <br><br><br><br>
+
       <button id="switch-fonts" style="opacity: 0.8; transform-origin: right; transform: scale(0.8); color: black; border-style: solid; border-width: 1px; border-color: black">Switch Fonts</button>
-    </main>
+      <h2>Shameless Begging</h2>
+      <p>You are under no obligation to read this, which is why it's under the END section. But hey, if you're here, I did some math.</p>
+      <p>For the Linear Algebra Study Guide and the MATH 1ZB3 Study Guide alone (the latter of which I am still writing and may or may not be out by the time you are reading this), I give a conservative estimate that 
+        I spent more than 100 hours on them, on writing, editing, <span class="code-inline">regex</span> postprocessing, figuring out the best config for PDF exporting, and mostly just writing because writing LaTeX is hard.
+      </p>
+      <p>
+        If I got paid Ontario minimum wage (\$17.20/h) for that work, it would be \$1720. Now I think you can tell by the name of this section I am about to beg you for money (which you have no obligation to do, by the way), but you may 
+        be balking at the thought of paying $1720, which is why all of what I just said is irrelevant and my goal for donations is actually TEN DOLLARS!! There's a still a lot of things I want to do to improve your first-year experience, like a guide on how 
+        to solve each LONCAPA (look, there's that one PDF of some guy's handwritten solutions going around but let's be honest even that's not very clear), study guides for other courses (even though the CHEM 1E03 textbook is bootycheeks so I'll 
+        need to figure something out there), ranking every food option on campus so you don't waste meal plan money (here's a freebie: the veggie pita wrap at MUSC is biblical levels of horrendous, premier Sysco® frozen bagged veggies in 
+        only the finest unwarmed sawdust-formed pita for god's sake I spent 6 DOLLARS ON THAT don't even get me started on the centro butter chicken it is impressive how you made butter chicken BROWN) and so on. 
+        What the hell was I talking about? Right! Donations! 
+      </p>
+      <p>
+        \$10 is still a lot for many of you (though it is still by no means an obligation for any of you to spend that much anyways) since you are students, but I hope we can get there
+         (if I forgot to mention it, you do not at all need to donate- these resources will stay free forever and ever until WW3 starts at least so like 10 years? Conservatively).
+      </p>
+      <p>
+        I have also an exciting incentive here, a bar! It will fill as people donate. Also, a panel. Behold.
+      </p>
+      <div style="align-items: center; display: flex; justify-content: center;">
+        <iframe id='kofiframe' src='https://ko-fi.com/brownbird/?hidefeed=true&widget=true&embed=true&preview=true' style='border:none;padding:4px;background:#f9f9f9;' height='712' title='brownbird'></iframe>
+      </div>
+      <p>
+        Exciting stuff. Or, just <a href="https://ko-fi.com/brownbird" target="_blank">go directly to the donation page</a>.
+      </p>
+      <p>
+        Here's your bar as promised.
+      </p>
+      <div class="progress-container">
+        <div class="progress-bar" progress=0 id="pgbar">
+          <div class="progress-fill">
+          </div>
+        </div>
+        <span class="value-label">0%</span>
+      </div>
+      <p>
+        If this bar doesn't match the amount donated on ko-fi, send me an email at <a href="mailto:me@jasoncheng.me">my address</a> and I will update it manually.
+      </p>
+      <p>
+        Oh, did I mention you have no obligation to donate ever? That too. That's it. Have fun.
+      </p>
+
+      <br><br><br><br>
+
+</div>
+
+</main>
 
     <noscript>
       This element requires Javascript to display.
@@ -154,5 +214,21 @@
     <script src="../assets/switchfonts.js"></script>
     <script src="../assets/subpages.js"></script>
     <script src="../assets/headinglinks.js" defer></script>
+    <script src="../assets/progressbar.js"></script>
+    <script>
+      function resizePDF() {
+        const pdf = document.querySelectorAll('embed');
+
+        pdf.forEach(e => {
+          e.width = window.innerWidth < 1000 ? (window.innerWidth*0.8).toString() + "px" : "1000px";
+        })
+      }
+
+      window.addEventListener('resize', function() {
+        resizePDF();
+      });
+
+      resizePDF();
+    </script>
 </body>
 </html>
