@@ -174,6 +174,10 @@ styleScrollPage.textContent = `
     z-index: 1000;
     pointer-events: auto;
 }
+  .page-section:not(.page-1) {
+    opacity: 0;
+    pointer-events: none;
+  }
 
 #modeselection {
     top: 1.2rem;
