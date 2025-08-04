@@ -5,13 +5,13 @@ class PageTransitions {
         this.isAnimating = false;
         this.scrollTimeout = null;
         
-        if (this.pages.length < 2) return; // No transitions needed if only one page
+        if (this.pages.length < 2) return; 
         
         this.init();
     }
     
     init() {
-        // Style all pages except first as hidden initially
+        
         this.pages.forEach((page, index) => {
             if (index > 0) {
                 page.style.opacity = '0';
@@ -25,7 +25,7 @@ class PageTransitions {
             page.style.height = '100vh';
             page.style.overflowY = 'auto';
             
-            // Add container for centered content
+            
             const container = document.createElement('div');
             container.className = 'page-content-container';
             container.style.display = 'flex';
@@ -39,20 +39,20 @@ class PageTransitions {
             container.style.padding = '2rem';
             container.style.boxSizing = 'border-box';
             
-            // Move all child nodes into the container
+            
             while (page.firstChild) {
                 container.appendChild(page.firstChild);
             }
             page.appendChild(container);
         });
         
-        // Make body non-scrollable (we'll handle scrolling ourselves)
+        
         document.body.style.overflow = 'hidden';
         
-        // Add wheel event listener
+        
         window.addEventListener('wheel', this.handleScroll.bind(this), { passive: false });
         
-        // Add touch events for mobile
+        
         let touchStartY = 0;
         window.addEventListener('touchstart', (e) => {
             touchStartY = e.touches[0].clientY;
@@ -62,7 +62,7 @@ class PageTransitions {
             const touchEndY = e.changedTouches[0].clientY;
             const deltaY = touchEndY - touchStartY;
             
-            // Threshold to prevent accidental page changes
+            
             if (Math.abs(deltaY) > 50) {
                 if (deltaY > 0) {
                     this.goToPreviousPage();
@@ -72,7 +72,7 @@ class PageTransitions {
             }
         }, { passive: true });
         
-        // Fix for elements that should stay interactive
+        
         this.preserveInteractiveElements();
     }
     
@@ -132,28 +132,26 @@ class PageTransitions {
         
         const direction = newIndex > this.currentPageIndex ? 1 : -1;
         
-        // Set initial positions
+        
         if (direction > 0) {
-            // For next page transition
+            
             newPage.style.transform = 'translateY(100%)';
         } else {
-            // For previous page transition
+            
             newPage.style.transform = 'translateY(-100%)';
         }
         
-        // Force reflow
+        
         newPage.offsetHeight;
         
-        // Animate both pages
+        
         currentPage.style.transform = `translateY(${-100 * direction}%)`;
         newPage.style.transform = 'translateY(0)';
         
         setTimeout(() => {
-            // After animation completes
+            
             currentPage.style.opacity = '0';
             currentPage.style.pointerEvents = 'none';
-            // Don't reset transform here - let it stay off-screen
-            // currentPage.style.transform = 'translateY(0)';
             
             this.currentPageIndex = newIndex;
             this.isAnimating = false;
@@ -162,7 +160,7 @@ class PageTransitions {
 
 }
 
-// Initialize when DOM is loaded
+
 document.addEventListener('DOMContentLoaded', () => {
     new PageTransitions();
 });
@@ -212,11 +210,64 @@ styleScrollPage.textContent = `
     max-width: 100%;
 }
 
-/* Optional: Add responsive adjustments */
 @media (max-width: 768px) {
     .page-content-container {
         padding: 1rem;
     }
 }
+
+/* 2nd page sttff */
+
+main.page-section:nth-child(2) .page-content-container {
+    flex-direction: row; /* Change to horizontal layout */
+    flex-wrap: wrap; /* Allow content to wrap if it doesn't fit */
+    justify-content: center; /* Center the columns horizontally */
+    align-items: flex-start; /* Align items to the top within their row */
+    padding: 2rem 10vw; /* 10vw margin on left and right for the container */
+    max-width: none; /* Override the default max-width to let vw units work */
+    gap: 30px; /* Add a gap between your columns */
+}
+
+/* Target the direct children (your "columns") within the second page's container */
+main.page-section:nth-child(2) .page-content-container > * {
+    flex: 1 1 40vw; /* flex-grow, flex-shrink, flex-basis. Each wants to be 40vw */
+    max-width: 40vw; /* Ensure they don't grow beyond 40vw */
+    box-sizing: border-box; /* Include padding/border in width calculation */
+    text-align: left; /* Adjust text alignment within columns if needed */
+}
+
+/* Responsive adjustments for the second page layout */
+@media (max-width: 992px) { /* Adjust breakpoint as needed */
+    main.page-section:nth-child(2) .page-content-container {
+        padding: 2rem 5vw; /* Reduce side padding on slightly smaller screens */
+        gap: 20px;
+    }
+    main.page-section:nth-child(2) .page-content-container > * {
+        flex-basis: 45vw; /* Make columns slightly smaller if needed */
+        max-width: 45vw;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .page-content-container {
+        padding: 1rem; /* Default mobile padding */
+    }
+
+    /* On smaller screens, stack the columns for better readability */
+    main.page-section:nth-child(2) .page-content-container {
+        flex-direction: column; /* Stack columns vertically */
+        padding: 2rem 1rem; /* Adjust padding for mobile */
+        gap: 1rem; /* Gap for stacked items */
+    }
+
+    main.page-section:nth-child(2) .page-content-container > * {
+        flex: 1 1 auto; /* Allow children to take full width */
+        max-width: 100%; /* Ensure they don't exceed 100% of parent */
+        text-align: center; /* Center text again when stacked */
+    }
+}
+
+
 `;
 document.head.appendChild(styleScrollPage);
