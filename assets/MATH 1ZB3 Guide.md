@@ -160,7 +160,7 @@ Something you should take away from this is that a series is just **the limit of
 #### 11.2.2: Sum of a Geometric Series
 
 The geometric series is a series of form $$\sum_{n=1}^{\infty} ar^{n-1} \quad \text{where} \quad a \neq 0$$This series is **very common**, and all you must know about it is that $$\boxed{\begin{gather} \text{ A geometric series is convergent if } \\ \vert r \vert<1 \vphantom{\int _{n=0}^{a}} \\ \text{ If a geometric series is convergent, its sum is } \\ s_{n} = \frac{a}{1-r} \qquad \vert r \vert < 1 \vphantom{\int_{n=0}^{a}}\\ \text{If } \vert r \vert>1, \text{ the series is divergent.} \end{gather}}$$
-Note that some questions may pose a geometric series with a shifted index, like $ar^{n}$, and you will need to shift it back/front accordingly to bring it to the provided form, or else the equations will not work.
+Note that some questions may pose a geometric series with a shifted index, like $ar^{n}$, and you will need to shift it back/front accordingly to bring it to the provided form, or else the equations will not work. If you are provided a shifted index, you may alternatively just use the fact that $a$ is not necessarily the value in the format given, but the first term of the geometric sequence. Find the first term and use that instead, and $r$ should be unaffected by a shifted index, and you'll get the same answer. 
 #### 11.2.3: Tests for Convergence
 
 Remember a series is divergent if its sequence of partial sums is divergent.
@@ -670,7 +670,7 @@ To find the tangent, do as you would with a function: find $\frac{dy}{dx}$ with 
 
 To find the second derivative, find $\frac{dy}{dx}$, then take its derivative with respect to $t$. Then, divide by the derivative of $x$ with respect to $t$.
 
-Also, at certain points, you may get multiple results for tangent lines. This happens when the curve doubles back over a point with a new distinct behavior. This will be represented by a situation resulting in a $\pm$ or a polynomial while solving for $t$ when given a point $(x,y)$, such as $t^{2}=1$. Be careful!
+Also, at certain points, you may get multiple results for tangent lines. This happens when the curve doubles back over a point with a new distinct behavior. This will be represented by a situation resulting in a $\pm$ or a polynomial while solving for $t$ when given a point $(x,y)$, such as $t^{2}=1$. Alternatively, when facing trig functions, be careful that the points given cannot be obtained through using different angles in the trig functions: you need to account for each different valid input. Be careful!
 
 #### 10.2.2: Areas
 
