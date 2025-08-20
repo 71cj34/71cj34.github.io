@@ -68,3 +68,7 @@ blockquote {
 body {
     margin-bottom: 20vh
 }
+
+mjx-container, mjx-math {
+  font-size: 100% !important;
+}
