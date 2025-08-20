@@ -1,25 +1,33 @@
 const switchfont = document.getElementById('switch-fonts');
 
 const textfontlist = [
+    "'Geist Mono', 'monospace'",
     "'Redaction-10', 'serif'",
     "'Syne', sans-serif",
-    "'Helvetica', 'sans-serif'",
-    "'Geist Mono', 'monospace'",
     "'Input Serif', 'Courier New', monospace",
     "'Average Sans', 'sans-serif'",
+    "'Exo 2', 'serif'",
+    "'Helvetica', 'sans-serif'",
     "'Geist', sans-serif",
+    "'Brygada 1918', 'sans-serif'",
+    "'Maple Mono', 'sans-serif'",
+    "'Caveat', 'cursive'",
     "'IM Fell English', 'serif'",
     "'LineFont'"
 ];
 
 const headfontlist = [
+    "'Redaction-35', serif",
     "'Helvetica Neue', 'sans-serif'",
     "'Inter', 'Arial', 'sans-serif'",
-    "'Helvetica Neue', 'sans-serif'",
-    "'Redaction-35', serif",
     "'Inconsolata', 'Courier', 'monospace'",
     "'Rufina', 'serif'",
+    "'Major Mono Display', 'serif'",
+    "'Helvetica Neue', 'sans-serif'",
     "'IBM Plex Mono', monospace",
+    "'Optician Sans', 'serif'",
+    "'Fredoka', 'sans-serif'",
+    "'Patua One', 'serif'",
     "'IM Fell English SC', 'cursive'",
     "'Libre Barcode'"
 ];

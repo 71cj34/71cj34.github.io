@@ -1,103 +1,144 @@
 @font-face {
-    font-family: "Redaction-10";
-    src: url("Redaction/Redaction10-Regular.otf");
-  }
+	font-family: "Redaction-10";
+	src: url("Redaction/Redaction10-Regular.otf");
+}
 
-  @font-face {
-    font-family: "Redaction-20";
-    src: url("Redaction/Redaction20-Regular.otf");
-  }
-  
-  @font-face {
-    font-family: "Redaction-35";
-    src: url("Redaction/Redaction35-Regular.otf");
-  }
+@font-face {
+	font-family: "Redaction-20";
+	src: url("Redaction/Redaction20-Regular.otf");
+}
 
-  @font-face {
-    font-family: "Redaction-50";
-    src: url("Redaction/Redaction50-Regular.otf");
-  }
+@font-face {
+	font-family: "Redaction-35";
+	src: url("Redaction/Redaction35-Regular.otf");
+}
 
-  @font-face {
-    font-family: "Redaction-70";
-    src: url("Redaction/Redaction70-Regular.otf");
-  }
+@font-face {
+	font-family: "Redaction-50";
+	src: url("Redaction/Redaction50-Regular.otf");
+}
 
-  @font-face {
-    font-family: "Redaction-100";
-    src: url("Redaction/Redaction100-Regular.otf");
-  }
+@font-face {
+	font-family: "Redaction-70";
+	src: url("Redaction/Redaction70-Regular.otf");
+}
 
-  @font-face {
-    font-family: "Geist Mono";
-    src: url("GeistMono.ttf");
-  }
+@font-face {
+	font-family: "Redaction-100";
+	src: url("Redaction/Redaction100-Regular.otf");
+}
 
-  @font-face {
-    font-family: "Helvetica";
-    src: url("Helvetica.ttf");
-  }
+@font-face {
+	font-family: "Geist Mono";
+	src: url("GeistMono.ttf");
+}
 
-  @font-face {
-    font-family: "Helvetica Neue";
-    src: url("HelveticaNeue.otf");
-  }
+@font-face {
+	font-family: "Helvetica";
+	src: url("Helvetica.ttf");
+}
 
-  @font-face {
-    font-family: "IM Fell English";
-    src: url("IMFellEnglish-Regular.ttf");
-  }
+@font-face {
+	font-family: "Helvetica Neue";
+	src: url("HelveticaNeue.otf");
+}
 
-  @font-face {
-    font-family: "IM Fell English SC";
-    src: url("IMFellEnglishSC-Regular.ttf");
-  }
+@font-face {
+	font-family: "IM Fell English";
+	src: url("IMFellEnglish-Regular.ttf");
+}
 
-  @font-face {
-    font-family: "Inconsolata";
-    src: url("Inconsolata.ttf");
-  }
+@font-face {
+	font-family: "IM Fell English SC";
+	src: url("IMFellEnglishSC-Regular.ttf");
+}
 
-  @font-face {
-    font-family: "Input Serif";
-    src: url("InputSerif.ttf");
-  }
+@font-face {
+	font-family: "Inconsolata";
+	src: url("Inconsolata.ttf");
+}
 
-  @font-face {
-    font-family: "Inter";
-    src: url("Inter-VariableFont_opsz\,wght.ttf");
-  }
+@font-face {
+	font-family: "Input Serif";
+	src: url("InputSerif.ttf");
+}
 
-  @font-face {
-    font-family: "Libre Barcode";
-    src: url("LibreBarcode128-Regular.ttf");
-  }
+@font-face {
+	font-family: "Inter";
+	src: url("Inter-VariableFont_opsz\,wght.ttf");
+}
 
-  @font-face {
-    font-family: "LineFont";
-    src: url("Linefont-VariableFont_wdth\,wght.ttf");
-  }
+@font-face {
+	font-family: "Libre Barcode";
+	src: url("LibreBarcode128-Regular.ttf");
+}
 
-  @font-face {
-    font-family: "Rufina";
-    src: url("Rufina-Regular.ttf");
-  }
-  @font-face {
-    font-family: "Syne";
-    src: url("Syne-VariableFont_wght.ttf");
-  }
+@font-face {
+	font-family: "LineFont";
+	src: url("Linefont-VariableFont_wdth\,wght.ttf");
+}
 
-  @font-face {
-    font-family: "Average Sans";
-    src: url("AverageSans-Regular.ttf");
-  }
+@font-face {
+	font-family: "Rufina";
+	src: url("Rufina-Regular.ttf");
+}
 
-  @font-face {
-    font-family: "IBM Plex Mono";
-    src: url("IBMPlexMono-Regular.ttf");
-  }
-  
-  @font-face {
-    font-family: "Geist";
-    src: url("Geist.ttf");
-  }
+@font-face {
+	font-family: "Syne";
+	src: url("Syne-VariableFont_wght.ttf");
+}
+
+@font-face {
+	font-family: "Average Sans";
+	src: url("AverageSans-Regular.ttf");
+}
+
+@font-face {
+	font-family: "IBM Plex Mono";
+	src: url("IBMPlexMono-Regular.ttf");
+}
+
+@font-face {
+	font-family: "Geist";
+	src: url("Geist.ttf");
+}
+
+@font-face {
+	font-family: "Exo 2";
+	src: url("Exo2-VariableFont_wght.ttf");
+}
+
+@font-face {
+	font-family: "Optician Sans";
+	src: url("Optician-Sans.ttf");
+}
+
+@font-face {
+	font-family: "Maple Mono";
+	src: url("MapleMono-Regular.ttf");
+}
+
+@font-face {
+	font-family: "Caveat";
+	src: url("Caveat-VariableFont_wght.ttf");
+}
+
+@font-face {
+	font-family: "Major Mono Display";
+	src: url("MajorMonoDisplay-Regular.ttf");
+}
+
+@font-face {
+	font-family: "Brygada 1918";
+	src: url("Brygada1918-VariableFont_wght.ttf");
+}
+
+@font-face {
+	font-family: "Fredoka";
+	src: url("Fredoka-VariableFont_wdth\,wght.ttf");
+}
+
+@font-face {
+	font-family: "Patua One";
+	src: url("PatuaOne-Regular.ttf");
+}
