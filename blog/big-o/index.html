@@ -184,6 +184,9 @@
     <script src="../../assets/switchfonts.js"></script>
     <script src="../../assets/subpages.js"></script>
     <script>
-      setTimeout(() => MathJax.typesetPromise(), 1000);
+         setTimeout(() => {
+         MathJax.typesetClear();
+         MathJax.typesetPromise();
+         }, 3000);
     </script>
 </html>
