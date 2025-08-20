@@ -11,7 +11,10 @@ const textfontlist = [
     "'Geist', sans-serif",
     "'Brygada 1918', 'sans-serif'",
     "'Maple Mono', 'sans-serif'",
+    "'VT323', 'monospace'",
+    "'Space Mono', 'monospace'",
     "'Caveat', 'cursive'",
+    "'Sour Gummy', 'monospace'",
     "'IM Fell English', 'serif'",
     "'LineFont'"
 ];
@@ -26,8 +29,11 @@ const headfontlist = [
     "'Helvetica Neue', 'sans-serif'",
     "'IBM Plex Mono', monospace",
     "'Optician Sans', 'serif'",
-    "'Fredoka', 'sans-serif'",
+    "'Anta', 'sans-serif'",
+    "'Rubik Pixels', 'monospace'",
+    "'Offside', 'monospace'",
     "'Patua One', 'serif'",
+    "'Fredoka', 'monospace'",
     "'IM Fell English SC', 'cursive'",
     "'Libre Barcode'"
 ];

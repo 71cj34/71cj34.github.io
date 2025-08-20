@@ -139,6 +139,36 @@
 }
 
 @font-face {
+	font-family: "VT323";
+	src: url("VT323-Regular.ttf");
+}
+
+@font-face {
+	font-family: "Space Mono";
+	src: url("SpaceMono-Regular.ttf");
+}
+
+@font-face {
+	font-family: "Sour Gummy";
+	src: url("SourGummy-VariableFont_wdth\,wght.ttf");
+}
+
+@font-face {
+	font-family: "Anta";
+	src: url("Anta-Regular.ttf");
+}
+
+@font-face {
+	font-family: "Rubik Pixels";
+	src: url("RubikPixels-Regular.ttf");
+}
+
+@font-face {
+	font-family: "Offside";
+	src: url("Offside-Regular.ttf");
+}
+
+@font-face {
 	font-family: "Patua One";
 	src: url("PatuaOne-Regular.ttf");
 }
