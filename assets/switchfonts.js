@@ -1,11 +1,11 @@
 const switchfont = document.getElementById('switch-fonts');
 
 const textfontlist = [
-    "'Input Serif', 'Courier New', monospace",
     "'Redaction-10', 'serif'",
     "'Syne', sans-serif",
     "'Helvetica', 'sans-serif'",
     "'Geist Mono', 'monospace'",
+    "'Input Serif', 'Courier New', monospace",
     "'Average Sans', 'sans-serif'",
     "'Geist', sans-serif",
     "'IM Fell English', 'serif'",
@@ -13,11 +13,11 @@ const textfontlist = [
 ];
 
 const headfontlist = [
-    "'Inconsolata', 'Courier', 'monospace'",
     "'Helvetica Neue', 'sans-serif'",
     "'Inter', 'Arial', 'sans-serif'",
     "'Helvetica Neue', 'sans-serif'",
     "'Redaction-35', serif",
+    "'Inconsolata', 'Courier', 'monospace'",
     "'Rufina', 'serif'",
     "'IBM Plex Mono', monospace",
     "'IM Fell English SC', 'cursive'",
