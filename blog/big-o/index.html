@@ -45,7 +45,7 @@
          <h1 style="margin-bottom: 0.25em;">Big O Notation</h1>
          <h4 class="subheading">Word count: <span id="wordcount" style="color: crimson"> &lt; Retrieving word count... &gt; </span></h4>
          <hr>
-         <p>Time for me to type 2000 words on a random tech subject because I'm bored. This time, I'm going to talk the basics of Big O notation and why it matters to you, starry-eyed software developer.</p>
+         <p>Time for me to type 2000 words on a random tech subject because I'm bored. This time, I'm going to talk the basics of Big O notation and why it (might) matter to you.</p>
          <hr>
          <p>Big O is a tool we use to answer a simple question:</p>
          <blockquote>
@@ -56,7 +56,7 @@
          <h2>The Questioner</h2>
          <h3>"Why not just time it?"</h3>
          <p>We <em>could</em> just run the code and look at a stopwatch afterwards, but:</p>
-         <ol>
+         <ol class="top-level">
             <li>Your mom's phone, my M1 MacBook, and the Azure <span class="code-inline">us-east-2c</span> instance all have different opinions about time. And latency. And consistency.</li>
             <li>“Works fine on 20 items” is something you tell yourself to feel better about your impending deadline. “Works fine on 200,000 items” is too. Try again when it's twenty <em>million</em>.</li>
             <li>Unlike you, who presumably must have an 8-digit budget to be asking such questions (a. because you're not concerned with spinning up an entire AWS instance just to play craps with a test database, b. because then, presumably, you are a C-suite exec, which explains why you're reading this instead of listening to your subordinates), most people either cannot or do not have the ability to test suitable real-world scenarios. This could be hardware, software, or just plain time limitations.</li>
@@ -64,7 +64,7 @@
          <p>Big O lets us throw hardware out of the equation for a second and focus solely on how <strong>the algorithm itself behaves as input size grows to infinity</strong>, or, in regular terms, “how the thing behaves as we shove increasingly large piles of junk into it”. (Look, if you take offense to me calling your inputs 'junk', you have not met the average end user. I have seen entire Slack threads pasted inside Search columns.)</p>
          <h3>"How are we going to count to infinity?"</h3>
          <p>Patience and a really big abacus. Hope you have a good work-life balance!</p>
-         <p>Just kidding. If you took first-year calculus, you can probably skip this part since you already know the answer. See, turns out a lot of algorithms behave like functions, and if we take the limit of an algorithm $\lim_{ n \to \infty } {O}(n)$, we can study how it behaves as it <em>approaches</em> the big infinity. This also lets us drop constant terms, small terms, and terms that don't increase quickly. For example, we can say stuff like $O(100k \cos^{2}{n} \cdot n) \approx O(n)$. But, as you'll see later, quite a bit of the time we won't even need to go there.</p>
+         <p>Just kidding. If you took first-year calculus, you can probably skip this part since you already know the answer. See, turns out a lot of algorithms behave like functions, and if we take the limit of an algorithm $\lim_{ n \to \infty } {O}(n)$, we can study how it behaves as it <em>approaches</em> the big infinity. This also lets us drop constant terms, small terms, and terms that don't increase quickly. For example, we can say stuff like $O(100k \cos^{2}{n} \cdot n) \approx O(n)$. If you're a big-words guy, this is called <strong>asymptotic behavior</strong>. But, as you may see later, quite a bit of the time we won't even need to go there- there is often a mathy way to get around needing to do calculus (eww!).</p>
          <h3>"But our input stack will never be infinity!"</h3>
          <p>Well, it works mighty well as a placeholder for <em>x</em> really big value. Let's say you're making an app. You test some filtering algorithm with 100 items, then 1,000, then you even stretch it out to 100,000 items. You declare this functional, push to production, and all is well. Then, a week later, your app blows up from TikTok or however all the trendy apps blow up these days, and you've got 80,000 users waiting at the front door! Turns out that algorithm of yours was $O(n^{2})$, and now you can't capitalize on your five minutes of fame because your server instance keeps blowing up every time a user so much as breathes on it. Cue stress, anxiety, stroke at 30, death, no more Taco Tuesdays. Don't let this happen to you! Test using Big O Notation™ today!</p>
          <p>Anyways, as ridiculous as that sounds, it does happen. <a href="https://blog.cloudflare.com/details-of-the-cloudflare-outage-on-july-2-2019/" target="_blank">Just ask Cloudflare.</a></p>
@@ -111,7 +111,7 @@
             <li>
                <strong>$O(n^2)$ - “Quadratic time.”</strong>
                <ul>
-                  <li>Everyone at a giant conference meeting has to shake one another's hands, and yes, duplicates do not count. If Bob shakes Alice's hand, Alice has to shake Bob's hand. By the time everyone's done, the first people will be dying from old age. You don't want to see this one.</li>
+                  <li>Everyone at a giant conference meeting has to shake everyone else's hand exactly once, and yes, duplicates do not count. If Bob shakes Alice's hand, Alice has to shake Bob's hand. By the time everyone's done, the first people will be dying from old age. You don't want to see this one.</li>
                   <li><em>Real danger zone:</em> nested loops over the same collection, naive matrix operations we wrote at 2 a.m.</li>
                </ul>
             </li>
@@ -136,14 +136,16 @@
          <ul>
             <li>Worst-case is what the textbooks always dissect, but practically speaking best-case or average-case are what is realistically going to come up.</li>
             <li>Don't get used to throwing away lower-level terms, as if you are using tiny input sizes or data pools, those will have a huge impact on performance.</li>
-            <li>Time isn't the only factor; the <a href="https://en.wikipedia.org/wiki/Space_complexity" target="_blank">space in memory you take up to run your algorithm can be just as, if not more important</a>.</li>
+            <li>Time isn't the only factor; the <a href="https://en.wikipedia.org/wiki/Space_complexity" target="_blank">space in memory you take up to run your algorithm can be just as, if not more important</a>.<ul><li>
+              An algorithm might run incredibly fast ($O(1)$ time! Yayyy!), but if it requires storing all our data in 10TB of RAM ($O(N)$ space where $N$ is huge), it's just as impractical as a slow algorithm. We actually use Big O in terms of memory usage too, helping us understand if our solution will fit within available resources.
+            </li></ul></li>
          </ul>
          <h2>The Blind Spot</h2>
          <p>Let me tell you a story.</p>
          <p>I was testing a sorting algorithm once, it was this thing that would let you inject multiple typed desiderata into a filtering/sort system to semi-randomly seed your results according to multiple factors. Don't ask, it didn't pan out. Anyways, according to my calculations, it would be $O(n \log{n})$ in complexity: it worked kind of the same as heap sort, I guess. But, for some reason, when I was testing it, it didn't act like that at all. When I added $50$, $500$, $5000$ values, it would always take around $10$ seconds or so, only when I bumped the dummy load up to $100,000$ values did it start to take a little longer. What the hell, man, I was thinking, what was happening?</p>
-         <p>Digging into some logs, I started spotting a pattern. Every time I'd start a test, the system would quietly shoot a bunch of GET requests to a dummy API (some vestigial bit from early on where I thought I'd benchmark sorting runs against an “objective” database in a Cloudflare D1 DB). Each request waited for a timeout- ten seconds, on the dot. If the cloud didn't answer (and it never did, because I hadn't gotten around to setting up the database yet), the code would wait every single time, and slow down my <span class="code-inline">time</span> calls.</p>
+         <p>Digging into some logs, I started spotting a pattern. Every time I'd start a test, the system would quietly shoot a bunch of GET requests to a dummy API (some vestigial bit from early on where I thought I'd benchmark sorting runs against an “objective” database in a Cloudflare D1 DB). Each request waited for a timeout- ten seconds, on the dot. If the cloud didn't answer (and it never did, because I hadn't gotten around to setting it up yet), the code would wait every single time, and slow down my <span class="code-inline">time</span> calls.</p>
          <p>That's the lesson.</p>
-         <p>Big O tells you how your algorithm scales, but it doesn't account for everything that can cause a slowdown- slow networks, cache misses, hardware limitations, anything other than the software itself. In this case, my “sorting algorithm” always had a 10-second fetter dragging along on it. Only when $n$ was so big it generated a second, bigger anchor (thanks, $O(n \log n)$! You did your job great :D) did I see the curve I expected.</p>
+         <p>Big O tells you how your algorithm scales, but it doesn't account for everything that can cause a slowdown- slow networks, cache misses, hardware limitations, anything other than the software itself. In this case, my “sorting algorithm” always had a 10-second weight dragging along on it. Only when $n$ was so big it generated a second, bigger weight (thanks, $O(n \log n)$! You did your job great :D) did I see the curve I expected.</p>
          <h2>Appendix A</h2>
          <p>Let's break down how we get $n \log{ n}$ as the complexity for a very common sorting algorithm- <strong>Merge Sort</strong>.</p>
          <p>But first, a quick TL;DR of how merge sort works: <strong>We split the array into halves, sort each, then merges it back together.</strong></p>
@@ -170,10 +172,11 @@
          </div>
          <p>Note that the base $2$ on the logarithm was removed because in Big O notation, we concern ourselves only with the <strong>behavior</strong> of the function, and the difference between base $10$ and base $x$ is only a constant factor. We use the change of base formula as proof:</p>
          <p>$\log_{x}{n}= \frac{\log_{10}n}{\log_{10}{x}} = \frac{1}{\log{x}}\log{n} \approx \log{n}$</p>
+         <br><br><br><a style="text-align: center; display: block" href="/">Return home.</a>
       </main>
       <button id="switch-fonts" style="opacity: 0.8; transform-origin: right; transform: scale(0.8); color: rgb(252, 252, 252); border-style: solid; border-width: 1px; border-color: black">Switch Fonts</button>
    </body>
-   
+
    <script src="../wordcount.js"></script>
    <script src="../peekaboo.js"></script>
    <script src="../../api/docs/code.js"></script>
