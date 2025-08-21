@@ -2,8 +2,21 @@
     --heading-color: #540202;
 }
 
+body {
+    margin: 12vh 18vw;
+    font-family: var(--text);
+    font-size: 1.1rem;
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        margin: 12vh 5vw;
+    }
+}
+
 h1, h2, h3, h4, h5 {
     color: var(--heading-color);
+    font-family: var(--head);
 }
 
 h1 {
@@ -33,7 +46,7 @@ h4 {
 }
 
 hr {
-    margin: 1.5rem;
+    margin: 1.25rem;
 }
 
 pre code {
@@ -65,10 +78,13 @@ blockquote {
     background-color: #f9f9f9; 
 }
 
-body {
-    margin-bottom: 20vh
-}
-
 mjx-container, mjx-math {
   font-size: 100% !important;
+}
+
+.subheading {
+  color: grey; 
+  font-style: italic; 
+  margin-top: 0; 
+  margin-bottom: 0;
 }
