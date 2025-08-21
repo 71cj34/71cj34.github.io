@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return total + link.offsetWidth + 15;
             }, 0);
 
-            if (window.innerWidth >= 810) {
+            if (window.innerWidth >= 811) {
                 if (content) content.style.marginTop = header.offsetHeight - 50 + 'px';
                 if (linksWidth > containerWidth) {
                     header.classList.add('expandable');
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } = data;
             let linkCenter = (linkRect.left + linkRect.right) / 2.0;
 
-            if (window.innerWidth >= 810) {
+            if (window.innerWidth >= 811) {
                 subdropdown.style.position = 'absolute';
                 subdropdown.style.left = `${linkCenter - parentRect.left - (dropdownRect.width / 2)}px`;
                 subdropdown.style.top = `${linkRect.bottom - header.getBoundingClientRect().top}px`;
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 function mobileDropdownToggleHandler(e, link, subdropdown) {
                     try {
-                    if (window.innerWidth >= 810) {
+                    if (window.innerWidth >= 811) {
                         return;
                     }
                     console.log("BUTTON PRESS DETECTED!!!");
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 link.addEventListener('mouseenter', function() {
-                    if (window.innerWidth >= 810) {
+                    if (window.innerWidth >= 811) {
                         clearTimeout(hideTimeout);
                         document.querySelectorAll('.subdropdown').forEach(d => {
                             d.style.display = 'none';
@@ -210,20 +210,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 link.addEventListener('mouseleave', function(e) {
-                    if (window.innerWidth >= 810) {
+                    if (window.innerWidth >= 811) {
                         startHideTimeout(subdropdown);
                     }
                 });
 
                 subdropdown.addEventListener('mouseenter', function() {
-                    if (window.innerWidth >= 810) {
+                    if (window.innerWidth >= 811) {
                         clearTimeout(hideTimeout);
                         subdropdown.style.opacity = '1';
                     }
                 });
 
                 subdropdown.addEventListener('mouseleave', function() {
-                    if (window.innerWidth >= 810) {
+                    if (window.innerWidth >= 811) {
                         startHideTimeout(subdropdown);
                     }
                 });
@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         document.addEventListener('touchend', function(e) {
-            if (window.innerWidth < 810 && activeMobileDropdown &&
+            if (window.innerWidth < 811 && activeMobileDropdown &&
                 !e.target.closest('.subdropdown') &&
                 !e.target.closest('.subpage-link.has-subdropdown')) {
 
@@ -300,9 +300,22 @@ document.addEventListener('DOMContentLoaded', function() {
 /////////////////
 
 const linkbar = document.getElementsByClassName("subpages-links")[0];
-linkbar.style.fontSize = window.innerWidth < 810 ? (0.5 + (Math.min((810 - window.innerWidth)/810, 0.3))).toString() + "rem" : "1rem";
 
-console.log((0.5 + (Math.min((810 - window.innerWidth)/810 - 0.5, 0.3))).toString() + "rem");
+function updateFontSize() {
+    if (!linkbar) return;
+
+    const minFontSize = 0.75;  // base at smallest widths
+    const maxExtra = 0.5;      // how much size increases as width gets closer to 811px
+    if (window.innerWidth < 811) {
+        const scale = Math.min((811 - window.innerWidth)/811, 1);
+        linkbar.style.fontSize = (minFontSize + scale * maxExtra) + "rem";
+    } else {
+        linkbar.style.fontSize = "1rem";
+    }
+}
+
+updateFontSize();
+window.addEventListener('resize', updateFontSize);
 
 const styleLinks = document.createElement('style');
 styleLinks.textContent = `
@@ -456,7 +469,7 @@ a.subpage-link {
   pointer-events: none;
 }
 /* Mobile-specific styles */
-@media (max-width: 810px) {
+@media (max-width: 811px) {
     .subpages-header.expandable .subpages-links {
         max-height: none;
     }
