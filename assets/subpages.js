@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return total + link.offsetWidth + 15;
             }, 0);
 
-            if (window.innerWidth >= 768) {
+            if (window.innerWidth >= 810) {
                 if (content) content.style.marginTop = header.offsetHeight - 50 + 'px';
                 if (linksWidth > containerWidth) {
                     header.classList.add('expandable');
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } = data;
             let linkCenter = (linkRect.left + linkRect.right) / 2.0;
 
-            if (window.innerWidth >= 768) {
+            if (window.innerWidth >= 810) {
                 subdropdown.style.position = 'absolute';
                 subdropdown.style.left = `${linkCenter - parentRect.left - (dropdownRect.width / 2)}px`;
                 subdropdown.style.top = `${linkRect.bottom - header.getBoundingClientRect().top}px`;
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 function mobileDropdownToggleHandler(e, link, subdropdown) {
                     try {
-                    if (window.innerWidth >= 768) {
+                    if (window.innerWidth >= 810) {
                         return;
                     }
                     console.log("BUTTON PRESS DETECTED!!!");
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 link.addEventListener('mouseenter', function() {
-                    if (window.innerWidth >= 768) {
+                    if (window.innerWidth >= 810) {
                         clearTimeout(hideTimeout);
                         document.querySelectorAll('.subdropdown').forEach(d => {
                             d.style.display = 'none';
@@ -210,20 +210,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 link.addEventListener('mouseleave', function(e) {
-                    if (window.innerWidth >= 768) {
+                    if (window.innerWidth >= 810) {
                         startHideTimeout(subdropdown);
                     }
                 });
 
                 subdropdown.addEventListener('mouseenter', function() {
-                    if (window.innerWidth >= 768) {
+                    if (window.innerWidth >= 810) {
                         clearTimeout(hideTimeout);
                         subdropdown.style.opacity = '1';
                     }
                 });
 
                 subdropdown.addEventListener('mouseleave', function() {
-                    if (window.innerWidth >= 768) {
+                    if (window.innerWidth >= 810) {
                         startHideTimeout(subdropdown);
                     }
                 });
@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         document.addEventListener('touchend', function(e) {
-            if (window.innerWidth < 768 && activeMobileDropdown &&
+            if (window.innerWidth < 810 && activeMobileDropdown &&
                 !e.target.closest('.subdropdown') &&
                 !e.target.closest('.subpage-link.has-subdropdown')) {
 
@@ -300,9 +300,9 @@ document.addEventListener('DOMContentLoaded', function() {
 /////////////////
 
 const linkbar = document.getElementsByClassName("subpages-links")[0];
-linkbar.style.fontSize = window.innerWidth < 768 ? (0.5 + (Math.min((768 - window.innerWidth)/768, 0.3))).toString() + "rem" : "1rem";
+linkbar.style.fontSize = window.innerWidth < 810 ? (0.5 + (Math.min((810 - window.innerWidth)/810, 0.3))).toString() + "rem" : "1rem";
 
-console.log((0.5 + (Math.min((768 - window.innerWidth)/768 - 0.5, 0.3))).toString() + "rem");
+console.log((0.5 + (Math.min((810 - window.innerWidth)/810 - 0.5, 0.3))).toString() + "rem");
 
 const styleLinks = document.createElement('style');
 styleLinks.textContent = `
@@ -456,7 +456,7 @@ a.subpage-link {
   pointer-events: none;
 }
 /* Mobile-specific styles */
-@media (max-width: 768px) {
+@media (max-width: 810px) {
     .subpages-header.expandable .subpages-links {
         max-height: none;
     }
