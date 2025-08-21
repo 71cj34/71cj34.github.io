@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirecting...</title>
+  <!-- Meta refresh as a failsafe after 5 seconds -->
+  <meta http-equiv="refresh" content="3;url=/school-resources" />
+  <script>
+    window.onload = function() {
+      window.location.replace('/school-resources');
+      
+      setTimeout(function() {
+        window.location.href = '/school-resources';
+      }, 1000);
+    };
+  </script>
+</head>
+<body>
+    <h1>Redirect Notice</h1>
+  <p>This page's contents have been migrated to <a href="/school-resources">https://jasoncheng.me/school-resources</a>.</p>
+  <p>If you are not redirected automatically, <a href="/school-resources/">click here</a> or wait 3 seconds.</p>
+</body>
+</html>
