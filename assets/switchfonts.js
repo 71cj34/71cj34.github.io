@@ -240,6 +240,20 @@ switchfont.addEventListener('click', function () {
             border-radius: 5px;
             z-index: 1000;
         }
+
+        @media (max-width: 768px) {
+            #switch-fonts {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #switch-fonts {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
     `;
 
     document.head.appendChild(style);
