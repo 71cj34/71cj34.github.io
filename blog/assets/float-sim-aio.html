@@ -116,7 +116,6 @@
 
 <script>
 (() => {
-  // Constants for IEEE754
   const FORMATS = {
     32: {
       bits: 32,
@@ -146,7 +145,6 @@
   const decimalToBitsBtn = document.getElementById('decimalToBitsBtn');
   const formatRadios = document.querySelectorAll('input[name="format"]');
 
-  // Create bit toggles and label positions
   function makeLabelsAndBits() {
     bitRow.innerHTML = '';
     bitLabels.innerHTML = '';
@@ -186,7 +184,7 @@
     }
   }
 
-  // Update visual bits given bits array
+  // update visual bits given bits array
   function updateBitUI() {
     const bitDivs = bitRow.children;
     for (let i = 0; i < bits.length; i++) {
@@ -199,28 +197,27 @@
     }
   }
 
-  // Toggle bit at index
+  // bit at index
   function toggleBit(i) {
     bits[i] = bits[i] ^ 1;
     updateBitUI();
     updateFloatDisplays();
   }
 
-  // Convert bits array to number (float)
-  // For 32-bit and 64-bit, use DataView to convert bits bytes to float
-  // First, create an ArrayBuffer and fill it with bits
-  // For 32-bit: 4 bytes
-  // For 64-bit: 8 bytes
-  // The bits array is MSB first, so bit 0 is the most significant bit
+  // convert bits array to number (float)
+  // for 32-bit and 64-bit, use DataView to convert bits bytes to float
+  // first, create an ArrayBuffer and fill it with bits
+  // for 32-bit: 4 bytes
+  // for 64-bit: 8 bytes
+  // fhe bits array is MSB first, so bit 0 is the most significant bit
 
   function bitsToFloat() {
     const { bits: totalBits } = currentFormat;
 
     if (totalBits === 32) {
-      // 4 bytes
       const buffer = new ArrayBuffer(4);
       const view = new DataView(buffer);
-      // Compose the 32-bit uint
+      // compose the 32-bit uint
       let val = 0;
       for (let i = 0; i < 32; i++) {
         val = (val << 1) | bits[i];
@@ -231,7 +228,7 @@
       // 8 bytes
       const buffer = new ArrayBuffer(8);
       const view = new DataView(buffer);
-      // Compose high and low 32 bits separately
+      // compose high and low 32 bits separately
       // bits[0..31] are high 32 bits (MSB side)
       // bits[32..63] are low 32 bits (LSB side)
       let high = 0;
@@ -248,8 +245,8 @@
     }
   }
 
-  // Convert a JS number to bits in current format (32 or 64-bit IEEE754)
-  // Use DataView with 4 or 8 bytes for 32 and 64 bit respectively
+  // convert a JS number to bits in current format (32 or 64-bit IEEE754)
+  // use DataView with 4/8 bytes for 32/64 bit respectively
   function floatToBits(num) {
     const { bits: totalBits } = currentFormat;
 
@@ -266,7 +263,7 @@
     } else if (totalBits === 64) {
       const buffer = new ArrayBuffer(8);
       const view = new DataView(buffer);
-      view.setFloat64(0, num, false); // Big endian
+      view.setFloat64(0, num, false); // this is big endian btw
       bits = new Uint8Array(totalBits);
       const high = view.getUint32(0, false);
       const low = view.getUint32(4, false);
@@ -280,7 +277,6 @@
     }
   }
 
-  // Updates float display and error based on current bits and decimal input
 function updateFloatDisplays() {
   const floatVal = bitsToFloat();
   const floatStr = formatFloatForDisplay(floatVal);
@@ -289,7 +285,6 @@ function updateFloatDisplays() {
 
   binaryDisplayEl.textContent = bitsToBinaryString();
 
-  // Calculate error if decimal input has value
   const decimalEntered = decimalInput.value !== "";
   if (decimalEntered) {
     const inputNum = Number(decimalInput.value);
@@ -303,16 +298,16 @@ function updateFloatDisplays() {
       displayError = error > 0 ? 'Infinity' : '-Infinity';
       errorValueEl.classList.add('error');
     } else {
-      // Determine if relative or absolute error used:
-      // When input is zero, use absolute error
+      // determine if relative or absolute error used:
+      // when input is zero, use absolute error
       let absError = Math.abs(error);
       let relError = inputNum !== 0 ? absError / Math.abs(inputNum) : absError;
-      const thresholdAbsolute = 1e-15; // For absolute error
-      const thresholdRelative = 1e-12; // For relative error
-      // Use whichever is appropriate:
+      const thresholdAbsolute = 1e-15;
+      const thresholdRelative = 1e-12;
+
       const isErrorSignificant = (inputNum === 0) ? (absError > thresholdAbsolute) : (relError > thresholdRelative);
 
-      // Format error with scientific notation for very small numbers
+      // format error with scientific notation (for small numbers)
       if (absError === 0) {
         displayError = '0';
       } else if (absError < 1e-12) {
@@ -331,23 +326,20 @@ function updateFloatDisplays() {
 }
  
 
-  // Helper: format float numbers nicely
   function formatFloatForDisplay(num) {
     if (Number.isNaN(num)) return 'NaN';
     if (num === Infinity) return 'Infinity';
     if (num === -Infinity) return '-Infinity';
     if (Object.is(num, -0)) return '-0';
     if (num === 0) return '0';
-    // Use precision: display with up to 17 decimal digits (safe for double precision)
-    // For single precision, 9 digits would be enough, but max 17 is safe for all.
+
     return num.toPrecision(17).replace(/\.?0+$/, '');
   }
 
-  // Convert bits array to a spaced binary string for display
+  // convert bits array to a spaced binary string for display
   function bitsToBinaryString() {
     const { bits: totalBits, expBits, fracBits } = currentFormat;
-    // Format: S | EEEEEEEE... | FFFF...
-    // We'll add spaces: after sign bit and exponent bits
+    // format: S | EEEEEEEE... | FFFF...
     let s = bits[0] ? '1' : '0';
     s += ' ';
     for (let i = 1; i <= expBits; i++) {
@@ -361,7 +353,7 @@ function updateFloatDisplays() {
   }
 
 
-  // When user inputs decimal and clicks Set bits, convert decimal to bits
+  // when user inputs decimal and clicks Set bits, convert decimal to bits
   decimalToBitsBtn.addEventListener('click', () => {
     const val = decimalInput.value;
     if (val === '') return;
@@ -375,13 +367,14 @@ function updateFloatDisplays() {
     updateFloatDisplays();
   });
 
-  // When format selection changes, adapt bits length and UI
+  // when format selection changes, adapt bits length and UI
   formatRadios.forEach(radio => {
     radio.addEventListener('change', () => {
       if (radio.checked) {
         currentFormat = FORMATS[radio.value];
         bits = new Uint8Array(currentFormat.bits);
-        // Reset bits to zero
+
+        // PIVOT!!!! PIVOT!!!!! PIVOT!!!!!!!!!
         for (let i = 0; i < bits.length; i++) bits[i] = 0;
         makeLabelsAndBits();
         updateBitUI();
@@ -391,10 +384,9 @@ function updateFloatDisplays() {
   });
 
 
-  // Initialization
   function init() {
     makeLabelsAndBits();
-    // Set initial to 0.0 float bits for selected format
+    // set initial to 0.0 float bits for selected format
     floatToBits(0);
     updateBitUI();
     updateFloatDisplays();

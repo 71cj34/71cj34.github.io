@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>Jason Cheng</title>
+      <link rel="shortcut icon" href="/img/stariconv2.png" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script>
+         MathJax = {
+           tex: {
+             inlineMath: [['$', '$'], ['\$$', '\$$']]
+           },
+           chtml: { scale: 1.0 } 
+         };
+      </script>
+      <script type="text/javascript" id="MathJax" async
+         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>    
+      <link rel="stylesheet" href="/blog/peekaboo.css" />
+      <link rel="stylesheet" href="/api/docs/code.css" />
+      <link rel="stylesheet" href="/blog/blog.css" />
+      <link rel="stylesheet" href="../../fonts/fonts.css" />
+   </head>
+   <body class="light-mode">
+      <div class="subpages-header" id="subpagesHeader">
+         <div class="subpages-title">Subpages:</div>
+         <div class="subpages-links">
+            <a href="/" class="subpage-link">Home</a>
+            <a class="subpage-link has-subdropdown">Personal/School Resources <span class="dropdown-arrow">▼</span></a>
+            <div class="subdropdown">
+               <a href="/projects" class="subdropdown-link">My Projects</a>
+               <a href="/firstyear" class="subdropdown-link">First Year Resources</a>
+               <a href="/portfolio" class="subdropdown-link">ENGINEER 1P13 Portfolio</a>
+            </div>
+            <a class="subpage-link has-subdropdown">Browser Apps/Games <span class="dropdown-arrow">▼</span></a>
+            <div class="subdropdown">
+               <a href="https://resize.jasoncheng.me" class="subdropdown-link">Image Resizer</a>
+               <a href="https://fooguessr.jasoncheng.me" class="subdropdown-link">Fooguessr</a>
+               <a href="https://sandwich.jasoncheng.me" class="subdropdown-link">Sandwich</a>
+            </div>
+            <a href="/api/docs" class="subpage-link">API Documentation</a>
+            <a href="https://github.com/71cj34/71cj34.github.io/blob/main/README.md" class="subpage-link">About this Site</a>
+         </div>
+      </div>
+<main>
+    <h1>IEEE 754</h1>
+             <h4 class="subheading">Word count: <span id="wordcount" style="color: crimson; font-family: var(--head)"> &lt; Retrieving word count... &gt; </span></h4>
+    <h2>What is a Number?</h2>
+    <p>Not all numbers are created equal.</p>
+    <p>If you have any experience with a programming language, especially strongly typed languages like C or Java, you know what a number is. Shocking. But, not only that, you know quite a few types of numbers. <span class="code-inline">int</span>, <span class="code-inline">float</span>, <span class="code-inline">double</span>, all of whom can be <span class="code-inline">short</span>, <span class="code-inline">long</span>, <span class="code-inline">signed</span>, and <span class="code-inline">unsigned</span>. See, though we may have enchanted chunks of earth inscribed with complex and miniscule sigils, connected them in an arcane and mysterious fashion, then powered it with an intangible <em>vis vitalis</em> in order to get to this point, it still cannot properly store numbers.</p>
+    <p>That's an over-exaggeration, but seriously: if you've seen something like this in your favorite non-denominational programming language:</p>
+    <pre><code>
+    float a = 1.31
+    float b = 0.31
+    float sum = a - b
+    print >> "Sum: " sum
+
+    > Sum: 0.99999994
+
+</code></pre>
+    <p>You know what I'm getting at.</p>
+    <p>More precisely (ha!), what is happening here in the pseudocode is an annoying example of how imprecision in decimal formats can cause measurable errors in calculations. If we take this <span class="code-inline">float</span> to be a single-precision floating point, that is, taking up 32 bits in memory, then it may not be able to properly represent a decimal like $0.5$. Remember, computers don't think in words or in numbers, they are made up of two things: ones and zeroes.</p>
+    <p>Imagine you have a flipboard in front of you, with 32 slots, each one with a card that either says 0 or 1. Flipping those cards creates a unique representation of a float upon interpretation. For example, if we want to create the float $21.57$, we encode it to $0\;10000011\;01011001000111101011100$. But, if we really think about it, how can 32 digits- each with 2 possible options- create, well, every decimal? 32 slots with 2 options makes $2^{32}=4\;294\;967\;296$ options, and even if we limit it to six or seven decimal points, this isn't nearly enough to create every decimal there is, especially if you consider negative numbers too.</p>
+    <p>Well, you're right: $0 10000011 01011001000111101011100$ doesn't actually equate $21.57$, if we calculate it, it equates to $21.5699996948$. Below, I have embedded a quick JS widget for you to play around with. Click on the 0s and 1s, what they look like in binary, as a float, and then try entering $21.57$ into the decimal field. Do you see how this format of decimals can be inaccurate?</p>
+    <iframe src="https://jasoncheng.me/blog/assets/float-sim-aio" width="100%" style="height: 35vh"></iframe>
+    <span style="font-style:italic; color: gray; font-size: 70%; margin-top: 0">Permalink to this widget: <a href="https://jasoncheng.me/blog/assets/float-sim-aio">https://jasoncheng.me/blog/assets/float-sim-aio</a></span>
+    <h3>What is a Decimal?</h3>
+    <p>So, do ever look at these data types and wonder why they are how they are? What if one day the Python Software Foundation or some other non-specific software conservator decides to say "Screw you, we're making floats take 40 bits of memory now"? Well, first of all, some CPU instruction sets don't even support non-standard memory sizes like 40 natively, but second of all, the <strong>Institute of Electrical and Electronics Engineers</strong> are the writers of the guideline that establishes the rules for these things. You can see it in the widget: the <strong>IEEE-754 Technical Standard</strong>.</p>
+    <p>Everything I just outlined was developed by this standard. Which bits are reserved for what, how the bits are arranged and interpreted, even how many bits there are. If you're not familiar with the standard, let me try to explain it.</p>
+    <h2>IEEE 754</h2>
+    <h3>Getting There</h3>
+    <p>You know decimals. They've got an integer, then a period, then however many integers you would like. (Of course, the preceding integer can also be as large as you like, but let's keep it small for the moment.)</p>
+    <p>You might also know that computers do not work by human definitions. Instead of words, numbers, images, anything we know, they work off of two digits only: 0s and 1s. So, how can we convert this human notation of decimals with periods and a leading integer into an efficient machine-readable version?</p>
+    <p>Let's come up with a decimal for the sake of explanation.
+    $$
+    0.000000000019241
+    $$
+    You can see we've normalized the integer portion of the coefficient to one non-zero digit, you are left only a reasonably-small integer.
+    $$
+    1.9241 \cdot 10^{-11}
+    $$
+    Let's try and convert this thing to computer language. Nowadays, most devices use IEEE 754 format, which is an efficient way to convert decimals to binary. There are numerous size formats too, but we will use fp32 single-precision float format for the example. When completed, this decimal would look something like this.
+    $$ 0 \; 01011011 \; 01010010011111011100001 $$</p>
+    <p>Let's talk about what this is.</p>
+    <ul>
+        <li>The first digit is the <strong>sign</strong>, $0$ for positive and $1$ for negative.</li>
+        <li>The next batch of 8 digits is the <strong>exponent</strong> $2^{\text{exponent}}$, basically a bit-efficient way to get closer to the desired value. However, powers like this lack precision, which is why most of the format is devoted to the mantissa.</li>
+        <li>The <strong>mantissa</strong> is 23 bits (technically 24, if you count the implicit 1 snuck in there) in total and contains a lot of the finer detail of the number.</li>
+    </ul>
+    <p>We will use the format $\text{e}^{a}\text{m}^{b}$, read "exponent-$a$ mantissa-$b$" for decimal formats. For example, looking at the example above, we would call the IEEE 754 fp32 format $\text{e}^{8}\text{m}^{23}$.</p>
+    <p>More specifically, let me walk you through how exactly we calculated this number.</p>
+    <h3>Calculating FP32</h3>
+    <p>If you think I'm about to do a bunch of calculations, you're wrong: we invented computers so that man would no longer need to do math, and I'll be damned if I don't fulfill that ambition. Also, I'm lazy. Don't sue me, all engineering students are.</p>
+    <p>Same number, $1.9241 \cdot 10^{-11}$.</p>
+    <ol>
+        <li>First, the <strong>sign</strong>. Ten seconds to guess what this bit will be.
+        </li>
+        <li>Then, we need to find the binary exponent.
+            <ol>
+                <li>What we need to do is take $\log_{2}{v}$, where $v$ is your base 10 decimal, to find our binary exponent $e$. We round the exponent to the nearest integer.
+                    <ol>
+                        <li>In this case, it's $-36$.</li>
+                    </ol>
+                </li>
+            </ol>
+        </li>
+        <li>We multiply $v$ by $2^{36}$ to normalize it and get the format we want, $v_{n} \times 2^{e}$.
+            <ol>
+                <li>In this case, it's approximately $1.3222314519_{10} \times 2^{-36}$</li>
+                <li>We bias the exponent by a standard-defined amount, $127$, to get $91$.</li>
+                <li>Now we convert to binary, and get $01011011$.</li>
+            </ol>
+        </li>
+        <li>Do you see it now? The $2^{-36}$ is the exponent term! Logically then, the first term is the mantissa.</li>
+        <li>Now after dropping the leading one, we need to calculate 23 fraction bits for $0.32223145187738\dots$.
+            <ol>
+                <li>We do this by repeatedly multiplying by $2$.</li>
+                <li>If, after multiplying by $2$, we have a leading $1$, the next bit is $1$. Otherwise, it's $0$. Then, we drop the leading $1$ (if it exists) than keep going.</li>
+                <li>We only need the first 23 fraction bits. Working it out, we get $01010010011111011100001$.</li>
+            </ol>
+        </li>
+        <li>Putting it all together, we get $\boxed{ 0 \; 01011011 \; 01010010011111011100001 }$.</li>
+    </ol>
+    <p>Easy as that!</p>
+    <h3>Other Types</h3>
+    <p>IEEE 754 standardizes quite a few decimal formats. We've got <strong>fp32</strong>, of course, which is a <span class="code-inline">float</span> in C, <strong>fp64</strong>, which is a <span class="code-inline">double</span>, and some compilers even support <strong>fp128</strong> as <span class="code-inline">long double</span>s if you're a crazy guy and know what you're doing.</p>
+    <p>In machine learning (yes, despite the kind of stuff I post on here, this blog was originally intended to be a machine learning blog; I have like four unfinished articles about quantization and pruning) fp32 is actually seen as a giant decimal format.</p>
+    <p>In order to cast types from higher to lower precision, the computer basically takes the bias from the higher, undoes it, then converts it to the lower precision by adding the lower bias. That handles the exponent bits. Be careful, though: if the smaller type can't handle the range, it'll either underflow or overflow. For the mantissa, it just discards the extra bits with some round-to-nearest optimization at the end.</p>
+    <p>Most are IEEE spec, like <strong>fp16</strong>, the half-width decimal format or <strong>fp8</strong>, the really-small decimal format (if you're doing anything except machine learning). We also made up some new decimal formats.</p>
+    <p>See, fp32 is great because it has a high dynamic range, letting it take a huge range of values while also helping avoid gradient vanishing/exploding and improve numerical stability while training. To kind-of get this same behavior while not having to deal with the absolutely mammoth amount of memory you need to work with fp32 at scale, we've got <strong>bf16</strong>. It has the same number of exponent bits, while sacrificing a bit of precision. We also have <strong>tf32</strong>, a Nvidia concoction, that's supposed to improve performance by the same reasons, except use 32 bits of memory which means you get none of the speed benefits. No one really uses it anyways so it's whatever.</p>
+    <p>Anyways, that is a topic for another blog post.</p>
+    <p>Thanks for reading.</p>
+</main>
+      <button id="switch-fonts" style="opacity: 0.8; transform-origin: right; transform: scale(0.8); color: rgb(252, 252, 252); border-style: solid; border-width: 1px; border-color: black">Switch Fonts</button>
+   </body>
+   <script src="../wordcount.js"></script>
+   <script src="../peekaboo.js"></script>
+   <script src="../../api/docs/code.js"></script>
+   <script src="../../assets/switchfonts.js"></script>
+   <script src="../../assets/subpages.js"></script>
+   <script>
+      setTimeout(() => {
+      MathJax.typesetClear();
+      MathJax.typesetPromise();
+      }, 3000);
+   </script>
+</html>
