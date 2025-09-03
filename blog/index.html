@@ -1,296 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Jason Cheng</title>
-    <link rel="shortcut icon" href="/img/stariconv2.png" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        MathJax = {
-          tex: {
-            inlineMath: [['$', '$'], ['\$$', '\$$']]
-          }
-        };
+   <head>
+      <meta charset="UTF-8">
+      <title>Jason Cheng</title>
+      <link rel="shortcut icon" href="/img/stariconv2.png" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script>
+         MathJax = {
+           tex: {
+             inlineMath: [['$', '$'], ['\$$', '\$$']]
+           }
+         };
       </script>
-    <script type="text/javascript" id="MathJax" async
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-    </script>
-    <link rel="stylesheet" href="../portfolio/ds1/ds1.css" />
-</head>
-<body class="light-mode">
-    <main>
-        <h1 style="margin-bottom: 0.25em;">Blog</h1>
-        <h4 style="font-style: italic; color: #979797; margin-top: 0">Thoughts I decide to share</h4>
-        <hr>
-
-        <div id="tag-filter-container">
+      <script type="text/javascript" id="MathJax" async
+         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <link rel="stylesheet" href="../portfolio/ds1/ds1.css" />
+   </head>
+   <body class="light-mode">
+      <main>
+         <h1 style="margin-bottom: 0.25em;">Blog</h1>
+         <h4 style="font-style: italic; color: #979797; margin-top: 0">Thoughts I decide to share</h4>
+         <hr>
+         <div id="tag-filter-container">
             <h3>Filter by Tags:</h3>
             <div id="tag-buttons">
-                <!-- Tag buttons will be dynamically generated here -->
             </div>
-        </div>
-
-        <div id="content">
-          <div class="blog-post-gateway" data-tags="computer science,algorithms,math">
-    <a href="big-o/index.html">
-        <h2>Big-O</h2>
-        <p class="blurb">
-            A short primer on Big-O notation, why it's important, and a few lessons on how to use it effectively.
-        </p>
-        <div class="post-meta">
-            <span class="word-count">2000 words</span>
-            <span class="post-date">August 20, 2025</span>
-        </div>
-    </a>
-</div>
-<div class="blog-post-gateway" data-tags="computer science,math">
-    <a href="ieee-754/index.html">
-        <h2>IEEE 754</h2>
-        <p class="blurb">
-            The IEEE 754 Standard, what it means for decimals, how it matters to you, and why it's awesome.
-        </p>
-        <div class="post-meta">
-            <span class="word-count">1462 words</span>
-            <span class="post-date">December 29, 2024</span>
-        </div>
-    </a>
-</div>
-        </div>
-    </main>
-    <style>
-      /* Existing styles */
-#content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2em;
-    padding: 1em 0;
-}
-
-.blog-post-gateway {
-    background-color: #f7f7f7;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.blog-post-gateway:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-.blog-post-gateway a {
-    text-decoration: none;
-    color: inherit;
-    padding: 1.5em;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.blog-post-gateway h2 {
-    font-size: 1.5em;
-    margin-top: 0;
-    margin-bottom: 0.75em;
-    color: #333;
-    font-family: monospace, sans-serif;
-    line-height: 1.3;
-}
-
-.blog-post-gateway .blurb {
-    font-size: 0.95em;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 1.5em;
-    flex-grow: 1;
-    font-family: monospace, sans-serif;
-}
-
-.blog-post-gateway .post-meta {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8em;
-    color: #777;
-    margin-top: auto;
-    border-top: 1px solid #eee;
-    padding-top: 1em;
-    font-family: monospace, sans-serif;
-}
-
-body.dark-mode .blog-post-gateway {
-    background-color: #2a2a2a;
-    border-color: #3f3f3f;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-body.dark-mode .blog-post-gateway:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-body.dark-mode .blog-post-gateway h2 {
-    color: #f0f0f0;
-}
-body.dark-mode .blog-post-gateway .blurb {
-    color: #c0c0c0;
-}
-body.dark-mode .blog-post-gateway .post-meta {
-    color: #999;
-    border-top-color: #3f3f3f;
-}
-
-/* New Styles for Tag Filtering */
-#tag-filter-container {
-    margin-bottom: 1.5em;
-    padding: 1em;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    background-color: #f7f7f7;
-}
-
-#tag-filter-container h3 {
-    margin-top: 0;
-    margin-bottom: 0.8em;
-    color: #333;
-    font-family: monospace, sans-serif;
-}
-
-#tag-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5em;
-}
-
-.tag-button {
-    background-color: #eee;
-    color: #555;
-    border: 1px solid #ccc;
-    padding: 0.5em 1em;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: all 0.2s ease-in-out;
-    font-family: monospace, sans-serif;
-}
-
-.tag-button:hover {
-    background-color: #ddd;
-    border-color: #bbb;
-    color: #333;
-}
-
-.tag-button.active {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
-}
-
-body.dark-mode #tag-filter-container {
-    background-color: #2a2a2a;
-    border-color: #3f3f3f;
-}
-
-body.dark-mode #tag-filter-container h3 {
-    color: #f0f0f0;
-}
-
-body.dark-mode .tag-button {
-    background-color: #3f3f3f;
-    color: #c0c0c0;
-    border-color: #555;
-}
-
-body.dark-mode .tag-button:hover {
-    background-color: #555;
-    border-color: #666;
-    color: #f0f0f0;
-}
-
-body.dark-mode .tag-button.active {
-    background-color: #0056b3;
-    border-color: #0056b3;
-    color: white;
-}
-    </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const blogPosts = document.querySelectorAll('.blog-post-gateway');
-            const tagButtonsContainer = document.getElementById('tag-buttons');
-            const contentContainer = document.getElementById('content');
-
-            
-            const allTags = new Set();
-            blogPosts.forEach(post => {
-                const tags = post.dataset.tags;
-                if (tags) {
-                    tags.split(',').forEach(tag => {
-                        allTags.add(tag.trim().toLowerCase());
-                    });
-                }
-            });
-
-            
-            const sortedTags = Array.from(allTags).sort();
-
-            
-            const allButton = document.createElement('button');
-            allButton.classList.add('tag-button', 'active');
-            allButton.innerText = 'All';
-            allButton.dataset.tag = 'all';
-            tagButtonsContainer.appendChild(allButton);
-
-            
-            sortedTags.forEach(tag => {
-                const button = document.createElement('button');
-                button.classList.add('tag-button');
-                button.innerText = tag.charAt(0).toUpperCase() + tag.slice(1); 
-                button.dataset.tag = tag;
-                tagButtonsContainer.appendChild(button);
-            });
-
-            
-            const tagButtons = document.querySelectorAll('.tag-button');
-
-            tagButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const selectedTag = this.dataset.tag;
-
-                    
-                    tagButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    this.classList.add('active');
-
-                    
-                    const orderedPosts = Array.from(blogPosts).sort((a,b) => {
-                        const dateA = new Date(a.querySelector('.post-date').textContent);
-                        const dateB = new Date(b.querySelector('.post-date').textContent);
-                        return dateB - dateA; 
-                    });
-
-                    
-                    contentContainer.innerHTML = '';
-
-                    orderedPosts.forEach(post => {
-                        if (selectedTag === 'all') {
-                            post.style.display = 'flex'; 
-                            contentContainer.appendChild(post); 
-                        } else {
-                            const postTags = post.dataset.tags ? post.dataset.tags.split(',').map(tag => tag.trim().toLowerCase()) : [];
-                            if (postTags.includes(selectedTag)) {
-                                post.style.display = 'flex'; 
-                                contentContainer.appendChild(post); 
-                            } else {
-                                post.style.display = 'none'; 
-                            }
-                        }
-                    });
-                });
-            });
-
-            
-            document.querySelector('.tag-button.active').click();
-        });
-    </script>
-</body>
+         </div>
+         <div id="content">
+            <div class="blog-post-gateway" data-tags="computer science,algorithms,math">
+               <a href="big-o/index.html">
+                  <h2>Big-O</h2>
+                  <p class="blurb">
+                     A short primer on Big-O notation, why it's important, and a few lessons on how to use it effectively.
+                  </p>
+                  <div class="post-meta">
+                     <span class="word-count">2000 words</span>
+                     <span class="post-date">August 20, 2025</span>
+                  </div>
+               </a>
+            </div>
+            <div class="blog-post-gateway" data-tags="computer science,math">
+               <a href="ieee-754/index.html">
+                  <h2>IEEE 754</h2>
+                  <p class="blurb">
+                     The IEEE 754 Standard, what it means for decimals, how it matters to you, and why it's awesome.
+                  </p>
+                  <div class="post-meta">
+                     <span class="word-count">1462 words</span>
+                     <span class="post-date">December 29, 2024</span>
+                  </div>
+               </a>
+            </div>
+         </div>
+      </main>
+      <style>
+         /* Existing styles */
+         #content {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+         gap: 2em;
+         padding: 1em 0;
+         }
+         .blog-post-gateway {
+         background-color: #f7f7f7;
+         border: 1px solid #e0e0e0;
+         border-radius: 8px;
+         overflow: hidden;
+         transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+         display: flex;
+         flex-direction: column;
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+         }
+         .blog-post-gateway:hover {
+         transform: translateY(-5px);
+         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+         }
+         .blog-post-gateway a {
+         text-decoration: none;
+         color: inherit;
+         padding: 1.5em;
+         display: flex;
+         flex-direction: column;
+         height: 100%;
+         }
+         .blog-post-gateway h2 {
+         font-size: 1.5em;
+         margin-top: 0;
+         margin-bottom: 0.75em;
+         color: #333;
+         font-family: monospace, sans-serif;
+         line-height: 1.3;
+         }
+         .blog-post-gateway .blurb {
+         font-size: 0.95em;
+         color: #555;
+         line-height: 1.6;
+         margin-bottom: 1.5em;
+         flex-grow: 1;
+         font-family: monospace, sans-serif;
+         }
+         .blog-post-gateway .post-meta {
+         display: flex;
+         justify-content: space-between;
+         font-size: 0.8em;
+         color: #777;
+         margin-top: auto;
+         border-top: 1px solid #eee;
+         padding-top: 1em;
+         font-family: monospace, sans-serif;
+         }
+         body.dark-mode .blog-post-gateway {
+         background-color: #2a2a2a;
+         border-color: #3f3f3f;
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+         }
+         body.dark-mode .blog-post-gateway:hover {
+         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+         }
+         body.dark-mode .blog-post-gateway h2 {
+         color: #f0f0f0;
+         }
+         body.dark-mode .blog-post-gateway .blurb {
+         color: #c0c0c0;
+         }
+         body.dark-mode .blog-post-gateway .post-meta {
+         color: #999;
+         border-top-color: #3f3f3f;
+         }
+         /* New Styles for Tag Filtering */
+         #tag-filter-container {
+         margin-bottom: 1.5em;
+         padding: 1em;
+         border: 1px solid #e0e0e0;
+         border-radius: 8px;
+         background-color: #f7f7f7;
+         }
+         #tag-filter-container h3 {
+         margin-top: 0;
+         margin-bottom: 0.8em;
+         color: #333;
+         font-family: monospace, sans-serif;
+         }
+         #tag-buttons {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 0.5em;
+         }
+         .tag-button {
+         background-color: #eee;
+         color: #555;
+         border: 1px solid #ccc;
+         padding: 0.5em 1em;
+         border-radius: 20px;
+         cursor: pointer;
+         font-size: 0.9em;
+         transition: all 0.2s ease-in-out;
+         font-family: monospace, sans-serif;
+         }
+         .tag-button:hover {
+         background-color: #ddd;
+         border-color: #bbb;
+         color: #333;
+         }
+         .tag-button.active {
+         background-color: #007bff;
+         color: white;
+         border-color: #007bff;
+         }
+         body.dark-mode #tag-filter-container {
+         background-color: #2a2a2a;
+         border-color: #3f3f3f;
+         }
+         body.dark-mode #tag-filter-container h3 {
+         color: #f0f0f0;
+         }
+         body.dark-mode .tag-button {
+         background-color: #3f3f3f;
+         color: #c0c0c0;
+         border-color: #555;
+         }
+         body.dark-mode .tag-button:hover {
+         background-color: #555;
+         border-color: #666;
+         color: #f0f0f0;
+         }
+         body.dark-mode .tag-button.active {
+         background-color: #0056b3;
+         border-color: #0056b3;
+         color: white;
+         }
+      </style>
+      <script>
+         document.addEventListener('DOMContentLoaded', () => {
+             const blogPosts = document.querySelectorAll('.blog-post-gateway');
+             const tagButtonsContainer = document.getElementById('tag-buttons');
+             const contentContainer = document.getElementById('content');
+         
+             
+             const allTags = new Set();
+             blogPosts.forEach(post => {
+                 const tags = post.dataset.tags;
+                 if (tags) {
+                     tags.split(',').forEach(tag => {
+                         allTags.add(tag.trim().toLowerCase());
+                     });
+                 }
+             });
+         
+             
+             const sortedTags = Array.from(allTags).sort();
+         
+             
+             const allButton = document.createElement('button');
+             allButton.classList.add('tag-button', 'active');
+             allButton.innerText = 'All';
+             allButton.dataset.tag = 'all';
+             tagButtonsContainer.appendChild(allButton);
+         
+             
+             sortedTags.forEach(tag => {
+                 const button = document.createElement('button');
+                 button.classList.add('tag-button');
+                 button.innerText = tag.charAt(0).toUpperCase() + tag.slice(1); 
+                 button.dataset.tag = tag;
+                 tagButtonsContainer.appendChild(button);
+             });
+         
+             
+             const tagButtons = document.querySelectorAll('.tag-button');
+         
+             tagButtons.forEach(button => {
+                 button.addEventListener('click', function() {
+                     const selectedTag = this.dataset.tag;
+         
+                     
+                     tagButtons.forEach(btn => btn.classList.remove('active'));
+                     
+                     this.classList.add('active');
+         
+                     
+                     const orderedPosts = Array.from(blogPosts).sort((a,b) => {
+                         const dateA = new Date(a.querySelector('.post-date').textContent);
+                         const dateB = new Date(b.querySelector('.post-date').textContent);
+                         return dateB - dateA; 
+                     });
+         
+                     
+                     contentContainer.innerHTML = '';
+         
+                     orderedPosts.forEach(post => {
+                         if (selectedTag === 'all') {
+                             post.style.display = 'flex'; 
+                             contentContainer.appendChild(post); 
+                         } else {
+                             const postTags = post.dataset.tags ? post.dataset.tags.split(',').map(tag => tag.trim().toLowerCase()) : [];
+                             if (postTags.includes(selectedTag)) {
+                                 post.style.display = 'flex'; 
+                                 contentContainer.appendChild(post); 
+                             } else {
+                                 post.style.display = 'none'; 
+                             }
+                         }
+                     });
+                 });
+             });
+         
+             
+             document.querySelector('.tag-button.active').click();
+         });
+      </script>
+   </body>
 </html>
