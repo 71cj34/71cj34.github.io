@@ -9,7 +9,40 @@ class PageTransitions {
         if (this.pages.length < 2) return; 
         
         this.init();
+        this.ensureFirstPageVisible();
     }
+
+    ensureFirstPageVisible() {
+    const hash = window.location.hash.slice(1);
+    const targetPage = hash
+        ? this.pages.find(p => p.id === hash)
+        : this.pages[0];                       // fallback to first page
+
+    const index = this.pages.indexOf(targetPage);
+    if (index === -1) return;                  // safety
+
+    /* if URL is already right, just show the page instantly */
+    if (window.location.hash.slice(1) !== targetPage.id) {
+        window.history.replaceState(null, null, `#${targetPage.id}`);
+    }
+
+    this.currentPageIndex = index;             // mark as active
+    this.showPage(index);                      // instant, no animation
+}
+    showPage(index) {
+    this.pages.forEach((p, i) => {
+        p.style.transition = 'none';           // remove transition
+        p.style.transform = 'translateY(0)';   // reset position
+        p.style.opacity = i === index ? '1' : '0';
+        p.style.pointerEvents = i === index ? 'auto' : 'none';
+    });
+    /* restore normal transitions for user scroll */
+    setTimeout(() => this.pages.forEach(p => {
+        p.style.transition = 'transform 0.8s ease, opacity 0.5s ease';
+    }), 50);
+}
+
+
     
     init() {
                 this.pages.forEach((page, index) => {
@@ -88,18 +121,16 @@ class PageTransitions {
         }, { passive: true });
     }
     
-    checkUrlHash() {
-        const hash = window.location.hash.substring(1);         
-        if (hash) {
-            const targetPage = this.pages.find(page => page.id === hash);
-            if (targetPage) {
-                const targetIndex = this.pages.indexOf(targetPage);
-                if (targetIndex !== this.currentPageIndex && !this.isAnimating) {
-                    this.transitionToPage(targetIndex);
-                }
-            }
-        }
-    }
+checkUrlHash() {
+    const hash = window.location.hash.slice(1);
+    const targetPage = this.pages.find(p => p.id === hash);
+    if (!targetPage) return;
+
+    const targetIndex = this.pages.indexOf(targetPage);
+    if (targetIndex === this.currentPageIndex || this.isAnimating) return;
+
+    this.transitionToPage(targetIndex);
+}
     
     handleScroll(e) {
         const interactiveElements = document.querySelectorAll('.preserve-interaction, #modeselection');
