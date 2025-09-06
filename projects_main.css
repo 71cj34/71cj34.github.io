@@ -99,20 +99,57 @@ h2 {
 }
 
 .foot {
-  font-size: 0.75rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
+  gap: .25em;
+  font-size: .75rem;
+  color: var(--link-color);
 }
 
-a {
+.foot a {
   color: var(--link-color);
   text-decoration: none;
   border-bottom: 1px solid var(--link-underline);
   padding-bottom: 1px;
 }
 
+.foot span.tech {
+  margin-right: auto;
+  color: inherit;
+}
+
 .tech {
   color: var(--tech-color);
   font-style: italic;
+  text-align: left;
+  max-width: 50%;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .6rem 1rem;
+  font-size: .9rem;
+  background: var(--accent);
+  color: #fff;
+}
+.nav-btn {
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: .25rem .55rem;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background .15s;
+}
+.nav-btn:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+.nav-btn:not(:disabled):hover {
+  background: rgba(255,255,255,.25);
+}
+#pageNum {
+  font-variant-numeric: tabular-nums;
 }
