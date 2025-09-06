@@ -256,5 +256,9 @@ switchfont.addEventListener('click', function () {
         }
     `;
 
-    document.head.appendChild(style);
+    if (!switchfont.classList.contains('no-default-style')) {
+        document.head.appendChild(style);
+    } else {
+        console.log("No default style applied to switch fonts button.");
+    }
 })();
