@@ -11,12 +11,30 @@
       <link rel="stylesheet" href="fonts/fonts.css" />
    </head>
    <body class="light-mode">
+            <div class="subpages-header" id="subpagesHeader">
+         <div class="subpages-title">Subpages:</div>
+         <div class="subpages-links">
+            <a href="/" class="subpage-link">Home</a>
+            <a class="subpage-link has-subdropdown">Personal/School Resources <span class="dropdown-arrow">▼</span></a>
+            <div class="subdropdown">
+               <a href="/#projects" class="subdropdown-link">My Projects</a>
+               <a href="/school-resources" class="subdropdown-link">First Year Resources</a>
+               <a href="/portfolio" class="subdropdown-link">ENGINEER 1P13 Portfolio</a>
+            </div>
+            <a class="subpage-link has-subdropdown">Browser Apps/Games <span class="dropdown-arrow">▼</span></a>
+            <div class="subdropdown">
+               <a href="https://resize.jasoncheng.me" class="subdropdown-link">Image Resizer</a>
+               <a href="https://fooguessr.jasoncheng.me" class="subdropdown-link">Fooguessr</a>
+               <a href="https://sandwich.jasoncheng.me" class="subdropdown-link">Sandwich</a>
+            </div>
+            <a href="/api/docs" class="subpage-link">API Documentation</a>
+            <a href="https://github.com/71cj34/71cj34.github.io/blob/main/README.md" class="subpage-link">About this Site</a>
+         </div>
+      </div>
     <div class="controls">
   <span id="modeselection">Dark mode.</span>
   <span id="switch-fonts" class="no-default-style">Switch fonts.</span>
 </div>
-       
-
       <main class="page-section page-1" id="home">
                      <p style="margin-bottom:1rem;">Hey there!</p>
             <p style="margin-bottom:2.25rem;">My name is <span class="highlight-inline">Jason Cheng</span>.</p>
@@ -176,5 +194,6 @@
    <script src="darkmode.js"></script>
    <script src="assets/scrollpage.js" defer></script>
    <script src="assets/switchfonts.js"></script>
+   <script src="assets/subpages.js"></script>
    <script src="projects_main_paginate.js"></script>
 </html>
