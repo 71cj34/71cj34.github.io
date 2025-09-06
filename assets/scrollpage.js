@@ -98,33 +98,29 @@ class PageTransitions {
             this.checkUrlHash();
         });
 
-        window.addEventListener('wheel', this.handleScroll.bind(this), {
-            passive: false
-        });
+window.addEventListener('wheel', e => {
+  if (this.isAnimating) { e.preventDefault(); return; }
+
+  if (isInsideWidget(e.target)) return;              // <-- let it scroll
+  /* … rest of the handler stays the same … */
+}, { passive:false });
 
 
-        let touchStartY = 0;
-        window.addEventListener('touchstart', (e) => {
-            touchStartY = e.touches[0].clientY;
-        }, {
-            passive: true
-        });
-
-        window.addEventListener('touchend', (e) => {
-            const touchEndY = e.changedTouches[0].clientY;
-            const deltaY = touchEndY - touchStartY;
+let touchStartY = 0;
+window.addEventListener('touchstart', e => {
+  if (isInsideWidget(e.target)) return;              // <-- ignore
+  touchStartY = e.touches[0].clientY;
+}, { passive:true });
 
 
-            if (Math.abs(deltaY) > 50) {
-                if (deltaY > 0) {
-                    this.goToPreviousPage();
-                } else {
-                    this.goToNextPage();
-                }
-            }
-        }, {
-            passive: true
-        });
+window.addEventListener('touchend', e => {
+  if (isInsideWidget(e.target)) return;              // <-- ignore
+  const deltaY = e.changedTouches[0].clientY - touchStartY;
+  if (Math.abs(deltaY) > 50) {
+    deltaY > 0 ? this.goToPreviousPage()
+               : this.goToNextPage();
+  }
+}, { passive:true });
     }
 
     checkUrlHash() {
@@ -225,3 +221,5 @@ class PageTransitions {
 document.addEventListener('DOMContentLoaded', () => {
     new PageTransitions();
 });
+
+const isInsideWidget = el => el.closest('.shell');
