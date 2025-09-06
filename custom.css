@@ -207,3 +207,119 @@ body.dark-mode .icon {
   text-align: center; 
   width: 100%; 
 }
+
+main.page-section:not(:first-of-type) {
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  transition: transform 0.8s ease, opacity 0.5s ease;
+}
+main.page-section:first-of-type {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  transition: transform 0.8s ease, opacity 0.5s ease;
+}
+
+.page-section {
+    opacity: 0; /* Hide all pages by default */
+    pointer-events: none; /* Disable interaction */
+    z-index: auto;
+}
+
+/* This class will be added by JS to the currently active page */
+.page-section.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2; /* Bring active page to front */
+}
+
+#modeselection, .preserve-interaction {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: auto;
+}
+  .page-section:not(.page-1) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+#modeselection {
+    top: 1.2rem;
+    right: 1.2rem;
+    cursor: pointer;
+}
+
+.page-section {
+    z-index: 1;
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+.page-section:first-child {
+    z-index: 2;
+}
+
+.page-content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.page-content-container > * {
+    max-width: 100%;
+}
+
+@media (max-width: 768px) {
+    .page-content-container {
+        padding: 1rem;
+    }
+}
+
+
+
+main.page-section:nth-child(2) .page-content-container {
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    align-items: flex-start; 
+    padding: 2rem 10vw; 
+    max-width: none;  
+}
+
+
+@media (max-width: 992px) { 
+    main.page-section:nth-child(2) .page-content-container {
+        padding: 2rem 5vw; 
+        gap: 20px;
+    }
+    main.page-section:nth-child(2) .page-content-container > * {
+        flex-basis: 45vw; 
+        max-width: 45vw;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .page-content-container {
+        padding: 1rem; 
+    }
+
+    .page-1 > .page-content-container {
+        gap: inherit;
+}}
