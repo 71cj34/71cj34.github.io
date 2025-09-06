@@ -27,13 +27,46 @@
   text-align: center;
 }
 
+/* DM STUFF */
 .top-right-icon {
   position: absolute;
-  top: 15px;
+  top:  15px;
   right: 15px;
   font-size: 14px;
+  text-align: right;
+}
+
+.top-right-icon > span {
+  margin-bottom:4em;
+}
+
+#modeselection, .preserve-interaction {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: auto;
+}
+
+#modeselection {
+    top: 1.2rem;
+    right: 1.2rem;
+    cursor: pointer;
+}
+
+/* DM STUFF (NEW) */
+
+.controls { 
+  position: fixed;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 1000;
+  display: flex;
+  gap: 2rem;
+  font-size: 14px;
+}
+
+.controls span {
   cursor: pointer;
-  }
+}
 
 .noselect {
   -webkit-user-select: none;
@@ -242,21 +275,11 @@ main.page-section:first-of-type {
     z-index: 2; /* Bring active page to front */
 }
 
-#modeselection, .preserve-interaction {
-    position: fixed;
-    z-index: 1000;
-    pointer-events: auto;
-}
   .page-section:not(.page-1) {
     opacity: 0;
     pointer-events: none;
   }
 
-#modeselection {
-    top: 1.2rem;
-    right: 1.2rem;
-    cursor: pointer;
-}
 
 .page-section {
     z-index: 1;
