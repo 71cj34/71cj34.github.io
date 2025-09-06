@@ -27,31 +27,6 @@
   text-align: center;
 }
 
-/* DM STUFF */
-.top-right-icon {
-  position: absolute;
-  top:  15px;
-  right: 15px;
-  font-size: 14px;
-  text-align: right;
-}
-
-.top-right-icon > span {
-  margin-bottom:4em;
-}
-
-#modeselection, .preserve-interaction {
-    position: fixed;
-    z-index: 1000;
-    pointer-events: auto;
-}
-
-#modeselection {
-    top: 1.2rem;
-    right: 1.2rem;
-    cursor: pointer;
-}
-
 /* DM STUFF (NEW) */
 
 .controls { 
@@ -62,10 +37,12 @@
   display: flex;
   gap: 2rem;
   font-size: 14px;
+  padding-block: 0.5em;
 }
 
 .controls span {
   cursor: pointer;
+  user-select: none;
 }
 
 .noselect {
