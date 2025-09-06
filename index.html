@@ -7,72 +7,174 @@
       <link rel="shortcut icon" href="/img/stariconv2.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="custom.css" />
+      <link rel="stylesheet" href="projects_main.css" />
+      <link rel="stylesheet" href="fonts/fonts.css" />
    </head>
    <body class="light-mode">
-      <div class="subpages-header" id="subpagesHeader">
-         <div class="subpages-title">Subpages:</div>
-         <div class="subpages-links">
-            <a href="/" class="subpage-link">Home</a>
-            <a class="subpage-link has-subdropdown">Personal/School Resources <span class="dropdown-arrow">▼</span></a>
-            <div class="subdropdown">
-               <a href="/projects" class="subdropdown-link">My Projects</a>
-               <a href="/firstyear" class="subdropdown-link">First Year Resources</a>
-               <a href="/portfolio" class="subdropdown-link">ENGINEER 1P13 Portfolio</a>
-            </div>
-            <a class="subpage-link has-subdropdown">Browser Apps/Games <span class="dropdown-arrow">▼</span></a>
-            <div class="subdropdown">
-               <a href="https://resize.jasoncheng.me" class="subdropdown-link">Image Resizer</a>
-               <a href="https://fooguessr.jasoncheng.me" class="subdropdown-link">Fooguessr</a>
-               <a href="https://sandwich.jasoncheng.me" class="subdropdown-link">Sandwich</a>
-            </div>
-            <a href="/api/docs" class="subpage-link">API Documentation</a>
-            <a href="https://github.com/71cj34/71cj34.github.io/blob/main/README.md" class="subpage-link">About this Site</a>
-         </div>
-      </div>
-      <span class="top-right-icon" id="modeselection"> Dark mode.</span>
+    <div class="controls">
+  <span id="modeselection">Dark mode.</span>
+  <span id="switch-fonts" class="no-default-style">Switch fonts.</span>
+</div>
+       
 
-      <main class="page-section page-1">
-         <div>
-            <p>Hey there!</p>
-            <p>My name is <span class="highlight-inline">Jason Cheng</span>.</p>
+      <main class="page-section page-1" id="home">
+                     <p style="margin-bottom:1rem;">Hey there!</p>
+            <p style="margin-bottom:2.25rem;">My name is <span class="highlight-inline">Jason Cheng</span>.</p>
             <br>
             <p><span class="highlight-inline">McMaster Computer Engineering</span>, class of <span class="highlight-inline">'29</span>.</p>
-            <p><span class="highlight-inline">Backend</span> developer, <span class="highlight-inline">LLM</span> enthusiast, and professional learner.</p>
+            <p style="margin-bottom:2.25rem;"><span class="highlight-inline">Backend</span> developer, <span class="highlight-inline">LLM</span> enthusiast, and professional learner.</p>
             <br>
-            <p>Email me at <span class="highlight-inline"><a href="mailto:hello@jasoncheng.me">hello@jasoncheng.me</a></span>.</p>
+            <p style="margin-bottom:2.25rem;">Email me at <span class="highlight-inline"><a href="mailto:hello@jasoncheng.me">hello@jasoncheng.me</a></span>.</p>
             <br>
 
             <p style="text-align: center; font-size: 1.5rem; margin: 1rem 0 0.2rem 0;" class="highlight-inline">
                Scroll down to learn more about me.
             </p>
-
-
-            <pre><p style="font-size: 1.2rem; color: lightgrey; font-family: 'Courier New', Courier, monospace; text-align: center; margin-top: 0">|
-|
-v</p></pre>
-            <div class="bottom-div">
-               <p><a href="https://en.wikipedia.org/wiki/K2-155d"><span><img class="icon " src="/img/stariconv2.png" alt="star icon"></span></a></p>
-               <p style="font-size: 0.6em; font-style: italic; justify-content: center; align-items: center; width: 100%;"> 
-                  <a href="https://ko-fi.com/brownbird" target="_blank">donations.</a>
-                  <br style="margin-top: 0.5rem">
-                  <span>( or send <strong>btc</strong> to bc1qtfwycffuq45cuyqaxlxm6xc5ezzsse0rm3a5mp )</span>
-               </p>
-            </div>
-         </div>
-         
       </main>
-      <main class="page-section">
-         <p>
-            Hey!<br><br>You managed to find a timing to visit my<br>page right while I'm renovating it.<br><br>
-            Come back later for the full renovation!<br><br>Don't worry, you're not missing anything;<br> 
-            the renovation will just collect all of the info<br>on the other subpages (like <a href="/projects" target="_blank">/projects</a>) into one page.<br><br>
-            Coding all of these fancy elements and events from scratch using JS is hard... <br><br>
-            In the meantime, use the top navbar to navigate the site. Thanks!
-         </p>
-         <p style="font-size: 0.8em; color: lightblue">06-27-2025</p>
+      <main class="page-section" id="projects">
+  <div class="shell">
+    <h1>projects</h1>
+
+    <div class="grid">
+
+      <div class="item">
+        <div>
+          <h2>fooguessr</h2>
+          <p class="tagline">browser game wherein you guess the language of a random github snippet.</p>
+        </div>
+        <div class="foot">
+          <span class="tech">html, css, js, github api</span>
+          <a href="https://github.com/71cj34/fooguessr/">src</a> · <a href="https://fooguessr.jasoncheng.me">play</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <h2>mergekithelper</h2>
+          <p class="tagline">batch/python script suite that takes the mess out of <a href="https://github.com/arcee-ai/mergekit/">mergekit</a>, from merge to quant to upload.</p>
+        </div>
+        <div class="foot">
+          <span class="tech">batch, python, llamacpp, mergekit</span>
+          <a href="https://github.com/71cj34/MergekitHelper">src</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <h2>llmcalculator</h2>
+          <p class="tagline">c++ cli that calculates required ram for loading both model &amp; context; made for embedded systems/workflows.</p>
+        </div>
+        <div class="foot">
+          <span class="tech">c++</span>
+          <a href="https://github.com/71cj34/llmcalculator">src</a> · <a href="https://github.com/71cj34/llmcalculator/releases">exe</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <h2>study guides</h2>
+          <p class="tagline">free notes written in latex &amp; markdown aimed to help students understand, not memorize.</p>
+        </div>
+        <div class="foot">
+          <span class="tech">md, latex</span>
+          <a href="/school-resources/">src</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <h2>rsz</h2>
+          <p class="tagline">powershell command-line script to batch-compress images. customizable and fast.</p>
+        </div>
+        <div class="foot">
+          <span class="tech">ps</span>
+          <a href="https://github.com/71cj34/rsz">src</a>
+        </div>
+      </div>
+
+            <div class="item">
+        <div>
+          <h2>blog</h2>
+          <p class="tagline">articles written on teaching tech and computer science principles</p>
+        </div>
+        <div class="foot">
+          <span class="tech">general tech</span>
+          <a href="/blog">read</a>
+        </div>
+      </div>
+
+            <div class="item">
+        <div>
+          <h2>mistral-nemo-v1</h2>
+          <p class="tagline">a dpo finetune of mistral nemo 12b, done remotely through docker on an a100. <br>22k+ downloads</p>
+        </div>
+        <div class="foot">
+          <span class="tech">docker, axolotl, dpo, rlhf, sft, hf</span>
+          <a href="https://huggingface.co/tssst/nemo-gutenberg-12b-v1">tensors</a> · <a href="https://huggingface.co/mradermacher/nemo-gutenberg-12b-v1-i1-GGUF">gguf</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <h2>mergekit merges</h2>
+          <p class="tagline">mergekit experiments &amp; benchmarks performed with lighteval</p>
+        </div>
+        <div class="foot">
+          <span class="tech">mergekit, hf, lighteval</span>
+          <a href="https://huggingface.co/collections/tssst/merges-6774c268fb77c86d800f8329">collection</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <h2>exl2 quants</h2>
+          <p class="tagline">exl2 quantizations performed with my python automated script suite.</p>
+        </div>
+        <div class="foot">
+          <span class="tech">hf, exllamav2, python</span>
+          <a href="https://huggingface.co/collections/tssst/exl2-quants-6774c2c818b5bd5388225ce8">collection</a>
+        </div>
+      </div>
+
+            <div class="item">
+        <div>
+          <h2>exl2 quants</h2>
+          <p class="tagline">exl2 quantizations performed with my python automated script suite.</p>
+        </div>
+        <div class="foot">
+          <span class="tech">hf, exllamav2, python</span>
+          <a href="https://huggingface.co/collections/tssst/exl2-quants-6774c2c818b5bd5388225ce8">collection</a>
+        </div>
+      </div>
+      <div class="item">
+        <div>
+          <h2>llmroyale</h2>
+          <p class="tagline">llm serving api where the llm changes daily and everyone shares a message pool. written in server-side js.</p>
+        </div>
+        <div class="foot">
+          <span class="tech">backend, javascript, apis</span>
+          <a href="https://llmroyale.onrender.com/">visit</a>
+        </div>
+      </div>
+
+     <div class="item">
+        <div>
+          <h2>this website</h2>
+          <p class="tagline">pure html/css/js, made with github pages, cloudflare, amazon ses, cloudflare workers/d1.</p>
+        </div>
+        <div class="foot">
+          <span class="tech">frontend, backend, html, css, js</span>
+          <a href="/">visit</a> · <a href="https://github.com/71cj34/71cj34.github.io">src</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
       </main>
    </body>
    <script src="darkmode.js"></script>
    <script src="assets/scrollpage.js" defer></script>
-   <script src="assets/subpages.js"></script>
+   <script src="assets/switchfonts.js"></script>
+   <script src="projects_main_paginate.js"></script>
 </html>
