@@ -17,27 +17,27 @@ class PageTransitions {
         const hash = window.location.hash.slice(1);
         const targetPage = hash ?
             this.pages.find(p => p.id === hash) :
-            this.pages[0]; // fallback to first page
+            this.pages[0];
 
         const index = this.pages.indexOf(targetPage);
-        if (index === -1) return; // safety
+        if (index === -1) return;
 
-        /* if URL is already right, just show the page instantly */
+
         if (window.location.hash.slice(1) !== targetPage.id) {
             window.history.replaceState(null, null, `#${targetPage.id}`);
         }
 
-        this.currentPageIndex = index; // mark as active
-        this.showPage(index); // instant, no animation
+        this.currentPageIndex = index;
+        this.showPage(index);
     }
     showPage(index) {
         this.pages.forEach((p, i) => {
-            p.style.transition = 'none'; // remove transition
-            p.style.transform = 'translateY(0)'; // reset position
+            p.style.transition = 'none';
+            p.style.transform = 'translateY(0)';
             p.style.opacity = i === index ? '1' : '0';
             p.style.pointerEvents = i === index ? 'auto' : 'none';
         });
-        /* restore normal transitions for user scroll */
+
         setTimeout(() => this.pages.forEach(p => {
             p.style.transition = 'transform 0.8s ease, opacity 0.5s ease';
         }), 50);
@@ -101,28 +101,29 @@ class PageTransitions {
 
         let touchStartY = 0;
         window.addEventListener('touchstart', e => {
-            if (isInsideWidget(e.target)) return; // <-- ignore
+            if (isInsideWidget(e.target)) return;
             touchStartY = e.touches[0].clientY;
         }, {
             passive: true
         });
 
         window.addEventListener(
-  'wheel',
-  e => {
-    if (this.isAnimating) {
-      e.preventDefault();
-      return;
-    }
-    if (isInsideWidget(e.target)) return;   // now works
-    this.handleScroll(e);                   // your old logic
-  },
-  { passive: false }
-);
+            'wheel',
+            e => {
+                if (this.isAnimating) {
+                    e.preventDefault();
+                    return;
+                }
+                if (isInsideWidget(e.target)) return;
+                this.handleScroll(e);
+            }, {
+                passive: false
+            }
+        );
 
 
         window.addEventListener('touchend', e => {
-            if (isInsideWidget(e.target)) return; // <-- ignore
+            if (isInsideWidget(e.target)) return;
             const deltaY = e.changedTouches[0].clientY - touchStartY;
             if (Math.abs(deltaY) > 50) {
                 deltaY > 0 ? this.goToPreviousPage() :
