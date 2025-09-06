@@ -7,6 +7,7 @@
       <link rel="shortcut icon" href="/img/stariconv2.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="custom.css" />
+      <link rel="stylesheet" href="projects_main.css" />
    </head>
    <body class="light-mode">
        <span class="top-right-icon" id="modeselection"> Dark mode.</span>
@@ -15,8 +16,80 @@
          <p>Lorem ipsum</p>
       </main>
       <main class="page-section" id="projects">
-         <!-- P2 CONTENT GOES HERE -->
-          <p>Lutua Docet</p>
+  <div class="shell">
+    <h1>projects</h1>
+
+    <div class="grid">
+
+      <div class="item">
+        <div>
+          <h2>lambda</h2>
+          <p class="tagline">minimal functional interpreter in 120 lines of rust.</p>
+        </div>
+        <div class="foot">
+          <span class="tech">rust, nom</span>
+          <a href="#">src</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <h2>dotfiles</h2>
+          <p class="tagline">lightweight session management and home synchronisation scripts.</p>
+        </div>
+        <div class="foot">
+          <span class="tech">bash, git</span>
+          <a href="#">src</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <h2>lathe</h2>
+          <p class="tagline">self-hosted analytics service using uuids &amp; 1-pixel beacons.</p>
+        </div>
+        <div class="foot">
+          <span class="tech">go, sqlite</span>
+          <a href="#">src</a> · <a href="#">demo</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <h2>cask</h2>
+          <p class="tagline">static site compiler focused on markup safety &amp; fast rebuilds.</p>
+        </div>
+        <div class="foot">
+          <span class="tech">nim, scss</span>
+          <a href="#">src</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <h2>pwm</h2>
+          <p class="tagline">tiny pwm fan controller driven by thermal sensors.</p>
+        </div>
+        <div class="foot">
+          <span class="tech">c, avr</span>
+          <a href="#">src</a> · <a href="#">schematic</a>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <h2>srgb</h2>
+          <p class="tagline">colour grading playground that lives in the browser.</p>
+        </div>
+        <div class="foot">
+          <span class="tech">js, canvas, wasm</span>
+          <a href="#">src</a> · <a href="#">demo</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
       </main>
    </body>
    <script src="darkmode.js"></script>

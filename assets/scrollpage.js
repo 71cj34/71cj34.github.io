@@ -12,10 +12,8 @@ class PageTransitions {
     }
     
     init() {
-        // Assign IDs to pages if they don't have one
-        this.pages.forEach((page, index) => {
-            // If no ID is set, assign a default one
-            if (!page.id) {
+                this.pages.forEach((page, index) => {
+                        if (!page.id) {
                 page.id = `page-${index}`;
             }
         });
@@ -61,16 +59,13 @@ class PageTransitions {
         document.body.style.overflow = 'hidden';
         
         
-        // Check hash on load
-        this.checkUrlHash();
+                this.checkUrlHash();
         
-        // Listen for hash changes
-        window.addEventListener('hashchange', () => {
+                window.addEventListener('hashchange', () => {
             this.checkUrlHash();
         });
         
-        // Listen for wheel events
-        window.addEventListener('wheel', this.handleScroll.bind(this), { passive: false });
+                window.addEventListener('wheel', this.handleScroll.bind(this), { passive: false });
         
         
         let touchStartY = 0;
@@ -106,8 +101,7 @@ class PageTransitions {
     }
     
     checkUrlHash() {
-        const hash = window.location.hash.substring(1); // Remove the #
-        
+        const hash = window.location.hash.substring(1);         
         if (hash) {
             const targetPage = this.pages.find(page => page.id === hash);
             if (targetPage) {
@@ -163,7 +157,6 @@ class PageTransitions {
         
         this.currentPageId = newPage.id;
         
-        // Update URL hash without triggering navigation
         if (window.history.pushState) {
             window.history.pushState(null, null, `#${this.currentPageId}`);
         } else {
