@@ -10,6 +10,7 @@ class PageTransitions {
 
         this.init();
         this.ensureFirstPageVisible();
+
     }
 
     ensureFirstPageVisible() {
@@ -98,29 +99,38 @@ class PageTransitions {
             this.checkUrlHash();
         });
 
-window.addEventListener('wheel', e => {
-  if (this.isAnimating) { e.preventDefault(); return; }
+        let touchStartY = 0;
+        window.addEventListener('touchstart', e => {
+            if (isInsideWidget(e.target)) return; // <-- ignore
+            touchStartY = e.touches[0].clientY;
+        }, {
+            passive: true
+        });
 
-  if (isInsideWidget(e.target)) return;              // <-- let it scroll
-  /* … rest of the handler stays the same … */
-}, { passive:false });
+        window.addEventListener(
+  'wheel',
+  e => {
+    if (this.isAnimating) {
+      e.preventDefault();
+      return;
+    }
+    if (isInsideWidget(e.target)) return;   // now works
+    this.handleScroll(e);                   // your old logic
+  },
+  { passive: false }
+);
 
 
-let touchStartY = 0;
-window.addEventListener('touchstart', e => {
-  if (isInsideWidget(e.target)) return;              // <-- ignore
-  touchStartY = e.touches[0].clientY;
-}, { passive:true });
-
-
-window.addEventListener('touchend', e => {
-  if (isInsideWidget(e.target)) return;              // <-- ignore
-  const deltaY = e.changedTouches[0].clientY - touchStartY;
-  if (Math.abs(deltaY) > 50) {
-    deltaY > 0 ? this.goToPreviousPage()
-               : this.goToNextPage();
-  }
-}, { passive:true });
+        window.addEventListener('touchend', e => {
+            if (isInsideWidget(e.target)) return; // <-- ignore
+            const deltaY = e.changedTouches[0].clientY - touchStartY;
+            if (Math.abs(deltaY) > 50) {
+                deltaY > 0 ? this.goToPreviousPage() :
+                    this.goToNextPage();
+            }
+        }, {
+            passive: true
+        });
     }
 
     checkUrlHash() {

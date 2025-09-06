@@ -8,6 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="custom.css" />
       <link rel="stylesheet" href="projects_main.css" />
+      <link rel="stylesheet" href="about_main.css" />
       <link rel="stylesheet" href="fonts/fonts.css" />
    </head>
    <body class="light-mode">
@@ -179,12 +180,53 @@
   </div>
 
       </main>
-      <main class="page-section" id="about">
-          <div class="shell">
+<main class="page-section" id="about">
+  <div class="shell">
     <h1>about me</h1>
-      </div>
+<section class="about-wrap">
+  <!-- 1. quick-facts -->
+  <aside class="facts">
+    <img src="avatar.jpg" alt="avatar" class="avatar"/>
+    <h3>kim coder</h3>
+    <p>full-stack tinkerer &amp; open-source fan</p>
 
-      </main>
+    <ul class="social">
+      <li><a href="#">github</a></li>
+      <li><a href="#">twitter</a></li>
+      <li><a href="#">mail</a></li>
+    </ul>
+  </aside>
+
+  <!-- 2. story -->
+  <article class="story">
+    <p>I build things for the web, usually with TypeScript, Go or Rust. When I’m not hacking I’m climbing rocks or brewing the perfect pour-over.</p>
+
+    <p>Currently hacking on <strong>project-x</strong> and learning <strong>webgpu</strong>.</p>
+  </article>
+
+  <!-- 3. skills & gear -->
+  <aside class="badges">
+    <h4>skills</h4>
+    <div class="tag-group">
+      <span class="tag">typescript</span>
+      <span class="tag">react</span>
+      <span class="tag">go</span>
+      <span class="tag">rust</span>
+      <span class="tag">postgres</span>
+    </div>
+
+    <h4>toolbox</h4>
+    <div class="tag-group">
+      <span class="tag">neovim</span>
+      <span class="tag">kitty</span>
+      <span class="tag">docker</span>
+      <span class="tag">vite</span>
+      <span class="tag">github-actions</span>
+    </div>
+  </aside>
+</section>
+  </div>
+</main>
    </body>
    <script src="darkmode.js"></script>
    <script src="assets/scrollpage.js" defer></script>
