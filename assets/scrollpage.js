@@ -5,60 +5,60 @@ class PageTransitions {
         this.isAnimating = false;
         this.scrollTimeout = null;
         this.currentPageId = null;
-        
-        if (this.pages.length < 2) return; 
-        
+
+        if (this.pages.length < 2) return;
+
         this.init();
         this.ensureFirstPageVisible();
     }
 
     ensureFirstPageVisible() {
-    const hash = window.location.hash.slice(1);
-    const targetPage = hash
-        ? this.pages.find(p => p.id === hash)
-        : this.pages[0];                       // fallback to first page
+        const hash = window.location.hash.slice(1);
+        const targetPage = hash ?
+            this.pages.find(p => p.id === hash) :
+            this.pages[0]; // fallback to first page
 
-    const index = this.pages.indexOf(targetPage);
-    if (index === -1) return;                  // safety
+        const index = this.pages.indexOf(targetPage);
+        if (index === -1) return; // safety
 
-    /* if URL is already right, just show the page instantly */
-    if (window.location.hash.slice(1) !== targetPage.id) {
-        window.history.replaceState(null, null, `#${targetPage.id}`);
+        /* if URL is already right, just show the page instantly */
+        if (window.location.hash.slice(1) !== targetPage.id) {
+            window.history.replaceState(null, null, `#${targetPage.id}`);
+        }
+
+        this.currentPageIndex = index; // mark as active
+        this.showPage(index); // instant, no animation
+    }
+    showPage(index) {
+        this.pages.forEach((p, i) => {
+            p.style.transition = 'none'; // remove transition
+            p.style.transform = 'translateY(0)'; // reset position
+            p.style.opacity = i === index ? '1' : '0';
+            p.style.pointerEvents = i === index ? 'auto' : 'none';
+        });
+        /* restore normal transitions for user scroll */
+        setTimeout(() => this.pages.forEach(p => {
+            p.style.transition = 'transform 0.8s ease, opacity 0.5s ease';
+        }), 50);
     }
 
-    this.currentPageIndex = index;             // mark as active
-    this.showPage(index);                      // instant, no animation
-}
-    showPage(index) {
-    this.pages.forEach((p, i) => {
-        p.style.transition = 'none';           // remove transition
-        p.style.transform = 'translateY(0)';   // reset position
-        p.style.opacity = i === index ? '1' : '0';
-        p.style.pointerEvents = i === index ? 'auto' : 'none';
-    });
-    /* restore normal transitions for user scroll */
-    setTimeout(() => this.pages.forEach(p => {
-        p.style.transition = 'transform 0.8s ease, opacity 0.5s ease';
-    }), 50);
-}
 
 
-    
     init() {
-                this.pages.forEach((page, index) => {
-                        if (!page.id) {
+        this.pages.forEach((page, index) => {
+            if (!page.id) {
                 page.id = `page-${index}`;
             }
         });
 
-        
-        
+
+
         this.pages.forEach((page, index) => {
             if (index > 0) {
                 page.style.opacity = '0';
                 page.style.pointerEvents = 'none';
             }
-            
+
             page.style.transition = 'transform 0.8s ease, opacity 0.5s ease';
             page.style.position = 'fixed';
             page.style.top = '0';
@@ -66,8 +66,8 @@ class PageTransitions {
             page.style.width = '100%';
             page.style.height = '100vh';
             page.style.overflowY = 'auto';
-            
-            
+
+
             const container = document.createElement('div');
             container.className = 'page-content-container';
             container.style.display = 'flex';
@@ -80,37 +80,41 @@ class PageTransitions {
             container.style.margin = '0 auto';
             container.style.padding = '2rem';
             container.style.boxSizing = 'border-box';
-            
-            
+
+
             while (page.firstChild) {
                 container.appendChild(page.firstChild);
             }
             page.appendChild(container);
         });
-        
-        
+
+
         document.body.style.overflow = 'hidden';
-        
-        
-                this.checkUrlHash();
-        
-                window.addEventListener('hashchange', () => {
+
+
+        this.checkUrlHash();
+
+        window.addEventListener('hashchange', () => {
             this.checkUrlHash();
         });
-        
-                window.addEventListener('wheel', this.handleScroll.bind(this), { passive: false });
-        
-        
+
+        window.addEventListener('wheel', this.handleScroll.bind(this), {
+            passive: false
+        });
+
+
         let touchStartY = 0;
         window.addEventListener('touchstart', (e) => {
             touchStartY = e.touches[0].clientY;
-        }, { passive: true });
-        
+        }, {
+            passive: true
+        });
+
         window.addEventListener('touchend', (e) => {
             const touchEndY = e.changedTouches[0].clientY;
             const deltaY = touchEndY - touchStartY;
-            
-            
+
+
             if (Math.abs(deltaY) > 50) {
                 if (deltaY > 0) {
                     this.goToPreviousPage();
@@ -118,35 +122,37 @@ class PageTransitions {
                     this.goToNextPage();
                 }
             }
-        }, { passive: true });
+        }, {
+            passive: true
+        });
     }
-    
-checkUrlHash() {
-    const hash = window.location.hash.slice(1);
-    const targetPage = this.pages.find(p => p.id === hash);
-    if (!targetPage) return;
 
-    const targetIndex = this.pages.indexOf(targetPage);
-    if (targetIndex === this.currentPageIndex || this.isAnimating) return;
+    checkUrlHash() {
+        const hash = window.location.hash.slice(1);
+        const targetPage = this.pages.find(p => p.id === hash);
+        if (!targetPage) return;
 
-    this.transitionToPage(targetIndex);
-}
-    
+        const targetIndex = this.pages.indexOf(targetPage);
+        if (targetIndex === this.currentPageIndex || this.isAnimating) return;
+
+        this.transitionToPage(targetIndex);
+    }
+
     handleScroll(e) {
         const interactiveElements = document.querySelectorAll('.preserve-interaction, #modeselection');
         const isOverInteractive = Array.from(interactiveElements).some(el => {
             return el.contains(e.target);
         });
-        
+
         if (this.isAnimating || isOverInteractive) {
             e.preventDefault();
             return;
         }
-        
+
         if (this.scrollTimeout) {
             clearTimeout(this.scrollTimeout);
         }
-        
+
         this.scrollTimeout = setTimeout(() => {
             if (e.deltaY > 0) {
                 this.goToNextPage();
@@ -154,60 +160,60 @@ checkUrlHash() {
                 this.goToPreviousPage();
             }
         }, 100);
-        
+
         e.preventDefault();
     }
-    
+
     goToNextPage() {
         if (this.currentPageIndex >= this.pages.length - 1 || this.isAnimating) return;
         this.transitionToPage(this.currentPageIndex + 1);
     }
-    
+
     goToPreviousPage() {
         if (this.currentPageIndex <= 0 || this.isAnimating) return;
         this.transitionToPage(this.currentPageIndex - 1);
     }
-    
+
     transitionToPage(newIndex) {
         this.isAnimating = true;
-        
+
         const currentPage = this.pages[this.currentPageIndex];
         const newPage = this.pages[newIndex];
-        
+
         this.currentPageId = newPage.id;
-        
+
         if (window.history.pushState) {
             window.history.pushState(null, null, `#${this.currentPageId}`);
         } else {
             window.location.hash = this.currentPageId;
         }
-        
+
         newPage.style.opacity = '1';
         newPage.style.pointerEvents = 'auto';
-        
+
         const direction = newIndex > this.currentPageIndex ? 1 : -1;
-        
-        
+
+
         if (direction > 0) {
-            
+
             newPage.style.transform = 'translateY(100%)';
         } else {
-            
+
             newPage.style.transform = 'translateY(-100%)';
         }
-        
-        
+
+
         newPage.offsetHeight;
-        
-        
+
+
         currentPage.style.transform = `translateY(${-100 * direction}%)`;
         newPage.style.transform = 'translateY(0)';
-        
+
         setTimeout(() => {
-            
+
             currentPage.style.opacity = '0';
             currentPage.style.pointerEvents = 'none';
-            
+
             this.currentPageIndex = newIndex;
             this.isAnimating = false;
         }, 800);
