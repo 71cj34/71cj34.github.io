@@ -4,6 +4,7 @@ class PageTransitions {
         this.currentPageIndex = 0;
         this.isAnimating = false;
         this.scrollTimeout = null;
+        this.currentPageId = null;
         
         if (this.pages.length < 2) return; 
         
@@ -11,12 +12,22 @@ class PageTransitions {
     }
     
     init() {
+        // Assign IDs to pages if they don't have one
+        this.pages.forEach((page, index) => {
+            // If no ID is set, assign a default one
+            if (!page.id) {
+                page.id = `page-${index}`;
+            }
+        });
+
+        
         
         this.pages.forEach((page, index) => {
             if (index > 0) {
                 page.style.opacity = '0';
                 page.style.pointerEvents = 'none';
             }
+            
             page.style.transition = 'transform 0.8s ease, opacity 0.5s ease';
             page.style.position = 'fixed';
             page.style.top = '0';
@@ -50,6 +61,15 @@ class PageTransitions {
         document.body.style.overflow = 'hidden';
         
         
+        // Check hash on load
+        this.checkUrlHash();
+        
+        // Listen for hash changes
+        window.addEventListener('hashchange', () => {
+            this.checkUrlHash();
+        });
+        
+        // Listen for wheel events
         window.addEventListener('wheel', this.handleScroll.bind(this), { passive: false });
         
         
@@ -83,6 +103,20 @@ class PageTransitions {
             el.style.zIndex = '1000';
             el.style.pointerEvents = 'auto';
         });
+    }
+    
+    checkUrlHash() {
+        const hash = window.location.hash.substring(1); // Remove the #
+        
+        if (hash) {
+            const targetPage = this.pages.find(page => page.id === hash);
+            if (targetPage) {
+                const targetIndex = this.pages.indexOf(targetPage);
+                if (targetIndex !== this.currentPageIndex && !this.isAnimating) {
+                    this.transitionToPage(targetIndex);
+                }
+            }
+        }
     }
     
     handleScroll(e) {
@@ -126,6 +160,15 @@ class PageTransitions {
         
         const currentPage = this.pages[this.currentPageIndex];
         const newPage = this.pages[newIndex];
+        
+        this.currentPageId = newPage.id;
+        
+        // Update URL hash without triggering navigation
+        if (window.history.pushState) {
+            window.history.pushState(null, null, `#${this.currentPageId}`);
+        } else {
+            window.location.hash = this.currentPageId;
+        }
         
         newPage.style.opacity = '1';
         newPage.style.pointerEvents = 'auto';
@@ -216,34 +259,33 @@ styleScrollPage.textContent = `
     }
 }
 
-/* 2nd page sttff */
+
 
 main.page-section:nth-child(2) .page-content-container {
-    flex-direction: row; /* Change to horizontal layout */
-    flex-wrap: wrap; /* Allow content to wrap if it doesn't fit */
-    justify-content: center; /* Center the columns horizontally */
-    align-items: flex-start; /* Align items to the top within their row */
-    padding: 2rem 10vw; /* 10vw margin on left and right for the container */
-    max-width: none; /* Override the default max-width to let vw units work */
-    gap: 30px; /* Add a gap between your columns */
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    align-items: flex-start; 
+    padding: 2rem 10vw; 
+    max-width: none;  
 }
 
-/* Target the direct children (your "columns") within the second page's container */
-main.page-section:nth-child(2) .page-content-container > * {
-    flex: 1 1 40vw; /* flex-grow, flex-shrink, flex-basis. Each wants to be 40vw */
-    max-width: 40vw; /* Ensure they don't grow beyond 40vw */
-    box-sizing: border-box; /* Include padding/border in width calculation */
-    text-align: left; /* Adjust text alignment within columns if needed */
-}
+// no idea why this was here but it made the first page not centered vertically
+// main.page-section:nth-child(2) .page-content-container > * {
+//     flex: 1 1 40vw; 
+//     max-width: 40vw; 
+//     box-sizing: border-box; 
+//     text-align: left; 
+// }
 
-/* Responsive adjustments for the second page layout */
-@media (max-width: 992px) { /* Adjust breakpoint as needed */
+
+@media (max-width: 992px) { 
     main.page-section:nth-child(2) .page-content-container {
-        padding: 2rem 5vw; /* Reduce side padding on slightly smaller screens */
+        padding: 2rem 5vw; 
         gap: 20px;
     }
     main.page-section:nth-child(2) .page-content-container > * {
-        flex-basis: 45vw; /* Make columns slightly smaller if needed */
+        flex-basis: 45vw; 
         max-width: 45vw;
     }
 }
@@ -251,23 +293,12 @@ main.page-section:nth-child(2) .page-content-container > * {
 
 @media (max-width: 768px) {
     .page-content-container {
-        padding: 1rem; /* Default mobile padding */
+        padding: 1rem; 
     }
 
-    /* On smaller screens, stack the columns for better readability */
-    main.page-section:nth-child(2) .page-content-container {
-        flex-direction: column; /* Stack columns vertically */
-        padding: 2rem 1rem; /* Adjust padding for mobile */
-        gap: 1rem; /* Gap for stacked items */
-    }
-
-    main.page-section:nth-child(2) .page-content-container > * {
-        flex: 1 1 auto; /* Allow children to take full width */
-        max-width: 100%; /* Ensure they don't exceed 100% of parent */
-        text-align: center; /* Center text again when stacked */
-    }
+    .page-1 > .page-content-container {
+        gap: inherit;
 }
-
 
 `;
 document.head.appendChild(styleScrollPage);
