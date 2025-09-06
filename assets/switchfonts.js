@@ -196,69 +196,68 @@ switchfont.addEventListener('click', function () {
         }
     });
 
-    const style = document.createElement('style');
-    style.textContent = `
-        .popup {
-            position: fixed;
-            bottom: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: sans-serif;
-            color: black;
-            background: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.075);
-            border-radius: 10px;
-            padding: 10px 20px;
-            z-index: 1000;
-            opacity: 0;
-            max-width: 70vw;
-            text-align: center;
-            font-size: clamp(0.5em, calc(0.85em + 0.5 * ((100vw - 320px) / 880)), 1.15em);
-            transition: bottom 0.5s ease, opacity 0.5s ease;
-        }
+    // if (!switchfont.classList.contains('no-default-style')) {
+    //     const style = document.createElement('style');
+    //     style.textContent = `
+    //         .popup {
+    //             position: fixed;
+    //             bottom: -100px;
+    //             left: 50%;
+    //             transform: translateX(-50%);
+    //             font-family: sans-serif;
+    //             color: black;
+    //             background: rgba(255, 255, 255, 0.3);
+    //             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    //             backdrop-filter: blur(10px);
+    //             -webkit-backdrop-filter: blur(10px);
+    //             border: 1px solid rgba(255, 255, 255, 0.075);
+    //             border-radius: 10px;
+    //             padding: 10px 20px;
+    //             z-index: 1000;
+    //             opacity: 0;
+    //             max-width: 70vw;
+    //             text-align: center;
+    //             font-size: clamp(0.5em, calc(0.85em + 0.5 * ((100vw - 320px) / 880)), 1.15em);
+    //             transition: bottom 0.5s ease, opacity 0.5s ease;
+    //         }
 
-        .popup.show {
-            bottom: 10%;
-            opacity: 1;
-        }
+    //         .popup.show {
+    //             bottom: 10%;
+    //             opacity: 1;
+    //         }
 
-        #switch-fonts {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            border: none;
-            font-family: var(--text);
-            color: white;
-            background-color: #444;
-            padding: 15px 28px;
-            text-align: center;
-            font-size: 1.1rem;
-            cursor: pointer;
-            border-radius: 5px;
-            z-index: 1000;
-        }
+    //         #switch-fonts {
+    //             position: absolute;
+    //             top: 2rem;
+    //             right: 2rem;
+    //             border: none;
+    //             font-family: var(--text);
+    //             color: white;
+    //             background-color: #444;
+    //             padding: 15px 28px;
+    //             text-align: center;
+    //             font-size: 1.1rem;
+    //             cursor: pointer;
+    //             border-radius: 5px;
+    //             z-index: 1000;
+    //         }
 
-        @media (max-width: 768px) {
-            #switch-fonts {
-                padding: 10px 20px;
-                font-size: 16px;
-            }
-        }
+    //         @media (max-width: 768px) {
+    //             #switch-fonts {
+    //                 padding: 10px 20px;
+    //                 font-size: 16px;
+    //             }
+    //         }
 
-        @media (max-width: 480px) {
-            #switch-fonts {
-                padding: 8px 16px;
-                font-size: 14px;
-            }
-        }
-    `;
-
-    if (!switchfont.classList.contains('no-default-style')) {
-        document.head.appendChild(style);
-    } else {
-        console.log("No default style applied to switch fonts button.");
-    }
+    //         @media (max-width: 480px) {
+    //             #switch-fonts {
+    //                 padding: 8px 16px;
+    //                 font-size: 14px;
+    //             }
+    //         }
+    //     `;
+    //     document.head.appendChild(style);
+    // } else {
+    //     console.log("No default style applied to switch fonts button.");
+    // }
 })();

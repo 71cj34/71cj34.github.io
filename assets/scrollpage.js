@@ -88,17 +88,17 @@ class PageTransitions {
         }, { passive: true });
         
         
-        this.preserveInteractiveElements();
+        // this.preserveInteractiveElements();
     }
     
-    preserveInteractiveElements() {
-        const interactiveElements = document.querySelectorAll('.preserve-interaction, #modeselection');
-        interactiveElements.forEach(el => {
-            el.style.position = 'fixed';
-            el.style.zIndex = '1000';
-            el.style.pointerEvents = 'auto';
-        });
-    }
+    // preserveInteractiveElements() {
+    //     const interactiveElements = document.querySelectorAll('.preserve-interaction, #modeselection');
+    //     interactiveElements.forEach(el => {
+    //         el.style.position = 'fixed';
+    //         el.style.zIndex = '1000';
+    //         el.style.pointerEvents = 'auto';
+    //     });
+    // }
     
     checkUrlHash() {
         const hash = window.location.hash.substring(1);         
