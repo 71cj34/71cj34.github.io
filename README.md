@@ -3,7 +3,7 @@
 Welcome to the repository my personal site [jasoncheng.me](https://jasoncheng.me) is served from.
 
 It uses only plain HTML/JS/CSS with no frameworks or build tools (except Github Pages' default Jekyll compiler). As such, any non-standard elements are made from scratch, from CSS and JS. For example, the dropdown header menu found on some of the pages are made with over 
-[**480 lines of pure JavaScript**](https://github.com/71cj34/71cj34.github.io/blob/main/assets/subpages.js). Here are some notes on the repository if you wish to explore:
+[**500 lines of pure JavaScript**](https://github.com/71cj34/71cj34.github.io/blob/main/assets/subpages.js). Here are some notes on the repository if you wish to explore:
 
 - `.depr`
   - Old and unfinished projects and files. Does not get built onto the website because of a Jekyll rule.
@@ -11,10 +11,11 @@ It uses only plain HTML/JS/CSS with no frameworks or build tools (except Github 
   - Old Jekyll configuration files. Have no effect.
 - `api`
   - My API served through Cloudflare Workers. Since I don't pay for any serverside hosting, sadly I couldn't make an actual 'real' server-fetch/serve style API.
+  - Deprecated; I have since found much [better ways](https://llmroyale.onrender.com) to test my API-making capabilities.
 - `assets`
   - Any non-image assets served from the website. Additionally, module-style JavaScript files used throughout the website (such as the font-switching script [`switchfonts.js`](https://github.com/71cj34/71cj34.github.io/blob/main/assets/switchfonts.js)).
 - `blog`
-  - Unfinished blog hub. Contains a short snippet of an unfinished article on the Transformers model, before I migrated to writing the articles on proper writing software. However, does feature some neat stuff, like an [all-in-one IEEE 754 float simulator html file](https://jasoncheng.me/blog/assets/float-sim-aio).
+  - My blog hub, for whenever I do stuff like that. Also contains some neat stuff, like an [all-in-one IEEE 754 float simulator html file](https://jasoncheng.me/blog/assets/float-sim-aio).
 - `exif`
   - Unfinished browser app, like [`resize`](https://resize.jasoncheng.me), that gets EXIF data from an uploaded image.
 - `firstyear`
