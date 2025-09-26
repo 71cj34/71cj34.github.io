@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOU NEED TO PANIC!!!!!!!</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+            background:#fff;
+            color:#000;
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            flex-direction: column;
+            padding:5vh 5vw;
+        }
+        .container{
+            width:100%;
+            max-width:900px;
+            display:flex;
+            flex-direction:column;
+            gap:10vh;
+        }
+        .event{
+            text-align:center;
+        }
+        .event-title{
+            font-size:1rem;
+            font-weight:600;
+            letter-spacing:.05em;
+            margin-bottom:1.2rem;
+            color:#000;
+        }
+        .countdown{
+            display:flex;
+            justify-content:center;
+            gap:min(3vw,24px);
+        }
+        .unit{
+            min-width:min(18vw,140px);
+        }
+        .value{
+            font-size:min(18vw,100px);
+            font-weight:900;
+            line-height:1;
+            height:min(18vw,100px);
+            overflow:hidden;
+            position:relative;
+        }
+        .value-inner{
+            position:absolute;
+            inset:0;
+            transition:transform .6s cubic-bezier(.45,0,.55,1), color 1s ease-out; /* Added color transition */
+            transform:translateY(0%);
+            color: #000; /* Default color */
+        }
+
+        .value-inner.slide-out{
+            transform:translateY(100%);
+        }
+        .value-inner.new-slide-in {
+            transform: translateY(-100%);
+        }
+
+        /* Color classes for countdown values */
+        .color-stage-1 { color: #8B0000; } /* Dark Red */
+        .color-stage-2 { color: #DC143C; } /* Crimson */
+        .color-stage-3 { color: #FF0000; } /* Bright Red */
+
+        .label{
+            margin-top:.6rem;
+            font-size:.75rem;
+            letter-spacing:.1em;
+            color:#000;
+        }
+        .expired{
+            font-size:min(12vw,72px);
+            font-weight:900;
+            color:#d00;
+        }
+        @media(prefers-reduced-motion:reduce){
+            .value-inner{transition:none}
+        }
+    </style>
+</head>
+<body>
+    <div class="event-title" style="transform:scale(0.9); margin-bottom: 5vh;">oh gjod oh fjuck oh god oh god</div>
+    <hr style="width: 5%; margin-bottom:5vh;">
+    <div id="root"></div>
+    <script>
+        const dates=[
+            {name:"COMPENG 2DI4 MIDTERM",date:new Date("2025-10-29T19:00:00")},
+            {name:"LOGIC DESIGN MIDTERM",date:new Date("2025-09-25T22:04:00")},
+            {name:"SUMMER SOLSTICE",date:new Date("2024-06-21T14:51:00")}
+        ];
+
+        const root=document.getElementById("root");
+        root.className="container";
+
+        dates.forEach(o=>{
+            const d=document.createElement("div");d.className="event";
+            d.innerHTML=`
+                <div class="event-title">${o.name}</div>
+                <div class="countdown">
+                    ${["days","hours","mins","secs"].map(u=>`
+                        <div class="unit">
+                            <div class="value" data-unit="${u}">
+                                <div class="value-inner current">00</div>
+                            </div>
+                            <div class="label">${u.toUpperCase()}</div>
+                        </div>`).join("")}
+                </div>`;
+            root.appendChild(d);
+            new Countdown(d,o.date);
+        });
+
+        function Countdown(el, target){
+            const prev={d:null,h:null,m:null,s:null};
+            const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+            const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+
+            const tick=()=>{
+                const r=target-new Date();
+                if(r<=0){el.innerHTML='<div class="expired">THE TIME HAS COME</div>';return true;}
+
+                const d=Math.floor(r/864e5);
+                const h=Math.floor((r % 864e5) / 36e5);
+                const m=Math.floor((r % 36e5) / 6e4);
+                const s=Math.floor((r % 6e4) / 1e3);
+
+                // Determine color class based on remaining time
+                let colorClass = '';
+                if (r < ONE_DAY_MS) { // Less than 1 day
+                    colorClass = 'color-stage-3'; // Bright Red
+                } else if (r < ONE_WEEK_MS / 2) { // Less than 3.5 days (half a week)
+                    colorClass = 'color-stage-2'; // Crimson
+                } else if (r < ONE_WEEK_MS) { // Less than 1 week
+                    colorClass = 'color-stage-1'; // Dark Red
+                }
+
+                set("days",d, colorClass);
+                set("hours",h, colorClass);
+                set("mins",m, colorClass);
+                set("secs",s, colorClass);
+            };
+
+            const set=(unit,val, colorClass)=>{
+                const wrap=el.querySelector(`[data-unit="${unit}"]`);
+                const old=wrap.querySelector(".current");
+
+                if(prev[unit[0]]===null){
+                    prev[unit[0]]=val;
+                    old.textContent=String(val).padStart(2,"0");
+                    old.className = `value-inner current ${colorClass}`; // Apply initial color
+                    return;
+                }
+
+                if(prev[unit[0]]!==val){
+                    const neu=document.createElement("div");
+                    neu.className=`value-inner new-slide-in ${colorClass}`; // Apply color to new element
+                    neu.textContent=String(val).padStart(2,"0");
+
+                    wrap.appendChild(neu);
+
+                    void neu.offsetWidth;
+
+                    requestAnimationFrame(()=>{
+                        old.classList.remove("current");
+                        old.classList.add("slide-out");
+
+                        neu.classList.remove("new-slide-in");
+                        neu.classList.add("current");
+
+                        // Ensure old element's color class is removed to avoid affecting the new one
+                        old.classList.remove('color-stage-1', 'color-stage-2', 'color-stage-3');
+
+                        setTimeout(() => old.remove(), 600);
+                    });
+
+                    prev[unit[0]]=val;
+                } else {
+                    // If the value hasn't changed, but the color might have (e.g., crossing a time threshold)
+                    if (!old.classList.contains(colorClass)) {
+                        old.classList.remove('color-stage-1', 'color-stage-2', 'color-stage-3');
+                        old.classList.add(colorClass);
+                    }
+                }
+            };
+            const iv=setInterval(()=>{if(tick())clearInterval(iv);},1000);
+            tick();
+        }
+    </script>
+</body>
+</html>
