@@ -96,6 +96,7 @@
             {name:"MATH 2Z03 MIDTERM (ends)",date:new Date("2025-10-27T20:00:00")},
             {name:"COMPENG 2SH4 MIDTERM",date:new Date("2025-10-22T18:50:00")},
             {name:"STATS 3Y03 MIDTERM",date:new Date("2025-10-03T19:00:00")},
+            {name:"END OF THE UNIVERSE",date:new Date("1219672405-02-24T21:51:32")},
         ];
 
         dates.sort((a, b) => a.date - b.date);
@@ -178,17 +179,12 @@
 
                     void neu.offsetWidth;
 
-                    requestAnimationFrame(()=>{
-                        old.classList.remove("current");
-                        old.classList.add("slide-out");
-
-                        neu.classList.remove("new-slide-in");
-                        neu.classList.add("current");
-
-                        old.classList.remove('color-stage-1', 'color-stage-2', 'color-stage-3');
-
-                        setTimeout(() => old.remove(), 600);
-                    });
+                    old.classList.remove("current");
+                    old.classList.add("slide-out");
+                    neu.classList.remove("new-slide-in");
+                    neu.classList.add("current");
+                    old.classList.remove('color-stage-1', 'color-stage-2', 'color-stage-3');
+                    setTimeout(() => old.remove(), 600);
 
                     prev[unit[0]]=val;
                 } else {
