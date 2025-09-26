@@ -156,13 +156,22 @@
                 if(prev[unit[0]]===null){
                     prev[unit[0]]=val;
                     old.textContent=String(val).padStart(2,"0");
-                    old.className = `value-inner current ${colorClass}`;
+                    old.className = `value-inner current`;
+                    if (colorClass) {
+                        old.classList.add(colorClass);
+                    }
                     return;
                 }
 
                 if(prev[unit[0]]!==val){
                     const neu=document.createElement("div");
-                    neu.className=`value-inner new-slide-in ${colorClass}`;
+                    neu.className=`value-inner new-slide-in`;
+
+                    if (colorClass) {
+                        neu.classList.add(colorClass);
+                    }
+
+
                     neu.textContent=String(val).padStart(2,"0");
 
                     wrap.appendChild(neu);
@@ -183,10 +192,14 @@
 
                     prev[unit[0]]=val;
                 } else {
-                    if (!old.classList.contains(colorClass)) {
+                    if (colorClass) {
                         old.classList.remove('color-stage-1', 'color-stage-2', 'color-stage-3');
                         old.classList.add(colorClass);
+                    } else {
+                        // If colorClass is empty, ensure no color classes are present
+                        old.classList.remove('color-stage-1', 'color-stage-2', 'color-stage-3');
                     }
+
                 }
             };
             const iv=setInterval(()=>{if(tick())clearInterval(iv);},1000);
@@ -208,7 +221,7 @@
             "Childs is watching you right now using his mystical psychic powers and weeping. Do not disappoint him.",
             "remember... you can always switch to econ",
             "pl ease helpp me i  am trapepd in a javasript array i dont knw what to do oh god",
-            "no matter how much you study remember you are actually always at the confident-but-an-idiot side of the dunning kruger curve. thats right. KEEP STUDYING",
+            "no matter how much you study remember you are actually always at the confident-but-unfortunately-an-idiot side of the dunning kruger curve. thats right. KEEP STUDYING",
             "THE VOID STARES BACK",
             "DRINK MORE COFFEE!!",
             "PANIC!!!",
