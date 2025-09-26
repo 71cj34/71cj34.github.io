@@ -43,19 +43,19 @@
             min-width:min(18vw,140px);
         }
         .value{
-            font-size:min(18vw,100px);
+            font-size:min(15vw,90px);
             font-weight:900;
             line-height:1;
-            height:min(18vw,100px);
+            height:min(15vw,90px);
             overflow:hidden;
             position:relative;
         }
         .value-inner{
             position:absolute;
             inset:0;
-            transition:transform .6s cubic-bezier(.45,0,.55,1), color 1s ease-out; /* Added color transition */
+            transition:transform .6s cubic-bezier(.45,0,.55,1), color 1s ease-out;
             transform:translateY(0%);
-            color: #000; /* Default color */
+            color: #000;
         }
 
         .value-inner.slide-out{
@@ -65,10 +65,9 @@
             transform: translateY(-100%);
         }
 
-        /* Color classes for countdown values */
-        .color-stage-1 { color: #8B0000; } /* Dark Red */
-        .color-stage-2 { color: #DC143C; } /* Crimson */
-        .color-stage-3 { color: #FF0000; } /* Bright Red */
+        .color-stage-1 { color: #8B0000; }
+        .color-stage-2 { color: #DC143C; }
+        .color-stage-3 { color: #FF0000; }
 
         .label{
             margin-top:.6rem;
@@ -87,15 +86,19 @@
     </style>
 </head>
 <body>
-    <div class="event-title" style="transform:scale(0.9); margin-bottom: 5vh;">oh gjod oh fjuck oh god oh god</div>
+    <div class="event-title" style="transform:scale(0.9); margin-bottom: 5vh; text-align: center;" id="splash-text"></div>
     <hr style="width: 5%; margin-bottom:5vh;">
     <div id="root"></div>
     <script>
         const dates=[
             {name:"COMPENG 2DI4 MIDTERM",date:new Date("2025-10-29T19:00:00")},
-            {name:"LOGIC DESIGN MIDTERM",date:new Date("2025-09-25T22:04:00")},
-            {name:"SUMMER SOLSTICE",date:new Date("2024-06-21T14:51:00")}
+            {name:"ELECENG 2CI4 MIDTERM",date:new Date("2025-10-27T19:00:00")},
+            {name:"MATH 2Z03 MIDTERM (ends)",date:new Date("2025-10-27T20:00:00")},
+            {name:"COMPENG 2SH4 MIDTERM",date:new Date("2025-10-22T18:50:00")},
+            {name:"STATS 3Y03 MIDTERM",date:new Date("2025-10-03T19:00:00")},
         ];
+
+        dates.sort((a, b) => a.date - b.date);
 
         const root=document.getElementById("root");
         root.className="container";
@@ -131,14 +134,13 @@
                 const m=Math.floor((r % 36e5) / 6e4);
                 const s=Math.floor((r % 6e4) / 1e3);
 
-                // Determine color class based on remaining time
                 let colorClass = '';
-                if (r < ONE_DAY_MS) { // Less than 1 day
-                    colorClass = 'color-stage-3'; // Bright Red
-                } else if (r < ONE_WEEK_MS / 2) { // Less than 3.5 days (half a week)
-                    colorClass = 'color-stage-2'; // Crimson
-                } else if (r < ONE_WEEK_MS) { // Less than 1 week
-                    colorClass = 'color-stage-1'; // Dark Red
+                if (r < ONE_DAY_MS) {
+                    colorClass = 'color-stage-3';
+                } else if (r < ONE_WEEK_MS / 2) {
+                    colorClass = 'color-stage-2';
+                } else if (r < ONE_WEEK_MS) {
+                    colorClass = 'color-stage-1';
                 }
 
                 set("days",d, colorClass);
@@ -154,13 +156,13 @@
                 if(prev[unit[0]]===null){
                     prev[unit[0]]=val;
                     old.textContent=String(val).padStart(2,"0");
-                    old.className = `value-inner current ${colorClass}`; // Apply initial color
+                    old.className = `value-inner current ${colorClass}`;
                     return;
                 }
 
                 if(prev[unit[0]]!==val){
                     const neu=document.createElement("div");
-                    neu.className=`value-inner new-slide-in ${colorClass}`; // Apply color to new element
+                    neu.className=`value-inner new-slide-in ${colorClass}`;
                     neu.textContent=String(val).padStart(2,"0");
 
                     wrap.appendChild(neu);
@@ -174,7 +176,6 @@
                         neu.classList.remove("new-slide-in");
                         neu.classList.add("current");
 
-                        // Ensure old element's color class is removed to avoid affecting the new one
                         old.classList.remove('color-stage-1', 'color-stage-2', 'color-stage-3');
 
                         setTimeout(() => old.remove(), 600);
@@ -182,7 +183,6 @@
 
                     prev[unit[0]]=val;
                 } else {
-                    // If the value hasn't changed, but the color might have (e.g., crossing a time threshold)
                     if (!old.classList.contains(colorClass)) {
                         old.classList.remove('color-stage-1', 'color-stage-2', 'color-stage-3');
                         old.classList.add(colorClass);
@@ -192,6 +192,33 @@
             const iv=setInterval(()=>{if(tick())clearInterval(iv);},1000);
             tick();
         }
+
+        const splashTexts = [
+            "PANIC!!!!!!!",
+            "oh gjod oh fjuck oh god oh god",
+            "THE END IS NIGH!!!!!!",
+            "STUDY NOW OR YOU WILL BE HOMELESS OR WORSE: WORKING AT BEST BUY",
+            "Ephesians 6:12",
+            "god help you.",
+            "im not gonna lie i tried this hummus with peppers added to it once and it was actually better than i thought. i thought the pepper would be like a bit much or soggy but no it was pretty pleasant. i would buy it again honestly except for the fact it's never on sale (i guess everyones pepperpilled to the extent where the pepper hummus never goes on sale) but i guess there's not much you can do, especially since they keep making that one dogshit flavour (the one with the weird spices that taste kind of like feet (not that i would know what feet taste like, i'm speaking from an objective feet-smell-translation sense here) but it kind of ruins it) and so thats the one that is always on sale and like some kind of good little capitalismpilled slave i keep buying it because my monkey brain cant pass up the chance to save $1 on a terrible container of the worst hummus youve ever tasted. anyways i actually discovered that they put tahini in hummus. i dont know what i imagined before, like they were siblings on the processed-nut-spread family tree or something but apparently no tahinis sesame and hummus is chickpeas and they actually just add it to the hummu",
+            "you need to throw up.... NOW!!!",
+            "Our father who art in heaven, hallowed be thy name, thy kingdom come, thy will be done, on ea",
+            "CRY IN THE THODE STAIRWELL!!",
+            "THE STORM IS BREAKING UPON THE HORIZON",
+            "Childs is watching you right now using his mystical psychic powers and weeping. Do not disappoint him.",
+            "remember... you can always switch to econ",
+            "pl ease helpp me i  am trapepd in a javasript array i dont knw what to do oh god",
+            "no matter how much you study remember you are actually always at the confident-but-an-idiot side of the dunning kruger curve. thats right. KEEP STUDYING",
+            "THE VOID STARES BACK",
+            "DRINK MORE COFFEE!!",
+            "PANIC!!!",
+            "PANIC NOW!!!!!!!",
+            "YOU SHOULD HAVE STARTED PREPARING TWO WEEKS AGO",
+            "FEEL THE BURN"
+        ];
+
+        const splash = document.getElementById("splash-text");
+        splash.innerText = splashTexts[Math.floor(Math.random() * splashTexts.length)];
     </script>
 </body>
 </html>
