@@ -1,3 +1,5 @@
+// scroll replacement
+
 class PageTransitions {
     constructor() {
         this.pages = Array.from(document.querySelectorAll('main.page-section'));
