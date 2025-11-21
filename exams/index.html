@@ -133,7 +133,7 @@
 
             const tick=()=>{
                 const r=target-new Date();
-                if(r<=0){el.innerHTML='<div class="expired">THE TIME HAS COME</div>';return true;}
+                if(r<=0){el.innerHTML=`<div class="expired">THE TIME HAS COME</div><div style="font-size: 0.8em; font-style: italic;">Expired ${target.toDateString()}</div>`;return true;}
 
                 const d=Math.floor(r/864e5);
                 const h=Math.floor((r % 864e5) / 36e5);
