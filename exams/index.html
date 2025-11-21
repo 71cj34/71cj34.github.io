@@ -6,6 +6,14 @@
     <title>YOU NEED TO PANIC!!!!!!!</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
+        .tbtn {
+            position: absolute;
+            top: 2rem;
+            cursor: pointer;
+            right: 2rem;
+            font-size: 1.1em;
+        }
+
         body{
             font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
             background:#fff;
@@ -89,11 +97,50 @@
     <div class="event-title" style="transform:scale(0.9); margin-bottom: 5vh; text-align: center;" id="splash-text"></div>
     <hr style="width: 5%; margin-bottom:5vh;">
     <div id="root"></div>
+    <span class="tbtn" id="hide">Hide Expired</span>
     <script>
+        document.addEventListener('DOMContentLoaded', ()=>{
+            let h = 0;
+            const hide = document.getElementById("hide");
+            let es = Array.from(document.getElementsByClassName("event"));
+            hide.addEventListener("click", () =>{
+                if (h == 0) {
+                    hide.innerText = "Unhide Expired";
+                    es.forEach(e => {
+                        if (e.querySelector('div.expired')) {
+                            e.style.display = "none";
+                        }
+                    })
+                    h = 1;
+                    localStorage.setItem("expiredhidden", "True");
+                } else {
+                    hide.innerText = "Hide Expired";
+                    es.forEach(e => {
+                        if (e.querySelector('div.expired')) {
+                            e.style.display = "block";
+                        }
+                    })
+                    h = 0;
+                    localStorage.setItem("expiredhidden", "False");
+                }
+            })
+
+            if (localStorage.getItem("expiredhidden") == "True") {
+                hide.innerText = "Unhide Expired";
+                es.forEach(e => {
+                    if (e.querySelector('div.expired')) {
+                        e.style.display = "none";
+                    }
+                })
+                h = 1;
+            }
+        })
+
         const dates=[
             {name:"COMPENG 2DI4 MIDTERM",date:new Date("2025-10-29T19:00:00")},
             {name:"ELECENG 2CI4 MIDTERM",date:new Date("2025-10-27T19:00:00")},
             {name:"MATH 2Z03 MIDTERM (ends)",date:new Date("2025-10-27T20:00:00")},
+            {name:"MATH 2Z03 MIDTERM 2: MIDTERM HARDER (ends)",date:new Date("2025-11-24T08:00:00")},
             {name:"COMPENG 2SH4 MIDTERM",date:new Date("2025-10-22T18:50:00")},
             {name:"STATS 3Y03 MIDTERM",date:new Date("2025-10-03T19:00:00")},
             {name:"STATS 3Y03 FINAL",date:new Date("2025-12-10T16:00:00")},
@@ -123,17 +170,17 @@
                         </div>`).join("")}
                 </div>`;
             root.appendChild(d);
-            new Countdown(d,o.date);
+            new Countdown(d,o.name,o.date);
         });
 
-        function Countdown(el, target){
+        function Countdown(el, name, target){
             const prev={d:null,h:null,m:null,s:null};
             const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
             const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 
             const tick=()=>{
                 const r=target-new Date();
-                if(r<=0){el.innerHTML=`<div class="expired">THE TIME HAS COME</div><div style="font-size: 0.8em; font-style: italic;">Expired ${target.toDateString()}</div>`;return true;}
+                if(r<=0){el.innerHTML=`<div class="expired">THE TIME HAS COME</div><div style="font-size: 0.8em; font-style: italic; color:#560015">Was ${name}<br>Expired ${target.toDateString()}</div>`;return true;}
 
                 const d=Math.floor(r/864e5);
                 const h=Math.floor((r % 864e5) / 36e5);
