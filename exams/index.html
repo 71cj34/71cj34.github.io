@@ -47,7 +47,7 @@
             max-width:900px;
             display:flex;
             flex-direction:column;
-            gap:10vh;
+            gap:3vh;
         }
         .event{
             text-align:center;
@@ -112,15 +112,15 @@
         .year-group {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
 
         .year-header {
-            padding: 15px 20px;
-            font-size: 1.5rem;
+            padding: 8px 15px;
+            font-size: 1.25rem;
             font-weight: bold;
             cursor: pointer;
             background: rgba(0, 0, 0, 0.2);
@@ -239,6 +239,11 @@
             {name:"MATH 2Z03 FINAL",date:new Date("2025-12-13T16:00:00")},
             {name:"COMPENG 2DI4 FINAL",date:new Date("2025-12-16T12:30:00")},
             {name:"END OF THE UNIVERSE",date:new Date("1219672405-02-24T21:51:32")},
+
+            {name:"COMPENG 2DX3 MIDTERM 1",date:new Date("2026-02-13T11:30:00")},
+            {name:"COMPENG 2DX3 MIDTERM 2",date:new Date("2026-03-20T11:30:00")},
+            {name:"ELECENG 2EI4 MIDTERM",date:new Date("2026-02-28T12:30:00")},
+            {name:"COMPENG 2CF3 MIDTERM",date:new Date("2026-02-24T18:30:00")},
         ];
 
         dates.sort((a, b) => a.date - b.date);
@@ -261,8 +266,15 @@
 
             const summary = document.createElement("summary");
             summary.className = "year-header";
-            summary.innerHTML = `<span>${year} Schedule</span> <small>(${groups[year].length} items)</small>`;
             
+            console.log(year);
+            console.log(typeof(year));
+            if (year == "NaN") {
+                summary.innerHTML = `<span>Other</span> <small>(${groups[year].length} items)</small>`;
+            } else {
+                summary.innerHTML = `<span>${year}</span> <small>(${groups[year].length} items)</small>`;
+            }
+
             const content = document.createElement("div");
             content.className = "year-content";
 
