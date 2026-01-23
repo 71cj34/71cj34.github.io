@@ -176,42 +176,55 @@
     <div id="root"></div>
     <span class="tbtn" id="hide">Hide Expired</span>
     <script>
-        document.addEventListener('DOMContentLoaded', ()=>{
+        document.addEventListener('DOMContentLoaded', () => {
             let h = 0;
             const hide = document.getElementById("hide");
-            let es = Array.from(document.getElementsByClassName("event"));
-            hide.addEventListener("click", () =>{
-                if (h == 0) {
-                    hide.innerText = "Unhide Expired";
-                    es.forEach(e => {
-                        if (e.querySelector('div.expired')) {
+            const root = document.getElementById("root");
+
+            const refreshVisibility = () => {
+                const yearGroups = document.querySelectorAll(".year-group");
+                
+                yearGroups.forEach(group => {
+                    const events = Array.from(group.querySelectorAll(".event"));
+                    let visibleInGroup = 0;
+
+                    events.forEach(e => {
+                        const isExpired = !!e.querySelector('div.expired');
+                        if (h == 1 && isExpired) {
                             e.style.display = "none";
+                        } else {
+                            e.style.display = "block";
+                            visibleInGroup++;
                         }
-                    })
+                    });
+
+                    if (h == 1 && visibleInGroup === 0) {
+                        group.style.display = "none";
+                    } else {
+                        group.style.display = "block";
+                    }
+                });
+            };
+
+            hide.addEventListener("click", () => {
+                if (h == 0) {
                     h = 1;
+                    hide.innerText = "Unhide Expired";
                     localStorage.setItem("expiredhidden", "True");
                 } else {
-                    hide.innerText = "Hide Expired";
-                    es.forEach(e => {
-                        if (e.querySelector('div.expired')) {
-                            e.style.display = "block";
-                        }
-                    })
                     h = 0;
+                    hide.innerText = "Hide Expired";
                     localStorage.setItem("expiredhidden", "False");
                 }
-            })
+                refreshVisibility();
+            });
 
             if (localStorage.getItem("expiredhidden") == "True") {
-                hide.innerText = "Unhide Expired";
-                es.forEach(e => {
-                    if (e.querySelector('div.expired')) {
-                        e.style.display = "none";
-                    }
-                })
                 h = 1;
+                hide.innerText = "Unhide Expired";
+                refreshVisibility();
             }
-        })
+        });
 
         const dates=[
             {name:"COMPENG 2DI4 MIDTERM",date:new Date("2025-10-29T19:00:00")},
