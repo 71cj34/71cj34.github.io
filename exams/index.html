@@ -108,6 +108,66 @@
         @media(prefers-reduced-motion:reduce){
             .value-inner{transition:none}
         }
+
+        .year-group {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .year-header {
+            padding: 15px 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.2);
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .year-header::-webkit-details-marker {
+            display: none;
+        }
+
+        .year-header:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .year-header small {
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        .year-header::after {
+            content: "▼";
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .year-group[open] .year-header::after {
+            transform: rotate(180deg);
+        }
+
+        .year-content {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        details[open] .year-content {
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -170,24 +230,50 @@
 
         dates.sort((a, b) => a.date - b.date);
 
-        const root=document.getElementById("root");
-        root.className="container";
+        const root = document.getElementById("root");
+        root.className = "container";
 
-        dates.forEach(o=>{
-            const d=document.createElement("div");d.className="event";
-            d.innerHTML=`
-                <div class="event-title">${o.name}</div>
-                <div class="countdown">
-                    ${["days","hours","mins","secs"].map(u=>`
-                        <div class="unit">
-                            <div class="value" data-unit="${u}">
-                                <div class="value-inner current">00</div>
-                            </div>
-                            <div class="label">${u.toUpperCase()}</div>
-                        </div>`).join("")}
-                </div>`;
-            root.appendChild(d);
-            new Countdown(d,o.name,o.date);
+        const groups = {};
+        dates.forEach(o => {
+            const year = o.date.getFullYear();
+            if (!groups[year]) groups[year] = [];
+            groups[year].push(o);
+        });
+
+        const years = Object.keys(groups).sort((a, b) => a - b);
+
+        years.forEach(year => {
+            const details = document.createElement("details");
+            details.className = "year-group";
+
+            const summary = document.createElement("summary");
+            summary.className = "year-header";
+            summary.innerHTML = `<span>${year} Schedule</span> <small>(${groups[year].length} items)</small>`;
+            
+            const content = document.createElement("div");
+            content.className = "year-content";
+
+            details.appendChild(summary);
+            details.appendChild(content);
+            root.appendChild(details);
+
+            groups[year].forEach(o => {
+                const d = document.createElement("div");
+                d.className = "event";
+                d.innerHTML = `
+                    <div class="event-title">${o.name}</div>
+                    <div class="countdown">
+                        ${["days", "hours", "mins", "secs"].map(u => `
+                            <div class="unit">
+                                <div class="value" data-unit="${u}">
+                                    <div class="value-inner current">00</div>
+                                </div>
+                                <div class="label">${u.toUpperCase()}</div>
+                            </div>`).join("")}
+                    </div>`;
+                content.appendChild(d);
+                new Countdown(d, o.name, o.date);
+            });
         });
 
         function Countdown(el, name, target){
@@ -261,7 +347,6 @@
                         old.classList.remove('color-stage-1', 'color-stage-2', 'color-stage-3');
                         old.classList.add(colorClass);
                     } else {
-                        // If colorClass is empty, ensure no color classes are present
                         old.classList.remove('color-stage-1', 'color-stage-2', 'color-stage-3');
                     }
 
