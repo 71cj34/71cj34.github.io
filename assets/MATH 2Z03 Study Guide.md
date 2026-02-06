@@ -71,6 +71,8 @@ Refer to the 1ZB3 guide for more information.
 
 This formula applies to population growth too. Anything of the form $\frac{dQ}{dt}=kQ$ can be solved with it. For population growth, there is also a nonlinear model $\frac{dP}{dt}=rP\left( 1-\frac{P}{K} \right)$ that halts growth, where $K$ is the long-term limit of the population. To solve this model, separate parameters.  Note that $K$ is a stable critical point.
 
+Euler's method:$$\frac{dy}{dx}=f(x,y) \quad y(x_{0})=y_{0}$$to$$y_{n+1}=y_{n}+hf(x_{n},y_{n}), x_{n+1}=x_{n}+h$$
+
 ## 3.1: Theory of Linear Equations
 
 Recall general equation for $n$-th order linear DE: $a_{n}(x) \frac{d^{n} y}{d x^{n}}+a_{n-1}(x) \frac{d^{n-1} y}{d x^{n-1}}+\dots+a_{1}(x) \frac{d y}{d x}+a_{0}(x) y=g(x)$
@@ -331,7 +333,6 @@ f(t)&=g(t)+\int_{0}^{t} f(\tau)f(t-\tau) \; d\tau,\quad t \geq 0 \\
 Sifting property of Dirac delta function:$$f(t_0) = \int_0^\infty f(t)\delta(t-t_0)\;dt = \int_0^\infty f(t)\delta(t_0-t)\;dt = (f*\delta)(t_0)$$
 ## 13.1: Separable Partial Differential Equations
 
-
 General formula for linear second order PDE of two independent variables:$$A(x,y)\frac{\partial^2 u}{\partial x^2} + B(x,y)\frac{\partial^2 u}{\partial x \partial y} + C(x,y)\frac{\partial^2 u}{\partial y^2} + D(x,y)\frac{\partial u}{\partial x} + E(x,y)\frac{\partial u}{\partial y} + F(x,y)u = G(x,y)$$
 PDEs are hard to solve unless they're separable, second order, and linear.
 
@@ -392,5 +393,4 @@ Assuming string is of length $L$, both ends are fixed, initial displacement is $
 We are finding the steady state temperature distribution on rectangular plate.
 
 General solution of Laplace Equation:$$u(x,y)=A_{0}y+\sum_{n=1}^{\infty} A_{n}\cos{\left( \frac{n \pi x}{a} \right) \sinh{\left( \frac{n \pi y}{a} \right)}}$$
-where $$A_{0}=\frac{1}{ab}\int _{0}^{a} f(x) \; dx \quad \text{ and } \quad A_{n}=\frac{2}{a \sinh{\left( \frac{n \pi b}{a} \right)}} \int _{0}^{a} f(x) \cos{\left( \frac{n \pi x}{a} \right)} \; dx,\quad n=1,2,3,\dots $$
-
+where $$A_{0}=\frac{1}{ab}\int _{0}^{a} f(x) \; dx \quad \text{ and } \quad A_{n}=\frac{2}{a \sinh{\left( \frac{n \pi b}{a} \right)}} \int _{0}^{a} f(x) \cos{\left( \frac{n \pi x}{a} \right)} \; dx,\quad n=1,2,3,\dots$$
