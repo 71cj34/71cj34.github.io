@@ -1,4 +1,7 @@
 #current-project {
+    max-width: 65%;
+    margin-left: auto;
+    margin-right: auto;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -8,22 +11,74 @@
     background: #fff;
     border-bottom: 2px solid #eee;
 }
-#current-project h1 { 
-    font-size: 4rem; 
-    margin: 0; 
-    color: #333; 
+#current-project h1 {
+    font-size: 4rem;
+    margin: 0;
+    color: #333;
 }
-#current-project p { 
+#current-project p {
     font-family: var(--text);
-    font-size: 1.5rem; 
-    color: #666; 
+    font-size: 1.5rem;
+    color: #666;
 }
 
-#current-project .type { 
+#current-project .type {
     font-family: var(--text);
-    font-weight: bold; 
-    color: #007bff; 
-    text-transform: uppercase; 
+    font-weight: bold;
+    font-size: 2em;
+    color: #007bff;
+    text-transform: uppercase;
+}
+
+;#progress-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+#progress-bar-wrapper {
+    width: 100%;
+    height: 24px;
+    background-color: #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    border-radius: 12px;
+    transition: width 1s ease-in-out;
+    min-width: 2%;
+}
+
+#progress-bar-fill.warning {
+    background: linear-gradient(90deg, #ffc107, #ff9800);
+}
+
+#progress-bar-fill.danger {
+    background: linear-gradient(90deg, #dc3545, #c82333);
+}
+
+#progress-text {
+    font-family: var(--text);
+    font-size: 1rem;
+    color: #666;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#time-remaining {
+    font-weight: bold;
+    color: #007bff;
+}
+
+#time-elapsed {
+    color: #888;
 }
 
 #history { padding: 50px 20px; max-width: 800px; margin: 0 auto; }
