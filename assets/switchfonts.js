@@ -260,7 +260,7 @@ switchfont.addEventListener('click', function () {
                 }
             }
         `;
-        document.head.appendChild(style);
+        document.head.prepend(style);
     } else {
         console.log("No default style applied to switch fonts button.");
                 const style = document.createElement('style');
