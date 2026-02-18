@@ -1,0 +1,96 @@
+#current-project {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #fff;
+    border-bottom: 2px solid #eee;
+}
+#current-project h1 { 
+    font-size: 4rem; 
+    margin: 0; 
+    color: #333; 
+}
+#current-project p { 
+    font-family: var(--text);
+    font-size: 1.5rem; 
+    color: #666; 
+}
+
+#current-project .type { 
+    font-family: var(--text);
+    font-weight: bold; 
+    color: #007bff; 
+    text-transform: uppercase; 
+}
+
+#history { padding: 50px 20px; max-width: 800px; margin: 0 auto; }
+.project-card {
+    font-family: var(--text);
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.empty-state { text-align: center; padding: 100px; color: #888; }
+
+div.fail > * {
+    color: crimson;
+}
+
+.trlink {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+}
+
+.tllink {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 20px;
+}
+
+button, .tlbutton {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.tlbutton {
+    background-color: #000;
+    padding: 10px 20px;
+    color: #fff;
+    border: 1px solid #000;
+}
+.tlbutton:hover {
+    background-color: #333;
+    border-color: #333;
+}
+
+
+#switch-fonts, .other-buttons {
+    background-color: transparent;
+    color: #666;
+    border: 1px solid #ddd;
+}
+
+#switch-fonts:hover, .other-buttons:hover {
+    color: #000;
+    border-color: #000;
+    background-color: #f9f9f9;
+}
+h1, h2, h3, h4, h5 {
+    font-family: var(--head);
+}
+a {
+    font-family: var(--text);
+}
