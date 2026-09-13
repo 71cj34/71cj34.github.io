@@ -4,9 +4,9 @@
 Reads every markdown file in _reviews/. For any file missing album art, a
 release date, or a listen link in its front matter, queries the MusicBrainz
 release API with a `release:<album> AND <artist>` search, takes the first
-<release>, and uses its <date> and id. Then asks the Cover Art Archive for the
+<release>, and uses its date and id. Then asks the Cover Art Archive for the
 art. Populates:
-  - album-date:  the release date
+  - album-date:  the release date (fetched from the release endpoint)
   - art:         the cover image URL
   - url:         the first url relation (e.g. a streaming platform link)
 
@@ -136,33 +136,45 @@ def first_artist(value):
 
 
 def search_releases(album, artist):
-    """Query the release API; return (release_ids, date) or ([], None).
+    """Query the release API; return a list of release ids ([], if none).
 
-    Every <release> id is kept (in order); the <date> of the first is used as
-    the release date. Any missing piece is dropped.
+    Every <release> id is kept in order. MusicBrainz search results do not
+    include release dates, so a separate release-detail lookup is used for that.
     """
     query = f"release:{album} AND {artist}"
     url = MB_RELEASE_URL + "?" + urllib.parse.urlencode({"query": query})
     print(f"  querying {url}")
     data = get_bytes(url)
     if data is None:
-        return [], None
+        return []
     try:
         root = ET.fromstring(data)
     except ET.ParseError as e:
         print(f"    could not parse xml: {e}")
-        return [], None
+        return []
     releases = all_releases(root)
     if not releases:
         print("    no release found")
-        return [], None
-    ids = [rel.get("id") for rel in releases if rel.get("id")]
-    date = None
-    for child in releases[0]:
+        return []
+    return [rel.get("id") for rel in releases if rel.get("id")]
+
+
+def fetch_release_date(rid):
+    """Fetch the first release date for a release id; None if absent."""
+    url = f"{MB_RELEASE_URL}{rid}"
+    print(f"  date {url}")
+    data = get_bytes(url)
+    if data is None:
+        return None
+    try:
+        root = ET.fromstring(data)
+    except ET.ParseError as e:
+        print(f"    could not parse xml: {e}")
+        return None
+    for child in root.iter():
         if localname(child.tag) == "date" and child.text:
-            date = child.text.strip()
-            break
-    return ids, date
+            return child.text.strip()
+    return None
 
 
 def fetch_cover_art(rid):
@@ -294,7 +306,10 @@ def main():
             print("  already has art, date, and listen url, skipping")
             continue
 
-        rid, date = search_releases(fm["album"], first_artist(fm["artist"]))
+        rid = search_releases(fm["album"], first_artist(fm["artist"]))
+        date = None
+        if rid and not has_date:
+            date = fetch_release_date(rid[0])
         art = fetch_cover_art(rid[0]) if (rid and not has_art) else None
         urls = collect_urls(rid) if (rid and not has_url) else []
 
