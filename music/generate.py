@@ -240,6 +240,8 @@ def render_history_modal(hist):
 def load_reviews():
     reviews = []
     for path in sorted(REVIEWS_DIR.glob("*.md")):
+        if path.name.startswith("__"):
+            continue
         fm, body = parse_front_matter(path.read_text(encoding="utf-8"))
         missing = {"artist", "album", "grade", "posted_date", "album_date"} - set(fm)
         if missing:
