@@ -434,7 +434,7 @@ def review_html(r):
     )
     if r["genres"]:
         genre_links = " · ".join(
-            f'<a class="review-genre" href="#">{html_mod.escape(g)}</a>' for g in r["genres"]
+            f'<a class="review-genre" href="https://rateyourmusic.com/genre/{html_mod.escape(g, quote=True)}">{html_mod.escape(g)}</a>' for g in r["genres"]
         )
         meta_rows += (
             '<p class="review-meta-row"><span class="review-meta-label">genres:</span> '
