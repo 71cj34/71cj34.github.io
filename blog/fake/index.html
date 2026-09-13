@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>Jason Cheng</title>
+      <link rel="shortcut icon" href="/img/stariconv2.png" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script>
+         MathJax = {
+           tex: {
+             inlineMath: [['$', '$'], ['\$$', '\$$']]
+           },
+           chtml: { scale: 1.0 } 
+         };
+      </script>
+      <script type="text/javascript" id="MathJax" async
+         src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>    
+      <link rel="stylesheet" href="/blog/peekaboo.css" />
+      <link rel="stylesheet" href="/api/docs/code.css" />
+      <link rel="stylesheet" href="/blog/blog.css" />
+      <link rel="stylesheet" href="../../fonts/fonts.css" />
+
+      <link rel="stylesheet" href="notosans.css" />
+      <style>
+        .role-badge { 
+            padding: 2px 0; 
+            border-radius: 4px; 
+            font-weight: 700; 
+            display: inline-block; 
+            align-items: center; 
+            gap: 3px;
+            line-height: 1;
+            vertical-align: baseline; 
+            text-shadow: 
+                0 0 1px rgba(0,0,0,1);
+            font-family: 'Noto Sans';
+            letter-spacing: -0.5px;
+            
+        }
+
+        .role-badge img { 
+            height: 1.1em;  /* Slightly smaller than text height for a balanced look */
+            width: auto; 
+            display: inline-block; 
+            vertical-align: middle;
+        }
+        .role-town {color: #06E00C; }
+        .role-coven {color: #B545FF; }
+        .role-apocalypse { color: #FF004E; }
+
+        .role-doomsayer { color: #00CC99; }
+        .role-executioner { color: #949797; }
+        .role-jester { color: #F5A6D4; }
+        .role-pirate {  color: #ECC23E; }
+        .role-arsonist { color: #DB7601; }
+        .role-serial-killer {  color: #1D4DFC; }
+        .role-shroud { color: #6699FF; }
+        .role-werewolf { color: #9D7038; }
+        .role-vampire {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to bottom, #D90707, #951313);
+        }
+
+        .role-cursed-soul {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to bottom, #4FFF9F, #B54FFF);
+        }
+
+        .role-neutral {
+            color: #a9a9a9;
+        }
+
+        .role-any {
+            color: #ffffff;
+        }
+
+        .role-stoned {
+            color: #9c9a9a;
+        }
+
+        .keyword {
+            color: #007aff;
+            font-weight: 700; 
+              text-shadow: 
+                0 0 1px rgba(0,0,0,1);
+            font-family: 'Noto Sans';
+            letter-spacing: -1px;
+
+        }
+
+        main {
+            font-family: 'Noto Sans'
+        }
+      </style>
+   </head>
+   <body class="light-mode">
+      <div class="subpages-header" id="subpagesHeader">
+         <div class="subpages-title">Subpages:</div>
+         <div class="subpages-links">
+            <a href="/" class="subpage-link">Home</a>
+            <a class="subpage-link has-subdropdown">Personal/School Resources <span class="dropdown-arrow">▼</span></a>
+            <div class="subdropdown">
+               <a href="/#projects" class="subdropdown-link">My Projects</a>
+               <a href="/school-resources" class="subdropdown-link">First Year Resources</a>
+               <a href="/portfolio" class="subdropdown-link">ENGINEER 1P13 Portfolio</a>
+               <a href="/exams" class="subdropdown-link">Live Exam Countdown</a>
+               <a href="/llm" class="subdropdown-link">LLM Progress Bar</a>
+            </div>
+            <a class="subpage-link has-subdropdown">Browser Apps/Games <span class="dropdown-arrow">▼</span></a>
+            <div class="subdropdown">
+               <a href="https://resize.jasoncheng.me" class="subdropdown-link">Image Resizer</a>
+               <a href="https://fooguessr.jasoncheng.me" class="subdropdown-link">Fooguessr</a>
+               <a href="https://sandwich.jasoncheng.me" class="subdropdown-link">Sandwich</a>
+               <a href="https://mnemosyne.jasoncheng.me" class="subdropdown-link">Mnemosyne</a>
+               <a href="" class="subdropdown-link" style="text-decoration: line-through;">LLMRoyale</a>
+            </div>
+            <a href="/blog" class="subpage-link">Blog</a>
+            <a href="https://github.com/71cj34/71cj34.github.io/blob/main/README.md" class="subpage-link">About this Site</a>
+         </div>
+      </div>
+<main>
+    <h1>About Your ToS2 Fakeclaim</h1>
+             <h4 class="subheading">Word count: <span id="wordcount" style="color: crimson; font-family: var(--head)"> &lt; Retrieving word count... &gt; </span></h4>
+    <h2>What On Earth is ToS2?</h2>
+    <p>ToS2, or Town of Salem 2, is a social deduction game. It is similar to the game <em><a href="https://en.wikipedia.org/wiki/Mafia_(party_game)" target="_blank">Mafia</a></em> that you play with your friends, 
+        the game <em><a href="https://playwerewolf.co/pages/rules" target="_blank">Werewolf</a></em> you play with your now-former friends, or that one 
+        <em><a href="https://www.youtube.com/watch?v=ltv89lUmyQU" target="_blank">hilariously imbalanced game</a></em> they had in Jackbox Party Pack 6.</p>
+    <p>It averages 400 players at peak hours, thus making it around the <a href="https://steamdb.info/tag/745697/" target="_blank">fifth-most played</a> social deduction game on Steam.</p>
+    <img src="1.jpg" style="width: 80%">
+    <p>It is the most complex game out there that sharea a mechanical skill ceiling with Microsoft Word. The game features 60 roles across 5 factions 
+        (or 11 if you count #Neutral roles as seperate teams (or 13 if you count outliers (or 16 if you count the additions in the popular variant BToS2, counting Neutral Pariahs as one... wait, what was I talking about?)))</p>
+    <p>The game is infamously meta, with players expected to know all of the lingo, all of the roles, and all of the interactions to stand a chance past making it past VFA 
+        (here's hoping you know what that is!). Usually you can sneak by in social deduction games as an evil role by staying quiet. Well, try that here 
+    and you will be getting a friendly house call from your local Vigilante by Night 3.</p>
+    <p>It is a hard, frustrating, and anxiety-inducing experience from front to end.</p>
+        <p>Anyways,</p>
+    <h2>Fakeclaims and You</h2>
+    <p>If you play Town of Salem 2, you are going to have to play an evil role at some point. As an evil role, you need to have a fake claim, or at least an alignment, ready by Day 2. That's because on Day 2, people will do VFA, or :Vote For Alignment:.</p>
+    <p>VFA is when everyone is expected to claim a Town alignment (eg. #Town Investigative, #Town Support). Nonclaimers will be voted up to the stand, and if they continue to resist, get hanged.</p>
+    <p>Now, as an evil, this is pretty important! Claiming an alignment will lock you into a playstyle and role archetype to fake for the rest of the game. If you claim #Town Protective, you better have a good reason prepared 
+        if a #Lookout doesn't see you protecting the #Town Power claim like you should be. (And no, panic claiming #Oracle on stand will not work.)
+    </p>
+    <p>Before we get started, I want to introduce what I call the Three Exceptions of Fakeclaiming. Learning these rules pretty much opened the world as my oyster starting out.</p>
+    <ul>
+        <li>
+            <strong>Your claim doesn't have to be perfect.</strong>
+        <ul>
+            <li>A common phrase is "Town of Salem players can't read". This is true. I have posted D1 #Psychic wills with three names instead of two multiple times and no one called me out. If you claim to visit 15 on N2 but the dead #Lookout's will contradicts you, just don't bring it up. Chances are good no one will notice anyways.</li>
+        </ul>
+        </li>
+        <li>
+            <strong>Your claim doesn't have to last forever.</strong>
+            <ul>
+                <li>Your claim will, in most games, with a ~normal rolelist, only need to last you four to six nights. Before then, your team will either have majority, your team has been wiped off the face of the earth to the point where it doesn't matter if you get outed, or the game has entered a kingmaker or evil-majority state where everyone knows what everyone else is already. Even if you can't make it that long, you can try a confirmation play.</li>
+            </ul>
+        </li>
+        <li>
+            <strong>It's okay to get caught.</strong>
+            <ul>
+                <li>If you claim #Investigator, post D2, then immediately get proven fake by calling an open #Pirate claim NC, it's fine. No, it doesn't mean fakeclaiming #Investigator is a bad idea. No, it doesn't mean you necessarily did anything wrong. What it means is that you got unlucky. Shit happens. It's part of the game. Don't dwell on it.</li>
+            </ul>
+        </li>
+    </ul>
+    <h2>Alignment Claims</h2>
+    <p>Beginning of the game, D2. You are expected to claim an :Alignment:. This is going to inform how you need to act for the rest of the game!</p>
+    <p>Your 'real' role will also need to be within that alignment (see the next section for exceptions to this), and so you will need to write a will matching it. If you come under fire or the town doesn't have anything better to do, you will be asked to provide it, and you will be hanged if you can't.</p>
+    <p>The subtleties and nuances of faking an alignment come with time and experience. In the meantime, here are a few quick pointers for each:</p>
+    <ul>
+        <li><strong>#Town Investigative</strong>
+        <ul>
+            <li>
+                Post right away. Don't wait. If you are a #Lookout or #Tracker claim, you might get away with holding on your information to try and 'catch' an 'evil' lacking. Don't reveal bugs as #Spy unless you have info.
+            </li>
+            <li>
+                Act on your information. If your #Psychic's even-night will target dies, there is now a 1f1 with a guaranteed 'evil'. You will need to at least pay lip service to it. But, if the town is sufficiently stupid, you can get away with staying silent (see Exception #3). 
+            </li>
+            <li>
+                Be proactive. As an information-gatherer, the town expects you to follow up on leads, up suspicious players, and contribute heavily to the discussion. Even if you just follow what someone else says, say it.
+            </li>
+            <li>
+                Be wary of :Unknown Obstacle:s. If there is a known #Socialite, #Poisoner, or #Jailor, it can be worth waiting a fraction of a second before posting to see if any of the other players report a UO. 
+            </li>
+            <li>
+                Go on realistic people. If you're a #Sheriff claim and you claim to go on the confirmed #Vigilante, you will get voted. (See Exception #3). 
+            </li>
+        </ul>
+
+        <li><strong>#Town Protective</strong>
+        <ul>
+            <li>
+                Obviously, if the person you claimed to protect died that night, switch your target in your will.
+            </li>
+            <li>
+                You should try to coordinate with townies during the day. If someone asks to chain, be careful. If you accept, they will write it in their will and you better have a good excuse if they die later. If not, you need a good reason not to chain.
+            </li>
+            <li>
+                TPs are generally a proof-claim (more on what that means later). Realize people will see you as fake until you have a confirmed save. 
+            </li>
+        </ul>
+        </li>
+
+        <li><strong>#Town Support</strong>
+        <ul>
+            <li>
+                TS is a versatile alignment, but if you are not faking a role proof-claim (eg. #Tavern Keeper), you will be seen as fake unless proven otherwise.
+            </li>
+            <li>
+                Since it spans the widest range of roles, you will need to act how your role would act. Yippee.
+            </li>
+        </ul>
+        </li>
+
+        <li><strong>#Town Killing</strong>
+        <ul>
+            <li>
+                This is one role where 
+            </li>
+            <li>
+                Since it spans the widest range of roles, you will need to act how your role would act. Yippee.
+            </li>
+        </ul>
+        </li>
+
+        <li><strong>#Town Power</strong>
+        <ul>
+            <li>
+                Take charge. If you open claim #Town Power, you are telling the town that you are a strong town role that can lead the discussion.
+                <ul>
+                    <li>
+                        Roles that wouldn't necessarily do this like #Monarch might claim #Town Support or #Town Protective instead for this exact reason.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                You will be asked to reveal or prove yourself at some point before D5! Plan to win before then, or you will get hanged. Or if you're #Arsonist, hit a fat 5 player ignite on N4, and then get hanged. 
+            </li>
+            <li>
+                Otherwise, for those first few days, you will be practically immune to getting hanged. 
+            </li>
+            <li>
+                See next section for more information about :Copout:ing.
+            </li>
+        </ul>
+        </li>
+    </ul>
+    <h3>Copouts</h3>
+    <p>So the million dollar question. <strong>"It's Day 1 and I need to claim an alignment! What do I fakeclaim?"</strong></p>
+    <p>#Cleric. If you're nonvisiting, then #Deputy.</p>
+    <p>Okay, now let's be a little more creative.</p>
+    <h2>The Easy Claims</h2>
+    <p>#Cleric and #Deputy are two of the easy claims. They are claims, that by design, almost any evil role can fake to a decent level of success, and with almost no effort.</p>
+    <p>Before we talk about role-specific fakes (which, for some reason, seem to be the be-all-and-end-all for newer players), we should talk about the easy claims, since they aren't called 
+        easy for no reason. They can do the job, and you will probably win pretty often relying on them. Here is a list of all the claims I would call easy.
+    </p>
+    <ul>
+        <li>#Sheriff</li>
+        <li>#Bodyguard</li>
+        <li>#Cleric</li>
+        <li>#Oracle</li>
+        <li>#Deputy</li>
+        <li>#Trickster</li>
+        <li>#Admirer</li>
+    </ul>
+    <p>There are caveats here. See, though they may be easy, people <em>know</em> they are easy. If a hint of suspicion comes onto one of your calls as #Sheriff, no matter how vehemently you blame
+        #Soul Collector or #Enchanter :Frame:ing your target, you are getting hanged. If it's between you- the #Admirer claim- and the #Socialite, you are going down ten times out of ten.
+    </p>
+    <p>
+
+    </p>
+</main>
+      <button id="switch-fonts" style="opacity: 0.8; transform-origin: right; transform: scale(0.8); color: rgb(252, 252, 252); border-style: solid; border-width: 1px; border-color: black">Switch Fonts</button>
+   </body>
+   <script src="../wordcount.js"></script>
+   <script src="../peekaboo.js"></script>
+   <script src="../../api/docs/code.js"></script>
+   <script src="../../assets/switchfonts.js"></script>
+   <script src="../../assets/subpages.js"></script>
+      <script src="tos2.js"></script>
+   <script>
+      setTimeout(() => {
+      MathJax.typesetClear();
+      MathJax.typesetPromise();
+      }, 3000);
+   </script>
+</html>
