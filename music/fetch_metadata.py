@@ -1,17 +1,23 @@
 #!/usr/bin/env python3
 """Fetch album art and release dates from MusicBrainz + Cover Art Archive.
 
-Reads every markdown file in _reviews/. For any file missing album art or a
-release date in its front matter, queries the MusicBrainz release API with a
-`release:<album> AND <artist>` search, takes the first <release>, and uses its
-<date> and id. Then asks the Cover Art Archive for the art. Populates:
+Reads every markdown file in _reviews/. For any file missing album art, a
+release date, or a listen link in its front matter, queries the MusicBrainz
+release API with a `release:<album> AND <artist>` search, takes the first
+<release>, and uses its <date> and id. Then asks the Cover Art Archive for the
+art. Populates:
   - album-date:  the release date
   - art:         the cover image URL
+  - url:         the first url relation (e.g. a streaming platform link)
+
+The url field comes from a second request to the release endpoint with
+`inc=url-rels`; the first <relation><target> under the url relation-list is
+kept.
 
 All requests to MusicBrainz-hosted APIs are limited to 1 per second. A 503 is
 retried after waiting 5 seconds. If a value can't be found (empty response,
-missing key, missing art, ...), that front matter key is left untouched. Files
-that already have both values are skipped without fetching.
+missing key, missing art, ...), that front matter key is left untouched.
+Files that already have all fields are skipped without fetching.
 
 Zero dependencies: Python 3 stdlib only. Usage:  python fetch_metadata.py
 """
@@ -80,12 +86,13 @@ def localname(tag):
     return tag.rsplit("}", 1)[-1]
 
 
-def first_release(root):
-    """Return the first <release> under <metadata><release-list>, or None."""
+def all_releases(root):
+    """Return a list of every <release> under <metadata><release-list> in order."""
+    releases = []
     for el in root.iter():
         if localname(el.tag) == "release":
-            return el
-    return None
+            releases.append(el)
+    return releases
 
 
 def parse_front_matter(text):
@@ -128,33 +135,34 @@ def first_artist(value):
     return re.split(r"\s*,\s*", value, maxsplit=1)[0].strip()
 
 
-def search_release(album, artist):
-    """Query the release API; return (release_id, date) or (None, None).
+def search_releases(album, artist):
+    """Query the release API; return (release_ids, date) or ([], None).
 
-    The first <release> is used; its id attribute is kept and its <date> child
-    is the release date. Any missing piece becomes None.
+    Every <release> id is kept (in order); the <date> of the first is used as
+    the release date. Any missing piece is dropped.
     """
     query = f"release:{album} AND {artist}"
     url = MB_RELEASE_URL + "?" + urllib.parse.urlencode({"query": query})
     print(f"  querying {url}")
     data = get_bytes(url)
     if data is None:
-        return None, None
+        return [], None
     try:
         root = ET.fromstring(data)
     except ET.ParseError as e:
         print(f"    could not parse xml: {e}")
-        return None, None
-    rel = first_release(root)
-    if rel is None:
+        return [], None
+    releases = all_releases(root)
+    if not releases:
         print("    no release found")
-        return None, None
-    rid = rel.get("id")
+        return [], None
+    ids = [rel.get("id") for rel in releases if rel.get("id")]
     date = None
-    for child in rel:
+    for child in releases[0]:
         if localname(child.tag) == "date" and child.text:
             date = child.text.strip()
-    return rid, date
+            break
+    return ids, date
 
 
 def fetch_cover_art(rid):
@@ -172,18 +180,83 @@ def fetch_cover_art(rid):
         return None
 
 
+def fetch_urls(rid):
+    """Fetch every url relation for a release id; return a list of URLs.
+
+    Hits the release endpoint with inc=url-rels and walks the tree for each
+    <relation><target> under a <relation-list target-type="url">. Returns an
+    empty list when there are none.
+    """
+    url = f"{MB_RELEASE_URL}{rid}?inc=url-rels"
+    print(f"  urls {url}")
+    data = get_bytes(url)
+    if data is None:
+        return []
+    try:
+        root = ET.fromstring(data)
+    except ET.ParseError as e:
+        print(f"    could not parse xml: {e}")
+        return []
+    found = []
+    for el in root.iter():
+        if not (localname(el.tag) == "relation-list"
+                and el.get("target-type") == "url"):
+            continue
+        for rel in el:
+            if localname(rel.tag) != "relation":
+                continue
+            for child in rel:
+                if localname(child.tag) == "target" and child.text:
+                    found.append(child.text.strip())
+    return found
+
+
+def site_for(url):
+    """Return the site (registrable-ish host) a url lives on, or ''."""
+    host = urllib.parse.urlparse(url).netloc.lower()
+    host = re.sub(r"^www\.", "", host)
+    host = re.sub(r":\d+$", "", host)
+    return host
+
+
+def collect_urls(release_ids):
+    """Gather listen urls across all release ids, one per site.
+
+    Queries url-rels for every release id. URLs are kept in encounter order but
+    deduplicated by site -- keep only the first URL for any given site, even if
+    two links point at different pages on that site.
+    """
+    urls = []
+    seen_sites = set()
+    for rid in release_ids:
+        for u in fetch_urls(rid):
+            site = site_for(u)
+            if site and site not in seen_sites:
+                seen_sites.add(site)
+                urls.append(u)
+    return urls
+    print("    no url relation found")
+    return None
+
+
 def insert_fields(path, lines, body, new):
     """Append missing keys to the front matter and rewrite the file.
 
     `new` maps a normalized key to a display key and value string.
     """
-    display = {key: name for key, name, _value in new}
     existing = set()
     for line in lines:
         if ":" in line:
             existing.add(line.split(":", 1)[0].strip().replace("-", "_"))
     lines = [line for line in lines if not line.strip().startswith("#")]
-    additions = [f'{display[k]}: "{v}"' for k, _name, v in new if k not in existing]
+    additions = []
+    for k, name, v in new:
+        if k in existing:
+            continue
+        if isinstance(v, list):
+            additions.append(f"{name}: [" + ", ".join(f'"{x}"' for x in v) + "]")
+        else:
+            additions.append(f'{name}: "{v}"')
     if not additions:
         return
     insert_at = None
@@ -216,18 +289,22 @@ def main():
 
         has_art = bool(fm.get("art"))
         has_date = bool(fm.get("album_date"))
-        if has_art and has_date:
-            print("  already has album art and release date, skipping")
+        has_url = bool(fm.get("url"))
+        if has_art and has_date and has_url:
+            print("  already has art, date, and listen url, skipping")
             continue
 
-        rid, date = search_release(fm["album"], first_artist(fm["artist"]))
-        art = fetch_cover_art(rid) if (rid and not has_art) else None
+        rid, date = search_releases(fm["album"], first_artist(fm["artist"]))
+        art = fetch_cover_art(rid[0]) if (rid and not has_art) else None
+        urls = collect_urls(rid) if (rid and not has_url) else []
 
         new = []
         if not has_date and date:
             new.append(("album_date", "album-date", date))
         if not has_art and art:
             new.append(("art", "art", art))
+        if not has_url and urls:
+            new.append(("url", "url", urls))
         if new:
             insert_fields(path, lines, body, new)
         else:

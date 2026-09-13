@@ -12,6 +12,7 @@ import re
 import html as html_mod
 from pathlib import Path
 from datetime import datetime
+from urllib.parse import urlparse
 
 REVIEWS_DIR = Path(__file__).resolve().parent / "_reviews"
 OUT_DIR = Path(__file__).resolve().parent
@@ -268,6 +269,7 @@ def load_reviews():
             "updated_date_label": dates.get("updated_date_label") or None,
             "blurb": fm.get("blurb", ""),
             "art": fm.get("art") or None,
+            "url": fm.get("url"),
             "bnm": fm.get("bnm") == "true",
             "featured": fm.get("featured") == "true",
             "href": f"/music/reviews/{path.stem}/",
@@ -373,6 +375,35 @@ def index_html(reviews, featured):
     return body
 
 
+def listen_button(r):
+    """Build a 'Listen Here' icon link per url relation, or ''."""
+    raw = r.get("url")
+    if isinstance(raw, str):
+        raw = [raw]
+    if not raw:
+        return ""
+    buttons = []
+    for u in raw:
+        if not u:
+            continue
+        netloc = (urlparse(u).netloc or "").lower()
+        domain = re.sub(r"^www\.|:\d+$", "", netloc)
+        if not domain:
+            continue
+        title = domain.split(".", 1)[0].title()
+        if title == "Open":
+            title = "Spotify"
+        icon = (f"https://www.google.com/s2/favicons?sz=64&domain="
+                f"{html_mod.escape(domain, quote=True)}")
+        buttons.append(
+            f'<a class="review-listen" href="{html_mod.escape(u, quote=True)}" '
+            f'title="Listen to {html_mod.escape(r["album"])} on {title}">'
+            f'<img class="review-listen-icon" src="{icon}" alt="" width="20" height="20">'
+            f"Listen Here</a>"
+        )
+    return "".join(buttons)
+
+
 def review_html(r):
     my = f"{r['album']} — {r['artist']}"
     art = ""
@@ -410,6 +441,8 @@ def review_html(r):
             f'<span class="review-meta-value">{genre_links}</span></p>'
         )
     meta_html = f'<div class="review-meta-block">{meta_rows}</div>'
+    listen = listen_button(r)
+    listen_html = f'<div class="review-listen-row">{listen}</div>' if listen else ""
     body = HEAD.format(title=f"{my} · Catalog") + MASTHEAD
     body += f"""      <main class="review">
          <a class="review-back" href="/music">← back to catalog</a>
@@ -422,6 +455,7 @@ def review_html(r):
          <div class="article-body">
 {article}
          </div>
+         {listen_html}
       </main>
 """
     body += render_history_modal(r["grade_history"])
