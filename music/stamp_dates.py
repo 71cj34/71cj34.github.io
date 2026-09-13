@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-"""Stamp "updated-date" (and, when missing, "posted-date") to today.
+"""Stamp "posted-date" to today, but only when it is missing.
 
 Runs as a CI step in the music catalog build. For every markdown file in
-_reviews/ it:
-  - sets updated-date to today's date;
-  - if posted-date is absent or empty, sets it to today's date as well (and
-    forces updated-date to today, which it already is).
+_reviews/ it sets posted-date to today's date only when it is absent or empty.
+It never touches the updated-date field.
 
 Zero dependencies: Python 3 stdlib only. Usage:  python stamp_dates.py
 """
@@ -66,7 +64,6 @@ def main():
         posted = fm.get("posted_date", "").strip().strip('"')
         has_posted = bool(posted)
 
-        lines = set_key(lines, "updated_date", today, "updated-date")
         if not has_posted:
             lines = set_key(lines, "posted_date", today, "posted-date")
 
@@ -74,8 +71,7 @@ def main():
         if new_text != text:
             path.write_text(new_text, encoding="utf-8")
             changed += 1
-            print(f"  {path.name}: updated-date={today}"
-                  + (f" posted-date={today} (missing)" if not has_posted else ""))
+            print(f"  {path.name}: posted-date={today} (missing)")
         else:
             print(f"  {path.name}: unchanged")
     print(f"stamped {changed} file(s) with {today}")
