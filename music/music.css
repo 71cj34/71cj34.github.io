@@ -1,0 +1,722 @@
+/* ============================================================
+   catalog — music reviews
+   Minimal, full-width, brutalist reviews.
+   Layered on top of /portfolio/ds1/ds1.css (fonts + base type).
+   ============================================================ */
+
+/* ---------- theme tokens ---------- */
+body {
+  --paper: #f3efe7;   /* warm print paper     */
+  --ink: #1a1a1a;     /* body text            */
+  --muted: #6b655d;   /* secondary text       */
+  --accent: #9d1f1f;  /* screaming red        */
+  --line: #d8d2c6;    /* hairlines            */
+}
+
+body.dark-mode {
+  --paper: #161410;
+  --ink: #eceae4;
+  --muted: #a29c90;
+  --accent: #e0523f;
+  --line: #3a372f;
+}
+
+/* ---------- reset ds1 defaults ---------- */
+body, html {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--text);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--head);
+  color: var(--ink);
+}
+
+a {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+/* ---------- masthead ---------- */
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 0.8rem 3vw;
+  background: var(--paper);
+  border-bottom: 3px solid var(--accent);
+}
+
+.masthead-home {
+  font-family: var(--text);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.masthead-brand {
+  font-family: var(--head);
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.masthead-dot {
+  color: var(--accent);
+}
+
+.controls {
+  display: flex;
+  gap: 1.1rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.controls-slot {
+  cursor: pointer;
+  user-select: none;
+}
+
+.controls-slot:hover {
+  color: var(--accent);
+}
+
+/* ---------- hero ---------- */
+.hero {
+  padding: 3.5rem 3vw 1.6rem;
+  border-bottom: 3px solid var(--ink);
+}
+
+.hero-title {
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: clamp(3rem, 10vw, 9rem);
+  line-height: 0.95;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.hero-sub {
+  font-family: var(--text);
+  font-size: 1rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+/* ---------- grid shell (full width) ---------- */
+.grid-shell {
+  padding: 1.6rem 3vw;
+}
+
+/* ---------- featured review (lede) ---------- */
+.lede {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: clamp(1.2rem, 3vw, 2.5rem);
+  align-items: center;
+  border: 1px solid var(--ink);
+  border-top: 3px solid var(--accent);
+  padding: clamp(1rem, 2vw, 1.6rem);
+}
+
+.lede-art {
+  display: block;
+  width: clamp(120px, 22vw, 260px);
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1px solid var(--ink);
+  box-shadow: 6px 6px 0 var(--accent);
+  margin-left: 0.4rem;
+}
+
+.lede-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 100%;
+}
+
+.lede h2 {
+  font-family: var(--head);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1.05;
+  margin: 0;
+}
+
+.lede h2 em {
+  color: var(--accent);
+}
+
+.lede h2 a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 0.05rem;
+}
+
+.lede h2 a:hover {
+  color: var(--accent);
+}
+
+.lede p {
+  font-family: var(--text);
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.lede-meta {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  order: -1;
+}
+
+.lede-genres {
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+
+.lede-blurb {
+  color: var(--ink);
+  line-height: 1.5;
+  max-width: 55ch;
+}
+
+.lede-link a {
+  text-decoration: none;
+  border-bottom: 2px solid var(--accent);
+}
+
+.lede-link a:hover {
+  color: var(--accent);
+}
+
+/* the one-word grade sits in the right column */
+.lede-grade {
+  grid-column: 3;
+  align-self: center;
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  line-height: 1;
+  color: var(--accent);
+  writing-mode: vertical-rl;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ---------- section title ---------- */
+.section-title {
+  font-family: var(--head);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 3rem 0 0;
+}
+
+/* ---------- review grid ---------- */
+.reviews {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.1rem;
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.review-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--ink);
+  padding: 0.9rem 1.05rem;
+  background: var(--paper);
+  transition: opacity 0.15s ease;
+}
+
+.review-card-link:hover {
+  opacity: 0.8;
+}
+
+.card-art {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  margin-bottom: 0.6rem;
+}
+
+.card-artist {
+  font-family: var(--head);
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.card-album {
+  font-family: var(--text);
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0.1rem 0 0.5rem;
+}
+
+.card-album em {
+  color: var(--accent);
+}
+
+.card-badge {
+  font-family: var(--head);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0 0.35rem;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  margin-left: 0.5rem;
+}
+
+.card-blurb {
+  font-family: var(--text);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--ink);
+  flex: 1 1 auto;
+  margin: 0;
+}
+
+.card-grade {
+  font-family: var(--head);
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--ink);
+  align-self: flex-end;
+  border-top: 1px solid var(--line);
+  padding: 0.1rem 0 0.15rem;
+}
+
+/* grade words get a hint of color */
+.card-grade.excellent { color: var(--accent); }
+.card-grade.great     { color: var(--ink); }
+.card-grade.good      { color: var(--muted); }
+.card-grade.decent    { color: var(--muted); }
+
+/* ---------- footer ---------- */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1rem 2rem;
+  padding: 1.4rem 3vw;
+  border-top: 3px solid var(--accent);
+  font-family: var(--text);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.footer a {
+  color: var(--ink);
+}
+
+/* ---------- single review page ---------- */
+main.review {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2rem 3vw;
+}
+
+.review-back {
+  display: inline-block;
+  font-family: var(--text);
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 1.6rem;
+}
+
+.review-art {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  margin: 0 0 1rem;
+}
+
+.review-head {
+  border: 1px solid var(--ink);
+  border-top: 3px solid var(--accent);
+  padding: 1.2rem 1.6rem;
+}
+
+.review-meta-block {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 1rem;
+  row-gap: 0.15rem;
+  align-items: baseline;
+  margin: 0.9rem 0 0;
+}
+
+.review-meta-row {
+  font-family: var(--text);
+  font-size: 0.78rem;
+  margin: 0;
+}
+
+.review-meta-label {
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.review-meta-value {
+  font-family: var(--text);
+  color: var(--ink);
+}
+
+.review-genre {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.review-genre:hover {
+  text-decoration: underline;
+}
+
+.review-title {
+  font-family: var(--head);
+  font-size: 2rem;
+  line-height: 1.1;
+  margin: 0.5rem 0 0.15rem;
+}
+
+.review-title em {
+  color: var(--accent);
+}
+
+.review-grade {
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin: 0.6rem 0 0;
+}
+
+.review-grade.excellent { color: var(--accent); }
+.review-grade.great     { color: var(--ink); }
+.review-grade.good      { color: var(--muted); }
+.review-grade.decent    { color: var(--muted); }
+
+.review-grade--history {
+  display: inline-block;
+  cursor: pointer;
+  border-bottom: 2px dashed var(--accent);
+  padding-bottom: 0.1rem;
+}
+
+.review-grade--history:hover {
+  color: var(--accent);
+}
+
+/* ---------- grade history modal ---------- */
+.grade-history-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grade-history-modal[hidden] {
+  display: none;
+}
+
+.gh-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.gh-box {
+  position: relative;
+  width: min(640px, calc(100% - 3rem));
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-top: 3px solid var(--accent);
+  padding: 1.5rem 1.6rem 1rem;
+  box-shadow: 8px 8px 0 var(--accent);
+}
+
+.gh-close {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.9rem;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-family: var(--head);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.gh-title {
+  font-family: var(--head);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 1rem;
+}
+
+.gh-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--paper);
+}
+
+.gh-grid {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.gh-axis {
+  fill: var(--muted);
+  font-family: var(--text);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+}
+
+.gh-line {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.gh-tick {
+  stroke: var(--line);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 4;
+}
+
+.gh-dot {
+  stroke: var(--paper);
+  stroke-width: 1.5;
+}
+
+.gh-dot.excellent { fill: var(--accent); }
+.gh-dot.great     { fill: var(--ink); }
+.gh-dot.good,
+.gh-dot.decent    { fill: var(--muted); }
+
+.gh-marker {
+  fill: var(--muted);
+  font-family: var(--text);
+  font-size: 0.6rem;
+}
+
+.gh-label {
+  font-family: var(--head);
+  font-size: 0.58rem;
+  font-weight: 700;
+}
+
+.gh-label.excellent { fill: var(--accent); }
+.gh-label.great     { fill: var(--ink); }
+.gh-label.good,
+.gh-label.decent    { fill: var(--muted); }
+
+.gh-legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  margin: 1rem 0 0;
+  padding: 1rem 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.gh-legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--text);
+  font-size: 0.8rem;
+}
+
+.gh-legend-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+}
+
+.gh-legend-dot.excellent { background: var(--accent); }
+.gh-legend-dot.great     { background: var(--ink); }
+.gh-legend-dot.good,
+.gh-legend-dot.decent    { background: var(--muted); }
+
+.gh-legend-grade {
+  font-family: var(--head);
+  font-weight: 700;
+}
+
+.gh-legend-grade.excellent { color: var(--accent); }
+.gh-legend-grade.great     { color: var(--ink); }
+.gh-legend-grade.good,
+.gh-legend-grade.decent    { color: var(--muted); }
+
+.review-blurb {
+  font-family: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0.4rem 0 0;
+}
+
+.no-blurb {
+  font-style: italic;
+  color: var(--muted);
+}
+
+.gh-none {
+  font-family: var(--text);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--muted);
+  margin: 0;
+}
+
+.no-review {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--text);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--muted);
+  margin: 0;
+}
+
+.no-review-icon {
+  font-size: 1.4rem;
+  color: var(--accent);
+}
+
+/* ---------- rendered markdown prose ---------- */
+.article-body {
+  margin-top: 2rem;
+}
+
+.article-body p {
+  font-family: var(--text);
+  line-height: 1.65;
+  margin: 0 0 1rem;
+}
+
+.article-body h2 {
+  font-family: var(--head);
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 1.2rem 0 0.55rem;
+}
+
+.article-body h3 {
+  font-family: var(--head);
+  font-size: 1.05rem;
+  margin: 1rem 0 0.4rem;
+}
+
+.article-body h4 {
+  font-family: var(--head);
+  font-size: 0.95rem;
+  margin: 0.9rem 0 0.35rem;
+}
+
+.article-body ul,
+.article-body ol {
+  margin: 0 0 1rem 1.25rem;
+}
+
+.article-body li {
+  margin-bottom: 0.3rem;
+}
+
+.article-body blockquote {
+  border-left: 2px solid var(--accent);
+  margin: 0.5rem 0 1rem;
+  padding: 0 1rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.article-body code {
+  font-family: var(--text);
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.05rem 0.35rem;
+}
+
+.article-body strong {
+  color: var(--accent);
+}
+
+.article-body a {
+  color: var(--accent);
+}
+
+.article-body hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 1.5rem 0;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 720px) {
+  .hero { padding: 2.5rem 4vw 1.2rem; }
+  .lede {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .lede-art {
+    width: min(60vw, 200px);
+    margin: 0 auto 0.4rem;
+    grid-row: 1;
+  }
+  .lede-body {
+    grid-row: 2;
+    text-align: left;
+  }
+  .lede-grade {
+    grid-column: 1;
+    writing-mode: initial;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-top: 1px solid var(--line);
+    padding-top: 0.4rem;
+  }
+}
