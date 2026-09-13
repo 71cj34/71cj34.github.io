@@ -166,7 +166,7 @@ def fetch_cover_art(rid):
         return None
     try:
         payload = json.loads(data)
-        return payload["images"][0]["image"]
+        return payload["images"][0]["thumbnails"]["1200"]
     except (ValueError, TypeError, KeyError, IndexError):
         print("    no usable cover art in response")
         return None
