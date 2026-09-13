@@ -204,13 +204,27 @@ a {
   color: var(--accent);
 }
 
-/* the one-word grade sits in the right column */
+/* the one-word grade + vertical stars sit in the right column */
 .lede-grade {
   grid-column: 3;
   align-self: center;
+  display: flex;
+  align-items: center;
+  gap: clamp(1.2rem, 3vw, 2.5rem);
+}
+
+.lede-grade-stars {
+  /* stacked, rotated stars, to the left of the word */
+  writing-mode: vertical-rl;
+  font-size: clamp(1.4rem, 2.6vw, 2.9rem);
+  color: var(--ink);
+  letter-spacing: 0.45em;
+}
+
+.lede-grade-word {
   font-family: var(--head);
   font-weight: 900;
-  font-size: clamp(2.6rem, 6vw, 5rem);
+  font-size: clamp(1.4rem, 2.6vw, 2.9rem);
   line-height: 1;
   color: var(--accent);
   writing-mode: vertical-rl;
@@ -304,6 +318,9 @@ a {
 }
 
 .card-grade {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
   font-family: var(--head);
   font-weight: 800;
   font-size: 1.15rem;
@@ -311,6 +328,16 @@ a {
   align-self: flex-end;
   border-top: 1px solid var(--line);
   padding: 0.1rem 0 0.15rem;
+}
+
+.card-grade-word {
+  color: var(--ink);
+}
+
+.card-grade-stars {
+  color: var(--ink);
+  font-size: 1.15rem;
+  letter-spacing: 0.12em;
 }
 
 /* grade words get a hint of color */
@@ -414,11 +441,26 @@ main.review {
 }
 
 .review-grade {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  padding: 0.5rem 0 0.2rem;
   font-family: var(--head);
   font-weight: 900;
   font-size: 1.5rem;
   color: var(--ink);
   margin: 0.6rem 0 0;
+}
+
+.review-grade-trigger {
+  color: inherit;
+}
+
+.review-grade-stars {
+  font-family: var(--head);
+  font-size: 1.5rem;
+  color: var(--ink);
+  letter-spacing: 0.12em;
 }
 
 .review-grade.excellent { color: var(--accent); }
@@ -713,10 +755,19 @@ main.review {
   }
   .lede-grade {
     grid-column: 1;
+    flex-direction: row;
+    writing-mode: initial;
+    gap: 1rem;
+    border-top: 1px solid var(--line);
+    padding-top: 0.4rem;
+  }
+  .lede-grade-stars {
+    writing-mode: initial;
+    letter-spacing: 0.08em;
+  }
+  .lede-grade-word {
     writing-mode: initial;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    border-top: 1px solid var(--line);
-    padding-top: 0.4rem;
   }
 }

@@ -16,8 +16,17 @@ from datetime import datetime
 REVIEWS_DIR = Path(__file__).resolve().parent / "_reviews"
 OUT_DIR = Path(__file__).resolve().parent
 
-GRADES = ("Decent", "Good", "Great", "Excellent")
+GRADES = ("Decent", "Good", "Great", "Excellent", "Perfect")
 GRADE_INDEX = {g: i for i, g in enumerate(GRADES)}
+
+# one-word grade -> number of filled stars
+STAR = "\u2605"  # ★ black star
+STARS_BY_GRADE = {"Decent": 1, "Good": 2, "Great": 3, "Excellent": 4, "Perfect": 5}
+
+
+def stars_for(grade):
+    """Return a string of stars for a grade (empty if not mapped)."""
+    return STAR * STARS_BY_GRADE.get(grade, 0)
 
 # keys that are dates and should be parsed into display labels
 DATE_FIELDS = ("album_date", "posted_date", "updated_date")
@@ -322,7 +331,7 @@ def card(r):
 {art}               <h3 class="card-artist">{html_mod.escape(r['album'])}{badge}</h3>
                <p class="card-album">by {html_mod.escape(r['artist'])}</p>
                <p class="card-blurb">{blurb_html(r)}</p>
-               <p class="card-grade {r['grade'].lower()}">{r['grade']}</p>
+               <p class="card-grade {r['grade'].lower()}"><span class="card-grade-word">{r['grade']}</span><span class="card-grade-stars" aria-hidden="true">{stars_for(r['grade'])}</span></p>
             </article>
             </a>"""
 
@@ -339,7 +348,10 @@ def lede(r):
             <p class="lede-blurb">{blurb_html(r)}</p>
             <p class="lede-link"><a href="{r['href']}">read the full review →</a></p>
             </div>
-            <p class="lede-grade">{r['grade']}</p>
+            <div class="lede-grade">
+               <span class="lede-grade-stars" aria-hidden="true">{stars_for(r['grade'])}</span>
+               <span class="lede-grade-word">{r['grade']}</span>
+            </div>
          </section>"""
 
 
@@ -367,8 +379,10 @@ def review_html(r):
     if r["art"]:
         art = f'               <img class="review-art" src="{html_mod.escape(r["art"], quote=True)}" alt="Album art for {html_mod.escape(r["album"])}">\n'
     grade_markup = (
-        f'<p class="review-grade {r["grade"].lower()} review-grade--history" '
-        f'id="grade-history-trigger" title="View grade history">{r["grade"]}</p>'
+        f'<p class="review-grade {r["grade"].lower()}">'
+        f'<span class="review-grade-trigger {r["grade"].lower()} review-grade--history" '
+        f'id="grade-history-trigger" title="View grade history">{r["grade"]}</span>'
+        f'<span class="review-grade-stars" aria-hidden="true">{stars_for(r["grade"])}</span></p>'
     )
     if r["body"]:
         article = r["body"]
@@ -383,7 +397,7 @@ def review_html(r):
     if r["updated_date_label"]:
         rows.append(("updated", r["updated_date_label"]))
     meta_rows = "".join(
-        f'<p class="review-meta-row"><span class="review-meta-label">{name}</span>'
+        f'<p class="review-meta-row"><span class="review-meta-label">{name}:</span> '
         f'<span class="review-meta-value">{html_mod.escape(value)}</span></p>'
         for name, value in rows
     )
@@ -392,7 +406,7 @@ def review_html(r):
             f'<a class="review-genre" href="#">{html_mod.escape(g)}</a>' for g in r["genres"]
         )
         meta_rows += (
-            '<p class="review-meta-row"><span class="review-meta-label">genres</span>'
+            '<p class="review-meta-row"><span class="review-meta-label">genres:</span> '
             f'<span class="review-meta-value">{genre_links}</span></p>'
         )
     meta_html = f'<div class="review-meta-block">{meta_rows}</div>'
