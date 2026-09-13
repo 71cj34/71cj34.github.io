@@ -5,7 +5,12 @@ REVIEWS_DIR = os.path.join(os.path.dirname(__file__), "_reviews")
 
 
 def slugify_album(name: str) -> str:
-    return re.sub(r"\s+", "-", name.strip()).lower()
+    s = name.strip().lower()
+    # drop characters that are illegal in (Windows) filenames
+    s = re.sub(r'[<>:"/\\|?*]', "", s)
+    s = re.sub(r"\s+", "-", s)
+    s = re.sub(r"-+", "-", s).strip("-.")
+    return s
 
 
 def rename_files():
