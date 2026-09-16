@@ -203,8 +203,15 @@
                     } else {
                         group.style.display = "block";
                     }
+
+                    const countEl = group.querySelector(".year-header small");
+                    if (countEl) {
+                        const n = h == 1 ? visibleInGroup : events.length;
+                        countEl.textContent = `(${n} items)`;
+                    }
                 });
             };
+            window.refreshVisibility = refreshVisibility;
 
             hide.addEventListener("click", () => {
                 if (h == 0) {
@@ -320,7 +327,7 @@
 
             const tick=()=>{
                 const r=target-new Date();
-                if(r<=0){el.innerHTML=`<div class="expired">THE TIME HAS COME</div><div style="font-size: 0.8em; font-style: italic; color:#560015">Was ${name}<br>Expired ${target.toDateString()}</div>`;return true;}
+                if(r<=0){el.innerHTML=`<div class="expired">THE TIME HAS COME</div><div style="font-size: 0.8em; font-style: italic; color:#560015">Was ${name}<br>Expired ${target.toDateString()}</div>`;if(window.refreshVisibility)window.refreshVisibility();return true;}
 
                 const d=Math.floor(r/864e5);
                 const h=Math.floor((r % 864e5) / 36e5);
