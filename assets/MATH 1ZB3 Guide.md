@@ -1,37 +1,32 @@
-## §. Preface
+## Preface
 
-Hello! Welcome to MATH 1ZB3, MATH 1AA3, or whatever course.
+Recommended pre-reading:
+[My MATH 1ZC3 Study Guide](https://jasoncheng.me/assets/Linear%20Algebra%20Study%20Guide.pdf)
 
-I'm Jason Cheng, a second-year (as of time of writing) computer engineering student. This study guide contains, as of time of writing, the whole content of the courses above, and more. It is cited straight from the textbook, everything important you need to know. The textbook used is **Calculus: Early Transcendentals (2020)**. I recommend getting the textbook even if you use this book: it contains tons of examples and diagrams that will help you beyond words can. However, if you can't pay, just use a [shadow library](https://annas-archive.org).
-
-If you're wondering who I am to be making this guide, my grades for the first two MATH 1ZB3 tests should help (the final exam hasn't happened yet as of writing).
-<img src="flex.png" style="max-width: 60vw;">
-
-(Yes, I know I lowkey fumbled on Test 2).
+The textbook used is **Calculus: Early Transcendentals (2020)**. I recommend getting the textbook even if you use this book: it contains tons of examples and diagrams that will help you beyond words can. If you don't want to pay, just [shadow library](https://annas-archive.org).
 
 Flexing out of the way, I suggest checking in the **outline** of whatever PDF reader you are using, and you will see each chapter, subchapter, and sub-subchapter there. Click to skip to specific chapters or parts. 
 
 I have included here explanations of my own to help you through specific chapters and concepts that may be difficult. Also note that while I have used large headings to denote content of each test, your course schedule will be different every year- expect some content to be off by a bit, some content to be taught out of order, even some chapters to be skipped entirely.
 
-On the subject of skipped chapters, several subchapters are not part of your course curriculum. You are responsible for knowing which ones you need to know, but I have included warnings specific to MATH 1ZB3 at each problematic chapter.
+On the subject of skipped chapters, several subchapters are not part of your course curriculum. You are responsible for knowing which ones you need to know, but I have included warnings specific to the MATH 1ZB3 as of 2025 at each problematic chapter.
 
-Last thing: if you are here from my [Linear Algebra Study Guide](https://jasoncheng.me/assets/Linear%20Algebra%20Study%20Guide.pdf), just know that at this point in my life, I do not feel entirely great about its contents. Yes, it is a very helpful resource, and yes, I know students that have scored 10+s using it *(I guide others to a treasure I cannot possess)*, but I think it is not my finest work. It is messy, amateurish, and very barebones. Fun fact: the LASG is 64 pages. This is 70 (on A4 paper), all while covering only course content. I think that speaks to how much harder I'm trying to help you understand the content.
-
-This time, I have a better system in place. 
+Last thing: if you are here from my [Linear Algebra Study Guide](https://jasoncheng.me/assets/Linear%20Algebra%20Study%20Guide.pdf), just know that at this point in my life, I do not feel entirely great about its contents. Yes, it is a very helpful resource, and yes, I know students that have scored 10+s using it *(I guide others to a treasure I cannot possess)*, but I think it is not my finest work. It is messy, amateurish, and very barebones. For one, there was little distinction made between actual stuff you should memorize, versus fun facts or derivations. That is why I will be using this system for 1ZB3:
 
 - Any block math, that is any math in its own paragraph block and surrounded by an outline, for example$$\boxed{\text{Math puns are the first sine of madness.}}$$is an important theorem straight from the textbook, one you are expected to know and understand.
 - Any block math, for example $$\begin{gather}
 | \text{You}(x,y) \rangle = \sqrt{p} \left| \text{ :) } \right\rangle+ \sqrt{1-p} \left|\text{ :( }\right\rangle \\
 p \rightarrow 1 \text{ as } (x,y) \rightarrow(x_{\text{bed}},y_{\text{bed}}) \text{ under observation}
-\end{gather}$$is considered 'important', as in part of a proof for a theorem, an important byproduct, or an important theorem that isn't from the textbook. (if you don't understand this example, then ask ChatGPT or your nearest physicist or something. Trust me, it's funny)
-- Any inline math, for example $9+10=\int^{1}_{0} 126x^{5} \; dx$, is used for formatting or anything less important.
+\end{gather}$$is considered 'important', as in part of a proof for a theorem, an important byproduct, or an important theorem that isn't from the textbook. (if you don't understand this example, then ask your nearest physicist or something. Trust me, it's funny)
+- Any inline math, for example $9+10=\int^{1}_{0} 126x^{5} \; dx$, is used for formatting, derivations, and anything else.
 
-As usual, `.md` source code is posted in the [same place you got this PDF](https://jasoncheng.me/firstyear/#math) (if you got it elsewhere, I'm not mad at you :D).
+As usual, `.md` source code is posted in the [same place you got this PDF](https://jasoncheng.me/firstyear/##math).
+
 ## 0. Review
 
-These chapters should be review from MATH 1ZA3 (or equivalent). You should know everything within by heart.
+These chapters should be review from MATH 1ZA3 (or equivalent). You should hopefully know everything within by heart!
 
-### 7.5: Strategies for Integration
+#### 7.5: Strategies for Integration
 
 $1.$ $\int x^n dx = \frac{x^{n+1}}{n+1} \quad (n \neq -1)$  
 $2.$ $\int \frac{1}{x} dx = \ln |x|$  
@@ -76,7 +71,7 @@ Tips for integration:
 
 This 'section' of the course will span from around its start to the first midterm.
 
-### 7.8: Improper Integrals
+#### 7.8: Improper Integrals
 
 **Improper integrals** are definite integrals with an infinite interval or a discontinuous integrand. We will refer to the former as **Type 1** and the latter as **Type 2**.
 
@@ -91,7 +86,7 @@ In order to solve such an integral, we abstract the infinite end to a variable, 
 If the limit exists, we call that integral **convergent**. If not, we call it **divergent**. 
 
 Formally, we define
-$$\boxed{\begin{gather} \displaylines{\text{(a) If } \int_a^t f(x)\,dx \text{ exists for every number } t \ge a, \text{ then} \\ \int_a^\infty f(x)\,dx = \lim_{t \to \infty} \int_a^t f(x)\,dx \\ \text{ provided this limit exists (as a finite number).} \\} \\ \\ \displaylines{\text{(b) If } \int_t^b f(x)\,dx \text{ exists for every number } t \le b, \text{ then} \\ \int_{-\infty}^b f(x)\,dx = \lim_{t \to -\infty} \int_t^b f(x)\,dx \\ \text{provided this limit exists (as a finite number).} \\} \\ \\ \displaylines{\text{(c) If both } \int_a^\infty f(x)\,dx \text{ and } \int_{-\infty}^a f(x)\,dx \text{ are convergent, then we define} \\ \int_{-\infty}^\infty f(x)\,dx = \int_{-\infty}^a f(x)\,dx + \int_a^\infty f(x)\,dx} \end{gather}}$$
+$$\boxed{\begin{gathered} \displaylines{\text{(a) If } \int_a^t f(x)\,dx \text{ exists for every number } t \ge a, \text{ then} \\ \int_a^\infty f(x)\,dx = \lim_{t \to \infty} \int_a^t f(x)\,dx \\ \text{ provided this limit exists (as a finite number).} \\} \\ \\ \displaylines{\text{(b) If } \int_t^b f(x)\,dx \text{ exists for every number } t \le b, \text{ then} \\ \int_{-\infty}^b f(x)\,dx = \lim_{t \to -\infty} \int_t^b f(x)\,dx \\ \text{provided this limit exists (as a finite number).} \\} \\ \\ \displaylines{\text{(c) If both } \int_a^\infty f(x)\,dx \text{ and } \int_{-\infty}^a f(x)\,dx \text{ are convergent, then we define} \\ \int_{-\infty}^\infty f(x)\,dx = \int_{-\infty}^a f(x)\,dx + \int_a^\infty f(x)\,dx} \end{gathered}}$$
 
 
 The following important fact is also presented: $$\boxed{\int^{\infty}_{1} \frac{1}{x^{p}} \, dx \text{ is convergent if } p>1 \text{ and divergent if }p\leq1.}$$We call a function of this kind a **p-series**.
@@ -106,19 +101,19 @@ This is **Type 2**. Integrals of this type will appear as:$$s\int^{t}_{a} f(x) \
 
 In the first case, you replace $t$ with the limit as the bound approaches the discontinuity, as in$$\int^{t}_{a} f(x) \, dx = \lim_{  t \to b^{-} } \int^{b}_{a} f(x) \, dx \qquad \text{or} \qquad \int^{b}_{t} f(x) \, dx = \lim_{  t \to a^{+} } \int^{b}_{a} f(x) \, dx$$We call the subsequent improper integral **convergent** if the limit exists and **divergent** if it does not.
 
-Formally, we define $$\boxed{\begin{gather} \displaylines{\text{(a) If } f \text{ is continuous on } [a,b) \text{ and is discontinuous at } b, \text{ then} \\ \int_a^b f(x)\,dx = \lim_{t \to b^-} \int_a^t f(x)\,dx \\ \text{if this limit exists (as a finite number).} \\} \\ \\ \displaylines{\text{(b) If } f \text{ is continuous on } (a,b] \text{ and is discontinuous at } a, \text{ then} \\ \int_a^b f(x)\,dx = \lim_{t \to a^+} \int_t^b f(x)\,dx \\ \text{if this limit exists (as a finite number).} \\} \\ \\ \text{The improper integral } \int_a^b f(x)\,dx \text{ is called } \textbf{convergent} \text{ if the corresponding limit}\\ \text{exists and } \textbf{divergent} \text{ if the limit does not exist.} \\ \\ \\ \displaylines{\text{(c) If } f \text{ has a discontinuity at } c, \text{ where } a < c < b, \text{ and both } \int_a^c f(x)\,dx \text{ and } \int_c^b f(x)\,dx \text{ are convergent, then we define} \\ \int_a^b f(x)\,dx = \int_a^c f(x)\,dx + \int_c^b f(x)\,dx} \end{gather}}$$
+Formally, we define $$\boxed{\begin{gathered} \displaylines{\text{(a) If } f \text{ is continuous on } [a,b) \text{ and is discontinuous at } b, \text{ then} \\ \int_a^b f(x)\,dx = \lim_{t \to b^-} \int_a^t f(x)\,dx \\ \text{if this limit exists (as a finite number).} \\} \\ \\ \displaylines{\text{(b) If } f \text{ is continuous on } (a,b] \text{ and is discontinuous at } a, \text{ then} \\ \int_a^b f(x)\,dx = \lim_{t \to a^+} \int_t^b f(x)\,dx \\ \text{if this limit exists (as a finite number).} \\} \\ \\ \text{The improper integral } \int_a^b f(x)\,dx \text{ is called } \textbf{convergent} \text{ if the corresponding limit}\\ \text{exists and } \textbf{divergent} \text{ if the limit does not exist.} \\ \\ \\ \displaylines{\text{(c) If } f \text{ has a discontinuity at } c, \text{ where } a < c < b, \text{ and both } \int_a^c f(x)\,dx \text{ and } \int_c^b f(x)\,dx \text{ are convergent, then we define} \\ \int_a^b f(x)\,dx = \int_a^c f(x)\,dx + \int_c^b f(x)\,dx} \end{gathered}}$$
 The Type II p-series acts differently than the Type I. It is one of the biggest mistakes students make (McLean said that). $$\boxed{\int _{0}^{1} \frac{1}{x^{p}} \, dx \text{ is convergent if } p<1 \text{ and divergent if }p\geq1.}$$or the exact opposite of the Type I.
 
 #### 7.8.3: The Comparison Test
 
 This is a way to find out if an improper integral converges or diverges without finding its exact value.
-$$\boxed{\begin{gather} \text{If } f, g \text{ are continuous functions with } f(x) \geq g(x) \geq 0 \text{ for } x \geq a, \\ \text{(a) If } \int_a^\infty f(x) \, dx \text{ is convergent, then } \int_a^\infty g(x) \, dx \text{ is convergent.} \\ \text{(b) If } \int_a^\infty g(x) \, dx \text{ is divergent, then } \int_a^\infty f(x) \, dx \text{ is divergent.} \end{gather}}$$
+$$\boxed{\begin{gathered} \text{If } f, g \text{ are continuous functions with } f(x) \geq g(x) \geq 0 \text{ for } x \geq a, \\ \text{(a) If } \int_a^\infty f(x) \, dx \text{ is convergent, then } \int_a^\infty g(x) \, dx \text{ is convergent.} \\ \text{(b) If } \int_a^\infty g(x) \, dx \text{ is divergent, then } \int_a^\infty f(x) \, dx \text{ is divergent.} \end{gathered}}$$
 
 Basically, if you know a function $f$ to be either convergent or divergent, you can guarantee another function $g$ to be one of them based on the relationship between their $y$-values. If $f$ converges and $g$ is underneath $f$ for all $x$ (at least, all relevant $x$ values in the integral), it will also converge. If $f$ diverges and $g$ is above $f$ for all $x$, it will also diverge. 
 
-### 11.1: Sequences
+#### 11.1: Sequences
 
-Sequences are lists of numbers following some specific pattern. As such, they can be represented as functions or in sigma notation.  (**Note: sequences and series are NOT the same! This is a common mistake! Most of the theorems in Ch. 11 will only work for one or the other so do not mix them up. Additionally, if a sequence converges, it does NOT guarantee its series converges! However, since convergent series will always have convergent sequences, this may lead you to form incorrect assumptions when in reality you got lucky.**)
+Sequences are lists of numbers following some specific pattern. As such, they can be represented as functions or in sigma notation.  (**Note: sequences and series are NOT the same! This is a common mistake! Most of the theorems in Ch. 11 will only work for one or the other so do not mix them up. Additionally, if a sequence converges, it does NOT guarantee its series converges! However, since convergent series will always have convergent sequences, this may lead you to form incorrect assumptions when in reality you got lucky since your mistake actually worked.**)
 
 #### 11.1.1: Infinite Sequences
 
@@ -126,26 +121,26 @@ An infinite sequence is a sequence where there is a term $a_{n}$ for every posit
 
 If we graph a lot of values of an infinite sequence, it may appear to begin to converge at a specific value.
 
-$$\boxed{\begin{gather}  \text{A sequence } \{a_n\} \text{ has the limit } L \text{ and we write}  \\ \lim_{n \to \infty} a_n = L \quad \text{or} \quad a_n \to L \text{ as } n \to \infty \\ \text{if we can make the terms } a_n \text{ as close to } L \text{ as we like by taking } n \text{ sufficiently large.} \\ \text{If } L \text{ exists, we say the sequence \textbf{converges} (or is \textbf{convergent}).} \\ \text{Otherwise, we say the sequence \textbf{diverges} (or is \textbf{divergent}).} \end{gather}}$$
+$$\boxed{\begin{gathered}  \text{A sequence } \{a_n\} \text{ has the limit } L \text{ and we write}  \\ \lim_{n \to \infty} a_n = L \quad \text{or} \quad a_n \to L \text{ as } n \to \infty \\ \text{if we can make the terms } a_n \text{ as close to } L \text{ as we like by taking } n \text{ sufficiently large.} \\ \text{If } L \text{ exists, we say the sequence \textbf{converges} (or is \textbf{convergent}).} \\ \text{Otherwise, we say the sequence \textbf{diverges} (or is \textbf{divergent}).} \end{gathered}}$$
 
 Again, do not confuse this with the convergence of a series.
 
-If we define the general term $a_{n}$ to be expressed by a function $f(n) = a_{n}$, we can say that $\lim\limits_{  n \to \infty } a_{n} = L$. Find below some useful sequence laws. These are the  same as the limit laws you already know but in a slightly different format.$$\boxed{\begin{align*} \text{ Suppose that } \{a_n\} \text{ and }& \{b_n\} \text{ are convergent sequences and } c \text{ is a constant. Then: } \\ 1.&\quad \lim_{n \to \infty} (a_n + b_n) = \lim_{n \to \infty} a_n + \lim_{n \to \infty} b_n \\ 2.&\quad \lim_{n \to \infty} (a_n - b_n) = \lim_{n \to \infty} a_n - \lim_{n \to \infty} b_n \\ 3.&\quad \lim_{n \to \infty} c a_n = c \lim_{n \to \infty} a_n \\ 4.&\quad \lim_{n \to \infty} (a_n b_n) = \lim_{n \to \infty} a_n \cdot \lim_{n \to \infty} b_n \\ 5.&\quad \lim_{n \to \infty} \frac{a_n}{b_n} = \frac{\lim_{n \to \infty} a_n}{\lim_{n \to \infty} b_n} \quad \text{if } \lim_{n \to \infty} b_n \neq 0 \\ 6. &\quad \lim_{n \to \infty} a_{n}^{p} = [\lim_{n \to \infty} a_{n}]^{p} \text{ if } p > 0 \text{ and } a_{n} > 0 \end{align*}}$$
+If we define the general term $a_{n}$ to be expressed by a function $f(n) = a_{n}$, we can say that $\lim\limits_{  n \to \infty } a_{n} = L$. Find below some useful sequence laws. These are the  same as the limit laws you already know but in a slightly different format.$$\boxed{\begin{aligned} \text{ Suppose that } \{a_n\} \text{ and }& \{b_n\} \text{ are convergent sequences and } c \text{ is a constant. Then: } \\ 1.&\quad \lim_{n \to \infty} (a_n + b_n) = \lim_{n \to \infty} a_n + \lim_{n \to \infty} b_n \\ 2.&\quad \lim_{n \to \infty} (a_n - b_n) = \lim_{n \to \infty} a_n - \lim_{n \to \infty} b_n \\ 3.&\quad \lim_{n \to \infty} c a_n = c \lim_{n \to \infty} a_n \\ 4.&\quad \lim_{n \to \infty} (a_n b_n) = \lim_{n \to \infty} a_n \cdot \lim_{n \to \infty} b_n \\ 5.&\quad \lim_{n \to \infty} \frac{a_n}{b_n} = \frac{\lim_{n \to \infty} a_n}{\lim_{n \to \infty} b_n} \quad \text{if } \lim_{n \to \infty} b_n \neq 0 \\ 6. &\quad \lim_{n \to \infty} a_{n}^{p} = [\lim_{n \to \infty} a_{n}]^{p} \text{ if } p > 0 \text{ and } a_{n} > 0 \end{aligned}}$$
 The squeeze theorem is also helpful. It is like the comparison test, but you determine the exact value of a limit. Essentially, if a sequence is 'squished' between two other sequences above and on the bottom that both converge to the same value, the sequence in between will also converge to that value. This can be very powerful if you know how to use it.  $$\boxed{\text{If } a_n \leq b_n \leq c_n \text{ for } n \geq n_0 \text{ and } \lim_{n \to \infty} a_n = \lim_{n \to \infty} c_n = L, \text{then } \lim_{n \to \infty} b_n = L.}$$
 The following formula can also prove useful: $$\boxed{\text{If } \lim_{  n \to \infty } \vert a_{n} \vert = 0, \text{ then} \lim_{  n \to \infty } a_{n} = 0}$$
-A sequence's convergeability cannot be removed by function composition, that is if you pipe every term of a convergent sequence through a function $f(a_{n})$, it will still be convergent. Formally,$$\boxed{\begin{gather} \text{If } \lim_{  n \to \infty } a_{n}=L \text{ and the function } f \text{ is continuous at } L, \text{ then} \\ \lim_{  n \to \infty } f(a_{n}) = f(L) \end{gather}}$$
+A sequence's convergeability cannot be removed by function composition, that is if you pipe every term of a convergent sequence through a function $f(a_{n})$, it will still be convergent. Formally,$$\boxed{\begin{gathered} \text{If } \lim_{  n \to \infty } a_{n}=L \text{ and the function } f \text{ is continuous at } L, \text{ then} \\ \lim_{  n \to \infty } f(a_{n}) = f(L) \end{gathered}}$$
 **This may be important:** these are what will happen for sequences of the form $r^{n}$:$$\boxed{\lim_{n \to \infty} r^n = \begin{cases} 0 & \text{if } -1 < r < 1 \\1 & \text{if } r = 1 \\\text{does not exist} & \text{if } r = -1 \\\text{diverges} & \text{if } |r| > 1\end{cases}}$$
 
 #### 11.1.2: Monotonic/Bounded Sequences
 
 A sequence is called **increasing** if $a_{n+1} > a_{n}$ for all terms $n$. A sequence is **decreasing** if $a_{n+1}<a_{n}$ for all terms $n$. If a sequence is either increasing or decreasing, it is **monotonic**.
 
-$$\boxed{\begin{gather} \text{A sequence } a_{n} \text{ is } \textbf{bounded above} \text{ by } M \text{ if: } \\ \\ a_{n} \leq M \text{ for all } n \geq 1 \\ \\ \text{ Or it is } \textbf{bounded below} \text{ by } m \text{ if: } \\ \\ m \leq a_{n} \text{ for all } n \geq 1 \end{gather}}$$
+$$\boxed{\begin{gathered} \text{A sequence } a_{n} \text{ is } \textbf{bounded above} \text{ by } M \text{ if: } \\ \\ a_{n} \leq M \text{ for all } n \geq 1 \\ \\ \text{ Or it is } \textbf{bounded below} \text{ by } m \text{ if: } \\ \\ m \leq a_{n} \text{ for all } n \geq 1 \end{gathered}}$$
 If a sequence is bound above and below, then it is called a **bounded sequence**.
 
-The **Monotonic Sequence Theorem** states that $$\boxed{\begin{gather} \text{Every bounded, montononic sequence is convergent.} \\ \dots \\ \text{In particular, an increasing and bounded above sequence converges} \\ \text{and a decreasing and bounded below sequence converges.} \end{gather}}$$
+The **Monotonic Sequence Theorem** states that $$\boxed{\begin{gathered} \text{Every bounded, montononic sequence is convergent.} \\ \dots \\ \text{In particular, an increasing and bounded above sequence converges} \\ \text{and a decreasing and bounded below sequence converges.} \end{gathered}}$$
 
-### 11.2: Series
+#### 11.2: Series
 
 A series is the sum of a sequence's terms. Please do remember not to confuse the two.
 
@@ -154,12 +149,12 @@ A series is the sum of a sequence's terms. Please do remember not to confuse the
 Sigma notation is most commonly used for series. An infinite series, where all the infinite terms of an infinite sequence are summed, is notated like such: $$\sum_{n=1}^{\infty} a_{n} \qquad \text{ or } \qquad \sum a_{n}$$
 A partial sum is a sum of the terms of a sequence up to a term $n$, such that $s_{n} = a_{1} + a_{2} + \dots + a_{n}$.
 
-$$\boxed{\begin{gather} \text{ Given the series }\sum_{n=1}^{\infty} a_{n} \text{ and its } n\text{-th partial sum }  \\ s_{n} = a_{1} + a_{2} + \dots + a_{n}, \vphantom{\int_{n=0}^{a}} \\  \text{If the sequence of partial sums } \left\{s_{n}\right\} \text{ converges and} \lim_{  n \to \infty } s_{n} = L \text{ where } L \text{ is a real number,} \\ \left\{a_{n}\right\} \text{ is }\textbf{convergent}\text{ and L is the } \textbf{sum} \text{ of the series, expressed as } \\ \sum_{n=1}^{\infty} a_{n} = L \\ \text{But if } \left\{s_{n}\right\} \textbf{ diverges}, \text{ the series is } \textbf{divergent}. \end{gather}}$$
+$$\boxed{\begin{gathered} \text{ Given the series }\sum_{n=1}^{\infty} a_{n} \text{ and its } n\text{-th partial sum }  \\ s_{n} = a_{1} + a_{2} + \dots + a_{n}, \vphantom{\int_{n=0}^{a}} \\  \text{If the sequence of partial sums } \left\{s_{n}\right\} \text{ converges and} \lim_{  n \to \infty } s_{n} = L \text{ where } L \text{ is a real number,} \\ \left\{a_{n}\right\} \text{ is }\textbf{convergent}\text{ and L is the } \textbf{sum} \text{ of the series, expressed as } \\ \sum_{n=1}^{\infty} a_{n} = L \\ \text{But if } \left\{s_{n}\right\} \textbf{ diverges}, \text{ the series is } \textbf{divergent}. \end{gathered}}$$
 Something you should take away from this is that a series is just **the limit of the sequence of partial sums of a sequence**. This can be helpful to visualize the concept.
 
 #### 11.2.2: Sum of a Geometric Series
 
-The geometric series is a series of form $$\sum_{n=1}^{\infty} ar^{n-1} \quad \text{where} \quad a \neq 0$$This series is **very common**, and all you must know about it is that $$\boxed{\begin{gather} \text{ A geometric series is convergent if } \\ \vert r \vert<1 \vphantom{\int _{n=0}^{a}} \\ \text{ If a geometric series is convergent, its sum is } \\ s_{n} = \frac{a}{1-r} \qquad \vert r \vert < 1 \vphantom{\int_{n=0}^{a}}\\ \text{If } \vert r \vert>1, \text{ the series is divergent.} \end{gather}}$$
+The geometric series is a series of form $$\sum_{n=1}^{\infty} ar^{n-1} \quad \text{where} \quad a \neq 0$$This series is **very common**, and all you must know about it is that $$\boxed{\begin{gathered} \text{ A geometric series is convergent if } \\ \vert r \vert<1 \vphantom{\int _{n=0}^{a}} \\ \text{ If a geometric series is convergent, its sum is } \\ s_{n} = \frac{a}{1-r} \qquad \vert r \vert < 1 \vphantom{\int_{n=0}^{a}}\\ \text{If } \vert r \vert>1, \text{ the series is divergent.} \end{gathered}}$$
 Note that some questions may pose a geometric series with a shifted index, like $ar^{n}$, and you will need to shift it back/front accordingly to bring it to the provided form, or else the equations will not work. If you are provided a shifted index, you may alternatively just use the fact that $a$ is not necessarily the value in the format given, but the first term of the geometric sequence. Find the first term and use that instead, and $r$ should be unaffected by a shifted index, and you'll get the same answer. 
 #### 11.2.3: Tests for Convergence
 
@@ -170,13 +165,13 @@ Essentially, if a series is convergent, its sequence will converge to 0. **Commo
 
 $$\boxed{\text{ If} \lim_{  n \to \infty } a_{n} \text{ does not exist or} \neq  0, \text{ the series is divergent.}}$$
 Remember the common mistake, this does not mean that the series will be convergent if the limit is 0. Here is a helpful graphic:$$\lim_{  n \to \infty } a_{n} = \begin{cases} \text{D.N.E}: \quad & \text{Series is guaranteed divergent.}  \\ \neq 0: \quad& \text{Series is guaranteed divergent.} \\ 0: \quad & \text{We have no idea. (The series could be convergent, but we don't know based on this.)} \end{cases}$$
-The first three limit laws listed above for sequences are also correct for series. In particular, these are the addition, subtraction, and multiplication laws. $$\boxed{\begin{gather} \text{ If } \Sigma a_{n} \text{ and } \Sigma b_{n} \text{ are convergent series, then: } \vphantom{\int_{n=0}} \\ \text{(a)} \sum_{n=1}^{\infty} ca_{n} = c \sum_{n=1}^{\infty} a_{n} \\ \text{(b)} \sum_{n=1}^{\infty} (a_{n} + b_{n}) = \sum_{n=1}^{\infty} a_{n} + \sum_{n=1}^{\infty} b_{n} \\ \text{(c)} \sum_{n=1}^{\infty} (a_{n} - b_{n}) = \sum_{n=1}^{\infty} a_{n} - \sum_{n=1}^{\infty} b_{n} \end{gather}}$$
+The first three limit laws listed above for sequences are also correct for series. In particular, these are the addition, subtraction, and multiplication laws. $$\boxed{\begin{gathered} \text{ If } \Sigma a_{n} \text{ and } \Sigma b_{n} \text{ are convergent series, then: } \vphantom{\int_{n=0}} \\ \text{(a)} \sum_{n=1}^{\infty} ca_{n} = c \sum_{n=1}^{\infty} a_{n} \\ \text{(b)} \sum_{n=1}^{\infty} (a_{n} + b_{n}) = \sum_{n=1}^{\infty} a_{n} + \sum_{n=1}^{\infty} b_{n} \\ \text{(c)} \sum_{n=1}^{\infty} (a_{n} - b_{n}) = \sum_{n=1}^{\infty} a_{n} - \sum_{n=1}^{\infty} b_{n} \end{gathered}}$$
 
-### 11.3: The Integral Test and Estimates of Sums
+#### 11.3: The Integral Test and Estimates of Sums
 
 #### 11.3.1: The Integral Test
 
-$$\boxed{\begin{gather} \text{ Suppose } f \text{ is a continuous, decreasing, positive function on } [1, \infty) \text{ and let } a_{n} = f(n). \text{Then the series } \sum_{n=1}^{\infty} a_{n} \\ \text{converges if and only if the improper integral} \smallint _{1}^{\infty} f(x)  \, dx \text{ is convergent}. \\ \\ \text{(i)} \quad \text{If } \int _{1}^{\infty} f(x) \, dx \text{ is convergent, then } \sum_{n=1}^{\infty} a_{n} \text{ is convergent.} \\ \text{(ii)} \quad \text{If } \int _{1}^{\infty} f(x) \, dx \text{ is divergent, then } \sum_{n=1}^{\infty} a_{n} \text{ is divergent.} \end{gather}}$$
+$$\boxed{\begin{gathered} \text{ Suppose } f \text{ is a continuous, decreasing, positive function on } [1, \infty) \text{ and let } a_{n} = f(n). \text{Then the series } \sum_{n=1}^{\infty} a_{n} \\ \text{converges if and only if the improper integral} \smallint _{1}^{\infty} f(x)  \, dx \text{ is convergent}. \\ \\ \text{(i)} \quad \text{If } \int _{1}^{\infty} f(x) \, dx \text{ is convergent, then } \sum_{n=1}^{\infty} a_{n} \text{ is convergent.} \\ \text{(ii)} \quad \text{If } \int _{1}^{\infty} f(x) \, dx \text{ is divergent, then } \sum_{n=1}^{\infty} a_{n} \text{ is divergent.} \end{gathered}}$$
 Here are the integral test's caveats in a more legible form.
 - The function must be ultimately decreasing for $x > N$ for some number N.
 - The function must be entirely positive.
@@ -190,7 +185,7 @@ The p-series was discussed back in **7.8.1**, but only its role in an improper i
 **Common mistake:** Please remember that an improper integral is not the same thing as a series summation. All the improper integral does is prove the sum of the area underneath the sequence exists as $x$ gets large. $$\sum_{n=1}^{\infty}a_{n} \neq \int _{1}^{\infty}f(x) \, dx$$ 
 #### 11.3.2: Estimating the Sum of a Series
 
-The partial sum at any term $n$ can be used as a approximation of the actual sum, $s$. The difference between an approximation of the sum and the sum itself, $s - s_{n}$ is known as $R_{n}$ or the **remainder** of the approximation.$$\boxed{\begin{gather} \text{Suppose } f(k) = a_{k}, \text{ where } f \text{ is a continuous, positive, decreasing function} \\ \text{for } x \geq n \text{ and } \Sigma_{n=1}^{\infty} a_{n} \text{ is convergent. If } R_{n} = s - s_{n}, \\ \int _{n+1}^{\infty} f(x) \, \leq R_{n} \leq \int _{n}^{\infty} f(x) \, dx \end{gather}}$$Or in simpler terms, iterating through partial sums of each term, each successive approximation will be more precise than the one before. This is useful when a question asks for accuracy to certain decimal point. Note that the improper integrals are NOT the approximations themselves. Here is some explanation on what these integrals actually are:
+The partial sum at any term $n$ can be used as a approximation of the actual sum, $s$. The difference between an approximation of the sum and the sum itself, $s - s_{n}$ is known as $R_{n}$ or the **remainder** of the approximation.$$\boxed{\begin{gathered} \text{Suppose } f(k) = a_{k}, \text{ where } f \text{ is a continuous, positive, decreasing function} \\ \text{for } x \geq n \text{ and } \Sigma_{n=1}^{\infty} a_{n} \text{ is convergent. If } R_{n} = s - s_{n}, \\ \int _{n+1}^{\infty} f(x) \, \leq R_{n} \leq \int _{n}^{\infty} f(x) \, dx \end{gathered}}$$Or in simpler terms, iterating through partial sums of each term, each successive approximation will be more precise than the one before. This is useful when a question asks for accuracy to certain decimal point. Note that the improper integrals are NOT the approximations themselves. Here is some explanation on what these integrals actually are:
 
 - Recall that $R_{n}$ is not an integral, but a sigma infinite summation of the sequence.
 - Since $f$ is decreasing, the sum of values at integer points can be compared to integrals:
@@ -209,13 +204,13 @@ The partial sum at any term $n$ can be used as a approximation of the actual sum
 By adding $s_{n}$ to all sides, we get$$\boxed{s_{n}+\int _{n+1}^{\infty} f(x) \, \leq s \leq s_{n}+\int _{n}^{\infty} f(x) \, dx  }$$
 This can be used to provide upper/lower bounds for $s$.
 
-### 11.4: The Comparison Tests
+#### 11.4: The Comparison Tests
 
 The comparison tests work similarly for series as they do for sequences.
 
 #### 11.4.1: Direct Comparison Test
 
-$$\boxed{\begin{gather} \text{ Supppose that } \Sigma a_{n}, \Sigma b_{n} \text{ are series with positive terms.} \\ \text{(i)}\quad \text{If } \Sigma a_{n} \text{ is convergent and } b_{n} \leq a_{n} \text{ for all }n, \, \Sigma b_{n} \text{ is also convergent.} \vphantom{\sum^{a}} \\ \text{(ii)}\quad \text{If } \Sigma a_{n} \text{ is divergent and } b_{n} \geq a_{n} \text{ for all }n, \, \Sigma b_{n} \text{ is also divergent.} \end{gather}}$$
+$$\boxed{\begin{gathered} \text{ Supppose that } \Sigma a_{n}, \Sigma b_{n} \text{ are series with positive terms.} \\ \text{(i)}\quad \text{If } \Sigma a_{n} \text{ is convergent and } b_{n} \leq a_{n} \text{ for all }n, \, \Sigma b_{n} \text{ is also convergent.} \vphantom{\sum^{a}} \\ \text{(ii)}\quad \text{If } \Sigma a_{n} \text{ is divergent and } b_{n} \geq a_{n} \text{ for all }n, \, \Sigma b_{n} \text{ is also divergent.} \end{gathered}}$$
 - Since you need a known convergent/divergent series to use the direct comparison tests, these two families are most common.
 	- P-series
 		- Converges when $p>1$, diverges when $p \leq 1$
@@ -224,7 +219,7 @@ $$\boxed{\begin{gather} \text{ Supppose that } \Sigma a_{n}, \Sigma b_{n} \text{
 
 #### 11.4.2: Limit Comparison Test
 
- The direct comparison test is useless in the case where your known series is divergent and larger than your target series, or when your known series is convergent and smaller than your target series. In these cases where you still want to use a comparison (like if the series is very similar to one of the good families above), you use this.$$\boxed{\begin{gather} \text{ Supppose that } \Sigma a_{n}, \Sigma b_{n} \text{ are series with positive terms. If } \\ \lim_{  n \to \infty } \frac{a_{n}}{b_{n}} = c \vphantom{\sum_{n=0}^{a}} \\ \text{where }c \text{ is finite and } c > 0, \text{ then either both series converge or both diverge.} \end{gather}}$$
+ The direct comparison test is useless in the case where your known series is divergent and larger than your target series, or when your known series is convergent and smaller than your target series. In these cases where you still want to use a comparison (like if the series is very similar to one of the good families above), you use this.$$\boxed{\begin{gathered} \text{ Supppose that } \Sigma a_{n}, \Sigma b_{n} \text{ are series with positive terms. If } \\ \lim_{  n \to \infty } \frac{a_{n}}{b_{n}} = c \vphantom{\sum_{n=0}^{a}} \\ \text{where }c \text{ is finite and } c > 0, \text{ then either both series converge or both diverge.} \end{gathered}}$$
 #### 11.4.3: Estimating Sums
 
 If we can say that every term of the series $\left\{a_{n}\right\}$ is smaller or equal to than every corresponding term of the sequence $\left\{b_{n}\right\}$, then the remainder of $\left\{a_{n}\right\}$, $R_{n}$, will be smaller or equal to the remainder of $\left\{b_{n}\right\}$, $T_{n}$.
@@ -232,38 +227,38 @@ If we can say that every term of the series $\left\{a_{n}\right\}$ is smaller or
 If we look at the remainder estimate for the integral test, we have $$\int _{n+1}^{\infty} f(x) \, \leq R_{n} \leq \int _{n}^{\infty} f(x) \, dx$$which we can adapt to this method of sum estimation:$$R_{n} \leq T_{n} \leq \int _{n}^{\infty} f(x) \, dx$$
 We can use this to approximate the sum of a series given $n$. Remember all these methods to estimate sums do not give the sum itself, unless you are given the partial sum $s_{n}$. You estimate the sum by finding $R_{n}$, or how far the partial sum at $n$ is from the real sum.
 
-### 11.5: Alternating Series and Absolute Convergence
+#### 11.5: Alternating Series and Absolute Convergence
 
 #### 11.5.1: The Alternating Series
 
-An **alternating series** is a series of form $a_{n} = (-1)^{(n-1 \,|\, n)}b_{n}$ where $b_{n}$ is positive.$$\boxed{ \begin{gather} \text{If the alternating series } \\ a_{n} = (-1)^{(n-1\,|\, n)}b_{n} \quad (b_{n}>0) \vphantom{\sum_{n=0}^{a}} \\ \text{satisfies the  conditions:} \\ \begin{aligned} & \text{(i)} \quad b_{n+1} \leq b_{n} \quad\text{for all } n \vphantom{\sum^{a}} \\ & \text{(ii)} \quad \lim_{n \to \infty} b_{n} = 0 \vphantom{\sum_{n=0}} \end{aligned} \\ \text{Then the series is guaranteed to be convergent.} \end{gather} }$$
+An **alternating series** is a series of form $a_{n} = (-1)^{(n-1 \,|\, n)}b_{n}$ where $b_{n}$ is positive.$$\boxed{ \begin{gathered} \text{If the alternating series } \\ a_{n} = (-1)^{(n-1\,|\, n)}b_{n} \quad (b_{n}>0) \vphantom{\sum_{n=0}^{a}} \\ \text{satisfies the  conditions:} \\ \begin{aligned} & \text{(i)} \quad b_{n+1} \leq b_{n} \quad\text{for all } n \vphantom{\sum^{a}} \\ & \text{(ii)} \quad \lim_{n \to \infty} b_{n} = 0 \vphantom{\sum_{n=0}} \end{aligned} \\ \text{Then the series is guaranteed to be convergent.} \end{gathered} }$$
 This is obvious if you think about it.
 
 #### 11.5.2: Estimating Sums of Alternating Series
 
-$$\boxed{ \begin{gather}  \text{If } s = \sum (-1)^{n-1} b_n, \text{ where } b_n > 0, \text{ is } \text{the sum of an alternating series that satisfies} \\ \text{(i)} \quad b_{n+1} \leq b_n \quad \text{and} \quad \text{(ii)} \quad \lim_{n \to \infty} b_n = 0 \vphantom{\sum^{1}_{n=0}} \\ \text{then:} \\ \vert R_{n} \vert = \vert s - s_{n} \vert \leq b_{n+1} \vphantom{\sum^{a}} \end{gather} }$$
+$$\boxed{ \begin{gathered}  \text{If } s = \sum (-1)^{n-1} b_n, \text{ where } b_n > 0, \text{ is } \text{the sum of an alternating series that satisfies} \\ \text{(i)} \quad b_{n+1} \leq b_n \quad \text{and} \quad \text{(ii)} \quad \lim_{n \to \infty} b_n = 0 \vphantom{\sum^{1}_{n=0}} \\ \text{then:} \\ \vert R_{n} \vert = \vert s - s_{n} \vert \leq b_{n+1} \vphantom{\sum^{a}} \end{gathered} }$$
 
 Essentially, the remainder is always smaller than the **value** of the first neglected term. Note this does not apply to other kinds of series. Do not try.
 
 #### 11.5.3: Absolute and Conditional Convergence
 
-$$\boxed{\begin{gather} \text{ A series } \Sigma a_{n} \text{ is called } \textbf{absolutely convergent} \text{ if the series } \\ \text{ of absolute values } \Sigma \vert a_{n} \vert \text{ is convergent.} \end{gather}}$$
-Note that if a convergent series only has positive terms, it will be absolutely convergent too.$$\boxed{\begin{gather} \text{ A series } \Sigma a_{n} \text{ is called } \textbf{conditionally convergent} \text{ if it is } \\ \text{ convergent but not absolutely convergent.} \end{gather}}$$
+$$\boxed{\begin{gathered} \text{ A series } \Sigma a_{n} \text{ is called } \textbf{absolutely convergent} \text{ if the series } \\ \text{ of absolute values } \Sigma \vert a_{n} \vert \text{ is convergent.} \end{gathered}}$$
+Note that if a convergent series only has positive terms, it will be absolutely convergent too.$$\boxed{\begin{gathered} \text{ A series } \Sigma a_{n} \text{ is called } \textbf{conditionally convergent} \text{ if it is } \\ \text{ convergent but not absolutely convergent.} \end{gathered}}$$
 The following is evident:$$\boxed{\text{If a series } \Sigma a_{n} \text{ is absolutely convergent, it is also convergent.}}$$
-### 11.6: The Ratio and Root Tests
+#### 11.6: The Ratio and Root Tests
 
 #### 11.6.1: Ratio Test
 
-$$\boxed{\begin{gather} \text{(i) If } \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| = L < 1, \quad \text{then } \sum_{n=1}^\infty a_n \text{ is absolutely convergent (and convergent).} \\ \text{(ii) If } \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| = L > 1 \quad \text{or} \quad \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| = \infty, \quad \text{then } \sum_{n=1}^\infty a_n \text{ is divergent.} \\ \text{(iii) If } \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| = 1, \quad \text{the Ratio Test is inconclusive.} \end{gather}}$$
+$$\boxed{\begin{gathered} \text{(i) If } \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| = L < 1, \quad \text{then } \sum_{n=1}^\infty a_n \text{ is absolutely convergent (and convergent).} \\ \text{(ii) If } \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| = L > 1 \quad \text{or} \quad \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| = \infty, \quad \text{then } \sum_{n=1}^\infty a_n \text{ is divergent.} \\ \text{(iii) If } \lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| = 1, \quad \text{the Ratio Test is inconclusive.} \end{gathered}}$$
 The ratio test usually will fail for certain types of sequences. More on this in 11.7.
 
 #### 11.6.2: Root Test
 
-This is most conveniently used when there are $n$-th powers involved.$$\boxed{\begin{gather} \text{(i) If } \lim_{n \to \infty} \sqrt[n]{|a_n|} = L < 1, \quad \text{then the series } \sum_{n=1}^\infty a_n \text{ is absolutely convergent} \text{ (and therefore convergent).} \\ \text{(ii) If } \lim_{n \to \infty} \sqrt[n]{|a_n|} = L > 1 \quad \text{or} \quad \lim_{n \to \infty} \sqrt[n]{|a_n|} = \infty, \quad \text{then the series } \sum_{n=1}^\infty a_n \text{ is divergent.} \\ \text{(iii) If } \lim_{n \to \infty} \sqrt[n]{|a_n|} = 1, \quad \text{the Root Test is inconclusive.} \end{gather}}$$
+This is most conveniently used when there are $n$-th powers involved.$$\boxed{\begin{gathered} \text{(i) If } \lim_{n \to \infty} \sqrt[n]{|a_n|} = L < 1, \quad \text{then the series } \sum_{n=1}^\infty a_n \text{ is absolutely convergent} \text{ (and therefore convergent).} \\ \text{(ii) If } \lim_{n \to \infty} \sqrt[n]{|a_n|} = L > 1 \quad \text{or} \quad \lim_{n \to \infty} \sqrt[n]{|a_n|} = \infty, \quad \text{then the series } \sum_{n=1}^\infty a_n \text{ is divergent.} \\ \text{(iii) If } \lim_{n \to \infty} \sqrt[n]{|a_n|} = 1, \quad \text{the Root Test is inconclusive.} \end{gathered}}$$
 If the root test fails, the ratio test will also fail. However, if the ratio test fails, there are a small number of situations where the root test will still succeed. In most other cases, the root test really isn't worth using.
 - For example, when there is a $n$-th power **overall**, as in over the whole thing and not just a term or two.
 
-### 11.7: Strategy for Testing Series
+#### 11.7: Strategy for Testing Series
 
 The strategy around testing a series for convergence/divergence is based on its form.
 
@@ -283,7 +278,7 @@ The strategy around testing a series for convergence/divergence is based on its 
 8.  **Integral Test**: When $a_n = f(n)$ and the integral $\int_1^\infty f(x) dx$ is straightforward to evaluate, the Integral Test can be applied effectively, provided its hypotheses are met.
     *   Remember the function must be ultimately decreasing, positive, and continuous on the interval.
 
-### 11.8: Power Series
+#### 11.8: Power Series
 
 #### 11.8.1: Power Series
 
@@ -297,31 +292,31 @@ To solve a power series, you usually use either the **ratio test** or the **root
 
 #### 11.8.2: Interval of Convergence
 
-$$\boxed{\begin{gather} \text{ For a power series } c_{n}(x-a)^{n}, \text{ there are only three possibilities: } \vphantom{\sum_{}{a}} \\ \begin{gathered} \begin{aligned} &\text{(i) The series converges only at } x=a. \\ &\text{(ii) The series converges for all }x. \\ &\text{(iii) There is a positive number } R \text{ for which the series converges if } \vert x -a  \vert < R \\ &\qquad\text{and diverges if } \vert x - a \vert > R. \end{aligned} \end{gathered} \end{gather} }$$
+$$\boxed{\begin{gathered} \text{ For a power series } c_{n}(x-a)^{n}, \text{ there are only three possibilities: } \vphantom{\sum_{}{a}} \\ \begin{gathered} \begin{aligned} &\text{(i) The series converges only at } x=a. \\ &\text{(ii) The series converges for all }x. \\ &\text{(iii) There is a positive number } R \text{ for which the series converges if } \vert x -a  \vert < R \\ &\qquad\text{and diverges if } \vert x - a \vert > R. \end{aligned} \end{gathered} \end{gathered} }$$
 
 $R$ is the **radius of convergence** of the power series. In case $\text{(i)}$, $R=0$, and in $\text{(ii)}$, $R=\infty$. The **interval of convergence** is all values for which the power series converges. In case $\text{(i)}$, the interval of convergence is a single point $x=a$, and in $\text{(ii)}$, the radius of convergence is $x=(-\infty,\infty)$. In case $\text{(iii)}$, the inequality can be transformed: $$\vert x-a \vert < R \longrightarrow a-R < x < a+R$$
 to form the interval of convergence.
 
 In case $\text{(iii)}$, when $x=a \pm R$, the power series may converge or diverge. Thus, if you find yourself in this situation, **you must test both endpoints** to make sure they either converge or diverge. Eg. On the interval $2 - 5$, you must test both $2$ and $5$ to figure out if it is $[2,5], (2,5], \dots$
 
-### Appendix E: Sigma Notation
+#### Appendix E: Sigma Notation
 
 You should probably know what sigma notation is before starting the course, especially if you read the prior chapters (sorry but I'm not putting the chapters in strictly learning order), but contained are some formulas and facts that may be important.
 
-$$\boxed{\begin{gather} \text{If } a_{m}, a_{m+1}, \dots, a_{n} \text{ are real numbers and } m, n \text{ are integers such that } m \leq n, \text{ then } \\ \sum_{i=m}^{n} a_{i} = a_{m}, a_{m+1}, \dots, a_{n} \end{gather}}$$
+$$\boxed{\begin{gathered} \text{If } a_{m}, a_{m+1}, \dots, a_{n} \text{ are real numbers and } m, n \text{ are integers such that } m \leq n, \text{ then } \\ \sum_{i=m}^{n} a_{i} = a_{m}, a_{m+1}, \dots, a_{n} \end{gathered}}$$
 
 This notation means the following:
 - Starting from $i=m$, for every integer value of $i$, the term $a_{i}$ is added to a cumulative sum.
 - The summing stops when $i=n$, thus the last value is $a_{n}$.
 
-Several rules similar to those from the Limit Laws hold.$$\boxed{\begin{gather} \text{ If } c \text{ is any constant (not dependent on } i \text{), then:}\vphantom{\sum_{n=0}} \\  \text{(a)} \quad \sum_{i=m}^{n} ca_{i} = c \sum_{i=m}^{n} a_{i}   \\ \text{(b)} \quad \sum_{i=m}^{n} (a_{i} + b_{i}) = \sum_{i=m}^{n} a_{i} + \sum_{i=m}^{n} b_{i}    \\ \text{(b)} \quad \sum_{i=m}^{n} (a_{i} - b_{i}) = \sum_{i=m}^{n} a_{i} - \sum_{i=m}^{n} b_{i}    \\ \end{gather}}$$
-The following formulas are the most useful part of this section.$$\boxed{\begin{gather} \text{Let } c \text{ be a constant and } n \text{ a positive integer.} \vphantom{\sum_{n=0}}\\ \begin{aligned} \text{(a)} \quad & \sum_{i=1}^{n} 1 = n & \text{(b)} \quad & \sum_{i=1}^{n}c = nc \\ \text{(c)} \quad & \sum_{i=1}^{n} i = \frac{n(n+1)}{2} & \text{(d)} \quad & \sum_{i=1}^{n} i^{2}= \frac{n(n+1)(2n+1)}{6} \\ \text{(e)} \quad & \sum_{i=1}^{n} i^{3} = \left[\frac{n(n+1)}{2}\right]^{2} & \end{aligned} \end{gather}}$$
+Several rules similar to those from the Limit Laws hold.$$\boxed{\begin{gathered} \text{ If } c \text{ is any constant (not dependent on } i \text{), then:}\vphantom{\sum_{n=0}} \\  \text{(a)} \quad \sum_{i=m}^{n} ca_{i} = c \sum_{i=m}^{n} a_{i}   \\ \text{(b)} \quad \sum_{i=m}^{n} (a_{i} + b_{i}) = \sum_{i=m}^{n} a_{i} + \sum_{i=m}^{n} b_{i}    \\ \text{(b)} \quad \sum_{i=m}^{n} (a_{i} - b_{i}) = \sum_{i=m}^{n} a_{i} - \sum_{i=m}^{n} b_{i}    \\ \end{gathered}}$$
+The following formulas are the most useful part of this section.$$\boxed{\begin{gathered} \text{Let } c \text{ be a constant and } n \text{ a positive integer.} \vphantom{\sum_{n=0}}\\ \begin{aligned} \text{(a)} \quad & \sum_{i=1}^{n} 1 = n & \text{(b)} \quad & \sum_{i=1}^{n}c = nc \\ \text{(c)} \quad & \sum_{i=1}^{n} i = \frac{n(n+1)}{2} & \text{(d)} \quad & \sum_{i=1}^{n} i^{2}= \frac{n(n+1)(2n+1)}{6} \\ \text{(e)} \quad & \sum_{i=1}^{n} i^{3} = \left[\frac{n(n+1)}{2}\right]^{2} & \end{aligned} \end{gathered}}$$
 At least memorize the last three, since the first two are at least somewhat derivable on the fly.
 
-### Mathematical Induction
+#### Mathematical Induction
 
 The textbook is ██ when it comes to induction, so I recommend [this video](https://www.youtube.com/watch?v=x5cWX-EyLEI) by my mathematics GOAT Professor Leonard to learn about it. Here is what the textbook has to say:
-$$\boxed{\begin{gather} \text{ Let } S_{n} \text{ be a statement about the positive integer } n. \text{ If we prove that: } \\ \begin{gathered}\begin{aligned} &\circ \quad S_{1} \text{ is true.}\vphantom{\overset{a}{a}}\\ &\circ \quad S_{k+1} \text{ is true whenever } S_{k} \text{ is true.}\vphantom{\underset{a}{a}} \end{aligned}\end{gathered} \\ \text{ Then } S_{k} \text{ is true for all positive integers } n. \end{gather}}$$
+$$\boxed{\begin{gathered} \text{ Let } S_{n} \text{ be a statement about the positive integer } n. \text{ If we prove that: } \\ \begin{gathered}\begin{aligned} &\circ \quad S_{1} \text{ is true.}\vphantom{\overset{a}{a}}\\ &\circ \quad S_{k+1} \text{ is true whenever } S_{k} \text{ is true.}\vphantom{\underset{a}{a}} \end{aligned}\end{gathered} \\ \text{ Then } S_{k} \text{ is true for all positive integers } n. \end{gathered}}$$
 
 Just do a lot of practice problems and you'll probably be fine.
 
@@ -329,7 +324,7 @@ Just do a lot of practice problems and you'll probably be fine.
 
 The following will cover around the material from Test 2.
 
-### 11.9: Representations of Functions as Power Series
+#### 11.9: Representations of Functions as Power Series
 
 #### 11.9.1: Representations of Functions using Geometric Series
 
@@ -337,30 +332,30 @@ Similar to how we used trigonometric identities to break down integrals into mor
 
 #### 11.9.2: Differentiation and Integration of Power Series
 
-If a function can be a power series, we might like to integrate or differentiate it. A way to do this is to differentiate/integrate each term of the power series separately.$$\boxed{\begin{gather} \text{ If the power series } \Sigma c_{n} (x-a)^{n} \text{ has a radius of convergence } R > 0 \text{, then the function } \vphantom{\sum_{n=0}} \\ f(x) = c_{0} + c_{1}(x-a) + c_2(x-a)^{2} + \dots = \sum_{n=0}^{\infty} c_{n}(x-a)^{n} \\ \text{ is differentiable (and therefore continuous) on the interval } \vphantom{\sum_{n=0}^{a}} \\ (a-R, a+R) \vphantom{\sum} \\ \text{ and the following is true.} \vphantom{\sum_{n=0}^{a}}\\ \text{(i)} \quad f'(x) = c_{1}+2c_{2}(x-a) + 3c_{3}(x-a)^{2} + \dots = \sum_{n=1}^{\infty}nc_{n}(x-a)^{n-1} \\ \begin{gathered}\begin{aligned} \text{(ii)} \quad  \int f(x) \, dx &= C+ c_{0}(x-a) + c_{1} \frac{(x-a)^{2}}{2} + c_{2} \frac{(x-a)^{3}}{3} + \dots  \\ &= C + \sum_{n=0}^{\infty} c_{n} \frac{(x-a)^{n+{1}}}{n+1} \end{aligned}\end{gathered}  \end{gather}}$$
-Here is an alternate symbolic phrasing of the two true statements above:$$\boxed{\begin{gather} \text{(i.alt)} \quad \frac{d}{dx} \left[\sum_{n=0}^{\infty} c_{n}(x-a)^{n}\right] = \sum_{n=0}^{\infty} \frac{d}{dx} \left[c_{n} (x-a)^{n}\right]  \\ \text{(ii.alt)} \quad \int \left[\sum_{n=0}^{\infty} c_{n}(x-a)^{n}\right] dx = \sum_{n=0}^{\infty} \int \left[c_{n} (x-a)^{n}\right] \; dx \end{gather}}$$
+If a function can be a power series, we might like to integrate or differentiate it. A way to do this is to differentiate/integrate each term of the power series separately.$$\boxed{\begin{gathered} \text{ If the power series } \Sigma c_{n} (x-a)^{n} \text{ has a radius of convergence } R > 0 \text{, then the function } \vphantom{\sum_{n=0}} \\ f(x) = c_{0} + c_{1}(x-a) + c_2(x-a)^{2} + \dots = \sum_{n=0}^{\infty} c_{n}(x-a)^{n} \\ \text{ is differentiable (and therefore continuous) on the interval } \vphantom{\sum_{n=0}^{a}} \\ (a-R, a+R) \vphantom{\sum} \\ \text{ and the following is true.} \vphantom{\sum_{n=0}^{a}}\\ \text{(i)} \quad f'(x) = c_{1}+2c_{2}(x-a) + 3c_{3}(x-a)^{2} + \dots = \sum_{n=1}^{\infty}nc_{n}(x-a)^{n-1} \\ \begin{gathered}\begin{aligned} \text{(ii)} \quad  \int f(x) \, dx &= C+ c_{0}(x-a) + c_{1} \frac{(x-a)^{2}}{2} + c_{2} \frac{(x-a)^{3}}{3} + \dots  \\ &= C + \sum_{n=0}^{\infty} c_{n} \frac{(x-a)^{n+{1}}}{n+1} \end{aligned}\end{gathered}  \end{gathered}}$$
+Here is an alternate symbolic phrasing of the two true statements above:$$\boxed{\begin{gathered} \text{(i.alt)} \quad \frac{d}{dx} \left[\sum_{n=0}^{\infty} c_{n}(x-a)^{n}\right] = \sum_{n=0}^{\infty} \frac{d}{dx} \left[c_{n} (x-a)^{n}\right]  \\ \text{(ii.alt)} \quad \int \left[\sum_{n=0}^{\infty} c_{n}(x-a)^{n}\right] dx = \sum_{n=0}^{\infty} \int \left[c_{n} (x-a)^{n}\right] \; dx \end{gathered}}$$
 There are a few considerations you should keep in mind:
 - These only work with **power series**. Do not rely on this for other types of series.
 - The **radius of convergence** $R$ is unchanged after differentiation/integration, but its **interval of convergence** may change.
 	- Specifically, the new differentiated/integrated function may now diverge/converge at one of the interval's endpoints.
 
-### 11.10: Taylor and Maclaurin Series
+#### 11.10: Taylor and Maclaurin Series
 
 In the last chapter, we used a geometric series to turn a function into a power series. Using what we will learn in this chapter, we can express some more functions as power series.
 
 #### 11.10.1: Definitions of Taylor and Maclaurin Series
 
-$$\boxed{\begin{gather} \text{If }f \text{ has a power series expansion at }a, \text{ or } \\ f(x) = c_{0}+c_{1}(x-a)+c_{2}(x-a)^{2} + \dots \quad \vert x-a \vert<R \vphantom{\sum_{i=1}^{N} } \\ \text{ then its coefficients are given by } \\ c_{n} = \frac{f^{(n)}(a)}{n!} \end{gather}}$$
-In other words,$$\boxed{\begin{align*} f(x) &= \sum_{n=0}^{\infty}  \frac{f^{(n)}(a)}{n!}(x-a)^{n} \\ &= f(a) + \frac{f'(a)}{1!}(x-a) + \frac{f''(a)}{2!}(x-a)^{2} + \frac{f'''(a)}{3!}(x-a)^{3} + \dots \end{align*}}$$
-This series is the **Taylor expansion** of $f(x)$ about $a$. When $a=0$,$$\boxed{\begin{align*} f(x) &= \sum_{n=0}^{\infty}  \frac{f^{(n)}(0)}{n!}x^{n} \\ &= f(0) + \frac{f'(0)}{1!}x + \frac{f''(0)}{2!}x^{2} + \frac{f'''(0)}{3!}x^{3} + \dots \end{align*}}$$
+$$\boxed{\begin{gathered} \text{If }f \text{ has a power series expansion at }a, \text{ or } \\ f(x) = c_{0}+c_{1}(x-a)+c_{2}(x-a)^{2} + \dots \quad \vert x-a \vert<R \vphantom{\sum_{i=1}^{N} } \\ \text{ then its coefficients are given by } \\ c_{n} = \frac{f^{(n)}(a)}{n!} \end{gathered}}$$
+In other words,$$\boxed{\begin{aligned} f(x) &= \sum_{n=0}^{\infty}  \frac{f^{(n)}(a)}{n!}(x-a)^{n} \\ &= f(a) + \frac{f'(a)}{1!}(x-a) + \frac{f''(a)}{2!}(x-a)^{2} + \frac{f'''(a)}{3!}(x-a)^{3} + \dots \end{aligned}}$$
+This series is the **Taylor expansion** of $f(x)$ about $a$. When $a=0$,$$\boxed{\begin{aligned} f(x) &= \sum_{n=0}^{\infty}  \frac{f^{(n)}(0)}{n!}x^{n} \\ &= f(0) + \frac{f'(0)}{1!}x + \frac{f''(0)}{2!}x^{2} + \frac{f'''(0)}{3!}x^{3} + \dots \end{aligned}}$$
 This series is called the **Maclaurin series**.
 
 Note that a Taylor series's sum is not necessarily equal to $f$, like with a geometric series. If the function does not have a valid power series representation at $a$, then its Taylor series will just be an approximation. Additionally, the power series expansion of $f$ at $a$ is unique. 
 
 #### 11.10.2: When is a Function Represented by its Taylor Series?
 
-We call the sum of polynomials up to the $n$-th term of a Taylor series $\frac{f^{(n)}(a)}{n!}(x-a)^{n}$ by the name $T_{n}(x)$, or the $n$-th degree Taylor polynomial of $f$ at $a$. Let the quantity $R_{n}(x)$ be the remainder of a Taylor series' sum and the function itself at $n$ terms, i.e $f(x) = T_{n}(x) + R_{n}(x)$. If we can prove that $R(x)$ approaches 0 at infinity, we can say that the Taylor series represents the function. Formally, $$\boxed{\begin{gather} \text{ If } f(x) = T_{n}(x) + R_{n}(x), \text{ where } T_{n} \text{ is the } n \text{-th degree Taylor polynomial of } f \text{ at } a, \text{ and } \\ \lim_{  n \to \infty } R_{n}(x) = 0 \vphantom{\sum_{i=1}^{N} } \\ \text{for } \vert x-a \vert < R, \text{ then } f \text{ is equal to the sum of the Taylor series on } \vert x-a \vert <R. \end{gather}}$$
-The following is called **Taylor's Inequality** and is useful to prove a function is equal to the sum of its Taylor series on an interval.$$\boxed{\begin{gather} \text{ If } \vert f^{(n+1)}(x) \vert \leq M \text{ for } \vert x-a \vert \leq d, \text{ then the remainder } R_{n}(x) \text{ of the Taylor series satisfies } \\ \vert R_{n}(x) \vert \leq \frac{M}{(n+1)!}\vert x-a \vert^{n+1} \quad \text{ for } \quad \vert x-a \vert \leq d \vphantom{sum_{x}^{y}} \end{gather}}$$
+We call the sum of polynomials up to the $n$-th term of a Taylor series $\frac{f^{(n)}(a)}{n!}(x-a)^{n}$ by the name $T_{n}(x)$, or the $n$-th degree Taylor polynomial of $f$ at $a$. Let the quantity $R_{n}(x)$ be the remainder of a Taylor series' sum and the function itself at $n$ terms, i.e $f(x) = T_{n}(x) + R_{n}(x)$. If we can prove that $R(x)$ approaches 0 at infinity, we can say that the Taylor series represents the function. Formally, $$\boxed{\begin{gathered} \text{ If } f(x) = T_{n}(x) + R_{n}(x), \text{ where } T_{n} \text{ is the } n \text{-th degree Taylor polynomial of } f \text{ at } a, \text{ and } \\ \lim_{  n \to \infty } R_{n}(x) = 0 \vphantom{\sum_{i=1}^{N} } \\ \text{for } \vert x-a \vert < R, \text{ then } f \text{ is equal to the sum of the Taylor series on } \vert x-a \vert <R. \end{gathered}}$$
+The following is called **Taylor's Inequality** and is useful to prove a function is equal to the sum of its Taylor series on an interval.$$\boxed{\begin{gathered} \text{ If } \vert f^{(n+1)}(x) \vert \leq M \text{ for } \vert x-a \vert \leq d, \text{ then the remainder } R_{n}(x) \text{ of the Taylor series satisfies } \\ \vert R_{n}(x) \vert \leq \frac{M}{(n+1)!}\vert x-a \vert^{n+1} \quad \text{ for } \quad \vert x-a \vert \leq d \vphantom{sum_{x}^{y}} \end{gathered}}$$
 **Common mistake:** In Taylor's Inequality, the numerator is of form $f^{(n+1)}(x)$, while in the regular Taylor/Maclaurin series, it's $f^{n}(a)$ instead. Don't mix this up.
 
 Taylor's inequality is much harder to grasp than the Alternating Series Estimate or the Integral Estimate even though they may seem similar. I will try to explain in a way different from the textbook.
@@ -387,7 +382,7 @@ Fun fact: this is a way to find an expression for the constant $e$, as if we set
 
 You should try to derive these yourself as an exercise, but here they are in one block for reference. And yes, you should be expected to memorize all of these. The $k \choose n$ in the bottom is called **general binomial coefficient**, and it is **not** the same thing as a combinatorial.
 
-$$\boxed{\begin{align*} & \frac{1}{1-x} = \sum_{n=0}^\infty x^n = 1 + x + x^2 + x^3 + \cdots && \text{for } |x| < 1 && R=1 \\ & e^{x} = \sum_{n=0}^\infty \frac{x^n}{n!} = 1 + \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots && \text{for all } x && R=\infty \\ & \sin{x} = \sum_{n=0}^\infty (-1)^n \frac{x^{2n+1}}{(2n+1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots && \text{for all } x && R=\infty \\ & \cos{x} = \sum_{n=0}^\infty (-1)^n \frac{x^{2n}}{(2n)!} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \cdots && \text{for all } x && R=\infty \\ & \tan^{-1}{x} = \sum_{n=0}^\infty (-1)^n \frac{x^{2n+1}}{2n+1} = x - \frac{x^3}{3} + \frac{x^5}{5} - \frac{x^7}{7} + \cdots && \text{for } |x| < 1 && R=1 \\ & \ln(1+x) = \sum_{n=1}^\infty (-1)^{n-1} \frac{x^n}{n} = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \cdots && \text{for } |x| < 1 && R=1 \\ & (1+x)^k = \sum_{n=0}^\infty \binom{k}{n} x^n = 1 + kx + \frac{k(k-1)}{2!} x^2 + \frac{k(k-1)(k-2)}{3!} x^3 + \cdots && \text{for } |x| < 1, k \in \mathbb{R} && R=1 \end{align*}}$$
+$$\boxed{\begin{aligned} & \frac{1}{1-x} = \sum_{n=0}^\infty x^n = 1 + x + x^2 + x^3 + \cdots && \text{for } |x| < 1 && R=1 \\ & e^{x} = \sum_{n=0}^\infty \frac{x^n}{n!} = 1 + \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots && \text{for all } x && R=\infty \\ & \sin{x} = \sum_{n=0}^\infty (-1)^n \frac{x^{2n+1}}{(2n+1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots && \text{for all } x && R=\infty \\ & \cos{x} = \sum_{n=0}^\infty (-1)^n \frac{x^{2n}}{(2n)!} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \cdots && \text{for all } x && R=\infty \\ & \tan^{-1}{x} = \sum_{n=0}^\infty (-1)^n \frac{x^{2n+1}}{2n+1} = x - \frac{x^3}{3} + \frac{x^5}{5} - \frac{x^7}{7} + \cdots && \text{for } |x| < 1 && R=1 \\ & \ln(1+x) = \sum_{n=1}^\infty (-1)^{n-1} \frac{x^n}{n} = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \cdots && \text{for } |x| < 1 && R=1 \\ & (1+x)^k = \sum_{n=0}^\infty \binom{k}{n} x^n = 1 + kx + \frac{k(k-1)}{2!} x^2 + \frac{k(k-1)(k-2)}{3!} x^3 + \cdots && \text{for } |x| < 1, k \in \mathbb{R} && R=1 \end{aligned}}$$
 
 #### 11.10.4: New Taylor Series from Old
 
@@ -399,7 +394,7 @@ Idk man that's all there is to it this is another reason I recommend you get the
 
 Since series expansions are polynomials, we can multiply and divide them. So if you get asked to find the series expansion for a function that looks like a multiplication/division of two functions whose expansions you know (again, refer to the table above), you can easily find the series expansion that way.
 
-### 11.11: Applications of Taylor Polynomials
+#### 11.11: Applications of Taylor Polynomials
 
 #### 11.11.1: Approximating Functions by Polynomials
 
@@ -409,7 +404,7 @@ The main use for Taylor polynomials is to approximate a function $f$ around a po
 
 If you want to simplify an equation in physics, you can use a Taylor series to get a simpler approximation, especially if the interval of interest is small. That's it.
 
-### 8.2: Area of a Surface of Revolution
+#### 8.2: Area of a Surface of Revolution
 
 #### 8.2.1: Finding the Area of a Surface of Revolution
 
@@ -442,7 +437,7 @@ For comparison purposes, here are all four variations.
 | $y$-axis           | $y = f(x)$    | $x$    | $\sqrt{1 + (dy/dx)^2}\,dx$ | $\displaystyle \int_a^b 2\pi x \sqrt{1 + \left(\frac{dy}{dx}\right)^2} dx$ |
 | $y$-axis           | $x = g(y)$    | $x$    | $\sqrt{1 + (dx/dy)^2}\,dy$ | $\displaystyle \int_c^d 2\pi x \sqrt{1 + \left(\frac{dx}{dy}\right)^2} dy$ |
 
-### 8.3: Applications to Physics and Engineering
+#### 8.3: Applications to Physics and Engineering
 
 #### 8.3.1: Hydrostatic Pressure and Force
 
@@ -464,9 +459,8 @@ In these cases, you use the fact that **pressure is the same in all directions**
 
 #### 8.3.2: Moments and Centers of Mass
 
-```ad-attention
-This subchapter will not be tested in this course but is here for posterity.
-```
+> [!warning] Attention
+> This subchapter will not be tested in this course but is here for posterity.
 
 We want to find a point $P$ on a planar object where a thin needle, placed on $P$ will balance it perfectly. $P$ is called the **center of mass**.
 
@@ -484,12 +478,13 @@ This all assumes that density $\rho$ is constant. If it isn't, these will not wo
 If the region $\mathscr{R}$ is bounded by another function $g(x)$ instead of the x-axis, then we adapt the formulas: $$\boxed{\overline{x} = \frac{1}{A} \int _{a}^{b} x[f(x) - g(x)]  \, dx \qquad \overline{y} = \frac{1}{A} \int _{a}^{b} \frac{1}{2} \left[ (f(x))^{2} - (g(x))^{2} \right] \, dx }$$
 #### 8.3.3: Theorem of Pappus
 
-```ad-attention
-This subchapter will not be tested in this course but is here for posterity.
-```
 
-$$\boxed{\begin{gather} \text{Let } \mathscr{R} \text{ be a plane region that rests entirely on one side of a line } l \\ \text{ in the plane. If } \mathscr{R} \text{ is rotated about } l, \text{ then the entire volume of } \\ \text{ the resulting solid is the product of the area } A \text{ of } \mathscr{R} \text{ and the } \\ \text{ distance } d \text{ traveled  by the centroid of } \mathscr{R}. \end{gather}}$$
-### 9.1: Modeling with Differential Equations
+> [!warning] Attention
+> This subchapter will not be tested in this course but is here for posterity.
+
+
+$$\boxed{\begin{gathered} \text{Let } \mathscr{R} \text{ be a plane region that rests entirely on one side of a line } l \\ \text{ in the plane. If } \mathscr{R} \text{ is rotated about } l, \text{ then the entire volume of } \\ \text{ the resulting solid is the product of the area } A \text{ of } \mathscr{R} \text{ and the } \\ \text{ distance } d \text{ traveled  by the centroid of } \mathscr{R}. \end{gathered}}$$
+#### 9.1: Modeling with Differential Equations
 
 A **differential equation** is an equation that contains both an unknown function and one or more of its derivatives.
 
@@ -509,7 +504,7 @@ The **order** of a differential equation is the highest power present in the equ
 
 Most of the time, you will need to narrow down your solutions by satisfying a condition, called an **initial-value problem**. Basically, your solution must pass through a point $(x_{0}, y_{0})$.
 
-### 9.3: Separable Equations
+#### 9.3: Separable Equations
 
 #### 9.3.1: Separable Differential Equations
 
@@ -536,14 +531,14 @@ The main function is the amount of substance in the container as a function of t
 
 The shtick here is remembering to take into account both entry and removal rates in the derivative.
 
-### 3.8:  Exponential Decay and Growth
+#### 3.8:  Exponential Decay and Growth
 
 **Exponential growth** is an application of differential equations. As a reminder, the equation  $$\frac{dy}{dx} = ky$$means that the rate of change of $y$ (which is a function of $x$) is equal to $y$ itself multiplied by a constant. At $y(0)=c$, $c$ is the **initial value** of the equation.
 
-$$\boxed{\begin{gather}
+$$\boxed{\begin{gathered}
 \text{ The only solutions of the differential equation } \textstyle dy/dt =ky \text{ are the exponential functions } \\
 y(t) = y(0)e^{kt} \vphantom{\int_{x}^{y}} 
-\end{gather}}$$
+\end{gathered}}$$
 (I recommend trying to derive this yourself. Hint: separate the equations.)
 
 #### 3.8.1: Population Growth
@@ -587,7 +582,7 @@ You may be familiar with the equation$$A = A_{0}\left( 1+\frac{r}{n} \right)^{nt
 and use $$\boxed{A(t) = A(0)e^{rt}}$$where $A(t)$ is the amount of money in the account at time $t$, $r$ is the interest rate per year as a decimal, and $t$ is the number of years.
 
 This is called **continuous compounding**, where instead of compounding our interest at months or years, we compound at infinitesimally small blocks of time (since we took $n\to \infty$) which lets us get a lot more precise.
-### 9.5: Linear Equations
+#### 9.5: Linear Equations
 
 #### 9.5.1: Linear Differential Equations
 
@@ -608,22 +603,21 @@ Using the product rule on the left hand side with $\frac{d}{dx}(I(x)) = I(x)P(x)
 Integrating both sides, we get $$
 I(x)y  = \int I(x)Q(x) \; dx+ C $$ 
 And we can solve for $y$:$$y(x)= \frac{1}{I(x)} \int I(x)Q(x) \; dx +C$$
-Challenge: try to derive a formula for $I(x)$. You will need to separate the equation at some point. Or just look below for the general formula for $I(x)$ for a first-order linear differential equation.$$\boxed{\begin{gather}
+Challenge: try to derive a formula for $I(x)$. You will need to separate the equation at some point. Or just look below for the general formula for $I(x)$ for a first-order linear differential equation.$$\boxed{\begin{gathered}
 \text{ To solve the linear differential equation } dy/dx + P(x)y = Q(x), \text{ multiply each side by } \\
 \text{ the integrating factor } I(x) = e^{\int P(x) \; dx } \text{ and then integrate both sides.}
-\end{gather}}$$
+\end{gathered}}$$
 #### 9.5.2: Application to Electrical Circuits
 
-```ad-attention
-This subchapter will not be tested in this course but is here for posterity.
-```
+> [!warning] Attention
+> This subchapter will not be tested in this course but is here for posterity.
 
 Ohm's Law says that the voltage drop due to a resistor is equal to $RI$. Faraday's Law says the voltage drop due to an inductor is equal to $L \frac{dI}{dt}$. If we have a circuit with both an inductor and resistor, the sum of the voltage drops must equal to sum of the voltage gain:$$
 L \frac{dI}{dt} + RI = V(t)$$
 (If you didn't already learn this in PHYSICS 1E03, you will soon. Enjoy!)
 
 This is a first-order linear equation. The solution gives $I(t)$, current at time $t$. 
-### 10.1: Curves Defined by Parametric Equations
+#### 10.1: Curves Defined by Parametric Equations
 
 #### 10.1.1: Parametric Equations
 
@@ -635,9 +629,8 @@ Parametric curves can also plot the direction of movement. For example, as $t$ i
 
 #### 10.1.2: The Cycloid
 
-```ad-attention
-This subchapter will not be tested in this course but is here for posterity.
-```
+> [!warning] Attention
+> This subchapter will not be tested in this course but is here for posterity.
 
 The curve traced by a point on the circumference of a circle as it rolls is called a **cycloid.**
 
@@ -647,22 +640,22 @@ To find the $y$-value, we do the same thing: the center of the circle is always 
 
 All of this uses the variable $\theta$ as the third variable instead of $t$, representing the degrees rotated by the circle.
 
-$$\boxed{\begin{align*}
+$$\boxed{\begin{aligned}
 x = r(\theta-\sin{\theta}) \qquad &y = r(1-\cos{\theta}) &\quad\theta \in \mathbb{R} \vphantom{\int_{x}^{y}}
-\end{align*}}$$
+\end{aligned}}$$
 You can eliminate the parameter, but you'll just get a complicated equation for a small part of the full cycloid.
 
 #### 10.1.2: Families of Parametric Curves
 
 Some parametric curves can be in families. They can be categorized by their shared features. Often, they will share similarities in their formulae as well, such as with the linear curve family $x=at+b, y=ct+d$. Especially, they may look like progressions or have similar appearances as you change the constants $a,b,c,d,\dots$.
 
-### 10.2: Calculus with Parametric Curves
+#### 10.2: Calculus with Parametric Curves
 
 #### 10.2.1: Tangents
 
-If we want to find the tangent at a point on a parametric curve, we can use the chain rule. The goal is to find $\frac{dy}{dx}$. The chain rule defines $\frac{dy}{dx} = (\frac{dy}{du})\cdot(\frac{du}{dx})$. Notice how the $du$ term appears to cancel out. We do the same thing with $x=f(t),y=g(t)$, $$\boxed{\begin{align*}
+If we want to find the tangent at a point on a parametric curve, we can use the chain rule. The goal is to find $\frac{dy}{dx}$. The chain rule defines $\frac{dy}{dx} = (\frac{dy}{du})\cdot(\frac{du}{dx})$. Notice how the $du$ term appears to cancel out. We do the same thing with $x=f(t),y=g(t)$, $$\boxed{\begin{aligned}
 \frac{dy}{dx} = \left( \frac{dy}{dt} \right) \cdot \left( \frac{dt}{dx} \right) &= \frac{\frac{dy}{dt}}{\frac{dx}{dt}} \quad &\text{ if } \frac{dx}{dt} \neq 0
-\end{align*}}$$
+\end{aligned}}$$
 Intuitively, $\frac{dy}{dx}$ represents the ratio between a small change in $y$ and a small change in $x$. Since we can only represent $x$ and $y$ through the intermediary variable $t$, this formula says "for a small change in $t$: how much does $y$'s change compare to $x$'s change?" It is the same thing as $\frac{dy}{dx}$, but this formula just has the addition of $t$ since they both depend on it. So, we don't need to eliminate the parameter to find $\frac{dy}{dx}$.
 
 If you need it, here is the formula for the second derivative, $\frac{d^{2}y}{dx^{2}}$: $$\boxed{\frac{d^{2}y}{dx^{2}} = \frac{d}{dx}\left( \frac{dy}{dx} \right) = \frac{\frac{d}{dt}\left( \frac{dy}{dx} \right)}{\frac{dx}{dt}}}$$
@@ -685,19 +678,19 @@ A&=\int^{b}_{a} y \; dx \\
 The formula for the arc length of a segment of a function is$$L = \int ^{b}_{a} \sqrt{1+\left( \frac{dy}{dx} \right)^{2}} \; dx $$Suppose this segment can also be described by parametric equations. Inserting what we know $\frac{dy}{dx}$ to be,$$
 L = \int_{\alpha}^{\beta} \sqrt{1+\left( \frac{\frac{dy}{dt}}{\frac{dx}{dt}} \right)^{2}} \frac{dx}{dt}\; dt= \int_{\alpha}^{\beta} \sqrt{\left( \frac{dx}{dt} \right)^{2}+ \left( \frac{dy}{dt} \right)^{2}} \; dt  $$
 The good thing about this formula is that it works on any curve, even curves that cannot be represented as $y=f(x)$. There's a big proof in the textbook using MVT, a Riemann sum, and such, but formally,$$
-\boxed{\begin{gather}
+\boxed{\begin{gathered}
 \text{ If a curve } C \text{ is described by } x=f(t), y=g(t), \alpha \leq t \leq \beta, \text{ where } \\
 f' \text{ and } g' \text{ are continuous on } [\alpha, \beta] \text{ and } C \text{ is traversed exactly once } \\
 \text{ as } t \text{ goes from } \alpha \rightarrow \beta, \text{ then the length of } C \text{ is } \\
 L=  \int_{\alpha}^{\beta} \sqrt{\left( \frac{dx}{dt} \right)^{2} + \left( \frac{dy}{dt} \right)^{2} } \; dt 
-\end{gather}}$$
+\end{gathered}}$$
 While using this formula, be careful that $C$ is only traversed once! If you define your bounds incorrectly, you may go over the same curve twice (like using $2 \pi$ instead of $\pi$ with a circle of radius $1$)
 
 ## 3. The Polar System, Partial Derivatives, and Multi-Integrals
 
 This covers material after Test 2. Final stretch.
 
-### 10.3: Polar Coordinates
+#### 10.3: Polar Coordinates
 
 #### 10.3.1: The Polar System
 
@@ -720,7 +713,7 @@ You can also take advantage of symmetry to sketch polar curves.
 - If the equation is unchanged when $-r$ replaces $r$ or $\theta+\pi$ is replaced by $\theta$, the curve is symmetric about the pole.
 - If the equation is unchanged when $\pi-\theta$ replaces $\theta$, the curve is symmetric about $\theta=\frac{\pi}{2}$
 
-### 10.4: Calculus in Polar Coordinates
+#### 10.4: Calculus in Polar Coordinates
 
 #### 10.4.1: Area
 
@@ -743,7 +736,7 @@ We convert polar curves to parametric equations again and use the same method. T
 $$\boxed{\frac{dy}{dx} = \frac{\frac{dy}{d\theta}}{\frac{dx}{d\theta}} = \frac{\frac{dr}{d\theta}\sin{\theta} + r \cos{\theta}}{\frac{dr}{d\theta}\cos{\theta} - r\sin{\theta}}}$$
 We can find horizontal tangents by finding points where $\frac{dy}{d\theta}=0$ and vertical tangents by finding points where $\frac{dx}{d\theta}=0$.
 
-### 14.1: Functions of Several Variables
+#### 14.1: Functions of Several Variables
 
 #### 14.1.1: Functions of Two Variables
 
@@ -769,24 +762,24 @@ The following two restrictions must also be followed:
 
 This is the same deal as two-variable functions but for three variables. $f(x,y,z)=w$. 
 
-### 14.2: Limits and Continuity
+#### 14.2: Limits and Continuity
 
 #### 14.2.1: Limits of Functions of Two Variables
 
-These work similarly to how you would expect: if you can take your value $f(x,y)$ as close as you like to a number $L$ by moving the pair $(x,y)$ closer to another pair $(a,b)$, then we can say that the limit of the function as $(x,y) \rightarrow (a,b)$ is $L$. Formally:$$\boxed{\begin{gather}
+These work similarly to how you would expect: if you can take your value $f(x,y)$ as close as you like to a number $L$ by moving the pair $(x,y)$ closer to another pair $(a,b)$, then we can say that the limit of the function as $(x,y) \rightarrow (a,b)$ is $L$. Formally:$$\boxed{\begin{gathered}
 \text{Let } f \text{ be a function of two variables whose domain } D \text{ includes } \\
 \text{ points arbitrarily close to } (a,b). \text{ Then we say that the } \textbf{limit} \text{ of } \\
 f(x,y) \text{ as } (x,y) \text{ approaches } (a,b) \text{ is } L \text{ and we write } \\
 \lim_{(x,y)\rightarrow (a,b)} f(x,y) = L \vphantom{\int_{x}^{y}} \\
 \text{ if for every number } \varepsilon > 0 \text{ there is a corresponding number } \delta > 0 \text{ such that} \\
 \text{ if } (x,y) \in D \text{ and } 0 < \sqrt{(x-a)^2 + (y-b)^2} < \delta \text{ then } \vert f(x,y) - L \vert < \varepsilon
-\end{gather}}$$But again, you really don't need to know this exact formal definition.  
+\end{gathered}}$$But again, you really don't need to know this exact formal definition.  
 
 #### 14.2.2: Showing That a Limit Does Not Exist
 
 On single-variable functions, we can approach a limit from either the left or right. We know if the limit from the positive end does not equal the limit from the negative end, the limit does not exist. Since there can be nearly infinite ways to approach any point since our graph looks more like a plane than a line, we adapt this rule.
-$$\boxed{\begin{gather}\text{If } f(x, y) \rightarrow L_1 \text{ as } (x, y) \rightarrow (a, b) \text{ along a path } C_1 \\ \text{ and } f(x, y) \rightarrow L_2 \text{ as } (x, y) \rightarrow (a, b) \text{ along a path } C_2, \\ \text{ where } L_1 \neq L_2, \text{ then } \lim_{(x,y)\rightarrow(a, b)} f(x, y) \text{ does not exist.}
-\end{gather}}$$
+$$\boxed{\begin{gathered}\text{If } f(x, y) \rightarrow L_1 \text{ as } (x, y) \rightarrow (a, b) \text{ along a path } C_1 \\ \text{ and } f(x, y) \rightarrow L_2 \text{ as } (x, y) \rightarrow (a, b) \text{ along a path } C_2, \\ \text{ where } L_1 \neq L_2, \text{ then } \lim_{(x,y)\rightarrow(a, b)} f(x, y) \text{ does not exist.}
+\end{gathered}}$$
 Usually, the most convenient way to accomplish this is by having one path approach the point along the $x$-axis, and the other approach from the $y$-axis. Also note the inverse is not true: even if both limits exist, that **does not guarantee** the limit exists. As long as there is one path that does not give you the same $L$ as the others, it will not exist.
 
 #### 14.2.3: Properties of Limits
@@ -803,14 +796,14 @@ $$\boxed{\begin{equation*}
 \end{equation*}}$$
 The squeeze theorem is also here and it works about how you would expect.
 
-$$\boxed{\begin{gather}
+$$\boxed{\begin{gathered}
 \text{If } h(x,y) \le f(x,y) \le g(x,y) \text{ for all } (x,y) \text{ in a disk } \\
 \text{ around }(a,b) \text{ (except possibly at } (a,b) \text{ itself)} \text{ and if } \\
 \begin{aligned}
 \lim_{(x,y)\rightarrow (a,b)} h(x,y) &= L \vphantom{\int^{y}}\\
 \text{and}\quad \lim_{(x,y)\rightarrow (a,b)} g(x,y) &= L \\
 \text{then:}\quad \lim_{(x,y)\rightarrow (a,b)} f(x,y) &= L \\
-\end{aligned}\end{gather}}$$
+\end{aligned}\end{gathered}}$$
 
 Also, remember that algebraic combinations of common functions (exponentials, trig functions, polynomials, rationals, etc) are all continuous on their domains. If two functions of different domain are combined, the function may only exist when **both domains** are satisfied. In other words, the new domain will be the **intersection** of the domains.
 
@@ -818,14 +811,14 @@ Also, remember that algebraic combinations of common functions (exponentials, tr
 
 We base continuity on the direct substitution property above.
 
-$$\boxed{\begin{gather}
+$$\boxed{\begin{gathered}
 \text{A function } f(x,y) \text{ is called continuous at } (a,b) \text{ if }  \\
 \lim_{  (x,y) \to (a,b) } f(x,y) = f(a,b) \vphantom{\sum_{x}^{y}} \\  \\
 \text{ We say that } f \text{ is continuous on } D \text{ if } f \text{ is continuous at every point in } D.
-\end{gather}}$$
+\end{gathered}}$$
 #### 14.2.5: Functions of Three or More Variables
 
-We can do all of this with functions of three or more variables. The notation $$\lim_{  (x,y,z) \to (a,b,c) } f(x,y,z)=L$$signifies that the value of the function will approach $L$ as the point $(x,y,z)$ approaches the point $(a,b,c)$. Of course, same as two variables, continuity is defined as $$\lim_{  (x,y,z) \to (a,b,c) } f(x,y,z)=f(a,b,c)$$Here's the formal definition if you want it, but you really don't need it.$$\boxed{\begin{gather}
+We can do all of this with functions of three or more variables. The notation $$\lim_{  (x,y,z) \to (a,b,c) } f(x,y,z)=L$$signifies that the value of the function will approach $L$ as the point $(x,y,z)$ approaches the point $(a,b,c)$. Of course, same as two variables, continuity is defined as $$\lim_{  (x,y,z) \to (a,b,c) } f(x,y,z)=f(a,b,c)$$Here's the formal definition if you want it, but you really don't need it.$$\boxed{\begin{gathered}
 \text{ If } f \text{ is defined on a subset } D \text{ of } \mathbb{R}^{n}, \text{ then }  \\
 \lim_{  \mathbf{x} \to \mathbf{a} } f(\mathbf{x}) = L  \\
 \text{ means that for every number } \varepsilon > 0 \text{ there is} \\
@@ -833,9 +826,9 @@ We can do all of this with functions of three or more variables. The notation $$
 \begin{aligned}
 \text{ if } \quad & \mathbf{x} \in D \;\, \text{ and } \;\,  0<\vert \mathbf{x}-\mathbf{a} \vert< \delta  \\
 \text{ then } \quad&\vert f(\mathbf{x}) \vert < \varepsilon
-\end{aligned}\end{gather}}$$
+\end{aligned}\end{gathered}}$$
 
-### 14.3: Partial Derivatives
+#### 14.3: Partial Derivatives
 
 #### 14.3.1: Partial Derivatives of Functions of Two Variables
 
@@ -858,67 +851,65 @@ A function $f(x,y)$ graphically is a surface in a 3D space. If we take the deriv
 
 #### 14.3.3: Derivatives of Three or More Variables
 
-```ad-attention
-This subchapter will not be tested in this course but is here for posterity.
-```
+> [!warning] Attention
+> This subchapter will not be tested in this course but is here for posterity.
 
 We can also do partial derivatives for functions of three or more variables, for example $$f_{x}(x,y,z) = \lim_{  h \to 0 } \frac{f(x+h,y,z)-f(x,y,z)}{h}$$Which works about the same you would expect: hold $y$ and $z$ constant and differentiate $f(x)$. Just don't try to represent it geometrically.
 
 #### 14.3.4: Higher Derivatives
 
 Since partial derivatives of a function of two variables $f$ are also functions of two variables, we can create partial derivatives of those. Here are some examples of what that looks like. $$\boxed{
-\begin{align*}
+\begin{aligned}
 (f_x)_x &= f_{xx} = f_{11} = \frac{\partial}{\partial x} \left( \frac{\partial f}{\partial x} \right) = \frac{\partial^2 f}{\partial x^2} = \frac{\partial^2 z}{\partial x^2} \\
 (f_x)_y &= f_{xy} = f_{12} = \frac{\partial}{\partial y} \left( \frac{\partial f}{\partial x} \right) = \frac{\partial^2 f}{\partial y \partial x} = \frac{\partial^2 z}{\partial y \partial x} \\
 (f_y)_x &= f_{yx} = f_{21} = \frac{\partial}{\partial x} \left( \frac{\partial f}{\partial y} \right) = \frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 z}{\partial x \partial y} \\
 (f_y)_y &= f_{yy} = f_{22} = \frac{\partial}{\partial y} \left( \frac{\partial f}{\partial y} \right) = \frac{\partial^2 f}{\partial y^2} = \frac{\partial^2 z}{\partial y^2}
-\end{align*}
+\end{aligned}
 }$$
 These look hard, but all you need to do in practice is go in order left to right. For $f_{xy}$ for example, differentiate with respect to $x$, then differentiate the result with respect to $y$.
 
-Notice how $f_{xy} = f_{yx}$. We can extend this using **Clairaut's Theorem**:$$\boxed{\begin{gather}
+Notice how $f_{xy} = f_{yx}$. We can extend this using **Clairaut's Theorem**:$$\boxed{\begin{gathered}
 \text{ Suppose } f \text{ is defined on a disk } D \text{ containing the point } (a,b). \text{ If the } \\
 \text{ functions } f_{xy} \text{ and } f_{yx} \text{ are both continuous on } D, \text{ then:} \\
 f_{xy}(a,b) = f_{yx}(a,b)
-\end{gather}}$$
+\end{gathered}}$$
 Which lets us do fun things like $f_{xyy} = f_{yxy} = f_{yyx}$ with even higher-order partial derivatives.
 
 #### 14.3.5: Partial Differential Equations
 
-```ad-attention
-This subchapter will not be tested in this course but is here for posterity.
-```
+> [!warning] Attention
+> This subchapter will not be tested in this course but is here for posterity.
 
 Partial derivatives can show up in differential equations. For example, $$\frac{ \partial^{2} u }{ \partial x^{2} } + \frac{ \partial^{2} u }{ \partial y^{2} } = 0 $$is known as Laplace's equation and its solutions are harmonic waves. 
 
 Another example is the wave equation  $$
 \frac{ \partial^{2} u }{ \partial t^{2} } = a^{2} \frac{ \partial^2 u }{ \partial x^2 } $$
-### 14.4: Tangent Planes and Linear Approximations
+#### 14.4: Tangent Planes and Linear Approximations
 
 #### 14.4.1: Tangent Planes
 
 The **tangent plane** at a point $(x,y,z)$ on a plane $z=f(x,y)$ is defined as a plane where it just touches $(x,y,z)$ and shares the same slope as $z=f(x,y)$ in all directions.
 
-$$\boxed{\begin{gather}
+$$\boxed{\begin{gathered}
 \text{ Suppose } f \text{ has continuous partial derivatives. An equation of the tangent } \\
 \text{ plane to the surface } z = f(x,y) \text{ at the point } (x_{0},y_{0},z_{0}) \text{ is } \\
 z - z_{0} = f_{x}(x_{0},y_{0})(x-x_{0}) + f_{y}(x_{0},y_{0})(y-y_{0})
-\end{gather}}$$
+\end{gathered}}$$
 
 #### 14.4.2: Linear Approximations
 
 The **linearization** of a function $f$ at a point $(a,b)$ is a **linear function** $L(x,y)$ that is a good approximation to $f$ at $(a,b)$. $$\boxed{L(x,y) = f(a,b) + f_{x}(a,b)(x-a) + f_{y}(a,b)(y-b)}$$In single-variable functions, this is the same thing as finding the tangent.
-$$ \boxed{ \begin{gather}
+$$ \boxed{ \begin{gathered}
 \text{ If } z = f(x, y), \text{ then } f \text{ is \textbf{differentiable} at } \\ (a, b) \text{ if } \Delta z \text{ can be expressed in the form } \\
 \Delta z = f_x(a, b) \Delta x + f_y(a, b) \Delta y + \varepsilon_1 \Delta x + \varepsilon_2 \Delta y  \vphantom{\int_{x}^{y}}
 \\ \text{where } \varepsilon_1 \text{ and } \varepsilon_2 \text{ are functions of } \Delta x \text{ and } \Delta y \\ \text{ such that } \varepsilon_1 \text{ and } \varepsilon_2 \rightarrow 0 \text{ as }   (\Delta x, \Delta y) \rightarrow (0, 0).
-\end{gather}} $$
+\end{gathered}} $$
 Essentially, what this says is that the error terms $\varepsilon$ should vanish as you approach the point, meaning the approximation is good.
 
-This is very impractical because ain't no one actually gonna do this, so we usually use$$\boxed{\begin{gather}
+This is very impractical because ain't no one actually gonna do this, so we usually use$$\boxed{\begin{gathered}
 \text{ If the partial derivatives } f_{x} \text{ and } f_{y} \text{ exist near } (a,b) \text{ and are } \\
 \text{ continuous at } (a,b) \text{, then } f \text{ is differentiable at } (a,b).
-\end{gather}}$$
+\end{gathered}}$$
 #### 14.4.3: Differentials
 
 $$\boxed{dz = f_{x}(x,y)\; dx + f_{y}(x,y)\;dy = \frac{ \partial z }{ \partial x }\;dx + \frac{ \partial z }{ \partial y }\;dy  }$$
@@ -932,13 +923,12 @@ $dz$ represents the approximate change: when we linearize to create an approxima
 
 #### 14.4.4: Functions of Three or More Variables
 
-```ad-attention
-This subchapter will not be tested in this course but is here for posterity.
-```
+> [!warning] Attention
+> This subchapter will not be tested in this course but is here for posterity.
 
 We can do all of this for functions with more than two variables. For example, the linear approximation of $w=f(x,y,z)$ is$$f(x, y, z) \approx f(a, b, c) + f_x(a, b, c)(x - a) + f_y(a, b, c)(y - b) + f_z(a, b, c)(z - c) = L(x,y,z)$$the **increment** of $w$ ($\Delta w$) is$$\Delta w = f(x + \Delta x, y + \Delta y, z + \Delta z) - f(x, y, z)$$and the **differential** $dw$ is$$dw = \frac{ \partial w }{ \partial x }\;dx + \frac{ \partial w }{ \partial y }\;dy + \frac{ \partial w }{ \partial z }\;dz $$
 
-### 14.5: The Chain Rule
+#### 14.5: The Chain Rule
 
 You better know the chain rule pretty damn well to get this chapter.
 
@@ -947,25 +937,25 @@ Let us revisit the 'normal' chain rule: If $y=f(x)$ and $x=g(t)$, i.e $y=f(g(t))
 #### 14.5.1: The Chain Rule - Case 1
 
 Let us say we have a function $z=f(x,y)$ and both $x=g(t)$ and $y=h(t)$ are differentiable functions of a fourth variable $t$. This is **Case 1**.$$
-\boxed{\begin{gather} \text{ Suppose that } z = f(x, y) \text{ is a differentiable function } \text{of } x \text{ and } y, \\
+\boxed{\begin{gathered} \text{ Suppose that } z = f(x, y) \text{ is a differentiable function } \text{of } x \text{ and } y, \\
  \text{ where } x = g(t) \text{ and } y = h(t) \text{ are both } \text{differentiable functions of }\\
  t. \text{ Then } z \text{ is a differentiable function of } t \text{ and} \\ \\
 \begin{aligned}
 \frac{dz}{dt} &= \frac{\partial f}{\partial x} \frac{dx}{dt} + \frac{\partial f}{\partial y} \frac{dy}{dt}  \\
 &= \frac{\partial z}{\partial x} \frac{dx}{dt} + \frac{\partial z}{\partial y} \frac{dy}{dt}
 \end{aligned}
-\end{gather}}$$
+\end{gathered}}$$
 #### 14.5.2: The Chain Rule - Case 2
 
 Let us say we have a function $z=f(x,y)$ and both $x=g(s,t)$ and $y=h(s,t)$ of two more variables $s,t$. This is **Case 2**. 
 
-Since we have another variable now, in order to differentiate $z=j(s,t)$, we need to find two partial derivatives, each holding one of $s,t$ constant. We apply the formula from Case 1 to both to get$$\boxed{\begin{gather} \text{ Suppose that } z = f(x, y) \text{ is a differentiable function } \text{of } x \text{ and } y, \text{ where } \\
+Since we have another variable now, in order to differentiate $z=j(s,t)$, we need to find two partial derivatives, each holding one of $s,t$ constant. We apply the formula from Case 1 to both to get$$\boxed{\begin{gathered} \text{ Suppose that } z = f(x, y) \text{ is a differentiable function } \text{of } x \text{ and } y, \text{ where } \\
   x = g(s,t) \text{ and } y = h(s.t) \text{ are both } \text{differentiable functions of }  t. \text{ Then: }\\ \\
 \begin{aligned}
 \frac{\partial z}{\partial s} &= \frac{\partial z}{\partial x} \frac{\partial x}{\partial s} + \frac{\partial z}{\partial y} \frac{\partial y}{\partial s} \quad &
 \frac{\partial z}{\partial t} &= \frac{\partial z}{\partial x} \frac{\partial x}{\partial t} + \frac{\partial z}{\partial y} \frac{\partial y}{\partial t}
 \end{aligned}
-\end{gather}}$$
+\end{gathered}}$$
 We can call $s$ and $t$ **independent variables**, $x$ and $y$ **intermediate variables**, and $z$ the **dependent variable**.
 
 This flowchart helps explain it. (Yes, it's janky, I'm relying on an Obsidian plugin to use math formatting inside the Mermaid chart)
@@ -991,13 +981,13 @@ Each layer represents one of the three types of variables. If you want to find a
 The tree diagram last time was overkill since we only had to deal with two intermediate variables. Let us expand our thinking to a general variable $u$ that is a function of $n$ intermediate variables $x_{1}, x_{2}, \dots, x_{n}$, which are each functions of $m$ independent variables $t_{1}, t_{2}, \dots, t_{n}$. Notice in each case, there are $n$ total variables.
 
 $$\boxed{
-\begin{gather}
+\begin{gathered}
 \text{Suppose that } u \text{ is a differentiable function of the } n \text{ variables } x_1, x_2, \ldots, x_n \\ \text{ and each } x_j \text{ is a differentiable function of the } m \text{ variables } t_1, t_2, \ldots, t_m. \\
 \text{Then } u \text{ is a function of } t_1, t_2, \ldots, t_m \text{ and} \\ \\
 \frac{\partial u}{\partial t_i} = \frac{\partial u}{\partial x_1} \frac{\partial x_1}{\partial t_i} + \frac{\partial u}{\partial x_2} \frac{\partial x_2}{\partial t_i} + \cdots + \frac{\partial u}{\partial x_n} \frac{\partial x_n}{\partial t_i} \\
 \\
 \text{for each } i = 1, 2, \ldots, m.
-\end{gather}
+\end{gathered}
 }$$
 
 Let's get another tree diagram in here.
@@ -1048,11 +1038,11 @@ Fun fact: In more advanced calculus, you will learn that solely having a format 
 	- $F_{y}(a,b)\neq0$
 	- $F_{x}$ and $F_{y}$ are continuous on the disk
 
-We can extend this to functions of more than one variable: if $z$ is given implicitly by $F(x,y,z)=0$, we can use the chain rule again:$$\boxed{\begin{align*}
+We can extend this to functions of more than one variable: if $z$ is given implicitly by $F(x,y,z)=0$, we can use the chain rule again:$$\boxed{\begin{aligned}
 \frac{\partial z}{\partial x} &= -\frac{\frac{\partial F}{\partial x}}{\frac{\partial F}{\partial z}} = -\frac{F_x}{F_z}  \\ \\\frac{\partial z}{\partial y} &= -\frac{\frac{\partial F}{\partial y}}{\frac{\partial F}{\partial z}} = -\frac{F_y}{F_z}
-\end{align*}}$$
+\end{aligned}}$$
 The Implicit Function Theorem has conditions for this as well, the same thing as above but with spheres instead of disks.
-### 14.6: Directional Derivatives and the Gradient Vector
+#### 14.6: Directional Derivatives and the Gradient Vector
 
 #### 14.6.1: Directional Derivatives
 
@@ -1061,32 +1051,32 @@ f_{x}(x,y) &= \lim_{  h \to 0 } \frac{f(x+h,y) - f(x,y)}{h} \\
 f_{y}(x,y) &= \lim_{  h \to 0 } \frac{f(x,y+h)- f(x,y)}{h}
 \end{aligned}\end{gathered}}$$
 But, if we want to go in any other direction that isn't $\mathbf{i}$ or $\mathbf{j}$, we need something else. Let $\mathbf{u}$ be an arbitrary unit vector in some direction. We have a function $f$, and we want to find its instantaneous rate of change in the direction from our starting point $(x_{0},y_{0})$ to $\mathbf{u}$.
-$$\boxed{\begin{gather} 
+$$\boxed{\begin{gathered} 
 \text{ The directional derivative of } f \text{ at } (x_{0},y_{0}) \text{ in direction of unit vector } \mathbf{u} = \langle a,b \rangle \text{ is } \\ \\
 D_{\mathbf{u}} f(x_0,y_0) = \lim_{h \to 0} \frac{f(x_0 + h a, \, y_0 + h b) - f(x_0, y_0)}{h}  \\ \\
 \text{ if this limit exists.}
-\end{gather}}$$
+\end{gathered}}$$
 What we did is move a small distance $h$ from our starting point to our target, measure how much the function $f$ changed with that small step, divide by the step's size $h$ to get the average rate of change, then take the limit as the distance $h$ approaches $0$ to find the instantaneous rate of change.
 
 Try plugging the unit vectors $\mathbf{i,j}$ in and seeing what happens ($\langle 0,1 \rangle, \langle 1,0 \rangle$ respectively). Look familiar?
 
-The formula above is the formal definition, but when doing problems, we usually use this one:$$\boxed{\begin{gather}
+The formula above is the formal definition, but when doing problems, we usually use this one:$$\boxed{\begin{gathered}
 \text{ If } f \text{ is a differentiable function of } x \text{ and } y, \text{ then } f \text{ has a directional } \\
 \text{ derivative in the direction of any unit vector } \mathbf{u} = \langle a,b \rangle \text{ and} \\
 D_{\mathbf{u}} f(x,y) = f_{x}(x,y)a + f_{y}(x,y)b
-\end{gather}}$$
+\end{gathered}}$$
 **Warning:** Unit vectors **must** have length $1$. If a problem requires you to calculate your own unit vector or derive a unit vector, be wary of this! You can check the length of a vector using the Pythagorean theorem. For example, using trigonometry with an angle will give you a vector, that while of the correct angle, is magnitudes too large and must be scaled down.
 
 #### 14.6.2: The Gradient Vector
 
 This is pretty important for fields like machine learning.
 
-$$\boxed{\begin{gather}
+$$\boxed{\begin{gathered}
 \text{ If } f \text{ is a function of two variables } x \text{ and } y, \text{ then the }  \\
 \textbf{gradient} \text{ of } f \text{ is the vector function defined by } \\ \\
 
 \nabla f(x,y) = \langle f_{x}(x,y),f_{y}(x,y) \rangle = \frac{ \partial f }{ \partial x } \mathbf{i} + \frac{ \partial f }{ \partial y } \mathbf{j}
-\end{gather}}$$
+\end{gathered}}$$
 We get this from the last equation in the last subchapter: we can rewrite $D_{\mathbf{u}} f(x,y) = f_{x}(x,y)a + f_{y}(x,y)b$ as a dot product.$$\begin{align*}
 D_{\mathbf{u}} f(x,y) &= f_{x}(x,y)a + f_{y}(x,y)b\\
 &=\langle f_{x}(x,y),f_{y}(x,y) \rangle \cdot \langle a,b \rangle \\
@@ -1097,15 +1087,14 @@ We can therefore rewrite the aforementioned equation:$$\boxed{D_{\mathbf{u}} f(x
 (I'm assuming you know what dot product is from physics)
 #### 14.6.3: Functions of Three Variables
 
-```ad-attention
-This subchapter will not be tested in this course but is here for posterity.
-```
+> [!warning] Attention
+> This subchapter will not be tested in this course but is here for posterity.
 
-$$\boxed{\begin{gather}
+$$\boxed{\begin{gathered}
 \text{ The directional derivative of } f \text{ at } (x_0,y_0,z_0)  \\
 \text{ in the direction of} \text{ a unit vector } \mathbf{u} = \langle a,b,c \rangle \text{ is} \\ \\
 D_{\mathbf{u}} f(x_0,y_0,z_0) = \lim_{h \to 0} \frac{ f(x_0 + ha, y_0 + hb, z_0 + hc) - f(x_0,y_0,z_0) }{ h }
-\end{gather}}$$
+\end{gathered}}$$
 We can compact this by writing it in vector form:$$\boxed{D_\mathbf{u} f(\mathbf{x}_0) = \lim_{h \to 0} \frac{f(\mathbf{x}_0 + h\mathbf{u}) - f(\mathbf{x}_0)}{h}}$$
 The gradient vector for three variables is:$$
 \boxed{\nabla f = \langle f_x, f_y, f_z \rangle  = \frac{\partial f}{\partial x}\mathbf{i} + \frac{\partial f}{\partial y}\mathbf{j} + \frac{\partial f}{\partial z}\mathbf{k}}$$
@@ -1113,23 +1102,22 @@ Then we rewrite the formula for the directional derivative:$$
 \boxed{D_{\mathbf{u}} f(x, y, z) = \nabla f(x, y, z) \cdot \mathbf{u}}$$
 #### 14.6.4: Maximizing the Directional Derivative
 
-Sometimes, we want to find the direction from a point in which the rate of change is the greatest.$$\boxed{\begin{gather}
+Sometimes, we want to find the direction from a point in which the rate of change is the greatest.$$\boxed{\begin{gathered}
 \text{ Suppose }f \text{ is a differentiable function of two or three variables. The maximum value } \\
 \text{ of the directional derivative } D_{\mathbf{u}}f(\mathbf{x}) \text{ is } \vert \nabla f(\mathbf{x}) \vert \text{ and it occurs when } \mathbf{u} \text{ has the same } \\
 \text{ direction as the gradient vector } \nabla f(\mathbf{x}).
-\end{gather}}$$
+\end{gathered}}$$
 #### 14.6.5: Tangent Planes to Level Surfaces
 
-```ad-attention
-This subchapter will not be tested in this course but is here for posterity.
-```
+> [!warning] Attention
+> This subchapter will not be tested in this course but is here for posterity.
 
 As a reminder, a **level plane** is a plane in which $f(x,y,z)=c$ for some constant $c$. At any point $P=(x_{0},y_{0},z_{0})$, the **tangent plane** is the plane that 'just touches' the surface at $P$ and is flat in the neighborhood, serving as a good approximation to the surface at that point.
 
 A tangent plane to the level surface $F(x,y,z)$ at $P(x_{0},y_{0},z_{0})$ is defined as the plane that passes through $P$ and has a normal vector (i.e the vector with $\vec{n} \cdot \vec{v} = 0$ for normal vector $\vec{n}$ and any vector in the plane $\vec{v}$) $\nabla F(x_{0},y_{0},z_{0})$. Therefore, the general equation of this tangent plane is$$\boxed{F_x(x_0, y_0, z_0)(x - x_0) + F_y(x_0, y_0, z_0)(y - y_0) + F_z(x_0, y_0, z_0)(z - z_0) = 0}$$
 #### 14.6.6: Significance of the Gradient Vector
 
-Here are some fun properties of the gradient vector.$$\boxed{\begin{gather}
+Here are some fun properties of the gradient vector.$$\boxed{\begin{gathered}
 \text{ Let } f \text{ be a differentiable function of two or more } \\
 \text{ variables and and suppose that } \nabla f(\mathbf{x}) \neq \mathbf{0}. \\ \\
 \begin{array}{ll}
@@ -1139,12 +1127,12 @@ Here are some fun properties of the gradient vector.$$\boxed{\begin{gather}
  & \text{increase of } f \text{ at } \mathbf{x}, \text{ and that maximum rate is } \vert \nabla f(\mathbf{x}) \vert.\vphantom{\underset{a}{a}}\\
     \bullet & \nabla f(\mathbf{x})\text{ is perpendicular to the level curve or level } \\
  & \text{surface of } f \text{ through } \mathbf{x}.
-\end{array}\end{gather}}$$
+\end{array}\end{gathered}}$$
 This lets do some cool things like plot the steepest rate of ascent up a contour map.
 
 Also, if you're interested in machine learning or in compsci, check out [gradient descents](https://en.wikipedia.org/wiki/Gradient_descent). You'll be learning that soon enough. Have fun!
 
-### 15.1: Double Integrals over Rectangles
+#### 15.1: Double Integrals over Rectangles
 
 #### 15.1.1: Volume and Double Integrals
 
@@ -1154,22 +1142,22 @@ Consider a function of two variables $f$ defined on a rectangle $R = [a,b] \time
 
 Let the solid in that rectangular field bounded by the rectangle and the function $z=f(x,y)$ be called $S$.
 
-If we split up $R$ into lots of smaller rectangles in a grid pattern, we notice we can approximate the volume of $S$ by summing the volumes of all the smaller rectangles, ergo $$V \approx \sum_{i=1}^{m} \sum_{j=1}^{n} f(x_{ij}^{*},y^{*}_{ij}) \cdot \Delta A $$Intuitively, this means that for the $i$-th 'column' and $j$-th 'row' in the grid of rectangles, we evaluate the volume and add it to the total. Remember the volume of a rectangular prism is its area times its height. From the definition of a definite integral in 2D, we know that we should take the limit:$$V = \lim_{  m,n \to \infty } \sum_{i=1}^{m} \sum_{j=1}^{n} f(x_{ij}^{*},y^{*}_{ij}) \cdot \Delta A$$and if we recall Riemann sums, we can condense this into a familiar form. $$\boxed{\begin{gather}\text{ The double integral of } f \text{ over the rectangle } R \text{ is } \\
-\iint\limits_R f(x,y) \; dA  = \lim_{  m,n \to \infty } \sum_{i=1}^{m} \sum_{j=1}^{n} f(x_{ij}^{*},y^{*}_{ij}) \cdot \Delta A \\ \text{ if this limit exists.}\end{gather}}$$Putting it all together,$$\boxed{\begin{gather}
+If we split up $R$ into lots of smaller rectangles in a grid pattern, we notice we can approximate the volume of $S$ by summing the volumes of all the smaller rectangles, ergo $$V \approx \sum_{i=1}^{m} \sum_{j=1}^{n} f(x_{ij}^{*},y^{*}_{ij}) \cdot \Delta A $$Intuitively, this means that for the $i$-th 'column' and $j$-th 'row' in the grid of rectangles, we evaluate the volume and add it to the total. Remember the volume of a rectangular prism is its area times its height. From the definition of a definite integral in 2D, we know that we should take the limit:$$V = \lim_{  m,n \to \infty } \sum_{i=1}^{m} \sum_{j=1}^{n} f(x_{ij}^{*},y^{*}_{ij}) \cdot \Delta A$$and if we recall Riemann sums, we can condense this into a familiar form. $$\boxed{\begin{gathered}\text{ The double integral of } f \text{ over the rectangle } R \text{ is } \\
+\iint\limits_R f(x,y) \; dA  = \lim_{  m,n \to \infty } \sum_{i=1}^{m} \sum_{j=1}^{n} f(x_{ij}^{*},y^{*}_{ij}) \cdot \Delta A \\ \text{ if this limit exists.}\end{gathered}}$$Putting it all together,$$\boxed{\begin{gathered}
 \text{ If } f(x,y) \geq 0, \text{ then the volume } V \text{ of the solid  that lies } \\
 \text{ above the rectangle } R \text{ and below the solid } z=f(x,y) \text{ is } \\
 V=  \iint\limits_{R} f(x,y) \; dA
-\end{gather}}$$The double-sum version (without the limit) is called a **double Riemann sum**.
+\end{gathered}}$$The double-sum version (without the limit) is called a **double Riemann sum**.
 
 #### 15.1.2: The Midpoint Rule
 
 Recall the **midpoint rule** for single integrals. If we have an integral $\int_{a}^{b} f(x) \; dx$, we can approximate it pretty well by dividing the interval into $n$ subintervals and then using the value of the function at the midpoint of each subinterval to estimate the area.$$\int_{a}^{b} f(x) \; dx \approx \Delta x \sum_{i=1}^{n} f(x_{i}^{*})$$where $\Delta x = \frac{{b-a}}{n}$ and $x_{i}^{*}$ is the height of the midpoint of the $i$th subinterval, or $x_{i}^{*} = a+\left( i-\frac{1}{2} \right) \Delta x$. 
 
-We can do something similar for functions of two variables.$$\boxed{\begin{gather}
+We can do something similar for functions of two variables.$$\boxed{\begin{gathered}
 \iint\limits_{R} f(x,y) \; dA\approx \sum_{i=1}^{m} \sum_{i=1}^{n} f(\overline{x}_{i}, \overline{y}_{i}) \Delta A \\
 \text{ where } \overline{x}_{i} \text{ is the midpoint of } [x_{i-1},x_{i}] \\
 \text{ and } \overline{y}_{i} \text{ is the midpoint of }[y_{i-1},y_{i}]
-\end{gather}}$$
+\end{gathered}}$$
 You will be provided values for $m$ and $n$ which represent how many subintervals you will approximate with.
 
 Note that we can only interpret a double integral as a volume **if** $f$ **is positive.**
@@ -1183,45 +1171,45 @@ In our volume double integrals, we have had the differential term $dA$ when $f$ 
 Now this result will be a function of $x$, so therefore we can write$$
 A(x)=\int_{c}^{d} f(x,y) \; dy$$And let us integrate both sides from $a$ to $b$: $$\begin{align*}
 \int_a^b A(x) \, dx &= \int_a^b \left[ \int_c^d f(x, y) \, dy \right] dx \\
-\int _{a}^{b} \int _{c}^{d}f(x,y) \; dy  \; dx &= \int_a^b \left[ \int_c^d f(x, y) \, dy \right] dx\end{align*}$$Note we must work from the inside out. The following is a more practical theorem for the purpose of turning a double integral into iterated integrals named **Fubini's Theorem**:$$\boxed{\begin{gather}
+\int _{a}^{b} \int _{c}^{d}f(x,y) \; dy  \; dx &= \int_a^b \left[ \int_c^d f(x, y) \, dy \right] dx\end{align*}$$Note we must work from the inside out. The following is a more practical theorem for the purpose of turning a double integral into iterated integrals named **Fubini's Theorem**:$$\boxed{\begin{gathered}
 \text{ If } f \text{ is continuous on the rectangle } \\
 R = \left\{(x,y)\mid a \leq x \leq b, c \leq y \leq d\right\} \vphantom{\int_{x}^{y}}  \\
 \text{ then }  \\
-\iint\limits_{R} f(x,y) \; dA = \int _{a}^{b} \int _{c}^{d}f(x,y) \; dy  \; dx = \int_a^b \left[ \int_c^d f(x, y) \, dy \right] dx\end{gather}}$$More generally, Fubini's Theorem is valid if we assume $f$ is bounded on $R$, $f$ is discontinuous only on a finite number of smooth curves, and that the iterated integrals exist. The next theorem follows from the special case where we assume that $f(x,y)$ can be factored into the form $g(x)h(y)$. $$\boxed{\begin{gather}
+\iint\limits_{R} f(x,y) \; dA = \int _{a}^{b} \int _{c}^{d}f(x,y) \; dy  \; dx = \int_a^b \left[ \int_c^d f(x, y) \, dy \right] dx\end{gathered}}$$More generally, Fubini's Theorem is valid if we assume $f$ is bounded on $R$, $f$ is discontinuous only on a finite number of smooth curves, and that the iterated integrals exist. The next theorem follows from the special case where we assume that $f(x,y)$ can be factored into the form $g(x)h(y)$. $$\boxed{\begin{gathered}
 \iint\limits_{R} g(x)h(y) \; dA = \int_{a}^{b} g(x) \; dx \int_{c}^{d} h(y) \; dy \\
 \text{ where } R = [a,b] \times [c,d]
-\end{gather}}$$
+\end{gathered}}$$
 #### 15.1.4: Average Value
 
 We know (at least you may know, since I don't think this is the syllabus for some math courses) that the **average value** of a function of one variable $f(x)$ is $$f_{\text{avg}} = \frac{1}{b-a} \int_{a}^{b} f(x) \; dx$$Similarly, the average value of a function of two variables $f(x,y)$ over a rectangle $R$ is$$f_{\text{avg}} = \frac{1}{A(R)} \iint\limits_{R}f(x,y)  \; dA$$where $A(R)$ is the area of the rectangle.
 
-### 15.2: Double Integrals over General Regions
+#### 15.2: Double Integrals over General Regions
 
 #### 15.2.1: General Regions
 
 Consider a general region $D$ on a Cartesian plane. $D$ is called **bounded** if it can be enclosed in a rectangular region $R$. Suppose $D$ is bounded. We want to integrate a function $f$ over $D$. To do so, let us define a piecewise function $F(x,y)$ on domain $R$:$$F(x,y) = \begin{cases}
 f(x,y) &\text{if } (x,y) \text{ is in } D \\
 0  & \text{if } (x,y) \text{ is in } R \text{ but not in } D\end{cases}$$ 
-If $F$ is integrable over $R$, we define the **double integral of $f$ over $D$** by $$\boxed{\begin{gather}
-\iint\limits_{D} f(x,y) \; dA = \iint\limits_{R}^{\vphantom{a}} F(x,y) \; dA \quad \text{ where } F \text{ is given above. }\end{gather}}$$
+If $F$ is integrable over $R$, we define the **double integral of $f$ over $D$** by $$\boxed{\begin{gathered}
+\iint\limits_{D} f(x,y) \; dA = \iint\limits_{R}^{\vphantom{a}} F(x,y) \; dA \quad \text{ where } F \text{ is given above. }\end{gathered}}$$
 This works is because when we take $F(x,y)$ at a point out of $D$, we get $0$. Thus, taking an integral including extra area not included in $D$ is fine, as long as the integral includes all of $D$, which is true for $R$.
 
 However, it is not uncommon for $f$ to have discontinuities at the boundary points at $D$. However, if $f$ is continuous on $D$ and the boundary curve of $D$ is well-behaved (you don't need to worry about that in this course), then $\iint\limits_{D} f(x,y) \; dA$ will exist.
 
 We call a plane region $D$ **Type 1** if it lies between the graphs of two continuous functions $g_{1}(x),g_{2}(x)$ where $g_{1}$ and $g_{2}$ are continuous on $[a,b]$. Picture an area between two curves from Calc 1. That's a Type 1 plane region.
 
-We put the rectangle $R$ around it to contain $D$, and we let $F$ be the piecewise function stated above. Through Fubini's Theorem, we can say that $$\iint\limits_{R}^{\vphantom{a}} F(x,y) \; dA = \int_{a}^{b} \int_{c}^{d} F(x,y) \; dy \; dx$$Recall that the rectangle $R$ spans $[a,b] \times[c,d]$. $c$ and $d$ are the $y$-components, and $D$ is bounded by the two functions $g_{1}$ and $g_{2}$. Also note how $F(x,y)= 0$ if $y$ goes out of these bounds. Therefore, we can rewrite the above in another format. $$\boxed{\begin{gather}
+We put the rectangle $R$ around it to contain $D$, and we let $F$ be the piecewise function stated above. Through Fubini's Theorem, we can say that $$\iint\limits_{R}^{\vphantom{a}} F(x,y) \; dA = \int_{a}^{b} \int_{c}^{d} F(x,y) \; dy \; dx$$Recall that the rectangle $R$ spans $[a,b] \times[c,d]$. $c$ and $d$ are the $y$-components, and $D$ is bounded by the two functions $g_{1}$ and $g_{2}$. Also note how $F(x,y)= 0$ if $y$ goes out of these bounds. Therefore, we can rewrite the above in another format. $$\boxed{\begin{gathered}
 \text{ If } f \text{ is continuous on a Type } 1 \text{ region } D \text{ described by }  \\
 D = \left\{(x,y)\mid a\leq x \leq b, \; g_{1}(x) \leq y \leq g_{2}(x)\right\} \vphantom{\int}\\
 \text{ then } \\
 \iint\limits_{R}^{\vphantom{a}} f(x,y) \; dA = \int_{a}^{b} \int_{g_{1}(x)}^{g_{2}(x)} f(x,y) \; dy \; dx
-\end{gather}}$$
-Now we consider plane regions of **Type 2**. These are planar regions bounded between two continuous functions of $y$. Yada yada, it's the same thing as Type 1.$$\boxed{\begin{gather}
+\end{gathered}}$$
+Now we consider plane regions of **Type 2**. These are planar regions bounded between two continuous functions of $y$. Yada yada, it's the same thing as Type 1.$$\boxed{\begin{gathered}
 \text{ If } f \text{ is continuous on a Type } 2 \text{ region } D \text{ described by }  \\
 D = \left\{(x,y)\mid c\leq y \leq d, \; h_{1}(y) \leq x \leq h_{2}(y)\right\} \vphantom{\int}\\
 \text{ then } \\
 \iint\limits_{R}^{\vphantom{a}} f(x,y) \; dA = \int_{a}^{b} \int_{h_{1}(y)}^{h_{2}(y)} f(x,y) \; dx \; dy
-\end{gather}}$$
+\end{gathered}}$$
 Note the $dx,dy$ have swapped places.
 
 #### 15.2.2: Changing the Order of Integration
@@ -1245,15 +1233,15 @@ A lot of the properties of single integrals also apply to double integrals. Basi
 The single-integral property $\int_a^b f(x) \, dx = \int_a^c f(x) \, dx + \int_c^b f(x) \, dx$ has an analogue since we're in more dimensions now.$$\boxed{\iint\limits_D f(x, y) \, dA = \iint\limits_{D_1} f(x, y) \, dA + \iint\limits_{D_2} f(x, y) \, dA}$$We can use this to evaluate regions not strictly of Types 1 or 2: For example, if a region crosses back over itself, like the region between two circles, we can split it into multiple double integrals to solve it.
 $$\boxed{\iint\limits_{D} 1 \; dA = A(D)}$$That's the area of $D$.
 
-We can combine multiple properties to prove the following:$$\boxed{\begin{gather}
+We can combine multiple properties to prove the following:$$\boxed{\begin{gathered}
 \text{ If } m \leq f(x,y) \leq M\text{ for all } (x,y) \text{ in } D, \text{ then} \\
 m \cdot A(D) \leq \iint\limits_{D} f(x,y) \; dA \leq M \cdot A(D)
-\end{gather}}$$
+\end{gathered}}$$
 Basically, if your plane in three dimensions can be bounded by two flat planes $z=m, z=M$, then the volume of the solid under your plane is always more than the volume of the solid bounded above by $m$ and always less than the volume of the solid bounded above by $M$. This is pretty intuitive if you think about it.
 
 ## Extra
 
-### Behaviors of Functions
+#### Behaviors of Functions
 
 Below is a table of various common functions/structures you may see. Note that this table counts convergence of **sequences**. It may be useful for series, i.e the Test for Divergence, but this mainly tracks what happens as $x \rightarrow \infty$ in $\lim_{  x \to \infty }f(x)$.
 
@@ -1282,7 +1270,7 @@ Below is a table of various common functions/structures you may see. Note that t
 | Rational $(n>d)$     | $\pm \infty$                                                      | Constant               | $\pm \infty$                                                      |
 | Rational $(n<d)$     | $0$                                                               | Constant               | $0$                                                               |
 
-### Scripts
+#### Scripts
 
 Since Obsidian is a janky program especially when it comes to LaTeX, I had to use some regex scripts to format everything properly. For example, since Obsidian is an Electron app (you can even open the dev console like a webpage using <code>Ctrl</code>-<code>Shift</code>-<code>I</code>) and MathJax is also a janky mess sometimes, having lone double dollar signs \$$ (which escape blocks of LaTeX-formatted math) on lines will break the compiler.
 
@@ -1332,22 +1320,113 @@ import re
   
 with open("output.txt", "r+") as f:  
     text = f.read()  
-    # REMEMBER TO REMOVE THE HASHTAG FROM THE TITLE BEFORE RUNNING THIS!!!!  
-    newtext = re.sub("(\r\n|\r|\n#)", "\n\n#", text) 
-    newertext = re.sub(r"(#.*)", r"\1\n", newtext)
+    ## REMEMBER TO REMOVE THE HASHTAG FROM THE TITLE BEFORE RUNNING THIS!!!!  
+    newtext = re.sub("(\r\n|\r|\n##)", "\n\n##", text) 
+    newertext = re.sub(r"(##.*)", r"\1\n", newtext)
     ab = re.sub(r"\r\n|\r|\n(?<!\{)\(([a-z])\)(?!\})", r"\n$\\text{(\1)}$", text)  
     f.truncate(0)  
     f.seek(0)  
     f.write(ab)
 ```
 
-If you choose to make edits and notice your compiled PDF is broken or corrupted in some way, run it through these and see if it fixes things.
+In order to convert all top-level display math environments (eg. `\begin{align*}`) to subordinates (eg. `\begin{aligned}`) due to a MathJax update between this guide's initial release and the update of Oct 9 2026, I used this script:
+```python
+from pathlib import Path
+import re
+import sys
 
-Also, I export this guide in particular with the settings **A3 paper, 18/16/12/12 mm margins top/bottom/left/right**. This is because some of the equations go off the page if I use A4 paper.
+def mat(text, open_pos):
+    depth = 0
+    i = open_pos
 
-### Special Thanks
+    while i < len(text):
+        char = text[i]
 
-I want to express my thanks to everything that makes it possible for me to be making these guides.
+        if char == "%":
+            backslashes = 0
+            j = i - 1
+            while j >= 0 and text[j] == "\\":
+                backslashes += 1
+                j -= 1
+            if backslashes % 2 == 0:
+                newline = text.find("\n", i)
+                if newline == -1:
+                    return None
+                i = newline + 1
+                continue
+
+        if char in "{}":
+            backslashes = 0
+            j = i - 1
+            while j >= 0 and text[j] == "\\":
+                backslashes += 1
+                j -= 1
+
+            if backslashes % 2 == 0:
+                if char == "{":
+                    depth += 1
+                else:
+                    depth -= 1
+                    if depth == 0:
+                        return i
+
+        i += 1
+
+    return None
+
+
+def main():
+    path = Path(sys.argv[1])
+    text = path.read_text(encoding="utf-8")
+
+    spans = []
+    for match in re.finditer(r"\\boxed\s*\{", text):
+        open_pos = match.end() - 1
+        close_pos = mat(text, open_pos)
+        if close_pos is not None:
+            spans.append((open_pos + 1, close_pos))
+
+    spans.sort()
+    merged = []
+    for start, end in spans:
+        if merged and start <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], end))
+        else:
+            merged.append((start, end))
+
+    rps = [
+        (r"\\begin\{gather\}", r"\begin{gathered}"),
+        (r"\\end\{gather\}", r"\end{gathered}"),
+        (r"\\begin\{align\*\}", r"\begin{aligned}"),
+        (r"\\end\{align\*\}", r"\end{aligned}"),
+    ]
+
+    counts = {pattern: 0 for pattern, _ in rps}
+
+    for start, end in reversed(merged):
+        section = text[start:end]
+        for pattern, replacement in rps:
+            section, count = re.subn(pattern, lambda match: replacement, section)
+            counts[pattern] += count
+        text = text[:start] + section + text[end:]
+
+    backup = path.with_suffix(path.suffix + ".bak")
+    backup.write_text(path.read_text(encoding="utf-8"), encoding="utf-8")
+    path.write_text(text, encoding="utf-8")
+
+    print(sum(counts.values()))
+
+
+if __name__ == "__main__":
+    main()
+```
+
+
+If you choose to make edits to the markdown and notice your compiled PDF is broken or corrupted in some way, run it through these and see if it fixes things.
+
+Also, I export this guide in particular with the settings **A3 paper, 24/18/16/16 mm margins top/bottom/left/right, 90 downscale score**. This is because some of the equations go off the page if I use A4 paper.
+
+#### Special Thanks
 
 Thank you to **Obsidian**, the best note-taking app ever. Being able to mess around with configs, add custom CSS snippets, and edit my files as raw `.md` files is instrumental to my process. Also, thank you to the creators of the theme **Typomagical**, my favorite Obsidian theme that makes writing these notes a pleasure to do. 
 
@@ -1356,13 +1435,3 @@ I want to say that without the plugin **Quick Latex** (and now, **Latex Suite**)
 **Better Export PDF** also provides the perfect way to export a PDF in this program, adding headers/footers, custom margins, and smarter logic when it comes to rendering a Markdown-LaTeX hybrid note into a PDF. To a lesser extent, I want to wholeheartedly thank **Admonition** for cool callouts, **Advanced Tables** for making Markdown tables less of a drag, and **Mehrmaid** for adding the functionality of using MathJax inside Mermaid charts, which can't have been easy.
 
 Thank you to **Syncthing** for automatically syncing my files from my laptop to PC: I tried to use Git for this. Don't. Use Syncthing.
-
-### Donations
-
-If you want to give a poor and starving university student who also has saved over thirty poor orphans (who were also starving by the way) from blazing homes a pittance, you may do so [here](https://ko-fi.com/brownbird). 
-
-You have no obligation to do so, of course, it is just a token of your grat- oh hey hear that? The meowing? That's the fifty small kittens. That I also saved. From burning homes. 
-
-You still have no obligation to donate, by the way, just letting you know. :D
-
-Thank you for using the guide!
