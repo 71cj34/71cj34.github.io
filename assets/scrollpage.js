@@ -1,238 +1,335 @@
-// scroll replacement
+const PANEL_MEDIA = '(min-width: 769px)';
+const TRANSITION_MS = 700;
+const WHEEL_THRESHOLD = 40;
+const GESTURE_GAP_MS = 180;
+const SWIPE_THRESHOLD = 60;
+const PASS_THROUGH = '.preserve-interaction, #modeselection';
 
-class PageTransitions {
-    constructor() {
-        this.pages = Array.from(document.querySelectorAll('main.page-section'));
-        this.currentPageIndex = 0;
-        this.isAnimating = false;
-        this.scrollTimeout = null;
-        this.currentPageId = null;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-        if (this.pages.length < 2) return;
+function isScrollable(el, dy) {
+    if (el.scrollHeight - el.clientHeight < 2) return false;
+    const overflow = getComputedStyle(el).overflowY;
+    if (overflow !== 'auto' && overflow !== 'scroll') return false;
+    return dy > 0
+        ? el.scrollTop + el.clientHeight < el.scrollHeight - 1
+        : el.scrollTop > 0;
+}
 
-        this.init();
-        this.ensureFirstPageVisible();
+function canScrollNatively(start, panel, dy) {
+    let el = start && panel.contains(start) ? start : panel;
+    for (; el && panel.contains(el); el = el.parentElement) {
+        if (isScrollable(el, dy)) return true;
+    }
+    return false;
+}
 
+const stripIndex = path => path.replace(/index\.html$/, '');
+
+class SectionNavigator {
+    constructor(sections) {
+        this.pages = sections;
+        this.index = 0;
+        this.enabled = false;
+        this.transition = null;
+        this.touch = null;
+        this.gestureTimer = null;
+        this.gestureNative = false;
+        this.gestureFlipped = false; // already flipped a panel in this gesture
+        this.wheelAccum = 0;
+
+        this.pages.forEach((el, i) => {
+            if (!el.id) el.id = `page-${i}`;
+            el.tabIndex = -1;
+
+            const inner = document.createElement('div');
+            inner.className = 'page-inner';
+            while (el.firstChild) inner.appendChild(el.firstChild);
+            el.appendChild(inner);
+        });
+
+        const startIndex = this.resolveHash();
+        this.index = startIndex < 0 ? 0 : startIndex;
+
+        // switchfonts.js is going to use this
+        window.pageTransitioner = this;
+
+        this.bindEvents();
+
+        this.media = window.matchMedia(PANEL_MEDIA);
+        this.media.addEventListener('change', e => this.setMode(e.matches));
+        this.setMode(this.media.matches, { initial: true });
     }
 
-    ensureFirstPageVisible() {
-        const hash = window.location.hash.slice(1);
-        const targetPage = hash ?
-            this.pages.find(p => p.id === hash) :
-            this.pages[0];
+    get currentPageIndex() {
+        return this.index;
+    }
 
-        const index = this.pages.indexOf(targetPage);
-        if (index === -1) return;
+    get currentPage() {
+        return this.pages[this.index];
+    }
 
+    // setup
 
-        if (window.location.hash.slice(1) !== targetPage.id) {
-            window.history.replaceState(null, null, `#${targetPage.id}`);
+    bindEvents() {
+        window.addEventListener('wheel', e => this.onWheel(e), { passive: false });
+        window.addEventListener('touchstart', e => this.onTouchStart(e), { passive: true });
+        window.addEventListener('touchend', e => this.onTouchEnd(e), { passive: true });
+        window.addEventListener('touchcancel', () => { this.touch = null; }, { passive: true });
+        window.addEventListener('keydown', e => this.onKeyDown(e));
+        window.addEventListener('hashchange', () => this.onHashChange());
+        document.addEventListener('click', e => this.onClick(e));
+    }
+
+    setMode(panelMode, { initial = false } = {}) {
+        this.resetGesture();
+        this.cancelTransition();
+
+        if (panelMode) {
+            const fromHash = this.resolveHash();
+            this.index = fromHash >= 0 ? fromHash : this.indexFromScroll();
         }
 
-        this.currentPageIndex = index;
-        this.showPage(index);
+        this.enabled = panelMode;
+        document.documentElement.classList.toggle('panel-mode', panelMode);
+
+        this.pages.forEach((page, i) => {
+            page.classList.toggle('is-active', panelMode && i === this.index);
+            page.inert = panelMode && i !== this.index;
+        });
+
+        if (!initial) {
+            if (panelMode) window.scrollTo(0, 0);
+            else this.pages[this.index].scrollIntoView({ block: 'start' });
+        }
     }
-    showPage(index) {
+
+
+    resolveHash() {
+        const id = decodeURIComponent(window.location.hash.slice(1));
+        if (!id) return -1;
+        return this.pages.findIndex(p => p.id === id);
+    }
+
+    indexFromScroll() {
+        const line = window.scrollY + window.innerHeight / 2;
+        let idx = 0;
         this.pages.forEach((p, i) => {
-            p.style.transition = 'none';
-            p.style.transform = 'translateY(0)';
-            p.style.opacity = i === index ? '1' : '0';
-            p.style.pointerEvents = i === index ? 'auto' : 'none';
+            if (p.getBoundingClientRect().top + window.scrollY <= line) idx = i;
         });
+        return idx;
+    }
 
-        setTimeout(() => this.pages.forEach(p => {
-            p.style.transition = 'transform 0.8s ease, opacity 0.5s ease';
-        }), 50);
+    resetGesture() {
+        clearTimeout(this.gestureTimer);
+        this.gestureTimer = null;
+        this.gestureNative = false;
+        this.gestureFlipped = false;
+        this.wheelAccum = 0;
+    }
+
+    step(dir) {
+        this.goTo(this.index + dir);
     }
 
 
+    goTo(next, { updateHash = true } = {}) {
+        if (!this.enabled) return;
+        if (this.transition) this.finishTransition();
+        if (next < 0 || next >= this.pages.length || next === this.index) return;
 
-    init() {
-        this.pages.forEach((page, index) => {
-            if (!page.id) {
-                page.id = `page-${index}`;
-            }
-        });
+        const dir = next > this.index ? 1 : -1;
+        const from = this.pages[this.index];
+        const to = this.pages[next];
+        this.index = next;
 
+        if (updateHash) {
+            window.history.pushState(null, '', `#${to.id}`);
+        }
 
+        to.inert = false;
+        to.classList.add('is-active', 'is-entering');
+        this.transition = { from, to, anims: [] };
 
-        this.pages.forEach((page, index) => {
-            if (index > 0) {
-                page.style.opacity = '0';
-                page.style.pointerEvents = 'none';
-            }
+        const duration = reduceMotion.matches ? 0 : TRANSITION_MS;
+        if (!duration || typeof to.animate !== 'function') {
+            this.finishTransition();
+            return;
+        }
 
-            page.style.transition = 'transform 0.8s ease, opacity 0.5s ease';
-            page.style.position = 'fixed';
-            page.style.top = '0';
-            page.style.left = '0';
-            page.style.width = '100%';
-            page.style.height = '100vh';
-            page.style.overflowY = 'auto';
-
-
-            const container = document.createElement('div');
-            container.className = 'page-content-container';
-            container.style.display = 'flex';
-            container.style.flexDirection = 'column';
-            container.style.justifyContent = 'center';
-            container.style.alignItems = 'center';
-            container.style.width = '100%';
-            container.style.height = '100%';
-            container.style.maxWidth = '1200px';
-            container.style.margin = '0 auto';
-            container.style.padding = '2rem';
-            container.style.boxSizing = 'border-box';
-
-
-            while (page.firstChild) {
-                container.appendChild(page.firstChild);
-            }
-            page.appendChild(container);
-        });
-
-
-        document.body.style.overflow = 'hidden';
-
-
-        this.checkUrlHash();
-
-        window.addEventListener('hashchange', () => {
-            this.checkUrlHash();
-        });
-
-        let touchStartY = 0;
-        window.addEventListener('touchstart', e => {
-            if (isInsideWidget(e.target)) return;
-            touchStartY = e.touches[0].clientY;
-        }, {
-            passive: true
-        });
-
-        window.addEventListener(
-            'wheel',
-            e => {
-                if (this.isAnimating) {
-                    e.preventDefault();
-                    return;
-                }
-                if (isInsideWidget(e.target)) return;
-                this.handleScroll(e);
-            }, {
-                passive: false
-            }
-        );
-
-
-        window.addEventListener('touchend', e => {
-            if (isInsideWidget(e.target)) return;
-            const deltaY = e.changedTouches[0].clientY - touchStartY;
-            if (Math.abs(deltaY) > 50) {
-                deltaY > 0 ? this.goToPreviousPage() :
-                    this.goToNextPage();
-            }
-        }, {
-            passive: true
-        });
+        const opts = { duration, easing: 'cubic-bezier(0.65, 0, 0.35, 1)' };
+        const anims = [
+            to.animate(
+                [{ transform: `translate3d(0, ${dir * 100}%, 0)` }, { transform: 'translate3d(0, 0, 0)' }],
+                opts
+            ),
+            from.animate(
+                [{ transform: 'translate3d(0, 0, 0)' }, { transform: `translate3d(0, ${-dir * 100}%, 0)` }],
+                opts
+            ),
+        ];
+        this.transition.anims = anims;
+        anims[0].onfinish = () => this.finishTransition();
     }
 
-    checkUrlHash() {
-        const hash = window.location.hash.slice(1);
-        const targetPage = this.pages.find(p => p.id === hash);
-        if (!targetPage) return;
-
-        const targetIndex = this.pages.indexOf(targetPage);
-        if (targetIndex === this.currentPageIndex || this.isAnimating) return;
-
-        this.transitionToPage(targetIndex);
+    cancelTransition() {
+        if (this.transition) this.finishTransition();
     }
 
-    handleScroll(e) {
-        const interactiveElements = document.querySelectorAll('.preserve-interaction, #modeselection');
-        const isOverInteractive = Array.from(interactiveElements).some(el => {
-            return el.contains(e.target);
-        });
+    finishTransition() {
+        const t = this.transition;
+        if (!t) return;
+        this.transition = null;
 
-        if (this.isAnimating || isOverInteractive) {
+        t.anims.forEach(a => a.cancel());
+        t.from.classList.remove('is-active');
+        t.from.inert = true;
+        t.to.classList.remove('is-entering');
+
+        if (t.from.contains(document.activeElement)) {
+            t.to.focus({ preventScroll: true });
+        }
+    }
+
+
+    onWheel(e) {
+        if (!this.enabled || e.ctrlKey) return;
+        const dy = e.deltaY;
+        if (dy === 0 || Math.abs(dy) < Math.abs(e.deltaX)) return;
+        if (e.target.closest && e.target.closest(PASS_THROUGH)) return;
+
+        clearTimeout(this.gestureTimer);
+        this.gestureTimer = setTimeout(() => this.resetGesture(), GESTURE_GAP_MS);
+
+        if (this.transition) {
             e.preventDefault();
             return;
         }
 
-        if (this.scrollTimeout) {
-            clearTimeout(this.scrollTimeout);
+        if (this.gestureNative) return;
+
+        if (this.gestureFlipped) {
+            e.preventDefault();
+            return;
         }
 
-        this.scrollTimeout = setTimeout(() => {
-            if (e.deltaY > 0) {
-                this.goToNextPage();
-            } else if (e.deltaY < 0) {
-                this.goToPreviousPage();
-            }
-        }, 100);
+        if (canScrollNatively(e.target, this.currentPage, dy)) {
+            this.gestureNative = true;
+            return;
+        }
 
         e.preventDefault();
+        this.wheelAccum += dy;
+        if (Math.abs(this.wheelAccum) < WHEEL_THRESHOLD) return;
+
+        const dir = Math.sign(this.wheelAccum);
+        this.wheelAccum = 0;
+        this.gestureFlipped = true;
+        this.step(dir);
     }
 
-    goToNextPage() {
-        if (this.currentPageIndex >= this.pages.length - 1 || this.isAnimating) return;
-        this.transitionToPage(this.currentPageIndex + 1);
+
+    onTouchStart(e) {
+        if (!this.enabled || e.touches.length !== 1) {
+            this.touch = null;
+            return;
+        }
+        const t = e.touches[0];
+        const panel = this.currentPage;
+
+        this.touch = {
+            x: t.clientX,
+            y: t.clientY,
+            canDown: canScrollNatively(e.target, panel, 1),
+            canUp: canScrollNatively(e.target, panel, -1),
+        };
     }
 
-    goToPreviousPage() {
-        if (this.currentPageIndex <= 0 || this.isAnimating) return;
-        this.transitionToPage(this.currentPageIndex - 1);
+    onTouchEnd(e) {
+        const start = this.touch;
+        this.touch = null;
+        if (!start || !this.enabled || this.transition || !e.changedTouches.length) return;
+
+        const t = e.changedTouches[0];
+        const dx = t.clientX - start.x;
+        const dy = start.y - t.clientY;
+        if (Math.abs(dy) < SWIPE_THRESHOLD || Math.abs(dy) < Math.abs(dx)) return;
+
+        if (dy > 0 && !start.canDown) this.step(1);
+        else if (dy < 0 && !start.canUp) this.step(-1);
     }
 
-    transitionToPage(newIndex) {
-        this.isAnimating = true;
+    onKeyDown(e) {
+        if (!this.enabled || e.altKey || e.ctrlKey || e.metaKey) return;
 
-        const currentPage = this.pages[this.currentPageIndex];
-        const newPage = this.pages[newIndex];
+        const el = e.target;
+        if (el.closest && el.closest('input, textarea, select, [contenteditable="true"]')) return;
 
-        this.currentPageId = newPage.id;
-
-        if (window.history.pushState) {
-            window.history.pushState(null, null, `#${this.currentPageId}`);
-        } else {
-            window.location.hash = this.currentPageId;
+        let dir = 0;
+        switch (e.key) {
+            case 'ArrowDown':
+            case 'PageDown':
+                dir = 1;
+                break;
+            case 'ArrowUp':
+            case 'PageUp':
+                dir = -1;
+                break;
+            case ' ':
+                if (el.closest && el.closest('button, a, [role="button"]')) return;
+                dir = e.shiftKey ? -1 : 1;
+                break;
+            case 'Home':
+                e.preventDefault();
+                this.goTo(0);
+                return;
+            case 'End':
+                e.preventDefault();
+                this.goTo(this.pages.length - 1);
+                return;
+            default:
+                return;
         }
 
-        newPage.style.opacity = '1';
-        newPage.style.pointerEvents = 'auto';
-
-        const direction = newIndex > this.currentPageIndex ? 1 : -1;
-
-
-        if (direction > 0) {
-
-            newPage.style.transform = 'translateY(100%)';
-        } else {
-
-            newPage.style.transform = 'translateY(-100%)';
+        if (this.transition) {
+            e.preventDefault();
+            return;
         }
+        if (canScrollNatively(el, this.currentPage, dir)) return;
 
-
-        newPage.offsetHeight;
-
-
-        currentPage.style.transform = `translateY(${-100 * direction}%)`;
-        newPage.style.transform = 'translateY(0)';
-
-        setTimeout(() => {
-
-            currentPage.style.opacity = '0';
-            currentPage.style.pointerEvents = 'none';
-
-            this.currentPageIndex = newIndex;
-            this.isAnimating = false;
-        }, 800);
+        e.preventDefault();
+        this.step(dir);
     }
 
+
+    onClick(e) {
+        if (!this.enabled || e.defaultPrevented || e.button !== 0) return;
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+        const link = e.target.closest && e.target.closest('a[href]');
+        if (!link || (link.target && link.target !== '_self')) return;
+
+        const url = new URL(link.href, window.location.href);
+        if (url.origin !== window.location.origin || !url.hash) return;
+        if (stripIndex(url.pathname) !== stripIndex(window.location.pathname)) return;
+
+        const idx = this.pages.findIndex(p => p.id === decodeURIComponent(url.hash.slice(1)));
+        if (idx < 0) return;
+
+        e.preventDefault();
+        this.goTo(idx);
+    }
+
+    onHashChange() {
+        if (!this.enabled) return;
+        const idx = this.resolveHash();
+        if (idx < 0 && window.location.hash) return;
+        this.goTo(Math.max(idx, 0), { updateHash: false });
+    }
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
-    new PageTransitions();
+    const sections = Array.from(document.querySelectorAll('main.page-section'));
+    if (sections.length < 2) return;
+    new SectionNavigator(sections);
 });
-
-const isInsideWidget = el => el.closest('.shell');

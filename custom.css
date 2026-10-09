@@ -218,108 +218,82 @@ body.dark-mode .icon {
   width: 100%; 
 }
 
-main.page-section:not(:first-of-type) {
-  opacity: 0;
-  pointer-events: none;
-  position: fixed;
-  top: 0;
-  left: 0;
+/* page sections */
+
+main.page-section {
+  display: flex;
+  flex-direction: column;
+  background-color: inherit;
+}
+
+.page-inner {
   width: 100%;
-  height: 100vh;
-  overflow-y: auto;
-  transition: transform 0.8s ease, opacity 0.5s ease;
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-main.page-section:first-of-type {
+
+.page-inner > * {
+  max-width: 100%;
+}
+
+html.panel-mode body {
+  overflow: hidden;
+  height: 100%;
+}
+
+html.panel-mode main.page-section {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
+  inset: 0;
   overflow-y: auto;
-  transition: transform 0.8s ease, opacity 0.5s ease;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  visibility: hidden;
+  z-index: 1;
 }
 
-.page-section {
-    opacity: 0; /* Hide all pages by default */
-    pointer-events: none; /* Disable interaction */
-    z-index: auto;
+html.panel-mode main.page-section.is-active {
+  visibility: visible;
+  z-index: 2;
 }
 
-/* This class will be added by JS to the currently active page */
-.page-section.active {
-    opacity: 1;
-    pointer-events: auto;
-    z-index: 2; /* Bring active page to front */
+html.panel-mode main.page-section.is-entering {
+  z-index: 3;
 }
 
-  .page-section:not(.page-1) {
-    opacity: 0;
-    pointer-events: none;
+html:not(.panel-mode) body {
+  display: block;
+  height: auto;
+  min-height: 100vh;
+}
+
+html:not(.panel-mode) main.page-section {
+  min-height: 100vh;
+  min-height: 100svh;
+  justify-content: center;
+  padding: 3.5rem 0;
+}
+
+html:not(.panel-mode) .page-inner {
+  padding: 1rem;
+}
+
+html:not(.panel-mode) .shell {
+  width: 92vw;
+  height: auto;
+}
+
+html:not(.panel-mode) .grid,
+html:not(.panel-mode) .about-wrap {
+  overflow: visible;
+}
+
+@media (max-width: 768px) {
+  .page-inner {
+    padding: 1rem;
   }
-
-
-.page-section {
-    z-index: 1;
-    background: var(--bg-color);
-    color: var(--text-color);
 }
-
-.page-section:first-child {
-    z-index: 2;
-}
-
-.page-content-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-    box-sizing: border-box;
-}
-
-.page-content-container > * {
-    max-width: 100%;
-}
-
-@media (max-width: 768px) {
-    .page-content-container {
-        padding: 1rem;
-    }
-}
-
-
-
-main.page-section:nth-child(2) .page-content-container {
-    flex-direction: row; 
-    flex-wrap: wrap; 
-    justify-content: center; 
-    align-items: flex-start; 
-    padding: 2rem 10vw; 
-    max-width: none;  
-}
-
-
-@media (max-width: 992px) { 
-    main.page-section:nth-child(2) .page-content-container {
-        padding: 2rem 5vw; 
-        gap: 20px;
-    }
-    main.page-section:nth-child(2) .page-content-container > * {
-        flex-basis: 45vw; 
-        max-width: 45vw;
-    }
-}
-
-
-@media (max-width: 768px) {
-    .page-content-container {
-        padding: 1rem; 
-    }
-
-    .page-1 > .page-content-container {
-        gap: inherit;
-}}
