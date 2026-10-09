@@ -785,15 +785,13 @@ Usually, the most convenient way to accomplish this is by having one path approa
 #### 14.2.3: Properties of Limits
 
 A lot of the same ones as normal limits apply here.
-$$\boxed{\begin{equation*}
-\begin{aligned}
+$$\boxed{\begin{aligned}
 &\text{1. } \lim_{(x, y) \to (a, b)}[f(x, y) + g(x, y)] = \lim_{(x, y) \to (a, b)} f(x, y) + \lim_{(x, y) \to (a, b)} g(x, y) \\
 &\text{2. } \lim_{(x, y) \to (a, b)}[f(x, y) - g(x, y)] = \lim_{(x, y) \to (a, b)} f(x, y) - \lim_{(x, y) \to (a, b)} g(x, y) \\
 &\text{3. } \lim_{(x, y) \to (a, b)}[cf(x, y)] = c \lim_{(x, y) \to (a, b)} f(x, y) \\
 &\text{4. } \lim_{(x, y) \to (a, b)}[f(x, y)g(x, y)] = \lim_{(x, y) \to (a, b)} f(x, y) \cdot \lim_{(x, y) \to (a, b)} g(x, y) \\
 &\text{5. } \lim_{(x, y) \to (a, b)}\frac{f(x, y)}{g(x, y)} = \frac{\lim_{(x, y) \to (a, b)} f(x, y)}{\lim_{(x, y) \to (a, b)} g(x, y)}, \text{ provided that } \lim_{(x, y) \to (a, b)} g(x, y) \neq 0
-\end{aligned}
-\end{equation*}}$$
+\end{aligned}}$$
 The squeeze theorem is also here and it works about how you would expect.
 
 $$\boxed{\begin{gathered}
